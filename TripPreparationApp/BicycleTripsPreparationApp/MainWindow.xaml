@@ -7,10 +7,15 @@
 		Width="525" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid x:Name="grid">
         <Grid.Resources>
-            <esri:SimpleLineSymbol x:Key="DashedGreenLineSymbol" Color="Green" Style="Dash" Width="5"/>
-            <esri:SimpleMarkerSymbol x:Key="StartSymbol" Color="Green" Style="Circle" Size="25"/>
-            <esri:SimpleMarkerSymbol x:Key="EndSymbol" Color="Red" Style="Circle" Size="25"/>
-            <esri:SimpleMarkerSymbol x:Key="RouteSymbol" Color="Orange" Style="Circle" Size="15"/>
+            <esri:SimpleMarkerSymbol x:Key="StartSymbol" Color="Green" Style="Circle" Size="15"/>
+            <esri:SimpleMarkerSymbol x:Key="EndSymbol" Color="Red" Style="Circle" Size="15"/>
+            <esri:SimpleMarkerSymbol x:Key="RouteSymbol" Color="White" Style="Circle" Size="5">
+                <esri:SimpleMarkerSymbol.Outline>
+                    <esri:SimpleLineSymbol Color="Black" Width="2" />
+                </esri:SimpleMarkerSymbol.Outline>
+            </esri:SimpleMarkerSymbol>
+            <esri:SymbolFont x:Key="LabelFont" FontSize="12" FontWeight="Bold" />
+            <esri:TextSymbol x:Key="LabelSymbol" Color="Black" BorderLineColor="White" BorderLineSize="1" Font="{StaticResource LabelFont}"/>
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -19,19 +24,34 @@
         </Grid.RowDefinitions>
         <ToolBar x:Name="toolBar" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0">
             <Button Content="Load GPX-track" Click="Button_Click" />
+            <TextBlock Text="distance per routepart" Margin="25,0,0,0" VerticalAlignment="Center"/>
+            <TextBox x:Name="distance" Text="100"/>
+            <TextBlock Text="prefix routepart gpx" Margin="25,0,0,0" VerticalAlignment="Center"/>
+            <TextBox x:Name="prefix" Text="" Width="150"/>
+            <Button Content="Save GPX-tracks" Click="SaveGPSTracks_Click" Margin="25, 0 , 0 ,0"/>
         </ToolBar>
         <esri:MapView x:Name="MyMapView" Grid.Row="1">
 			<esri:Map x:Name="Map">
                 <esri:OpenStreetMapLayer ID="OSMLayer" TemplateUri="http://{subDomain}.tile.opencyclemap.org/cycle/{level}/{col}/{row}.png"/>
-                <esri:GraphicsLayer ID="graphics" />
-            </esri:Map>
+                        <esri:GraphicsLayer ID="graphics">
+                            <esri:GraphicsLayer.Labeling>
+                                <esri:LabelProperties IsEnabled="True">
+                                    <esri:AttributeLabelClass Symbol="{StaticResource LabelSymbol}" TextExpression="[index]" />
+                                </esri:LabelProperties>
+                            </esri:GraphicsLayer.Labeling>
+                        </esri:GraphicsLayer>
+                    </esri:Map>
 		</esri:MapView>
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Margin="5">
                 <TextBlock>lengte</TextBlock>
-                <TextBlock x:Name="length" Margin="5,0,5,0"/>
+                <TextBlock x:Name="length" Margin="5,0,5,0" FontWeight="Bold"/>
                 <TextBlock>km</TextBlock>
             </StackPanel>
+            <Rectangle Width="100" Height="100" x:Name="R1"/>
+            <Rectangle Width="100" Height="100" x:Name="R2"/>
+            <Rectangle Width="100" Height="100" x:Name="R3"/>
+            <Rectangle Width="100" Height="100" x:Name="R4"/>
         </StackPanel>
     </Grid>
 </Window>

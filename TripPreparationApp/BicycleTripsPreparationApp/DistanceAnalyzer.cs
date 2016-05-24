@@ -9,21 +9,11 @@ namespace BicycleTripsPreparationApp
 {
     class DistanceAnalyzer
     {
-        private List<wptType> _wayPoints;
-        private List<double> _distances;
-        public DistanceAnalyzer(List<wptType> wayPoints)
+        public int CalculateDistance(List<wptType> wayPoints)
         {
-            _wayPoints = wayPoints;
-            var dataAnalyzer = new DataAnalyzer(_wayPoints);
-            _distances = dataAnalyzer.Distances;
-        }
-
-        public string TotalDistance
-        {
-            get
-            {
-                return ((int)_distances.Sum() / 1000).ToString();
-            }
+            var dataAnalyzer = new DataAnalyzer(wayPoints);
+            var distances = dataAnalyzer.Distances;
+            return ((int)distances.Sum() / 1000);
         }
     }
 }
