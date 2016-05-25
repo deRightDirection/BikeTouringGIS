@@ -55,3 +55,6 @@ D:\GitHub\FietstochtenPreparation\TripPreparationApp\BicycleTripsPreparationApp\
 D:\GitHub\FietstochtenPreparation\TripPreparationApp\BicycleTripsPreparationApp\bin\Debug\Newtonsoft.Json.xml
 D:\GitHub\FietstochtenPreparation\TripPreparationApp\BicycleTripsPreparationApp\bin\Debug\VersionHelpers.dll
 D:\GitHub\FietstochtenPreparation\TripPreparationApp\BicycleTripsPreparationApp\bin\Debug\VersionHelpers.xml
+D:\GitHub\BikeTouringGIS\TripPreparationApp\BicycleTripsPreparationApp\bin\Debug\BicycleTripsPreparationApp.exe.config
+D:\GitHub\BikeTouringGIS\TripPreparationApp\BicycleTripsPreparationApp\obj\Debug\BicycleTripsPreparationApp.exe
+D:\GitHub\BikeTouringGIS\TripPreparationApp\BicycleTripsPreparationApp\obj\Debug\BicycleTripsPreparationApp.pdb

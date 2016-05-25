@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicycleTripsPreparationApp", "BicycleTripsPreparationApp.csproj", "{39DE280E-2709-4C05-8F0C-01F8774D73C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeTouringGIS", "BikeTouringGIS.csproj", "{39DE280E-2709-4C05-8F0C-01F8774D73C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPX", "..\..\..\GPXDataAnalyzer\GPX\GPX.csproj", "{159F1FC4-4759-4DB0-8695-FFD423302DB4}"
 EndProject

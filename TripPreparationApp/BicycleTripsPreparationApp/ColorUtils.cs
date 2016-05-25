@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
-using Whathecode.System.Arithmetic.Interpolation;
-using Whathecode.System.Arithmetic.Interpolation.KeyPoint;
 
 namespace BicycleTripsPreparationApp
 {
@@ -34,9 +32,9 @@ namespace BicycleTripsPreparationApp
         public static List<Color> RgbLinearInterpolate(Color start, Color middle, Color end, int colorCount)
         {
             if (colorCount % 2 == 0)
-                return new List<Color>() { Colors.DarkGreen, Colors.Red };
+                return new List<Color>() { Colors.Gold, Colors.LimeGreen };
             if (colorCount == 1)
-                return new List<Color>() { Colors.DarkGreen };
+                return new List<Color>() { Colors.Gold };
             List<Color> ret = new List<Color>();
 
             if (colorCount == 0)
