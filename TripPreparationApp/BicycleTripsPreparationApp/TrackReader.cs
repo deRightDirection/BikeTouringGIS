@@ -8,8 +8,8 @@ using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Symbology;
 using GPX;
 
-namespace BicycleTripsPreparationApp
-{
+namespace BikeTouringGIS
+{ 
     class TrackReader
     {
         private string _gpxFileName;

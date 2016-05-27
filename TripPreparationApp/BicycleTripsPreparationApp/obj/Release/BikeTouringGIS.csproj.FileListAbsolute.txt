@@ -378,3 +378,8 @@ D:\GitHub\BikeTouringGIS\TripPreparationApp\BicycleTripsPreparationApp\bin\Relea
 D:\GitHub\BikeTouringGIS\TripPreparationApp\BicycleTripsPreparationApp\bin\Release\ArcGISRuntime10.2.7\resources\shaders\water_draw_ps_4_0.cso
 D:\GitHub\BikeTouringGIS\TripPreparationApp\BicycleTripsPreparationApp\bin\Release\ArcGISRuntime10.2.7\resources\shaders\water_draw_vs_4_0.cso
 D:\GitHub\BikeTouringGIS\TripPreparationApp\BicycleTripsPreparationApp\obj\Release\BikeTouringGIS_Content.g.cs
+D:\GitHub\BikeTouringGIS\TripPreparationApp\BicycleTripsPreparationApp\bin\Release\Log4NetConfiguration.xml
+D:\GitHub\BikeTouringGIS\TripPreparationApp\BicycleTripsPreparationApp\bin\Release\theRightDirection.Library.Logging.dll
+D:\GitHub\BikeTouringGIS\TripPreparationApp\BicycleTripsPreparationApp\bin\Release\log4net.dll
+D:\GitHub\BikeTouringGIS\TripPreparationApp\BicycleTripsPreparationApp\bin\Release\theRightDirection.Library.Extensions.dll
+D:\GitHub\BikeTouringGIS\TripPreparationApp\BicycleTripsPreparationApp\bin\Release\log4net.xml

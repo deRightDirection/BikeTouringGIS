@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
 
-namespace BicycleTripsPreparationApp
+namespace BikeTouringGIS
 {
     /// <summary>
     /// Interaction logic for Default.xaml

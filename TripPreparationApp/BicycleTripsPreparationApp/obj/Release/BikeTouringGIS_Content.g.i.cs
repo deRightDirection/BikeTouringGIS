@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("log4netconfiguration.xml")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("log4netconfiguration.xml")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("msvcp120.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("msvcr120.dll")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("runtimecorenetdesktop.dll")]

@@ -17,7 +17,7 @@ using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Symbology;
 using GPX;
 
-namespace BicycleTripsPreparationApp
+namespace BikeTouringGIS
 {
     /// <summary>
     /// Interaction logic for MainScreen.xaml
@@ -168,6 +168,11 @@ namespace BicycleTripsPreparationApp
                 }
                 distance += _distanceAnalyzer.CalculateDistance(x[j]);
             }
+
+        }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
 
         }
     }

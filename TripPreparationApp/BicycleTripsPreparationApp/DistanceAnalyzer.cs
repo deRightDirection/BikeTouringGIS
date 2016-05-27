@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GPX;
 
-namespace BicycleTripsPreparationApp
+namespace BikeTouringGIS
 {
     class DistanceAnalyzer
     {
