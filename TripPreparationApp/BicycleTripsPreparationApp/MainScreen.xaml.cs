@@ -49,7 +49,10 @@ namespace BikeTouringGIS
                 using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
                 {
                     var result = await mgr;
-
+                   var updateInfo = await result.CheckForUpdate();
+                    var currentVersion = updateInfo.CurrentlyInstalledVersion.Version;
+                    var futureVersion = updateInfo.FutureReleaseEntry.Version;
+                    updateApp.IsEnabled = currentVersion != futureVersion;
                 }
             }
             catch(Exception e)
@@ -57,7 +60,6 @@ namespace BikeTouringGIS
                 ILogger logger = Logger.GetLogger();
                 logger.LogException(e);
             }
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -195,9 +197,26 @@ namespace BikeTouringGIS
 
         }
 
-        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        private void updateApp_Click(object sender, RoutedEventArgs e)
         {
+            UpdateApplication();
+        }
 
+        private async void UpdateApplication()
+        {
+            try
+            {
+                using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
+                {
+                    var result = await mgr;
+                    await result.UpdateApp();
+                }
+            }
+            catch (Exception e)
+            {
+                ILogger logger = Logger.GetLogger();
+                logger.LogException(e);
+            }
         }
     }
 }

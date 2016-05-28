@@ -195,6 +195,12 @@ namespace BikeTouringGIS {
             return;
             case 11:
             this.updateApp = ((System.Windows.Controls.Button)(target));
+            
+            #line 160 "..\..\MainScreen.xaml"
+            this.updateApp.Click += new System.Windows.RoutedEventHandler(this.updateApp_Click);
+            
+            #line default
+            #line hidden
             return;
             }
             this._contentLoaded = true;
