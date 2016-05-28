@@ -16,6 +16,9 @@ using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Symbology;
 using GPX;
+using Squirrel;
+using BicycleTripsPreparationApp;
+using theRightDirection.Library.Logging;
 
 namespace BikeTouringGIS
 {
@@ -34,6 +37,27 @@ namespace BikeTouringGIS
         public MainScreen()
         {
             InitializeComponent();
+            var versionApp = typeof(App).Assembly.GetName().Version;
+            version.Text = string.Format("version {0}.{1}.{2}", versionApp.Major, versionApp.Minor,versionApp.Build);
+            CheckForUpdates();
+        }
+
+        private async void CheckForUpdates()
+        {
+            try
+            {
+                using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
+                {
+                    var result = await mgr;
+
+                }
+            }
+            catch(Exception e)
+            {
+                ILogger logger = Logger.GetLogger();
+                logger.LogException(e);
+            }
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
