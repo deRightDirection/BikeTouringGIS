@@ -153,6 +153,10 @@
                 <TextBlock  Margin="25,0,25,0">
                 <project:HyperLinkControl NavigateUri="http://www.basketbalnieuws.nl">website about basketball by the Right Direction</project:HyperLinkControl>
                 </TextBlock>
+                <TextBlock  Margin="25,0,25,0">
+                <project:HyperLinkControl NavigateUri="mailto:info@therightdirection.nl?subject=bike touring gis">mail us</project:HyperLinkControl>
+                </TextBlock>
+                <Button   Margin="50,0,0,0" Content="Update the application" x:Name="updateApp" IsEnabled="False" HorizontalAlignment="Right"/>
             </StackPanel>
         </Grid>
     </Grid>
