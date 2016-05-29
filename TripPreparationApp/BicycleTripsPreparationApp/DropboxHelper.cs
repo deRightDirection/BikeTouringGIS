@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using theRightDirection.Library.Logging;
 
 namespace BikeTouringGIS
 {
@@ -34,8 +35,10 @@ namespace BikeTouringGIS
                         var path = dbBase64Text.Skip(lastIndex + 1).ToArray();
                         _folder = Encoding.UTF8.GetString(path);
                     }
-                    catch (FileNotFoundException e)
+                    catch (Exception e)
                     {
+                        ILogger logger = Logger.GetLogger();
+                        logger.LogException(e);
                         return Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
                     }
                 }

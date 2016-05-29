@@ -1,0 +1,10 @@
+<log4j:event logger="theRightDirection.Library.Logging.Logger" timestamp="1464457928348" level="ERROR" thread="1"><log4j:message>Update.exe not found, not a Squirrel-installed app?
+Squirrel
+   at Squirrel.UpdateManager.getUpdateExe() in c:\Users\paulb\code\squirrel\squirrel.windows\src\Squirrel\UpdateManager.cs:line 287
+   at Squirrel.UpdateManager.getApplicationName() in c:\Users\paulb\code\squirrel\squirrel.windows\src\Squirrel\UpdateManager.cs:line 266
+   at Squirrel.UpdateManager..ctor(String urlOrPath, String applicationName, String rootDirectory, IFileDownloader urlDownloader) in c:\Users\paulb\code\squirrel\squirrel.windows\src\Squirrel\UpdateManager.cs:line 41
+   at Squirrel.UpdateManager.&lt;GitHubUpdateManager&gt;d__2b.MoveNext() in c:\Users\paulb\code\squirrel\squirrel.windows\src\Squirrel\UpdateManager.Factory.cs:line 80
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at BikeTouringGIS.MainScreen.&lt;CheckForUpdates&gt;d__8.MoveNext()</log4j:message><log4j:properties><log4j:data name="LogFileDate" value="28052016" /><log4j:data name="log4jmachinename" value="DESKTOP-70387U1" /><log4j:data name="LogFileName" value="theRightDirection.BikeTouringGIS.Logging" /><log4j:data name="log4net:UserName" value="DESKTOP-70387U1\info" /><log4j:data name="log4japp" value="theRightDirection.BikeTouringGIS.exe" /><log4j:data name="log4net:Identity" value="" /><log4j:data name="log4net:HostName" value="DESKTOP-70387U1" /></log4j:properties><log4j:locationInfo class="theRightDirection.Library.Logging.Logger" method="LogMessage" file="" line="0" /></log4j:event>
