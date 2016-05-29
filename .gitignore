@@ -45,3 +45,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+/TripPreparationApp/BicycleTripsPreparationApp/bin
+/TripPreparationApp/BicycleTripsPreparationApp/obj
+/TripPreparationApp/BicycleTripsPreparationApp/.vs
+/TripPreparationApp/BicycleTripsPreparationApp/packages

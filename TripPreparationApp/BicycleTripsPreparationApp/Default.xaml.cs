@@ -13,6 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro;
 using MahApps.Metro.Controls;
+using Squirrel;
+using MahApps.Metro.Controls.Dialogs;
+using System.Threading;
+using theRightDirection.Library.Logging;
 
 namespace BikeTouringGIS
 {
@@ -25,7 +29,5 @@ namespace BikeTouringGIS
         {
             InitializeComponent();
         }
-
-
     }
 }

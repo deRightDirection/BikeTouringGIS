@@ -19,6 +19,8 @@ using GPX;
 using Squirrel;
 using BicycleTripsPreparationApp;
 using theRightDirection.Library.Logging;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace BikeTouringGIS
 {
@@ -39,27 +41,6 @@ namespace BikeTouringGIS
             InitializeComponent();
             var versionApp = typeof(App).Assembly.GetName().Version;
             version.Text = string.Format("version {0}.{1}.{2}", versionApp.Major, versionApp.Minor,versionApp.Build);
-            CheckForUpdates();
-        }
-
-        private async void CheckForUpdates()
-        {
-            try
-            {
-                using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
-                {
-                    var result = await mgr;
-                   var updateInfo = await result.CheckForUpdate();
-                    var currentVersion = updateInfo.CurrentlyInstalledVersion.Version;
-                    var futureVersion = updateInfo.FutureReleaseEntry.Version;
-                    updateApp.IsEnabled = currentVersion != futureVersion;
-                }
-            }
-            catch(Exception e)
-            {
-                ILogger logger = Logger.GetLogger();
-                logger.LogException(e);
-            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -197,25 +178,30 @@ namespace BikeTouringGIS
 
         }
 
-        private void updateApp_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateApplication();
-        }
-
-        private async void UpdateApplication()
+        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
                 using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
                 {
                     var result = await mgr;
-                    await result.UpdateApp();
+                   var updateInfo = await result.CheckForUpdate();
+                    var currentVersion = updateInfo.CurrentlyInstalledVersion.Version;
+                    var futureVersion = updateInfo.FutureReleaseEntry.Version;
+                    if (currentVersion != futureVersion)
+                    {
+                        var window = Application.Current.MainWindow as MetroWindow;
+                        var controller = await window.ShowProgressAsync("Please wait...", "Updating application");
+                        await result.UpdateApp();
+                        await controller.CloseAsync();
+                    }
+                    mgr.Dispose();
                 }
             }
-            catch (Exception e)
+            catch(Exception ex)
             {
                 ILogger logger = Logger.GetLogger();
-                logger.LogException(e);
+                logger.LogException(ex);
             }
         }
     }

@@ -4,7 +4,8 @@
                      xmlns:Fluent="urn:fluent-ribbon"
                     xmlns:project="clr-namespace:BikeTouringGIS"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013">
+             xmlns:Dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+        xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013" Loaded="UserControl_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -20,28 +21,28 @@
             <Image Width="150" Height="99" Source="bike touring gis splash screen.png" Stretch="Fill" Grid.Column="0"/>
             <Border BorderBrush="DarkGreen" BorderThickness="1" Margin="5"  Grid.Column="1" HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                <Grid Margin="5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+                    <Grid Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
                         <Button Margin="5" Content="Load GPX-track" Click="Button_Click" Grid.Row="0" Grid.Column="1" Width="125" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Load any gpx-file with routes" Foreground="LightGray" VerticalAlignment="Bottom"/>
-                </Grid>
+                    </Grid>
 
-                <Grid Margin="25,5,5,5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+                    <Grid Margin="25,5,5,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
                         <Grid Grid.Row="0" Grid.Column="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -57,7 +58,7 @@
                         </Grid>
                         <Button Margin="5" Content="Create split points" Click="CreateSplitPoints_Click" Grid.Row="0" Grid.Column="1" Width="125" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Split route into smaller routes" Foreground="LightGray" VerticalAlignment="Bottom"/>
-                </Grid>
+                    </Grid>
 
                     <Grid Margin="25,5,5,5">
                         <Grid.RowDefinitions>
@@ -140,7 +141,7 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock  Margin="25,0,25,0" VerticalAlignment="Center">
                 <project:HyperLinkControl NavigateUri="http://www.therightdirection.nl/bike-touring-gis">website Bike Touring GIS</project:HyperLinkControl>
-            </TextBlock>
+                </TextBlock>
                 <TextBlock Margin="25,0,25,0">
                 <project:HyperLinkControl NavigateUri="https://www.facebook.com/mannusontheroll/">FaceBook page about the Green Rider</project:HyperLinkControl>
                 </TextBlock>
@@ -157,7 +158,6 @@
                 <project:HyperLinkControl NavigateUri="mailto:info@therightdirection.nl?subject=bike touring gis">mail us</project:HyperLinkControl>
                 </TextBlock>
                 <TextBlock x:Name="version" Margin="50,0,0,0"/>
-                <Button   Margin="10,0,0,0" Content="Update the application" x:Name="updateApp" IsEnabled="False" HorizontalAlignment="Right" Click="updateApp_Click"/>
             </StackPanel>
         </Grid>
     </Grid>
