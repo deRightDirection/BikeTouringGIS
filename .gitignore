@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -302,4 +301,4 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
->>>>>>> origin/master
+
