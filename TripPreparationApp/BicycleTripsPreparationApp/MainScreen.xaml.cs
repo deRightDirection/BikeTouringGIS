@@ -34,7 +34,7 @@ namespace BikeTouringGIS
         private string _lastUsedFolder;
         private GraphicsLayer _routelayer;
         private GraphicsLayer _splitLayer;
-        private TrackReader _trackReader;
+        private List<wptType> _wayPoints;
         private DistanceAnalyzer _distanceAnalyzer;
         public MainScreen()
         {
@@ -56,16 +56,44 @@ namespace BikeTouringGIS
                 _routelayer.Graphics.Clear();
                 _splitLayer.Graphics.Clear();
                 _lastUsedFolder = Path.GetDirectoryName(openFileDialog.FileName);
-                _trackReader = new TrackReader(openFileDialog.FileName);
-                // lees gpx tracks en zoom in naar gehele route
-                _trackReader.ReadGPXTrack();
-                ZoomToRoute(_trackReader.WayPoints);
-                // bepaal afstand gehele route
-                _distanceAnalyzer = new DistanceAnalyzer();
-                length.Text = _distanceAnalyzer.CalculateDistance(_trackReader.WayPoints).ToString();
-                // teken begin en eind punt op de kaart
-                GetStartAndEndPoint(grid.Resources["StartSymbol"] as SimpleMarkerSymbol, grid.Resources["EndSymbol"] as SimpleMarkerSymbol, _trackReader.WayPoints);
+                GetWayPoints(openFileDialog.FileName);
             }
+        }
+
+        private async void GetWayPoints(string fileName)
+        {
+            var gpx = new GPXFile(fileName);
+            var routes = gpx.GetRoutes();
+            var tracks = gpx.GetTracks();
+            // TODO MME 02062016: what if there are more routes & tracks?
+            if (routes.Count == 1)
+            {
+                var route = gpx.GetRoutes()[0];
+                _wayPoints = route.RouteWayPoints;
+                SetRoute();
+            }
+            if(routes.Count == 0 && tracks.Count == 1)
+            {
+                var window = Application.Current.MainWindow as MetroWindow;
+                var result = await window.ShowMessageAsync("Convert track to route", "There is one track available. Do you want to convert it to a route?", MessageDialogStyle.AffirmativeAndNegative);
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    // convert track to route
+                    SetRoute();
+
+                }
+            }
+
+        }
+
+        private void SetRoute()
+        {
+            ZoomToRoute(_wayPoints);
+            // bepaal afstand gehele route
+            _distanceAnalyzer = new DistanceAnalyzer();
+            length.Text = _distanceAnalyzer.CalculateDistance(_wayPoints).ToString();
+            // teken begin en eind punt op de kaart
+            GetStartAndEndPoint(grid.Resources["StartSymbol"] as SimpleMarkerSymbol, grid.Resources["EndSymbol"] as SimpleMarkerSymbol, _wayPoints);
         }
 
         private void ZoomToRoute(List<wptType> wayPoints)
@@ -146,7 +174,7 @@ namespace BikeTouringGIS
             _splitLayer.Graphics.Clear();
             _routePoints = new List<wptType>();
             // splits de route op naar stukken van x km
-            var routeSplitter = new RouteSplitter(_trackReader.WayPoints);
+            var routeSplitter = new RouteSplitter(_wayPoints);
             routeSplitter.SplitRoute(int.Parse(distanceTxt.Text));
             // collectie van routes en verschillende kleuren
             var x = routeSplitter.SplittedRoutes;
