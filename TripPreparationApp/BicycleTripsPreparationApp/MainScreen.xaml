@@ -109,7 +109,7 @@
                         <esri:SimpleLineSymbol Color="Black" Width="1" />
                     </esri:SimpleMarkerSymbol.Outline>
                 </esri:SimpleMarkerSymbol>
-                <esri:SimpleMarkerSymbol x:Key="EndSymbol" Color="Blue" Style="Circle" Size="10">
+                <esri:SimpleMarkerSymbol x:Key="EndSymbol" Color="DarkGreen" Style="Circle" Size="10">
                     <esri:SimpleMarkerSymbol.Outline>
                         <esri:SimpleLineSymbol Color="Black" Width="1" />
                     </esri:SimpleMarkerSymbol.Outline>
@@ -133,7 +133,13 @@
                             </esri:LabelProperties>
                         </esri:GraphicsLayer.Labeling>
                     </esri:GraphicsLayer>
-                    <esri:GraphicsLayer ID="route"/>
+                    <esri:GraphicsLayer ID="route">
+                        <esri:GraphicsLayer.Labeling>
+                            <esri:LabelProperties IsEnabled="True">
+                                <esri:AttributeLabelClass Symbol="{StaticResource LabelSymbol}" TextExpression="[name]" />
+                            </esri:LabelProperties>
+                        </esri:GraphicsLayer.Labeling>
+                    </esri:GraphicsLayer>
                 </esri:Map>
             </esri:MapView>
         </Grid>

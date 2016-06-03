@@ -302,3 +302,8 @@ paket-files/
 .idea/
 *.sln.iml
 
+*.pdb
+TripPreparationApp/BicycleTripsPreparationApp/.vs/BicycleTripsPreparationApp/v14/.suo
+*.pdb
+TripPreparationApp/BicycleTripsPreparationApp/obj/Debug/theRightDirection.BikeTouringGIS.exe
+*.suo

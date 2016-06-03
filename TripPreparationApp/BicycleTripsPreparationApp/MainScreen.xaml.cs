@@ -117,8 +117,12 @@ namespace BikeTouringGIS
             var geometry = CreateGeometryFromWayPoints(wayPoints);
             var track = new Graphic(geometry, grid.Resources["TotalRoute"] as SimpleLineSymbol);
             _routelayer.Graphics.Add(track);
-            _routelayer.Graphics.Add(new Graphic(new MapPoint((double)wayPoints.First().lon, (double)wayPoints.First().lat, new SpatialReference(4326)), startSymbol));
-            _routelayer.Graphics.Add(new Graphic(new MapPoint((double)wayPoints.Last().lon, (double)wayPoints.Last().lat, new SpatialReference(4326)), endSymbol));
+            var startPoint = new Graphic(new MapPoint((double)wayPoints.First().lon, (double)wayPoints.First().lat, new SpatialReference(4326)), startSymbol);
+            var endPoint = new Graphic(new MapPoint((double)wayPoints.Last().lon, (double)wayPoints.Last().lat, new SpatialReference(4326)), endSymbol);
+            startPoint.Attributes["name"] = "start";
+            endPoint.Attributes["name"] = "end";
+            _routelayer.Graphics.Add(startPoint);
+            _routelayer.Graphics.Add(endPoint);
         }
 
         private void DisplayPartOfTrack(List<wptType> wayPoints, Color color)
