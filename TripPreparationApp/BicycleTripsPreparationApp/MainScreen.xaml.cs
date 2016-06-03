@@ -75,9 +75,19 @@ namespace BikeTouringGIS
             if(routes.Count == 0 && tracks.Count == 1)
             {
                 var window = Application.Current.MainWindow as MetroWindow;
-                var result = await window.ShowMessageAsync("Convert track to route", "There is one track available. Do you want to convert it to a route?", MessageDialogStyle.AffirmativeAndNegative);
+                StringBuilder textBuilder = new StringBuilder();
+                textBuilder.AppendLine("There is one track available");
+                textBuilder.AppendLine();
+                textBuilder.AppendLine("routes are used by navigation-devices");
+                textBuilder.AppendLine("tracks are to register where you have been");
+                textBuilder.AppendLine();
+                textBuilder.AppendLine("Do you want to convert it to a route?");
+                var dialogText = textBuilder.ToString();
+                var result = await window.ShowMessageAsync("Convert track to route", dialogText, MessageDialogStyle.AffirmativeAndNegative);
                 if (result == MessageDialogResult.Affirmative)
                 {
+                    var converter = new TrackToRouteConverter();
+                    _wayPoints = converter.ConvertTrackToRoute(tracks[0]);
                     // convert track to route
                     SetRoute();
 
