@@ -307,3 +307,8 @@ TripPreparationApp/BicycleTripsPreparationApp/.vs/BicycleTripsPreparationApp/v14
 *.pdb
 TripPreparationApp/BicycleTripsPreparationApp/obj/Debug/theRightDirection.BikeTouringGIS.exe
 *.suo
+/TripPreparationApp/BicycleTripsPreparationApp/.vs
+/TripPreparationApp/BicycleTripsPreparationApp/bin
+/TripPreparationApp/BicycleTripsPreparationApp/bin/Debug
+/TripPreparationApp/BicycleTripsPreparationApp/bin/Release
+obj
