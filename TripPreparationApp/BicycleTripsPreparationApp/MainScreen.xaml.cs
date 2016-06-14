@@ -116,6 +116,7 @@ namespace BikeTouringGIS
         {
             var geometry = CreateGeometryFromWayPoints(wayPoints);
             var track = new Graphic(geometry, grid.Resources["TotalRoute"] as SimpleLineSymbol);
+            track.Attributes["routename"] = "mannus";
             _routelayer.Graphics.Add(track);
             var startPoint = new Graphic(new MapPoint((double)wayPoints.First().lon, (double)wayPoints.First().lat, new SpatialReference(4326)), startSymbol);
             var endPoint = new Graphic(new MapPoint((double)wayPoints.Last().lon, (double)wayPoints.Last().lat, new SpatialReference(4326)), endSymbol);
@@ -128,7 +129,7 @@ namespace BikeTouringGIS
         private void DisplayPartOfTrack(List<wptType> wayPoints, Color color)
         {
             var lineSymbol = new SimpleLineSymbol();
-            lineSymbol.Width = 3;
+            lineSymbol.Width = 4;
             lineSymbol.Color = color;
             var geometry = CreateGeometryFromWayPoints(wayPoints);
             var track = new Graphic(geometry, lineSymbol);

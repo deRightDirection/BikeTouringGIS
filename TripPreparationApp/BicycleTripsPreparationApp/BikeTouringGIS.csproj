@@ -124,6 +124,9 @@
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteList.xaml.cs">
+      <DependentUpon>RouteList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RouteSplitter.cs" />
     <Compile Include="TrackToRouteConverter.cs" />
     <Page Include="Default.xaml">
@@ -139,6 +142,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DropboxHelper.cs" />
+    <Page Include="RouteList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

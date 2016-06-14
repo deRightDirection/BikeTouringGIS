@@ -102,28 +102,34 @@
                 </Grid>
             </Border>
         </Grid>
-        <Grid x:Name="grid" Margin="5"  Grid.Row="1">
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <project:RouteList Margin="5" Grid.Column="0"/>
+            <Grid x:Name="grid" Margin="5" Grid.Column="1">
             <Grid.Resources>
-                <esri:SimpleMarkerSymbol x:Key="StartSymbol" Color="LightGreen" Style="Circle" Size="10">
+                <esri:SimpleMarkerSymbol x:Key="StartSymbol" Color="LightGreen" Style="Circle" Size="12">
                     <esri:SimpleMarkerSymbol.Outline>
-                        <esri:SimpleLineSymbol Color="Black" Width="1" />
+                        <esri:SimpleLineSymbol Color="Black" Width="2" />
                     </esri:SimpleMarkerSymbol.Outline>
                 </esri:SimpleMarkerSymbol>
-                <esri:SimpleMarkerSymbol x:Key="EndSymbol" Color="DarkGreen" Style="Circle" Size="10">
+                <esri:SimpleMarkerSymbol x:Key="EndSymbol" Color="DarkGreen" Style="Circle" Size="12">
                     <esri:SimpleMarkerSymbol.Outline>
-                        <esri:SimpleLineSymbol Color="Black" Width="1" />
+                        <esri:SimpleLineSymbol Color="Black" Width="2" />
                     </esri:SimpleMarkerSymbol.Outline>
                 </esri:SimpleMarkerSymbol>
-                <esri:SimpleMarkerSymbol x:Key="RouteSymbol" Color="White" Style="Circle" Size="5">
+                <esri:SimpleMarkerSymbol x:Key="RouteSymbol" Color="White" Style="Circle" Size="7">
                     <esri:SimpleMarkerSymbol.Outline>
-                        <esri:SimpleLineSymbol Color="Black" Width="1" />
+                        <esri:SimpleLineSymbol Color="Black" Width="2" />
                     </esri:SimpleMarkerSymbol.Outline>
                 </esri:SimpleMarkerSymbol>
                 <esri:SimpleLineSymbol x:Key="TotalRoute" Color="Gold" Width="3" />
-                <esri:SymbolFont x:Key="LabelFont" FontSize="12" FontWeight="Bold" />
-                <esri:TextSymbol x:Key="LabelSymbol" Color="Black" BorderLineColor="White" BorderLineSize="1" Font="{StaticResource LabelFont}"/>
+                <esri:SymbolFont x:Key="LabelFont" FontSize="15" FontWeight="Bold" />
+                <esri:TextSymbol x:Key="LabelSymbol" Color="Black" Font="{StaticResource LabelFont}"/>
             </Grid.Resources>
-            <esri:MapView x:Name="MyMapView" Grid.Row="1" BorderBrush="LimeGreen" BorderThickness="1" Margin="5">
+            <esri:MapView x:Name="MyMapView" BorderBrush="LimeGreen" BorderThickness="1">
                 <esri:Map x:Name="Map">
                     <esri:OpenStreetMapLayer ID="OSMLayer" TemplateUri="http://{subDomain}.tile.opencyclemap.org/cycle/{level}/{col}/{row}.png"/>
                     <esri:GraphicsLayer ID="split">
@@ -133,15 +139,17 @@
                             </esri:LabelProperties>
                         </esri:GraphicsLayer.Labeling>
                     </esri:GraphicsLayer>
-                    <esri:GraphicsLayer ID="route">
+                    <esri:GraphicsLayer ID="route" Opacity="{Binding Transparency}">
                         <esri:GraphicsLayer.Labeling>
                             <esri:LabelProperties IsEnabled="True">
                                 <esri:AttributeLabelClass Symbol="{StaticResource LabelSymbol}" TextExpression="[name]" />
-                            </esri:LabelProperties>
+                                    <esri:AttributeLabelClass Symbol="{StaticResource LabelSymbol}" TextExpression="[routename]" />
+                                </esri:LabelProperties>
                         </esri:GraphicsLayer.Labeling>
                     </esri:GraphicsLayer>
                 </esri:Map>
             </esri:MapView>
+        </Grid>
         </Grid>
         <Grid Grid.Row="2" Margin="5">
             <StackPanel Orientation="Horizontal">
