@@ -101,18 +101,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="TriAxis.RunSharp">
-      <HintPath>..\..\Libraries\TriAxis.RunSharp.dll</HintPath>
-    </Reference>
     <Reference Include="VersionHelpers, Version=10.0.0.0, Culture=neutral, PublicKeyToken=fcd95136011e7371, processorArchitecture=MSIL">
       <HintPath>packages\VersionHelpers.10.0.0.0\lib\net45\VersionHelpers.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Whathecode.Interop">
-      <HintPath>..\..\Libraries\Whathecode.Interop.dll</HintPath>
-    </Reference>
-    <Reference Include="Whathecode.System">
-      <HintPath>..\..\Libraries\Whathecode.System.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
