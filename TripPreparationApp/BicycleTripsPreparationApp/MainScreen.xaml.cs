@@ -155,7 +155,6 @@ namespace BikeTouringGIS
                 var gpx = new gpxType();
                 var rte = new rteType();
                 rte.name = $"{i + 1}_{prefix.Text}";
-//                rte.name = string.Format($"{i + 1}_{prefix.Text}");
                 rte.rtept = _routeParts[i].ToArray();
                 gpx.rte = new List<rteType>() { rte }.ToArray();
                 gpxFile.Save(filename, gpx);
@@ -195,14 +194,7 @@ namespace BikeTouringGIS
             // collectie van routes en verschillende kleuren
             var x = routeSplitter.SplittedRoutes;
             _routeParts = x;
-            var items = ColorUtils.RgbLinearInterpolate(Colors.Gold, Colors.YellowGreen, Colors.LimeGreen, x.Count);
-            var differenceCount = x.Count - items.Count;
-            for(int i = 0; i < differenceCount; i++)
-            {
-                items.Add(Colors.YellowGreen);
-            }
-
-
+            var items = ColorUtils.RgbLinearInterpolate(Colors.LightBlue, Colors.DarkBlue, x.Count, Colors.LightBlue, Colors.DarkBlue);
             // doorloop alle routes, teken iedere route op de kaart zet voor ieder beginpunt een stuk op de kaart plus afstand tot dit punt
             int distance = 0;
             for (int j = 0; j < x.Count; j++)

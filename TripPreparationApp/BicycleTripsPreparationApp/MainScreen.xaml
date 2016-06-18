@@ -127,7 +127,7 @@ xmlns:s="clr-namespace:System;assembly=mscorlib"
                         <esri:SimpleLineSymbol Color="Black" Width="2" />
                     </esri:SimpleMarkerSymbol.Outline>
                 </esri:SimpleMarkerSymbol>
-                <esri:SimpleLineSymbol x:Key="TotalRoute" Color="Gold" Width="3" />
+                <esri:SimpleLineSymbol x:Key="TotalRoute" Color="DarkBlue" Width="3" />
                 <esri:SymbolFont x:Key="LabelFont" FontSize="15" FontWeight="Bold" />
                 <esri:TextSymbol x:Key="LabelSymbol" Color="Black" Font="{StaticResource LabelFont}"/>
             </Grid.Resources>
