@@ -11,6 +11,11 @@ namespace BikeTouringGIS.ViewModels
     public class MainScreenViewModel : ViewModelBase
     {
         private bool _showOpenCycleMap, _showOpenStreetMap, _showFietsknooppunten;
+        private int _splitDistance;
+
+        public RelayCommand<int> SwitchBaseMapCommand { get; private set; }
+        public RelayCommand SaveSplittedRoute { get; private set; }
+
         public MainScreenViewModel()
         {
             SwitchBaseMapCommand = new RelayCommand<int>(x => SwitchBaseMap(x));
@@ -50,7 +55,5 @@ namespace BikeTouringGIS.ViewModels
                     break;
             }
         }
-
-        public RelayCommand<int> SwitchBaseMapCommand { get; private set; }
     }
 }

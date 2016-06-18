@@ -154,7 +154,8 @@ namespace BikeTouringGIS
                 var gpxFile = new GPXFile();
                 var gpx = new gpxType();
                 var rte = new rteType();
-                rte.name = string.Format("{0}_{1}", prefix.Text, i + 1);
+                rte.name = $"{i + 1}_{prefix.Text}";
+//                rte.name = string.Format($"{i + 1}_{prefix.Text}");
                 rte.rtept = _routeParts[i].ToArray();
                 gpx.rte = new List<rteType>() { rte }.ToArray();
                 gpxFile.Save(filename, gpx);
