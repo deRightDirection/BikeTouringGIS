@@ -1,10 +1,18 @@
-﻿using GalaSoft.MvvmLight;
+﻿using BicycleTripsPreparationApp;
+using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Geometry;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BikeTouringGIS.ViewModels
 {
@@ -12,13 +20,69 @@ namespace BikeTouringGIS.ViewModels
     {
         private bool _showOpenCycleMap, _showOpenStreetMap, _showFietsknooppunten;
         private int _splitDistance;
+        private bool _poiClickMode;
+        private readonly IDialogCoordinator _dialogCoordinator;
+        private string _poiName;
 
+        public RelayCommand ClearPOIsCommand { get; private set; }
+        public RelayCommand<MapPoint> MapDoubleClickCommand { get; private set; }
         public RelayCommand<int> SwitchBaseMapCommand { get; private set; }
         public RelayCommand SaveSplittedRoute { get; private set; }
+        public RelayCommand AddPOICommand { get; private set; }
 
         public MainScreenViewModel()
         {
+            _dialogCoordinator = DialogCoordinator.Instance;
             SwitchBaseMapCommand = new RelayCommand<int>(x => SwitchBaseMap(x));
+            AddPOICommand = new RelayCommand(AddPOI);
+            MapDoubleClickCommand = new RelayCommand<MapPoint>(x => MapDoubleClick(x));
+            ClearPOIsCommand = new RelayCommand(ClearPOIs);
+                }
+
+        // TODO: nog niet volledig mvvm
+        private void ClearPOIs()
+        {
+            var window = App.Current.MainWindow;
+            var mainScreen = ((MetroContentControl)window.Content).Content as MainScreen;
+            var symbol = mainScreen.Resources["POISymbol"] as SimpleMarkerSymbol;
+            var mapview = mainScreen.FindName("MyMapView") as MapView;
+            var poiLayer = mapview.Map.Layers["POIs"] as GraphicsLayer;
+            poiLayer.Graphics.Clear();
+        }
+
+        // TODO: nog niet volledig mvvm
+        private void MapDoubleClick(MapPoint p)
+        {
+            if (_poiClickMode)
+            {
+                var window = App.Current.MainWindow;
+                var mainScreen = ((MetroContentControl)window.Content).Content as MainScreen;
+                var symbol = mainScreen.Resources["POISymbol"] as SimpleMarkerSymbol;
+                var mapview = mainScreen.FindName("MyMapView") as MapView;
+                var poiLayer = mapview.Map.Layers["POIs"] as GraphicsLayer;
+                var poi = new Graphic(p, symbol);
+                poi.Attributes["title"] = _poiName;
+                poiLayer.Graphics.Add(poi);
+                _poiClickMode = false;
+            }
+        }
+
+        // TODO: nog niet volledig mvvm
+        private async void AddPOI()
+        {
+
+            await _dialogCoordinator.ShowInputAsync(this, "Name of POI", "Fill in the name of POI and click ok.")
+                .ContinueWith(t => _poiName = t.Result);
+            if(string.IsNullOrEmpty(_poiName))
+            {
+                await _dialogCoordinator.ShowMessageAsync(this, "Name of POI", "No name for POI given");
+            }
+            else
+            {
+                await _dialogCoordinator.ShowMessageAsync(this, "Name of POI", "After closing this window double click on the map for the location of the POI");
+                _poiClickMode = true;
+
+            }
         }
 
         public bool ShowOpenCycleMap

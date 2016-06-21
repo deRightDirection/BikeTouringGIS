@@ -32,7 +32,7 @@ namespace BikeTouringGIS
         private List<List<wptType>> _routeParts;
         private List<wptType> _routePoints;
         private string _lastUsedFolder;
-        private GraphicsLayer _routelayer;
+        private GraphicsLayer _routelayer, _poiLayer;
         private GraphicsLayer _splitLayer;
         private List<wptType> _wayPoints;
         private DistanceAnalyzer _distanceAnalyzer;
@@ -49,12 +49,14 @@ namespace BikeTouringGIS
             openFileDialog.Filter = "GPX files (*.gpx)|*.gpx";
             _routelayer = Map.Layers["route"] as GraphicsLayer;
             _splitLayer = Map.Layers["split"] as GraphicsLayer;
+            _poiLayer = Map.Layers["POIs"] as GraphicsLayer;
             openFileDialog.Multiselect = false;
             openFileDialog.InitialDirectory = DropBoxHelper.GetDropBoxFolder();
             if (openFileDialog.ShowDialog() == true)
             {
                 _routelayer.Graphics.Clear();
                 _splitLayer.Graphics.Clear();
+                _poiLayer.Graphics.Clear();
                 _lastUsedFolder = Path.GetDirectoryName(openFileDialog.FileName);
                 GetWayPoints(openFileDialog.FileName);
             }
@@ -63,6 +65,7 @@ namespace BikeTouringGIS
         private async void GetWayPoints(string fileName)
         {
             var gpx = new GPXFile(fileName);
+            var waypoints = gpx.GetWaypoints();
             var routes = gpx.GetRoutes();
             var tracks = gpx.GetTracks();
             // TODO MME 02062016: what if there are more routes & tracks?
@@ -93,7 +96,22 @@ namespace BikeTouringGIS
 
                 }
             }
+            if(waypoints.Count > 0)
+            {
+                ShowWayPoints(waypoints);
+            }
 
+        }
+
+        private void ShowWayPoints(List<wptType> waypoints)
+        {
+            var poiSymbol = this.Resources["POISymbol"] as SimpleMarkerSymbol;
+            foreach (var point in waypoints)
+            {
+                var mapPoint = new Graphic(new MapPoint((double)point.lon, (double)point.lat, new SpatialReference(4326)), poiSymbol);
+                mapPoint.Attributes["title"] = point.name;
+                _poiLayer.Graphics.Add(mapPoint);
+            }
         }
 
         private void SetRoute()
@@ -148,18 +166,38 @@ namespace BikeTouringGIS
 
         private void SaveGPSTracks_Click(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < _routeParts.Count; i++)
-            {
-                var filename = string.Format(@"{0}\{1}_{2}.gpx", _lastUsedFolder, prefix.Text, i + 1);
-                var gpxFile = new GPXFile();
-                var gpx = new gpxType();
-                var rte = new rteType();
-                rte.name = $"{i + 1}_{prefix.Text}";
-                rte.rtept = _routeParts[i].ToArray();
-                gpx.rte = new List<rteType>() { rte }.ToArray();
-                gpxFile.Save(filename, gpx);
-            }
+            var pois = GetPOIs();
+            // TODO pois bufferen om route
+                for (int i = 0; i < _routeParts.Count; i++)
+                {
+                    var filename = string.Format(@"{0}\{1}_{2}.gpx", _lastUsedFolder, prefix.Text, i + 1);
+                    var gpxFile = new GPXFile();
+                    var gpx = new gpxType();
+                    var rte = new rteType();
+                    rte.name = $"{i + 1}_{prefix.Text}";
+                    rte.rtept = _routeParts[i].ToArray();
+                    gpx.rte = new List<rteType>() { rte }.ToArray();
+                    gpx.wpt = pois;
+                    gpxFile.Save(filename, gpx);
+                }
             SaveAllSplitPointsAndLinesInOneFile();
+        }
+
+        private wptType[] GetPOIs()
+        {
+            var pois = _poiLayer.Graphics;
+            var result = new List<wptType>();
+            foreach(var poi in pois)
+            {
+                var wpt = new wptType();
+                var point = poi.Geometry as MapPoint;
+                wpt.lon = (decimal)point.X;
+                wpt.lat = (decimal)point.Y;
+                wpt.name = poi.Attributes["title"] as string;
+                wpt.desc = poi.Attributes["title"] as string;
+                result.Add(wpt);
+            }
+            return result.ToArray();
         }
 
         private void SaveAllSplitPointsAndLinesInOneFile()

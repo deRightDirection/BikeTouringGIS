@@ -134,6 +134,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\MouseButtonEventArgsToPointConverter.cs" />
     <Compile Include="Default.xaml.cs">
       <DependentUpon>Default.xaml</DependentUpon>
     </Compile>
