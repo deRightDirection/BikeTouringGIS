@@ -202,7 +202,7 @@ namespace BikeTouringGIS
 
         private void SaveAllSplitPointsAndLinesInOneFile()
         {
-            var filename = string.Format(@"{0}\splitlines_and_points_{1}_km.gpx", _lastUsedFolder, distanceTxt.Text);
+            var filename = string.Format(@"{0}\{2}_splitlines_and_points_{1}_km.gpx", _lastUsedFolder, distanceTxt.Text, prefix.Text);
             var gpxFile = new GPXFile();
             var gpx = new gpxType();
             gpx.wpt = _routePoints.ToArray();
