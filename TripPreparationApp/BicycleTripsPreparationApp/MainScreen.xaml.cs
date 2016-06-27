@@ -252,6 +252,27 @@ namespace BikeTouringGIS
 
         }
 
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if (Map.Layers[0].IsVisible)
+            {
+                Map.Layers[0].IsVisible = false;
+                Map.Layers[1].IsVisible = true;
+                return;
+            }
+            if (Map.Layers[1].IsVisible)
+            {
+                Map.Layers[0].IsVisible = true;
+                Map.Layers[1].IsVisible = false;
+                return;
+            }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Map.Layers[2].IsVisible = !Map.Layers[2].IsVisible;
+        }
+
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             try

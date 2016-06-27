@@ -33,11 +33,14 @@ namespace BikeTouringGIS.ViewModels
         public MainScreenViewModel()
         {
             _dialogCoordinator = DialogCoordinator.Instance;
+            ShowFietsknooppunten = false;
+            ShowOpenCycleMap = true;
+            ShowOpenStreetMap = false;
             SwitchBaseMapCommand = new RelayCommand<int>(x => SwitchBaseMap(x));
             AddPOICommand = new RelayCommand(AddPOI);
             MapDoubleClickCommand = new RelayCommand<MapPoint>(x => MapDoubleClick(x));
             ClearPOIsCommand = new RelayCommand(ClearPOIs);
-                }
+        }
 
         // TODO: nog niet volledig mvvm
         private void ClearPOIs()
@@ -107,15 +110,12 @@ namespace BikeTouringGIS.ViewModels
             {
                 case 0: ShowOpenCycleMap = true;
                     ShowOpenStreetMap = false;
-                    ShowFietsknooppunten = false;
                     break;
                 case 1:ShowOpenCycleMap = false;
                     ShowOpenStreetMap = true;
-                    ShowFietsknooppunten = false;
                     break;
-                case 2: ShowOpenCycleMap = false;
-                    ShowOpenStreetMap = false;
-                    ShowFietsknooppunten = true;
+                case 2:
+                    ShowFietsknooppunten = !ShowFietsknooppunten;
                     break;
             }
         }
