@@ -35,6 +35,7 @@ xmlns:s="clr-namespace:System;assembly=mscorlib"
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition />
+                <ColumnDefinition />
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Image Width="150" Height="99" Source="bike touring gis splash screen.png" Stretch="Fill" Grid.Column="0"/>
@@ -69,6 +70,51 @@ xmlns:s="clr-namespace:System;assembly=mscorlib"
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="1" Grid.Column="0" Content="Flip direction" Margin="5" Width="125" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen" Command="{Binding FlipDirectionCommand}" Click="Button_Click_1"/>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button Margin="5" Content="Save GPX-track" Grid.Row="0" Grid.Column="1" Width="125" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen" Click="Button_Click_2"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Save the original gpx" Foreground="LightGray" VerticalAlignment="Bottom"/>
+                    </Grid>
+
+
+                    <Grid Margin="25,5,5,5">
+                        <Button Content="Add POI" Command="{Binding AddPOICommand}"/>
+                    </Grid>
+                    <Grid Margin="25,5,5,5">
+                        <Button Content="Clear POI's" Command="{Binding ClearPOIsCommand}"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="DarkGreen" BorderThickness="1" Margin="5"  Grid.Column="2" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <Grid Margin="25,5,5,5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Row="0" Grid.Column="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="distance per routepart" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
@@ -78,7 +124,6 @@ xmlns:s="clr-namespace:System;assembly=mscorlib"
                         <Button Margin="5" Content="Create split points" Click="CreateSplitPoints_Click" Grid.Row="0" Grid.Column="1" Width="125" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Split route into smaller routes" Foreground="LightGray" VerticalAlignment="Bottom"/>
                     </Grid>
-
                     <Grid Margin="25,5,5,5">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
@@ -100,19 +145,13 @@ xmlns:s="clr-namespace:System;assembly=mscorlib"
                             <TextBox x:Name="prefix" Grid.Row="1" Grid.Column="0" Controls:TextBoxHelper.Watermark="Bike tour" Controls:TextBoxHelper.ClearTextButton="True"/>
                         </Grid>
 
-                        <Button Margin="5" Content="Save GPX-tracks" Click="SaveGPSTracks_Click" Grid.Row="0" Grid.Column="1" Width="125" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen"/>
+                        <Button Margin="5" Content="Save splitted GPX-tracks" Click="SaveGPSTracks_Click" Grid.Row="0" Grid.Column="1" Width="125" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Save smaller routes" Foreground="LightGray" VerticalAlignment="Bottom"/>
                     </Grid>
 
-                    <Grid Margin="25,5,5,5">
-                        <Button Content="Add POI" Command="{Binding AddPOICommand}"/>
-                    </Grid>
-                    <Grid Margin="25,5,5,5">
-                        <Button Content="Clear POI's" Command="{Binding ClearPOIsCommand}"/>
-                    </Grid>
                 </StackPanel>
             </Border>
-            <Border BorderBrush="DarkGreen" BorderThickness="1" Margin="5" MinWidth="150"  Grid.Column="2">
+            <Border BorderBrush="DarkGreen" BorderThickness="1" Margin="5" MinWidth="150"  Grid.Column="3">
                 <Grid Margin="5">
                     <Grid.RowDefinitions>
                         <RowDefinition/>

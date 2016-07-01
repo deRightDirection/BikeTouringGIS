@@ -29,6 +29,7 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand<int> SwitchBaseMapCommand { get; private set; }
         public RelayCommand SaveSplittedRoute { get; private set; }
         public RelayCommand AddPOICommand { get; private set; }
+        public RelayCommand FlipDirectionCommand { get; private set; }
 
         public MainScreenViewModel()
         {
@@ -38,8 +39,13 @@ namespace BikeTouringGIS.ViewModels
             ShowOpenStreetMap = false;
             SwitchBaseMapCommand = new RelayCommand<int>(x => SwitchBaseMap(x));
             AddPOICommand = new RelayCommand(AddPOI);
+            FlipDirectionCommand = new RelayCommand(FlipDirection);
             MapDoubleClickCommand = new RelayCommand<MapPoint>(x => MapDoubleClick(x));
             ClearPOIsCommand = new RelayCommand(ClearPOIs);
+        }
+
+        private void FlipDirection()
+        {
         }
 
         // TODO: nog niet volledig mvvm

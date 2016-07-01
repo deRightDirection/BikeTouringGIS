@@ -36,6 +36,7 @@ namespace BikeTouringGIS
         private GraphicsLayer _splitLayer;
         private List<wptType> _wayPoints;
         private DistanceAnalyzer _distanceAnalyzer;
+        private string _originalFile;
         public MainScreen()
         {
             InitializeComponent();
@@ -57,7 +58,8 @@ namespace BikeTouringGIS
                 _routelayer.Graphics.Clear();
                 _splitLayer.Graphics.Clear();
                 _poiLayer.Graphics.Clear();
-                _lastUsedFolder = Path.GetDirectoryName(openFileDialog.FileName);
+                _originalFile = openFileDialog.FileName;
+                _lastUsedFolder = Path.GetDirectoryName(_originalFile);
                 GetWayPoints(openFileDialog.FileName);
             }
         }
@@ -135,6 +137,7 @@ namespace BikeTouringGIS
             var geometry = CreateGeometryFromWayPoints(wayPoints);
             var track = new Graphic(geometry, grid.Resources["TotalRoute"] as SimpleLineSymbol);
             track.Attributes["routename"] = "mannus";
+            _routelayer.Graphics.Clear();
             _routelayer.Graphics.Add(track);
             var startPoint = new Graphic(new MapPoint((double)wayPoints.First().lon, (double)wayPoints.First().lat, new SpatialReference(4326)), startSymbol);
             var endPoint = new Graphic(new MapPoint((double)wayPoints.Last().lon, (double)wayPoints.Last().lat, new SpatialReference(4326)), endSymbol);
@@ -271,6 +274,25 @@ namespace BikeTouringGIS
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             Map.Layers[2].IsVisible = !Map.Layers[2].IsVisible;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            _wayPoints.Reverse();
+            SetRoute();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var pois = GetPOIs();
+            var filename = _originalFile;
+            var gpxFile = new GPXFile();
+            var gpx = new gpxType();
+            var rte = new rteType();
+            rte.rtept = _wayPoints.ToArray();
+            gpx.rte = new List<rteType>() { rte }.ToArray();
+            gpx.wpt = pois;
+            gpxFile.Save(filename, gpx);
         }
 
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
