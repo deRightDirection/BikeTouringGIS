@@ -88,13 +88,15 @@ xmlns:s="clr-namespace:System;assembly=mscorlib"
                         <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Save the original gpx" Foreground="LightGray" VerticalAlignment="Bottom"/>
                     </Grid>
 
-
+<!--
+                    experimental code so will use it in later release
                     <Grid Margin="25,5,5,5">
                         <Button Content="Add POI" Command="{Binding AddPOICommand}"/>
                     </Grid>
                     <Grid Margin="25,5,5,5">
                         <Button Content="Clear POI's" Command="{Binding ClearPOIsCommand}"/>
                     </Grid>
+                    -->
                 </StackPanel>
             </Border>
             <Border BorderBrush="DarkGreen" BorderThickness="1" Margin="5"  Grid.Column="2" HorizontalAlignment="Center">
