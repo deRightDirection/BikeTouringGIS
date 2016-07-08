@@ -299,21 +299,18 @@ namespace BikeTouringGIS
         {
             try
             {
-                using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
+                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
                 {
-                    using (var result = await mgr)
-                    {
-                        var updateInfo = await result.CheckForUpdate();
+                        var updateInfo = await mgr.CheckForUpdate();
                         var currentVersion = updateInfo.CurrentlyInstalledVersion.Version;
                         var futureVersion = updateInfo.FutureReleaseEntry.Version;
                         if (currentVersion != futureVersion)
                         {
                             var window = Application.Current.MainWindow as MetroWindow;
                             var controller = await window.ShowProgressAsync("Please wait...", "Updating application");
-                            await result.UpdateApp();
+                            await mgr.UpdateApp();
                             await controller.CloseAsync();
                         }
-                    }
                 }
             }
             catch(Exception ex)
