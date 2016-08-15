@@ -50,7 +50,7 @@ xmlns:s="clr-namespace:System;assembly=mscorlib"
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Button Margin="5" Content="Load GPX-track" Click="Button_Click" Grid.Row="0" Grid.Column="1" Width="125" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen"/>
+                        <Button Margin="5" Content="Load GPX-file" Click="Button_Click" Grid.Row="0" Grid.Column="1" Width="125" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="Load any gpx-file with routes" Foreground="LightGray" VerticalAlignment="Bottom"/>
                     </Grid>
 

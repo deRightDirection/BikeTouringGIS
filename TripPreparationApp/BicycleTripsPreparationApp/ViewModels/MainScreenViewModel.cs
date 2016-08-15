@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace BikeTouringGIS.ViewModels
         private string _poiName;
 
         public RelayCommand ClearPOIsCommand { get; private set; }
+        public RelayCommand LoadGpxFileCommand { get; private set; }
         public RelayCommand<MapPoint> MapDoubleClickCommand { get; private set; }
         public RelayCommand<int> SwitchBaseMapCommand { get; private set; }
         public RelayCommand SaveSplittedRoute { get; private set; }
