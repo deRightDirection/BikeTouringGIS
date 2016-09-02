@@ -191,6 +191,7 @@
     <ProjectReference Include="BikeTouringGisLibrary\BikeTouringGISLibrary.csproj">
       <Project>{bdc204a2-f656-43b9-9b4b-c6308bd81404}</Project>
       <Name>BikeTouringGISLibrary</Name>
+      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
