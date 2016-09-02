@@ -40,10 +40,6 @@ namespace BikeTouringGISLibrary
             }
         }
 
-        public void CreateGeometries()
-        {
-            _gpxData.CreateGeometries();
-        }
 
         private void LoadWayPoints(GPXFile gpx)
         {
