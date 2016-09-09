@@ -19,11 +19,13 @@ namespace BikeTouringGIS.ViewModels
         private Action<NewProjectDialogContent> _closeAction;
 
         public RelayCommand CloseCommand { get; private set; }
+        public RelayCommand CancelCommand { get; private set; }
 
-        public NewProjectDialogContent(Action<NewProjectDialogContent> closeHandler)
+        public NewProjectDialogContent(Action<NewProjectDialogContent> closeAndOkHandler, Action closeAndCancelHandler)
         {
-            _closeAction = closeHandler;
+            _closeAction = closeAndOkHandler;
             CloseCommand = new RelayCommand(DoIets);
+            CancelCommand = new RelayCommand(closeAndCancelHandler);
         }
 
         private void DoIets()

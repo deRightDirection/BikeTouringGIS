@@ -52,7 +52,11 @@ namespace BikeTouringGIS.Controls
                 var newProjectDialogContent = new NewProjectDialogContent(instance =>
                 {
                     _dialogCoordinator.HideMetroDialogAsync(mainWindow.DataContext, newProjectDialog);
-                    var x = (newProjectDialog.DataContext as NewProjectDialogContent).Description;
+                    // TODO
+                    Project = ;
+                },() =>
+                {
+                    _dialogCoordinator.HideMetroDialogAsync(mainWindow.DataContext, newProjectDialog);
                 });
                 newProjectDialogContent.Description = "test";
                 newProjectDialog.Content = new NewProjectDialog { DataContext = newProjectDialogContent};
