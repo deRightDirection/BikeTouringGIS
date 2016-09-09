@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows.Navigation;
 
-namespace BikeTouringGIS
+namespace BikeTouringGIS.Controls
 {
     public class HyperLinkControl : Hyperlink
     {

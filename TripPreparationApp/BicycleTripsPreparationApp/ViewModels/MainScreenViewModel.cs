@@ -1,4 +1,5 @@
 ﻿using BicycleTripsPreparationApp;
+using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
@@ -19,6 +20,8 @@ namespace BikeTouringGIS.ViewModels
 {
     public class MainScreenViewModel : ViewModelBase
     {
+        private BikeTouringGISProject _project;
+
         private bool _showOpenCycleMap, _showOpenStreetMap, _showFietsknooppunten;
         private int _splitDistance;
         private bool _poiClickMode;
@@ -45,6 +48,15 @@ namespace BikeTouringGIS.ViewModels
             MapDoubleClickCommand = new RelayCommand<MapPoint>(x => MapDoubleClick(x));
             ClearPOIsCommand = new RelayCommand(ClearPOIs);
         }
+
+        public BikeTouringGISProject Project
+        {
+            get { return _project; }
+            set { Set(() => Project, ref _project, value); }
+        }
+
+
+        // before 1.1.0 code
 
         private void FlipDirection()
         {

@@ -10,7 +10,7 @@ namespace BikeTouringGISLibrary.Model
 {
     public class WayPoint : GeometryCreatable
     {
-        public string Name { get; private set; }
+        public string Name { get; internal set; }
         public Graphic Location
         {
             get

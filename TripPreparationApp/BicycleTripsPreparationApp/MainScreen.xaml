@@ -7,10 +7,11 @@
 xmlns:s="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:BikeTouringGIS.Converters"
     xmlns:Fluent="urn:fluent-ribbon"
-                    xmlns:project="clr-namespace:BikeTouringGIS"
+                    xmlns:project="clr-namespace:BikeTouringGIS.Controls"
              xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:Dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
-        xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013" xmlns:ViewModels="clr-namespace:BikeTouringGIS.ViewModels" x:Class="BikeTouringGIS.MainScreen"
+        xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013" xmlns:ViewModels="clr-namespace:BikeTouringGIS.ViewModels"
+    x:Class="BikeTouringGIS.MainScreen"
                       Dialogs:DialogParticipation.Register="{Binding}"
     Name="mainscreen"
                     Loaded="UserControl_Loaded">
@@ -41,6 +42,7 @@ xmlns:s="clr-namespace:System;assembly=mscorlib"
             <Image Width="150" Height="99" Source="bike touring gis splash screen.png" Stretch="Fill" Grid.Column="0"/>
             <Border BorderBrush="DarkGreen" BorderThickness="1" Margin="5"  Grid.Column="1" HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
+                    <project:BikeTouringGISMenu/>
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition/>

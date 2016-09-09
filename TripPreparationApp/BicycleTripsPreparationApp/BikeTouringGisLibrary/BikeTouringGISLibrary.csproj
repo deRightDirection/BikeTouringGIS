@@ -49,6 +49,7 @@
     <Compile Include="GeometryCreatable.cs" />
     <Compile Include="IRoute.cs" />
     <Compile Include="Model\GpxInformation.cs" />
+    <Compile Include="Model\BikeTouringGISProject.cs" />
     <Compile Include="Model\Route.cs" />
     <Compile Include="Model\Track.cs" />
     <Compile Include="Model\WayPoint.cs" />

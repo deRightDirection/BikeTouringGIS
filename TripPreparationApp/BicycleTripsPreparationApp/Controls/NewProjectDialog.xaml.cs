@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace BikeTouringGIS
+namespace BikeTouringGIS.Controls
 {
     /// <summary>
-    /// Interaction logic for RouteList.xaml
+    /// Interaction logic for NewProjectDialog.xaml
     /// </summary>
-    public partial class RouteList : UserControl
+    public partial class NewProjectDialog : UserControl
     {
-        public RouteList()
+        public NewProjectDialog()
         {
             InitializeComponent();
         }

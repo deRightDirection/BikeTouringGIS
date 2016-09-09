@@ -26,7 +26,7 @@ namespace BikeTouringGISLibrary.UnitTests
             var gpxInfo = _fileReader.LoadFile(path);
             gpxInfo.Routes.Count.ShouldBeEquivalentTo(2);
             gpxInfo.Tracks.Count.ShouldBeEquivalentTo(11);
-            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(2);
+            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(49);
         }
     }
 }

@@ -17,9 +17,8 @@ namespace BikeTouringGISLibrary
             _gpxData = new GpxInformation();
             var gpx = new GPXFile(fileName);
             LoadRoutes(gpx);
-//            LoadWayPoints(gpx);
+            LoadWayPoints(gpx);
             LoadTracks(gpx);
-            //            var waypoints = gpx.GetWaypoints();
             return _gpxData;
         }
 
@@ -43,7 +42,13 @@ namespace BikeTouringGISLibrary
 
         private void LoadWayPoints(GPXFile gpx)
         {
-            throw new NotImplementedException();
+            foreach(var waypoint in gpx.GetWaypoints())
+            {
+                var wPoint = new WayPoint();
+                wPoint.Name = waypoint.name;
+                wPoint.Points = new List<wptType>() { waypoint };
+                _gpxData.WayPoints.Add(wPoint);
+            }
         }
 
         private void LoadRoutes(GPXFile gpx)
