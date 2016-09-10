@@ -21,7 +21,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Button Margin="5" Content="New project" Grid.Column="0" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen" Click="Button_Click"/>
-            <Button Margin="5" Content="Open project" Grid.Column="1" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen"/>
+            <Button Margin="5" Content="Open project" Grid.Column="1" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen" Click="Button_Click_1"/>
             <Button Margin="5" Content="Save project" Grid.Column="2" Style="{DynamicResource AccentedSquareButtonStyle}" BorderBrush="DarkGreen"/>
             <TextBlock Text="Project" Foreground="LightGray" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center"/>
         </Grid>

@@ -16,5 +16,11 @@ namespace BikeTouringGISLibrary
             var data = JsonConvert.SerializeObject(project);
             File.WriteAllText(project.ProjectFileLocation, data);
         }
+
+        public static BikeTouringGISProject OpenProjectFile(string fileName)
+        {
+            var data = File.ReadAllText(fileName);
+            return JsonConvert.DeserializeObject<BikeTouringGISProject>(data);
+        }
     }
 }

@@ -43,6 +43,7 @@ namespace BikeTouringGIS.Controls
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog saveProjectFileDialog = new Microsoft.Win32.SaveFileDialog();
+            saveProjectFileDialog.Title = "Save a new Bike touring GIS project";
             saveProjectFileDialog.Filter = "Bike touring GIS project files (*.biketouringgis)|*.biketouringgis";
             saveProjectFileDialog.InitialDirectory = DropBoxHelper.GetDropBoxFolder();
             if (saveProjectFileDialog.ShowDialog() == true)
@@ -61,7 +62,6 @@ namespace BikeTouringGIS.Controls
                 newProjectDialog.Content = new NewProjectDialog { DataContext = newProjectDialogContent};
                 await _dialogCoordinator.ShowMetroDialogAsync(mainWindow.DataContext, newProjectDialog);
             }
-
         }
 
         private DependencyObject FindMainScreen()
@@ -72,6 +72,19 @@ namespace BikeTouringGIS.Controls
                 ucParent = LogicalTreeHelper.GetParent(ucParent);
             }
             return ucParent;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openProjectFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openProjectFileDialog.Title = "Open a Bike touring GIS project";
+            openProjectFileDialog.Filter = "Bike touring GIS project files (*.biketouringgis)|*.biketouringgis";
+            openProjectFileDialog.InitialDirectory = DropBoxHelper.GetDropBoxFolder();
+            if (openProjectFileDialog.ShowDialog() == true)
+            {
+                var fileName = openProjectFileDialog.FileName;
+                Project = BikeTouringGISProjectFileHandler.OpenProjectFile(fileName);
+            }
         }
     }
 }
