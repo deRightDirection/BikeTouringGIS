@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using BikeTouringGISLibrary.Model;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using JetBrains.Annotations;
 using System;
@@ -16,21 +17,29 @@ namespace BikeTouringGIS.ViewModels
 
         private string _projectName;
         private string _description;
-        private Action<NewProjectDialogContent> _closeAction;
+        private Action<BikeTouringGISProject> _closeAction;
+        private string _projectFileLocation;
 
         public RelayCommand CloseCommand { get; private set; }
         public RelayCommand CancelCommand { get; private set; }
 
-        public NewProjectDialogContent(Action<NewProjectDialogContent> closeAndOkHandler, Action closeAndCancelHandler)
+        public NewProjectDialogContent(string projectFileLocation, Action<BikeTouringGISProject> closeAndOkHandler, Action closeAndCancelHandler)
         {
+            _projectFileLocation = projectFileLocation;
             _closeAction = closeAndOkHandler;
-            CloseCommand = new RelayCommand(DoIets);
+            CloseCommand = new RelayCommand(DoIets, CanDoIets);
             CancelCommand = new RelayCommand(closeAndCancelHandler);
+            ProjectName = string.Empty;
+        }
+
+        private bool CanDoIets()
+        {
+            return ProjectName.Trim().Length >= 5;
         }
 
         private void DoIets()
         {
-            _closeAction.Invoke(this);
+            _closeAction.Invoke(new BikeTouringGISProject() { Description = Description, Name = ProjectName, ProjectFileLocation = _projectFileLocation });
         }
 
         public string ProjectName
@@ -38,28 +47,24 @@ namespace BikeTouringGIS.ViewModels
             get { return _projectName; }
             set
             {
-                _projectName = value;
-                OnPropertyChanged();
+                Set(() => ProjectName, ref _projectName, value);
+                CloseCommand.RaiseCanExecuteChanged();
             }
         }
 
         public string Description
         {
             get { return _description; }
-            set
-            {
-                _description = value;
-                OnPropertyChanged();
-            }
+            set { Set(() => Description, ref _description, value); }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+//        public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
+ //       [NotifyPropertyChangedInvocator]
+  //      protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+   //     {
+    //        var handler = PropertyChanged;
+     //       if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+      //  }
     }
 }

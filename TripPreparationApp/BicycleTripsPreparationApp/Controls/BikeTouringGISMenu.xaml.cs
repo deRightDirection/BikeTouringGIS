@@ -1,4 +1,5 @@
 ﻿using BikeTouringGIS.ViewModels;
+using BikeTouringGISLibrary;
 using BikeTouringGISLibrary.Model;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -48,17 +49,15 @@ namespace BikeTouringGIS.Controls
             {
                 var newProjectDialog = new CustomDialog() { Title = "Create new Bike touring GIS project" };
                 var mainWindow = FindMainScreen() as MainScreen;
-
-                var newProjectDialogContent = new NewProjectDialogContent(instance =>
+                var newProjectDialogContent = new NewProjectDialogContent(saveProjectFileDialog.FileName, instance =>
                 {
                     _dialogCoordinator.HideMetroDialogAsync(mainWindow.DataContext, newProjectDialog);
-                    // TODO
-                    Project = ;
+                    Project = instance;
+                    BikeTouringGISProjectFileHandler.SaveNewProjectFile(instance);
                 },() =>
                 {
                     _dialogCoordinator.HideMetroDialogAsync(mainWindow.DataContext, newProjectDialog);
                 });
-                newProjectDialogContent.Description = "test";
                 newProjectDialog.Content = new NewProjectDialog { DataContext = newProjectDialogContent};
                 await _dialogCoordinator.ShowMetroDialogAsync(mainWindow.DataContext, newProjectDialog);
             }

@@ -55,7 +55,53 @@
                     BorderBrush="DarkGreen"
                     BorderThickness="1">
                 <StackPanel Orientation="Horizontal">
-                    <project:BikeTouringGISMenu />
+                    <Border BorderBrush="DarkGreen" BorderThickness="1">
+                        <Grid Margin="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="3"
+                                       FontWeight="Bold"
+                                       Text="Project details" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="0"
+                                       Text="Name" />
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="2"
+                                       MaxWidth="150"
+                                       Text="{Binding Project.Name}"
+                                       ToolTipService.ToolTip="{Binding Project.Name}"
+                                       TextWrapping="NoWrap" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="0"
+                                       Text="Path" />
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="2"
+                                       MaxWidth="150"
+                                       Text="{Binding Project.ProjectFileLocation}"
+                                       ToolTipService.ToolTip="{Binding Project.ProjectFileLocation}"
+                                       TextWrapping="NoWrap" />
+                            <TextBlock Grid.Row="3"
+                                       Grid.Column="0"
+                                       Text="Description" />
+                            <TextBlock Grid.Row="3"
+                                       Grid.Column="2"
+                                       MaxWidth="150"
+                                       Text="{Binding Project.Description}"
+                                       TextWrapping="WrapWithOverflow" />
+                        </Grid>
+                    </Border>
+                    <project:BikeTouringGISMenu Project="{Binding Project, Mode=TwoWay}" />
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition />
