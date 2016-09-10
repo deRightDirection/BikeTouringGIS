@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BikeTouringGISLibrary.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +19,15 @@ namespace BikeTouringGIS.Controls
     /// <summary>
     /// Interaction logic for RouteList.xaml
     /// </summary>
-    public partial class RouteList : UserControl
+    public partial class LayerList : UserControl
     {
-        public RouteList()
+        public static readonly DependencyProperty ProjectProperty = DependencyProperty.Register("Project", typeof(BikeTouringGISProject), typeof(LayerList), new PropertyMetadata(default(BikeTouringGISProject)));
+        public BikeTouringGISProject Project
+        {
+            get { return (BikeTouringGISProject)GetValue(ProjectProperty); }
+            set { SetValue(ProjectProperty, value); }
+        }
+        public LayerList()
         {
             InitializeComponent();
         }

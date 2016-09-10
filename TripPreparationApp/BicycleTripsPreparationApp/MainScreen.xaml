@@ -286,7 +286,10 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <project:RouteList Grid.Column="0" Margin="5" />
+            <project:LayerList Grid.Column="0"
+                               Margin="5"
+                               Project="{Binding Project,
+                                                 Mode=TwoWay}" />
             <Grid x:Name="grid"
                   Grid.Column="1"
                   Margin="5">
