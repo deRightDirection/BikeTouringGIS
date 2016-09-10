@@ -148,7 +148,11 @@
     <Compile Include="Controls\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ProjectDetails.xaml.cs">
+      <DependentUpon>ProjectDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\MouseButtonEventArgsToPointConverter.cs" />
+    <Compile Include="Converters\ProjectIsNotNullConverter.cs" />
     <Compile Include="Default.xaml.cs">
       <DependentUpon>Default.xaml</DependentUpon>
     </Compile>
@@ -172,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\NewProjectDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ProjectDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

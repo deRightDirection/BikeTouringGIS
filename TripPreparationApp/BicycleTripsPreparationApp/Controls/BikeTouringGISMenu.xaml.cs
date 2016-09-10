@@ -54,7 +54,7 @@ namespace BikeTouringGIS.Controls
                 {
                     _dialogCoordinator.HideMetroDialogAsync(mainWindow.DataContext, newProjectDialog);
                     Project = instance;
-                    BikeTouringGISProjectFileHandler.SaveNewProjectFile(instance);
+                    BikeTouringGISProjectFileHandler.SaveProjectFile(instance);
                 },() =>
                 {
                     _dialogCoordinator.HideMetroDialogAsync(mainWindow.DataContext, newProjectDialog);
@@ -85,6 +85,11 @@ namespace BikeTouringGIS.Controls
                 var fileName = openProjectFileDialog.FileName;
                 Project = BikeTouringGISProjectFileHandler.OpenProjectFile(fileName);
             }
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            BikeTouringGISProjectFileHandler.SaveProjectFile(Project);
         }
     }
 }

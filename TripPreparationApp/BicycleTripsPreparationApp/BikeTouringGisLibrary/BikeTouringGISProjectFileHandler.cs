@@ -11,7 +11,7 @@ namespace BikeTouringGISLibrary
 {
     public static class BikeTouringGISProjectFileHandler
     {
-        public static void SaveNewProjectFile(BikeTouringGISProject project)
+        public static void SaveProjectFile(BikeTouringGISProject project)
         {
             var data = JsonConvert.SerializeObject(project);
             File.WriteAllText(project.ProjectFileLocation, data);

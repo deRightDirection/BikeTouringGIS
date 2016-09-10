@@ -11,5 +11,12 @@ namespace BikeTouringGISLibrary.Model
         public string ProjectFileLocation { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public bool IsLoaded
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(ProjectFileLocation) && !string.IsNullOrEmpty(Name);
+            }
+        }
     }
 }
