@@ -28,5 +28,17 @@ namespace BikeTouringGISLibrary.UnitTests
             gpxInfo.Tracks.Count.ShouldBeEquivalentTo(11);
             gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(49);
         }
+
+        [TestMethod]
+        // bug #43
+        public void LoadFile_Counts_Tracks_Routes_Waypoints_Are_Correct2()
+        {
+            var fileName = "BRM300BNK16 v2.gpx";
+            var path = Path.Combine(UnitTestDirectory, fileName);
+            var gpxInfo = _fileReader.LoadFile(path);
+            gpxInfo.Routes.Count.ShouldBeEquivalentTo(0);
+            gpxInfo.Tracks.Count.ShouldBeEquivalentTo(8);
+            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(5);
+        }
     }
 }

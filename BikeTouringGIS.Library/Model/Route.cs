@@ -16,14 +16,14 @@ namespace BikeTouringGISLibrary.Model
         {
             get
             {
-                return CreatePointGraphic(Points[0], "start");
+                return CreateBikeTouringGISPointGraphic(Points[0], "start");
             }
         }
         public BikeTouringGISGraphic EndLocation
         {
             get
             {
-                return CreatePointGraphic(Points[Points.Count - 1], "end");
+                return CreateBikeTouringGISPointGraphic(Points[Points.Count - 1], "end");
             }
         }
 
@@ -31,7 +31,7 @@ namespace BikeTouringGISLibrary.Model
         {
             get
             {
-                return CreateLineGraphic(Name);
+                return CreateBikeTouringGISGraphic(Name);
             }
         }
 

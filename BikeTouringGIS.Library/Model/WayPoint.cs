@@ -11,16 +11,11 @@ namespace BikeTouringGISLibrary.Model
     public class WayPoint : GeometryCreatable
     {
         public string Name { get; internal set; }
-        public Graphic Location
-        {
-            get
-            {
-                return CreatePointGraphic(Points[0], Name);
-            }
-        }
 
         internal override void CreateGeometry()
         {
+            Geometry = new MapPoint((double)Points[0].lon, (double)Points[0].lat, new SpatialReference(4326));
+            Extent = Geometry.Extent;
         }
     }
 }

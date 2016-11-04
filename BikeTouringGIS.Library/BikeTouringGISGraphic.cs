@@ -17,7 +17,7 @@ namespace BikeTouringGISLibrary
 
         public Graphic AddSymbol(Symbol symbol)
         {
-            this.Symbol = symbol;
+            Symbol = symbol;
             return this;
         }
     }
