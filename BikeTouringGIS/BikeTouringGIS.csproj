@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{39DE280E-2709-4C05-8F0C-01F8774D73C7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>BikeTouringGIS</RootNamespace>
+    <AssemblyName>theRightDirection.BikeTouringGIS</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>bikecons_touring-16x16.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ControlzEx, Version=2.1.2.3, Culture=neutral, PublicKeyToken=f08b075e934b7045, processorArchitecture=MSIL">
+      <HintPath>packages\ControlzEx.2.1.2.3\lib\net45\ControlzEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DeltaCompressionDotNet, Version=1.1.0.0, Culture=neutral, PublicKeyToken=1d14d6e5194e7f4a, processorArchitecture=MSIL">
+      <HintPath>packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DeltaCompressionDotNet.MsDelta, Version=1.1.0.0, Culture=neutral, PublicKeyToken=46b2138a390abf55, processorArchitecture=MSIL">
+      <HintPath>packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.MsDelta.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DeltaCompressionDotNet.PatchApi, Version=1.1.0.0, Culture=neutral, PublicKeyToken=3e8888ee913ed789, processorArchitecture=MSIL">
+      <HintPath>packages\DeltaCompressionDotNet.1.1.0\lib\net20\DeltaCompressionDotNet.PatchApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Esri.ArcGISRuntime, Version=10.2.7.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\squirrel.windows.1.4.4\lib\Net45\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=10.2.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.3.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.3.0\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\Mono.Cecil.0.9.6.4\lib\net45\Mono.Cecil.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\Mono.Cecil.0.9.6.4\lib\net45\Mono.Cecil.Mdb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\Mono.Cecil.0.9.6.4\lib\net45\Mono.Cecil.Pdb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\Mono.Cecil.0.9.6.4\lib\net45\Mono.Cecil.Rocks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Squirrel, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\squirrel.windows.1.4.4\lib\Net45\NuGet.Squirrel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Splat.1.6.2\lib\Net45\Splat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Squirrel, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\squirrel.windows.1.4.4\lib\Net45\Squirrel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.3.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="VersionHelpers, Version=10.0.0.0, Culture=neutral, PublicKeyToken=fcd95136011e7371, processorArchitecture=MSIL">
+      <HintPath>packages\VersionHelpers.10.0.0.0\lib\net45\VersionHelpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Controls\BikeTouringGISMenu.xaml.cs">
+      <DependentUpon>BikeTouringGISMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NewProjectDialog.xaml.cs">
+      <DependentUpon>NewProjectDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ProjectDetails.xaml.cs">
+      <DependentUpon>ProjectDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\MouseButtonEventArgsToPointConverter.cs" />
+    <Compile Include="Converters\ProjectIsNotNullConverter.cs" />
+    <Compile Include="Default.xaml.cs">
+      <DependentUpon>Default.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DistanceAnalyzer.cs" />
+    <Compile Include="ColorUtils.cs" />
+    <Compile Include="Controls\HyperLinkControl.cs" />
+    <Compile Include="MainScreen.xaml.cs">
+      <DependentUpon>MainScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controls\LayerList.xaml.cs">
+      <DependentUpon>LayerList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RouteSplitter.cs" />
+    <Compile Include="TrackToRouteConverter.cs" />
+    <Compile Include="ViewModels\MainScreenViewModel.cs" />
+    <Compile Include="ViewModels\NewProjectDialogContent.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Page Include="Controls\BikeTouringGISMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\NewProjectDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ProjectDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Default.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DropboxHelper.cs" />
+    <Page Include="Controls\LayerList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Deployment.arcgisruntimemanifest" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bikecons_touring-16x16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <SplashScreen Include="bike touring gis splash screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="bikecons_touring-32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Log4NetConfiguration.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\GPXDataAnalyzer\GPX\GPX.csproj">
+      <Project>{159f1fc4-4759-4db0-8695-ffd423302db4}</Project>
+      <Name>GPX</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\theRightDirection.Library.Logging\theRightDirection.Library.Logging\theRightDirection.Library.Logging.csproj">
+      <Project>{302e3909-04af-4064-a533-6faa5e6593cf}</Project>
+      <Name>theRightDirection.Library.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BikeTouringGIS.Library\BikeTouringGIS.Library.csproj">
+      <Project>{bdc204a2-f656-43b9-9b4b-c6308bd81404}</Project>
+      <Name>BikeTouringGIS.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\ESRI\ArcGISRuntimeSDKNET10.2.7@InstallDir)ideintegration\ArcGISRuntime.targets" Condition="Exists('$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\ESRI\ArcGISRuntimeSDKNET10.2.7@InstallDir)ideintegration\ArcGISRuntime.targets')" />
+  <Target Name="ESRI_ArcGISRuntime_Deployment_ErrorIfTargetsMissing" BeforeTargets="PrepareForBuild;PrepareForClean">
+    <PropertyGroup>
+      <ErrorText>This project references the ArcGIS .NET Deployment build tasks targets file, but the file was missing. This may be because the SDK is not installed.</ErrorText>
+    </PropertyGroup>
+    <Error Text="$([System.String]::Format('$(ErrorText)'))" Condition="!Exists('$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\ESRI\ArcGISRuntimeSDKNET10.2.7@InstallDir)ideintegration\ArcGISRuntime.targets')" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
