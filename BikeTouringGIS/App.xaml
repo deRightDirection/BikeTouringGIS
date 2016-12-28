@@ -15,6 +15,8 @@ StartupUri="Default.xaml"
             <!-- Accent and AppTheme setting -->
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Emerald.xaml" />
             <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <!-- Fluent theme-->
+                <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2013/Generic.xaml" />
         </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
