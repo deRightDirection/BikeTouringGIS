@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using theRightDirection.Library.Logging;
 using System.Windows.Threading;
+using System.Windows.Media;
 
 namespace BicycleTripsPreparationApp
 {
@@ -19,6 +20,8 @@ namespace BicycleTripsPreparationApp
             DispatcherUnhandledException += (s, ex) => LogUnhandledException(ex.Exception, "Application.Current.DispatcherUnhandledException");
             try
             {
+                var x = Application.Current.Resources["RibbonThemeColorBrush"] = new SolidColorBrush(Colors.DarkGreen);
+
                 // Deployed applications must be licensed at the Basic level or greater (https://developers.arcgis.com/licensing).
                 // To enable Basic level functionality set the Client ID property before initializing the ArcGIS Runtime.
                 // ArcGISRuntimeEnvironment.ClientId = "<Your Client ID>";

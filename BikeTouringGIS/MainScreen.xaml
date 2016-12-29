@@ -400,28 +400,5 @@
                 </Border>
             </Grid>
         </Grid>
-        <Grid Grid.Row="2" Margin="5">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="25,0,25,0" VerticalAlignment="Center">
-                    <project:HyperLinkControl NavigateUri="http://www.therightdirection.nl/bike-touring-gis"><Run Text="website Bike Touring GIS" /></project:HyperLinkControl>
-                </TextBlock>
-                <TextBlock Margin="25,0,25,0">
-                    <project:HyperLinkControl NavigateUri="https://www.facebook.com/mannusontheroll/"><Run Text="FaceBook page about the Green Rider" /></project:HyperLinkControl>
-                </TextBlock>
-                <TextBlock Margin="25,0,25,0">
-                    <project:HyperLinkControl NavigateUri="http://www.therightdirection.nl"><Run Text="website company behind the Bike Touring GIS" /></project:HyperLinkControl>
-                </TextBlock>
-                <TextBlock Margin="25,0,25,0">
-                    <project:HyperLinkControl NavigateUri="http://www.mannus.nl"><Run Text="personal website owner the Right Direction" /></project:HyperLinkControl>
-                </TextBlock>
-                <TextBlock Margin="25,0,25,0">
-                    <project:HyperLinkControl NavigateUri="http://www.basketbalnieuws.nl"><Run Text="website about basketball by the Right Direction" /></project:HyperLinkControl>
-                </TextBlock>
-                <TextBlock Margin="25,0,25,0">
-                    <project:HyperLinkControl NavigateUri="mailto:info@therightdirection.nl?subject=bike touring gis"><Run Text="mail us" /></project:HyperLinkControl>
-                </TextBlock>
-                <TextBlock x:Name="version" Margin="50,0,0,0" />
-            </StackPanel>
-        </Grid>
     </Grid>
 </UserControl>
