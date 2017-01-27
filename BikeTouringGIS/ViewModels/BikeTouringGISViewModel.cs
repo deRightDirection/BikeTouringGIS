@@ -1,9 +1,12 @@
-﻿using BikeTouringGISLibrary;
+﻿using BikeTouringGIS.Controls;
+using BikeTouringGIS.Messenges;
+using BikeTouringGISLibrary;
 using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,9 +17,20 @@ namespace BikeTouringGIS.ViewModels
     public class BikeTouringGISViewModel : BikeTouringGISBaseViewModel
     {
         public RelayCommand OpenGPXFileCommand { get; private set; }
+        private ObservableCollection<BikeTouringGISLayer> _layers;
+        private BikeTouringGISLayer _wayPointsLayer;
         public BikeTouringGISViewModel()
         {
             OpenGPXFileCommand = new RelayCommand(OpenGPXFile);
+            _layers = new ObservableCollection<BikeTouringGISLayer>();
+            _wayPointsLayer = new BikeTouringGISLayer("Waypoints");
+            Layers.Add(_wayPointsLayer);
+        }
+
+        public ObservableCollection<BikeTouringGISLayer> Layers
+        {
+            get { return _layers; }
+            set { Set(ref _layers, value); }
         }
 
         private async void OpenGPXFile()
@@ -43,6 +57,10 @@ namespace BikeTouringGIS.ViewModels
                         track.ConvertTrackToRoute();
                     }
                 }
+                gpxFileInformation.CreateGeometries();
+                var layer = new BikeTouringGISLayer(openFileDialog.FileName, gpxFileInformation.AllRoutes);
+                Layers.Add(layer);
+                MessengerInstance.Send(new GPXDataLoadedMessage() { Layer = layer });
             }
         }
 

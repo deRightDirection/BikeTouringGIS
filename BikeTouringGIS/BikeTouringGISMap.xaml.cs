@@ -1,5 +1,6 @@
 ﻿using BikeTouringGIS.ViewModels;
 using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Layers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace BikeTouringGIS
         public BikeTouringGISMap()
         {
             InitializeComponent();
+            ((BikeTouringGISMapViewModel)DataContext).Map = MapControl;
         }
 
         public MainMenu Menu
@@ -43,6 +45,11 @@ namespace BikeTouringGIS
         public Map Map
         {
             get { return MapControl; }
+        }
+
+        public LayerCollection Layers
+        {
+            get { return MapControl.Layers; }
         }
 
         public MapView MapView

@@ -1,8 +1,11 @@
-﻿using BikeTouringGIS.ViewModels;
+﻿using BikeTouringGIS.Controls;
+using BikeTouringGIS.ViewModels;
 using Esri.ArcGISRuntime.Controls;
+using Esri.ArcGISRuntime.Layers;
 using Fluent;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +41,15 @@ namespace BikeTouringGIS
             get { return (Map)GetValue(MapProperty); }
             set { SetValue(MapProperty, value); }
         }
+        public ObservableCollection<BikeTouringGISLayer> Layers
+        {
+            get { return (ObservableCollection<BikeTouringGISLayer>)GetValue(LayersProperty); }
+            set { SetValue(LayersProperty, value); }
+        }
+
+
+        public static readonly DependencyProperty LayersProperty =
+            DependencyProperty.Register("Layers", typeof(ObservableCollection<BikeTouringGISLayer>), typeof(LayerList), new PropertyMetadata(null, OnLayersSet));
 
         public static readonly DependencyProperty MenuProperty =
             DependencyProperty.Register("Menu", typeof(MainMenu), typeof(LayerList), new PropertyMetadata(null, OnMenuSet));
@@ -50,10 +62,17 @@ namespace BikeTouringGIS
             var context = ((LayerList)d).DataContext;
             ((LayerListViewModel)context).Menu = e.NewValue as MainMenu;
         }
+
         private static void OnMapSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var context = ((LayerList)d).DataContext;
             ((LayerListViewModel)context).Map = e.NewValue as Map;
+        }
+
+        private static void OnLayersSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var context = ((LayerList)d).DataContext;
+            ((LayerListViewModel)context).Layers = e.NewValue as ObservableCollection<BikeTouringGISLayer>;
         }
     }
 }

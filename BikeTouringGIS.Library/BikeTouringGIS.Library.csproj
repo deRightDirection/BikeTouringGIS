@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="BikeTouringGISGraphic.cs" />
     <Compile Include="BikeTouringGISProjectFileHandler.cs" />
+    <Compile Include="Enumerations\LayerType.cs" />
     <Compile Include="GPXFileReader.cs" />
     <Compile Include="GeometryCreatable.cs" />
     <Compile Include="IRoute.cs" />
