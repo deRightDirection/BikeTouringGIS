@@ -8,9 +8,13 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
              xmlns:converters="clr-namespace:BikeTouringGIS.Converters"
+             xmlns:vm="clr-namespace:BikeTouringGIS.ViewModels"
              mc:Ignorable="d" 
              xmlns:s="clr-namespace:System;assembly=mscorlib"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <vm:BikeTouringGISMapViewModel/>
+    </UserControl.DataContext>
     <UserControl.Resources>
         <converters:MouseButtonEventArgsToPointConverter x:Key="MouseButtonEventArgsToPointConverter" />
         <esri:SimpleMarkerSymbol x:Key="POISymbol"
@@ -23,6 +27,14 @@
         </esri:SimpleMarkerSymbol>
     </UserControl.Resources>
     <Grid x:Name="grid">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="GotFocus">
+                <mvvm:EventToCommand Command="{Binding ShowTabGroupCommand}" CommandParameter="layerstab" />
+            </i:EventTrigger>
+            <i:EventTrigger EventName="LostFocus">
+                <mvvm:EventToCommand Command="{Binding CloseTabGroupCommand}" CommandParameter="layerstab" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <Grid.Resources>
             <esri:SimpleMarkerSymbol x:Key="StartSymbol"
                                              Size="12"
@@ -58,7 +70,7 @@
                                      Font="{StaticResource LabelFont}"
                                      Color="Black" />
         </Grid.Resources>
-        <esri:MapView x:Name="MyMapView"
+        <esri:MapView x:Name="MapViewControl"
                               BorderBrush="LimeGreen"
                               BorderThickness="1">
             <i:Interaction.Triggers>
@@ -70,7 +82,7 @@
                                                  PassEventArgsToCommand="True" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            <esri:Map x:Name="Map">
+            <esri:Map x:Name="MapControl">
                 <esri:OpenStreetMapLayer IsVisible="False" TemplateUri="http://{subDomain}.tile.opencyclemap.org/cycle/{level}/{col}/{row}.png" />
                 <esri:OpenStreetMapLayer IsVisible="True" />
                 <esri:WmsLayer IsVisible="False" ServiceUri="https://geodata.nationaalgeoregister.nl/fietsknooppuntennetwerk/wms" />

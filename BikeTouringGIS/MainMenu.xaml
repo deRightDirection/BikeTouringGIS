@@ -7,8 +7,68 @@
              xmlns:System="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d">
     <Grid>
-        <Fluent:Ribbon x:Name="ribbon"
-                       AutomaticStateManagement="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0"
+                   Width="150"
+                   Height="99"
+                   Source="bike touring gis splash screen.png"
+                   Stretch="Fill" />
+        <Fluent:Ribbon Grid.Column="1" x:Name="ribbonMenu"
+                       AutomaticStateManagement="True" ShowQuickAccessToolBarAboveRibbon="False" CanCustomizeQuickAccessToolBarItems="False" CanMinimize="False" CanQuickAccessLocationChanging="False" IsAutomaticCollapseEnabled="False" IsQuickAccessToolBarVisible="False">
+            <Fluent:Ribbon.Menu>
+                <Fluent:ApplicationMenu Header="File">
+                    <Fluent:ApplicationMenu.RightPaneContent>
+                        <StackPanel HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Orientation="Vertical">
+                            <Border HorizontalAlignment="Stretch"
+                                        BorderBrush="#64647F"
+                                        BorderThickness="0,0,0,0">
+
+                                <TextBlock Text="Recent files"
+                                               Background="#F6F7F8"
+                                               TextAlignment="Left"
+                                               Padding="12,4,4,4"
+                                               Foreground="#64647F"
+                                               FontWeight="SemiBold"
+                                               FontSize="12" />
+                            </Border>
+
+                            <StackPanel HorizontalAlignment="Stretch"
+                                            Height="2">
+
+                                <Border Height="1"
+                                            BorderThickness="1"
+                                            HorizontalAlignment="Stretch"
+                                            BorderBrush="#DCDDDE" />
+
+                                <Border Height="1"
+                                            BorderThickness="1"
+                                            HorizontalAlignment="Stretch"
+                                            BorderBrush="#FEFEFF" />
+
+                            </StackPanel>
+                        </StackPanel>
+                    </Fluent:ApplicationMenu.RightPaneContent>
+                    <Fluent:MenuItem Header="New" />
+                    <Fluent:MenuItem Header="Open"
+                                     Command="{Binding OpenGPXFileCommand}"
+                                         Description="CTRL + O"
+                                         ToolTip="Open gpx-file"/>
+                    <Fluent:MenuItem Header="Save As"/>
+                    <Separator />
+                    <Fluent:MenuItem Header="Exit"
+                                         KeyTip="X"
+                                         Command="{Binding ExitCommand}" />
+                </Fluent:ApplicationMenu>
+            </Fluent:Ribbon.Menu>
+            <Fluent:Ribbon.ContextualGroups>
+                <Fluent:RibbonContextualTabGroup Header="Layers" Visibility="Collapsed" Background="DarkGreen" BorderBrush="DarkGreen" x:Name="layerstab"/>
+            </Fluent:Ribbon.ContextualGroups>
+            <Fluent:RibbonTabItem Header="Add data" Group="{Binding ElementName=layerstab}" />
         </Fluent:Ribbon>
     </Grid>
 </UserControl>

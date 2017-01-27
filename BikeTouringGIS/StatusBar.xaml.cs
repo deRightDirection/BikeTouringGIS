@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BikeTouringGIS.ViewModels;
+using Esri.ArcGISRuntime.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,22 @@ namespace BikeTouringGIS
         public StatusBar()
         {
             InitializeComponent();
+        }
+
+        public MapView MapView
+        {
+            get { return (MapView)GetValue(MapViewProperty); }
+            set { SetValue(MapViewProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MapViewProperty =
+            DependencyProperty.Register("MapView", typeof(MapView), typeof(StatusBar), new PropertyMetadata(null, OnMapViewSet));
+
+        private static void OnMapViewSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var context = ((StatusBar)d).DataContext;
+            ((StatusBarViewModel)context).MapView = e.NewValue as MapView;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BikeTouringGIS.ViewModels;
+using Esri.ArcGISRuntime.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,29 @@ namespace BikeTouringGIS
         public BikeTouringGISMap()
         {
             InitializeComponent();
+        }
+
+        public MainMenu Menu
+        {
+            get { return (MainMenu)GetValue(MenuProperty); }
+            set { SetValue(MenuProperty, value); }
+        }
+        public static readonly DependencyProperty MenuProperty =
+            DependencyProperty.Register("Menu", typeof(MainMenu), typeof(BikeTouringGISMap), new PropertyMetadata(null, OnMenuSet));
+        private static void OnMenuSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var context = ((BikeTouringGISMap)d).DataContext;
+            ((BikeTouringGISMapViewModel)context).Menu = e.NewValue as MainMenu;
+        }
+
+        public Map Map
+        {
+            get { return MapControl; }
+        }
+
+        public MapView MapView
+        {
+            get { return MapViewControl; }
         }
     }
 }

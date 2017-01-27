@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fluent;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,17 @@ namespace BikeTouringGIS
         public MainMenu()
         {
             InitializeComponent();
+        }
+
+        public void ShowTabGroup(string name)
+        {
+            var group = ribbonMenu.ContextualGroups.FirstOrDefault(x => x.Name.Equals(name));
+            group.Visibility = Visibility.Visible;
+        }
+        public void HideTabGroup(string name)
+        {
+            var group = ribbonMenu.ContextualGroups.FirstOrDefault(x => x.Name.Equals(name));
+            group.Visibility = Visibility.Collapsed;
         }
     }
 }

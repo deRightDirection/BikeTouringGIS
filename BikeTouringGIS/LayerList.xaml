@@ -3,10 +3,60 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:BikeTouringGIS.ViewModels"
              xmlns:local="clr-namespace:BikeTouringGIS"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"             
+             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+             xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <vm:LayerListViewModel/>
+    </UserControl.DataContext>
+    <Border BorderBrush="DarkGreen" BorderThickness="1">
     <Grid>
-            
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="GotFocus">
+                    <mvvm:EventToCommand Command="{Binding ShowTabGroupCommand}" CommandParameter="layerstab" />
+            </i:EventTrigger>
+            <i:EventTrigger EventName="LostFocus">
+                    <mvvm:EventToCommand Command="{Binding CloseTabGroupCommand}" CommandParameter="layerstab" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <Grid.RowDefinitions>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Button Content="+" Width="50"/>
+        </StackPanel>
+        <ListView ItemsSource="{Binding Layers}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="DarkGray" BorderThickness="2" Padding="4">
+                        <StackPanel>
+                            <TextBlock Text="{Binding DisplayName}" FontSize="18" FontWeight="Bold" Margin="0,4" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <CheckBox Content="Enabled" IsChecked="{Binding IsVisible, Mode=TwoWay}" Margin="6,2"/>
+                                    <Slider Margin="0,0,20,0" Value="{Binding Opacity, Mode=TwoWay}" TickFrequency="0.01" Minimum="0" Maximum="1" />
+                                </StackPanel>
+<!--                                <Button Grid.Column="1" Content="Remove" Padding="12,4" VerticalAlignment="Center" Click="RemoveLayerButton_Click" />-->
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
+    </Border>
 </UserControl>

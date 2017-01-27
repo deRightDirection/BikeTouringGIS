@@ -44,11 +44,6 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0"
-                   Width="150"
-                   Height="99"
-                   Source="bike touring gis splash screen.png"
-                   Stretch="Fill" />
             <Border Grid.Column="1"
                     Margin="5"
                     HorizontalAlignment="Center"
