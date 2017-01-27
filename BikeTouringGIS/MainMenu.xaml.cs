@@ -1,4 +1,6 @@
-﻿using Fluent;
+﻿using BikeTouringGIS.Messenges;
+using Fluent;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,17 +26,13 @@ namespace BikeTouringGIS
         public MainMenu()
         {
             InitializeComponent();
+            Messenger.Default.Register<VisibilityTabChangedMessage>(this,ChangeVisibilityTab);
         }
 
-        public void ShowTabGroup(string name)
+        private void ChangeVisibilityTab(VisibilityTabChangedMessage message)
         {
-            var group = ribbonMenu.ContextualGroups.FirstOrDefault(x => x.Name.Equals(name));
-            group.Visibility = Visibility.Visible;
-        }
-        public void HideTabGroup(string name)
-        {
-            var group = ribbonMenu.ContextualGroups.FirstOrDefault(x => x.Name.Equals(name));
-            group.Visibility = Visibility.Collapsed;
+            var group = ribbonMenu.ContextualGroups.FirstOrDefault(x => x.Name.Equals(message.TabName));
+            group.Visibility = group.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

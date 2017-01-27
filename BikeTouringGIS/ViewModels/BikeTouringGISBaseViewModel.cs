@@ -1,4 +1,5 @@
-﻿using Esri.ArcGISRuntime.Controls;
+﻿using BikeTouringGIS.Messenges;
+using Esri.ArcGISRuntime.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -13,21 +14,15 @@ namespace BikeTouringGIS.ViewModels
     {
         private MainMenu _menu;
         protected Map _map;
-        public RelayCommand<string> ShowTabGroupCommand { get; private set; }
-        public RelayCommand<string> CloseTabGroupCommand { get; private set; }
+        public RelayCommand<string> ChangeVisibilityTabGroupCommand { get; private set; }
         public BikeTouringGISBaseViewModel()
         {
-            ShowTabGroupCommand = new RelayCommand<string>(ShowTabGroup);
-            CloseTabGroupCommand = new RelayCommand<string>(CloseTabGroup);
-        }
-        private void ShowTabGroup(string tabGroupName)
-        {
-            _menu.ShowTabGroup(tabGroupName);
+            ChangeVisibilityTabGroupCommand = new RelayCommand<string>(ChangeVisibilityTabGroup);
         }
 
-        private void CloseTabGroup(string tabGroupName)
+        private void ChangeVisibilityTabGroup(string tabGroupName)
         {
-            _menu.HideTabGroup(tabGroupName);
+            MessengerInstance.Send(new VisibilityTabChangedMessage() { TabName = tabGroupName });
         }
 
         public MainMenu Menu

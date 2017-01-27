@@ -29,10 +29,10 @@
     <Grid x:Name="grid">
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="GotFocus">
-                <mvvm:EventToCommand Command="{Binding ShowTabGroupCommand}" CommandParameter="layerstab" />
+                <mvvm:EventToCommand Command="{Binding ChangeVisibilityTabGroupCommand}" CommandParameter="layerstab" />
             </i:EventTrigger>
             <i:EventTrigger EventName="LostFocus">
-                <mvvm:EventToCommand Command="{Binding CloseTabGroupCommand}" CommandParameter="layerstab" />
+                <mvvm:EventToCommand Command="{Binding ChangeVisibilityTabGroupCommand}" CommandParameter="layerstab" />
             </i:EventTrigger>
         </i:Interaction.Triggers>
         <Grid.Resources>
