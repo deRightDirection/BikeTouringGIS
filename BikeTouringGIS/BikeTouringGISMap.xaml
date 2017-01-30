@@ -16,6 +16,28 @@
         <vm:BikeTouringGISMapViewModel/>
     </UserControl.DataContext>
     <UserControl.Resources>
+        <esri:SimpleMarkerSymbol x:Key="GPXRouteStartLocation" Size="12" Style="Circle" Color="LightGreen">
+            <esri:SimpleMarkerSymbol.Outline>
+                <esri:SimpleLineSymbol Width="2" Color="Black" />
+            </esri:SimpleMarkerSymbol.Outline>
+        </esri:SimpleMarkerSymbol>
+        <esri:SimpleMarkerSymbol x:Key="GPXRouteEndLocation"
+                                             Size="12"
+                                             Style="Circle"
+                                             Color="DarkGreen">
+            <esri:SimpleMarkerSymbol.Outline>
+                <esri:SimpleLineSymbol Width="2" Color="Black" />
+            </esri:SimpleMarkerSymbol.Outline>
+        </esri:SimpleMarkerSymbol>
+        <esri:SimpleLineSymbol x:Key="GPXRoute"
+                                           Width="3"
+                                           Color="LimeGreen" />
+        <esri:SymbolFont x:Key="LabelFont"
+                                     FontSize="15"
+                                     FontWeight="Bold" />
+        <esri:TextSymbol x:Key="LabelSymbol"
+                                     Font="{StaticResource LabelFont}"
+                                     Color="Black" />
         <converters:MouseButtonEventArgsToPointConverter x:Key="MouseButtonEventArgsToPointConverter" />
         <esri:SimpleMarkerSymbol x:Key="POISymbol"
                                  Size="12"
@@ -36,44 +58,14 @@
             </i:EventTrigger>
         </i:Interaction.Triggers>
         <Grid.Resources>
-            <esri:SimpleMarkerSymbol x:Key="StartSymbol"
-                                             Size="12"
-                                             Style="Circle"
-                                             Color="LightGreen">
-                <esri:SimpleMarkerSymbol.Outline>
-                    <esri:SimpleLineSymbol Width="2" Color="Black" />
-                </esri:SimpleMarkerSymbol.Outline>
-            </esri:SimpleMarkerSymbol>
-            <esri:SimpleMarkerSymbol x:Key="EndSymbol"
-                                             Size="12"
-                                             Style="Circle"
-                                             Color="DarkGreen">
-                <esri:SimpleMarkerSymbol.Outline>
-                    <esri:SimpleLineSymbol Width="2" Color="Black" />
-                </esri:SimpleMarkerSymbol.Outline>
-            </esri:SimpleMarkerSymbol>
-            <esri:SimpleMarkerSymbol x:Key="RouteSymbol"
-                                             Size="7"
-                                             Style="Circle"
-                                             Color="White">
-                <esri:SimpleMarkerSymbol.Outline>
-                    <esri:SimpleLineSymbol Width="2" Color="Black" />
-                </esri:SimpleMarkerSymbol.Outline>
-            </esri:SimpleMarkerSymbol>
-            <esri:SimpleLineSymbol x:Key="TotalRoute"
-                                           Width="3"
-                                           Color="DarkBlue" />
-            <esri:SymbolFont x:Key="LabelFont"
-                                     FontSize="15"
-                                     FontWeight="Bold" />
-            <esri:TextSymbol x:Key="LabelSymbol"
-                                     Font="{StaticResource LabelFont}"
-                                     Color="Black" />
         </Grid.Resources>
         <esri:MapView x:Name="MapViewControl"
                               BorderBrush="LimeGreen"
                               BorderThickness="1">
             <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ExtentChanged">
+                    <mvvm:EventToCommand Command="{Binding SetupMapCommand}"/>
+                </i:EventTrigger>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <mvvm:EventToCommand Command="{Binding MapDoubleClickCommand,
                                                                    Mode=OneWay}"
@@ -83,9 +75,14 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <esri:Map x:Name="MapControl">
-                <esri:OpenStreetMapLayer IsVisible="False" TemplateUri="http://{subDomain}.tile.opencyclemap.org/cycle/{level}/{col}/{row}.png" />
-                <esri:OpenStreetMapLayer IsVisible="True" />
-                <esri:WmsLayer IsVisible="False" ServiceUri="https://geodata.nationaalgeoregister.nl/fietsknooppuntennetwerk/wms" />
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="">
+                        
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <esri:OpenStreetMapLayer ID="opencyclemap"  TemplateUri="http://{subDomain}.tile.opencyclemap.org/cycle/{level}/{col}/{row}.png" />
+                <esri:OpenStreetMapLayer ID="openstreetmap" />
+                <esri:WmsLayer ID="fietsknooppunten" ServiceUri="https://geodata.nationaalgeoregister.nl/fietsknooppuntennetwerk/wms" />
                 <esri:GraphicsLayer ID="split">
                     <esri:GraphicsLayer.Labeling>
                         <esri:LabelProperties IsEnabled="True">
@@ -116,27 +113,9 @@
                         BorderBrush="DarkGreen"
                         BorderThickness="1">
             <StackPanel Margin="5">
-                <!-- TODO Command invullen voor Unchecked & Checked -->
-                <RadioButton 
-                                     Content="OpenCycleMap"
-                                     GroupName="basemap"
-                                     IsChecked="True">
-                    <RadioButton.CommandParameter>
-                        <s:Int32>0</s:Int32>
-                    </RadioButton.CommandParameter>
-                </RadioButton>
-                <RadioButton 
-                                     Content="OpenStreetMap"
-                                     GroupName="basemap">
-                    <RadioButton.CommandParameter>
-                        <s:Int32>1</s:Int32>
-                    </RadioButton.CommandParameter>
-                </RadioButton>
-                <CheckBox Content="Dutch Fietsknooppunten">
-                    <CheckBox.CommandParameter>
-                        <s:Int32>2</s:Int32>
-                    </CheckBox.CommandParameter>
-                </CheckBox>
+                <RadioButton Content="OpenCycleMap" GroupName="basemap" IsChecked="{Binding ShowOpenCycleMap, Mode=TwoWay}"/>
+                <RadioButton Content="OpenStreetMap" GroupName="basemap" IsChecked="{Binding ShowOpenStreetMap, Mode=TwoWay}" />
+                <CheckBox Content="Dutch Fietsknooppunten" IsThreeState="False" IsChecked="{Binding ShowKnooppunten, Mode=TwoWay}" />
             </StackPanel>
         </Border>
     </Grid>

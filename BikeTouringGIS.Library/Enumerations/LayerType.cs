@@ -9,7 +9,7 @@ namespace BikeTouringGISLibrary.Enumerations
     public enum LayerType
     {
         Unknown,
-        Waypoints,
-        Routes
+        PointsOfInterest,
+        GPXRoutes
     }
 }

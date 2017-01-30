@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GPX;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
+using BikeTouringGISLibrary.Enumerations;
 
 namespace BikeTouringGISLibrary.Model
 {
@@ -16,14 +17,14 @@ namespace BikeTouringGISLibrary.Model
         {
             get
             {
-                return CreateBikeTouringGISPointGraphic(Points[0], "start");
+                return CreateBikeTouringGISPointGraphic(Points[0], "start", GraphicType.GPXRouteStartLocation);
             }
         }
         public BikeTouringGISGraphic EndLocation
         {
             get
             {
-                return CreateBikeTouringGISPointGraphic(Points[Points.Count - 1], "end");
+                return CreateBikeTouringGISPointGraphic(Points[Points.Count - 1], "end", GraphicType.GPXRouteEndLocation);
             }
         }
 
@@ -31,7 +32,7 @@ namespace BikeTouringGISLibrary.Model
         {
             get
             {
-                return CreateBikeTouringGISGraphic(Name);
+                return CreateBikeTouringGISGraphic(Name, GraphicType.GPXRoute);
             }
         }
 

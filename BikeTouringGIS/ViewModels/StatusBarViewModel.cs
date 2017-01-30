@@ -11,11 +11,24 @@ namespace BikeTouringGIS.ViewModels
 {
     public class StatusBarViewModel : ViewModelBase
     {
+        private int _totalLengthOfRoutes;
+        private string _versionInformation;
         private MapView _mapView;
         private double _zoom;
         public StatusBarViewModel()
         {
             _zoom = 0;
+        }
+
+        public int TotalLengthOfRoutes
+        {
+            get { return _totalLengthOfRoutes; }
+            set { Set(ref _totalLengthOfRoutes, value); }
+        }
+        public string VersionInformation
+        {
+            get { return _versionInformation; }
+            set { Set(ref _versionInformation, value); }
         }
         public MapView MapView
         {

@@ -1,6 +1,8 @@
-﻿using BikeTouringGIS.Controls;
+﻿using BicycleTripsPreparationApp;
+using BikeTouringGIS.Controls;
 using BikeTouringGIS.Messenges;
 using BikeTouringGISLibrary;
+using Esri.ArcGISRuntime.Layers;
 using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -16,63 +18,13 @@ namespace BikeTouringGIS.ViewModels
 {
     public class BikeTouringGISViewModel : BikeTouringGISBaseViewModel
     {
-        public RelayCommand OpenGPXFileCommand { get; private set; }
-        private ObservableCollection<BikeTouringGISLayer> _layers;
-        private BikeTouringGISLayer _wayPointsLayer;
-        public BikeTouringGISViewModel()
+        public string VersionInformation
         {
-            OpenGPXFileCommand = new RelayCommand(OpenGPXFile);
-            _layers = new ObservableCollection<BikeTouringGISLayer>();
-            _wayPointsLayer = new BikeTouringGISLayer("Waypoints");
-            Layers.Add(_wayPointsLayer);
-        }
-
-        public ObservableCollection<BikeTouringGISLayer> Layers
-        {
-            get { return _layers; }
-            set { Set(ref _layers, value); }
-        }
-
-        private async void OpenGPXFile()
-        {
-            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog.Filter = "GPX files (*.gpx)|*.gpx";
-            openFileDialog.Multiselect = false;
-            openFileDialog.InitialDirectory = DropBoxHelper.GetDropBoxFolder();
-            if (openFileDialog.ShowDialog() == true)
+            get
             {
-                var gpxFileInformation = new GpxFileReader().LoadFile(openFileDialog.FileName);
-                foreach (var track in gpxFileInformation.Tracks)
-                {
-                    StringBuilder textBuilder = new StringBuilder();
-                    textBuilder.AppendLine($"Track {track.Name} is defined as track and not as route");
-                    textBuilder.AppendLine();
-                    textBuilder.AppendLine("routes are used by navigation-devices");
-                    textBuilder.AppendLine("tracks are to register where you have been");
-                    textBuilder.AppendLine();
-                    textBuilder.AppendLine("Do you want to convert it to a route?");
-                    var convertTrack = await ConvertTrackToRoute(textBuilder.ToString());
-                    if (convertTrack)
-                    {
-                        track.ConvertTrackToRoute();
-                    }
-                }
-                gpxFileInformation.CreateGeometries();
-                var layer = new BikeTouringGISLayer(openFileDialog.FileName, gpxFileInformation.AllRoutes);
-                Layers.Add(layer);
-                MessengerInstance.Send(new GPXDataLoadedMessage() { Layer = layer });
+                var versionApp = typeof(App).Assembly.GetName().Version;
+                return string.Format("version {0}.{1}.{2}", versionApp.Major, versionApp.Minor, versionApp.Build);
             }
-        }
-
-        private async Task<bool> ConvertTrackToRoute(string text)
-        {
-            var window = Application.Current.MainWindow as MetroWindow;
-            var result = await window.ShowMessageAsync("Convert track to route", text, MessageDialogStyle.AffirmativeAndNegative);
-            if (result == MessageDialogResult.Affirmative)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

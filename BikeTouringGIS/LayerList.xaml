@@ -16,6 +16,7 @@
     </UserControl.DataContext>
     <Border BorderBrush="DarkGreen" BorderThickness="1">
         <Grid>
+            <!--
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="GotFocus">
                     <mvvm:EventToCommand Command="{Binding ChangeVisibilityTabGroupCommand}" CommandParameter="layerstab" />
@@ -24,6 +25,7 @@
                     <mvvm:EventToCommand Command="{Binding ChangeVisibilityTabGroupCommand}" CommandParameter="layerstab" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
@@ -32,10 +34,11 @@
                 <Button Width="50" Content="+" />
             </StackPanel>
             <ListView Grid.Row="1"
-                      HorizontalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       ItemsSource="{Binding Layers,
-                                            Mode=TwoWay}">
+                                            Mode=TwoWay}"
+                      SelectedItem="{Binding SelectedLayer, Mode=TwoWay}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -46,7 +49,7 @@
                         <Border BorderBrush="DarkGray"
                                 BorderThickness="2"
                                 Padding="4"
-                                Visibility="{Binding IsVisible,
+                                Visibility="{Binding ShowLegend,
                                                      Mode=TwoWay,
                                                      Converter={StaticResource booleanVisibilityConverter}}">
                             <StackPanel>

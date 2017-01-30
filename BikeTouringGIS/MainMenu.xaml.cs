@@ -1,4 +1,6 @@
-﻿using BikeTouringGIS.Messenges;
+﻿using BikeTouringGIS.Controls;
+using BikeTouringGIS.Messenges;
+using BikeTouringGIS.ViewModels;
 using Fluent;
 using GalaSoft.MvvmLight.Messaging;
 using System;
@@ -26,8 +28,30 @@ namespace BikeTouringGIS
         public MainMenu()
         {
             InitializeComponent();
+            DataContext = this;
             Messenger.Default.Register<VisibilityTabChangedMessage>(this,ChangeVisibilityTab);
         }
+
+        public BikeTouringGISMapViewModel Map
+        {
+            get { return (BikeTouringGISMapViewModel)GetValue(MapProperty); }
+            set { SetValue(MapProperty, value); }
+        }
+
+        public BikeTouringGISLayer SelectedLayer
+        {
+            get { return (BikeTouringGISLayer)GetValue(SelectedLayerProperty); }
+            set { SetValue(SelectedLayerProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedLayer.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedLayerProperty =
+            DependencyProperty.Register("SelectedLayer", typeof(BikeTouringGISLayer), typeof(MainMenu), new PropertyMetadata(null));
+
+
+        // Using a DependencyProperty as the backing store for Map.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MapProperty =
+            DependencyProperty.Register("Map", typeof(BikeTouringGISMapViewModel), typeof(MainMenu), new PropertyMetadata(null));
 
         private void ChangeVisibilityTab(VisibilityTabChangedMessage message)
         {

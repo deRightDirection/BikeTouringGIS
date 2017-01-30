@@ -1,7 +1,9 @@
 ﻿using BikeTouringGIS.ViewModels;
+using BikeTouringGISLibrary.Enumerations;
 using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Layers;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WinUX.Common;
 
 namespace BikeTouringGIS
 {
@@ -23,10 +26,47 @@ namespace BikeTouringGIS
     /// </summary>
     public partial class BikeTouringGISMap : UserControl
     {
+        private BikeTouringGISMapViewModel _vm;
         public BikeTouringGISMap()
         {
             InitializeComponent();
-            ((BikeTouringGISMapViewModel)DataContext).Map = MapControl;
+            Map = MapControl;
+            var bindingViewMode = new Binding("Map") { Mode = BindingMode.TwoWay };
+            SetBinding(MapProperty, bindingViewMode);
+            bindingViewMode = new Binding("TotalLengthOfRoutes") { Mode = BindingMode.OneWay};
+            SetBinding(TotalLengthOfRoutesProperty, bindingViewMode);
+            _vm = ((BikeTouringGISMapViewModel)DataContext);
+            _vm.MapView = MapViewControl;
+            SetSymbology();
+        }
+
+        private void SetSymbology()
+        {
+            foreach(DictionaryEntry item in Resources)
+            {
+                GraphicType enumValue;
+                EnumHelper.TryParseTextToEnumValue<GraphicType>(item.Key.ToString(), out enumValue);
+                if(enumValue != GraphicType.Unknown)
+                {
+                    _vm.AddSymbol(enumValue, item.Value);
+                }
+            }
+        }
+
+        public Map Map
+        {
+            get { return (Map)GetValue(MapProperty); }
+            set { SetValue(MapProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Map.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MapProperty =
+            DependencyProperty.Register("Map", typeof(Map), typeof(BikeTouringGISMap), new PropertyMetadata(null, OnMapSet));
+
+        private static void OnMapSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var context = ((BikeTouringGISMap)d).DataContext;
+            ((BikeTouringGISMapViewModel)context).Map = e.NewValue as Map;
         }
 
         public MainMenu Menu
@@ -42,19 +82,14 @@ namespace BikeTouringGIS
             ((BikeTouringGISMapViewModel)context).Menu = e.NewValue as MainMenu;
         }
 
-        public Map Map
+        public int TotalLengthOfRoutes
         {
-            get { return MapControl; }
+            get { return (int)GetValue(TotalLengthOfRoutesProperty); }
+            set { SetValue(TotalLengthOfRoutesProperty, value); }
         }
 
-        public LayerCollection Layers
-        {
-            get { return MapControl.Layers; }
-        }
-
-        public MapView MapView
-        {
-            get { return MapViewControl; }
-        }
+        // Using a DependencyProperty as the backing store for TotalLengthOfRoutes.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TotalLengthOfRoutesProperty =
+            DependencyProperty.Register("TotalLengthOfRoutes", typeof(int), typeof(BikeTouringGISMap), new PropertyMetadata(0));
     }
 }

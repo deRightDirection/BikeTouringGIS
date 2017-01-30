@@ -37,24 +37,5 @@ namespace BikeTouringGISLibrary.Model
             Tracks = new List<Track>();
             WayPoints = new List<WayPoint>();
         }
-
-        public Envelope GetExtent()
-        {
-            var items = AllRoutes.Cast<Route>().ToList();
-            if(items.Count > 0)
-            {
-                var initialExtent = items[0].Extent;
-                for(int i = 1; i < items.Count; i++)
-                {
-                    initialExtent = initialExtent.Union(items[i].Extent);
-                }
-                if(WayPoints.Count > 0)
-                {
-                    WayPoints.ForEach(wp => initialExtent = initialExtent.Union(wp.Extent));
-                }
-                return initialExtent;
-            }
-            return null;
-        }
     }
 }

@@ -13,6 +13,9 @@
     </UserControl.DataContext>
     <Fluent:StatusBar HorizontalAlignment="Stretch"
                           VerticalAlignment="Bottom">
+        <Fluent:StatusBarItem Title="lengte" Margin="5 0 5 0"
+                                  HorizontalAlignment="Left"
+                                  Value="{Binding TotalLengthOfRoutes, StringFormat={}{0} km}" />
         <Fluent:StatusBarItem Title="map zoom"
                                   HorizontalAlignment="Right">
             <Slider x:Name="zoomSlider"
@@ -27,5 +30,9 @@
                         LargeChange="0.5"
                         />
         </Fluent:StatusBarItem>
+        <Fluent:StatusBarItem Title="versie" Margin="5 0 5 0"
+                                  HorizontalAlignment="Right"
+                                  Value="{Binding VersionInformation}" />
+
     </Fluent:StatusBar>
 </UserControl>

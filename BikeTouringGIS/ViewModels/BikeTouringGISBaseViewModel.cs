@@ -32,6 +32,7 @@ namespace BikeTouringGIS.ViewModels
 
         public Map Map
         {
+            get { return _map; }
             set { Set(ref _map, value); }
         }
     }

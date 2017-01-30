@@ -8,6 +8,8 @@ using BikeTouringGISLibrary.Model;
 using BikeTouringGISLibrary;
 using BikeTouringGISLibrary.Enumerations;
 using System.Collections.Specialized;
+using Esri.ArcGISRuntime.Symbology;
+using Esri.ArcGISRuntime.Geometry;
 
 namespace BikeTouringGIS.Controls
 {
@@ -17,13 +19,12 @@ namespace BikeTouringGIS.Controls
         {
             Graphics.CollectionChanged += SetVisibility;
             DisplayName = name;
-            IsVisible = false;
-            Type = LayerType.Waypoints;
+            Type = LayerType.PointsOfInterest;
         }
 
         private void SetVisibility(object sender, NotifyCollectionChangedEventArgs e)
         {
-            IsVisible = Graphics.Count > 0;
+           ShowLegend = Graphics.Count > 0;
         }
 
         public LayerType Type { get;private set;}
@@ -33,10 +34,51 @@ namespace BikeTouringGIS.Controls
             foreach(var route in routes)
             {
                 Graphics.Add(route.StartLocation);
-                Graphics.Add(route.RouteGeometry);
                 Graphics.Add(route.EndLocation);
+                Graphics.Add(route.RouteGeometry);
             }
-            Type = LayerType.Routes;
+            Type = LayerType.GPXRoutes;
+        }
+
+        public void SetSymbols(Dictionary<GraphicType, object> symbols)
+        {
+            foreach(BikeTouringGISGraphic graphic in Graphics)
+            {
+                var symbol = symbols[graphic.Type];
+                if(symbol is Symbol)
+                {
+                    graphic.Symbol = (Symbol)symbols[graphic.Type];
+                }
+            }
+        }
+
+        public Envelope Extent
+        {
+            get
+            {
+                Envelope initialExtent = null;
+                foreach (var graphic in Graphics)
+                {
+                    var graphicExtent = graphic.Geometry.Extent;
+                    initialExtent = initialExtent == null ? initialExtent = graphicExtent : initialExtent = initialExtent.Union(graphicExtent);
+                }
+                return initialExtent;
+            }
+        }
+
+        public int TotalLength
+        {
+            get
+            {
+                var length = 0;
+                foreach (BikeTouringGISGraphic graphic in Graphics)
+                {
+                    var distanceAnalyzer = new DistanceAnalyzer();
+                    var distance = distanceAnalyzer.CalculateDistance(graphic.Geometry);
+                    length += distance;
+                }
+                return length;
+            }
         }
     }
 }

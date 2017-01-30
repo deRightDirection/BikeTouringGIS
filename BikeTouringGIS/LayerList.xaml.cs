@@ -29,6 +29,8 @@ namespace BikeTouringGIS
         public LayerList()
         {
             InitializeComponent();
+            var bindingViewMode = new Binding("SelectedLayer") { Mode = BindingMode.TwoWay };
+            SetBinding(SelectedLayerProperty, bindingViewMode);
         }
 
         public MainMenu Menu
@@ -36,26 +38,28 @@ namespace BikeTouringGIS
             get { return (MainMenu)GetValue(MenuProperty); }
             set { SetValue(MenuProperty, value); }
         }
-        public Map Map
+
+        public LayerCollection Layers
         {
-            get { return (Map)GetValue(MapProperty); }
-            set { SetValue(MapProperty, value); }
-        }
-        public ObservableCollection<BikeTouringGISLayer> Layers
-        {
-            get { return (ObservableCollection<BikeTouringGISLayer>)GetValue(LayersProperty); }
+            get { return (LayerCollection)GetValue(LayersProperty); }
             set { SetValue(LayersProperty, value); }
         }
 
+        public BikeTouringGISLayer SelectedLayer
+        {
+            get { return (BikeTouringGISLayer)GetValue(SelectedLayerProperty); }
+            set { SetValue(SelectedLayerProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SelectedLayer.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedLayerProperty =
+            DependencyProperty.Register("SelectedLayer", typeof(BikeTouringGISLayer), typeof(LayerList), new PropertyMetadata(null, OnLayerSet));
 
         public static readonly DependencyProperty LayersProperty =
-            DependencyProperty.Register("Layers", typeof(ObservableCollection<BikeTouringGISLayer>), typeof(LayerList), new PropertyMetadata(null, OnLayersSet));
+            DependencyProperty.Register("Layers", typeof(LayerCollection), typeof(LayerList), new PropertyMetadata(null, OnLayersSet));
 
         public static readonly DependencyProperty MenuProperty =
             DependencyProperty.Register("Menu", typeof(MainMenu), typeof(LayerList), new PropertyMetadata(null, OnMenuSet));
-
-        public static readonly DependencyProperty MapProperty =
-            DependencyProperty.Register("Map", typeof(Map), typeof(LayerList), new PropertyMetadata(null, OnMapSet));
 
         private static void OnMenuSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -63,16 +67,16 @@ namespace BikeTouringGIS
             ((LayerListViewModel)context).Menu = e.NewValue as MainMenu;
         }
 
-        private static void OnMapSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnLayerSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var context = ((LayerList)d).DataContext;
-            ((LayerListViewModel)context).Map = e.NewValue as Map;
+            ((LayerListViewModel)context).SelectedLayer= e.NewValue as BikeTouringGISLayer;
         }
 
         private static void OnLayersSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var context = ((LayerList)d).DataContext;
-            ((LayerListViewModel)context).Layers = e.NewValue as ObservableCollection<BikeTouringGISLayer>;
+            ((LayerListViewModel)context).Layers = e.NewValue as LayerCollection;
         }
     }
 }

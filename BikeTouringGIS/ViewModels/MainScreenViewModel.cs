@@ -23,7 +23,6 @@ namespace BikeTouringGIS.ViewModels
         private BikeTouringGISProject _project;
 
         private bool _showOpenCycleMap, _showOpenStreetMap, _showFietsknooppunten;
-        private int _splitDistance;
         private bool _poiClickMode;
         private readonly IDialogCoordinator _dialogCoordinator;
         private string _poiName;

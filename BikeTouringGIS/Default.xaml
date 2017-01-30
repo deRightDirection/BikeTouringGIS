@@ -21,16 +21,16 @@
                    Name="MainWindow"
                    Icon="bikecons_touring-32x32.png"
                    WindowStartupLocation="CenterScreen"
+                   Loaded="MainWindow_Loaded"
                    WindowState="Maximized"
                    mc:Ignorable="d">
     <Metro:MetroWindow.DataContext>
-        <vm:BikeTouringGISViewModel />
+        <vm:BikeTouringGISViewModel/>
     </Metro:MetroWindow.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="250" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -39,61 +39,18 @@
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
-        <ListView Grid.Row="0"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      ItemsSource="{Binding Layers, Mode=TwoWay}">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="DarkGray"
-                                BorderThickness="2"
-                                Padding="4">
-                        <StackPanel>
-                            <TextBlock Margin="0,4"
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           Text="{Binding DisplayName}" />
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel>
-                                    <CheckBox Margin="6,2"
-                                                  Content="Enabled"
-                                                  IsChecked="{Binding IsVisible,
-                                                                      Mode=TwoWay}" />
-                                    <Slider Margin="0,0,20,0"
-                                                Maximum="1"
-                                                Minimum="0"
-                                                TickFrequency="0.01"
-                                                Value="{Binding Opacity,
-                                                                Mode=TwoWay}" />
-                                </StackPanel>
-                                <!--                                <Button Grid.Column="1" Content="Remove" Padding="12,4" VerticalAlignment="Center" Click="RemoveLayerButton_Click" />-->
-                            </Grid>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
         <project:MainMenu x:Name="mainmenu"
+                          Map="{Binding DataContext, ElementName=biketouringgismap}"
+                          SelectedLayer="{Binding SelectedLayer, ElementName=layerlist}"
                           Grid.Row="0"
                           Grid.ColumnSpan="2" />
         <project:MainScreen Grid.Row="1" Grid.ColumnSpan="2" />
         <project:LayerList Grid.Row="2"
                            Grid.Column="0"
                            Margin="5 0 1 5"
-                           Layers="{Binding DataContext.Layers, ElementName=MainWindow,
+                           x:Name="layerlist"
+                           Layers="{Binding Map.Layers, ElementName=biketouringgismap,
                                             Mode=TwoWay}"
-                           Map="{Binding Map,
-                                         ElementName=biketouringgismap}"
                            Menu="{Binding ElementName=mainmenu}" />
         <project:BikeTouringGISMap x:Name="biketouringgismap"
                                    Grid.Row="2"
@@ -102,8 +59,9 @@
                                    Menu="{Binding ElementName=mainmenu}" />
         <project:StatusBar Grid.Row="3"
                            Grid.ColumnSpan="2"
-                           MapView="{Binding MapView,
-                                             ElementName=biketouringgismap}" />
+                           VersionInformation="{Binding DataContext.VersionInformation, ElementName=MainWindow}"
+                           TotalLengthOfRoutes="{Binding TotalLengthOfRoutes, ElementName=biketouringgismap}"
+                         />
         <project:UrlBar Grid.Row="4"
                         Grid.ColumnSpan="2"
                         Margin="5" />

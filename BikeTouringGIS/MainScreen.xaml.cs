@@ -31,13 +31,11 @@ namespace BikeTouringGIS
     /// </summary>
     public partial class MainScreen : UserControl
     {
-        private List<List<wptType>> _routeParts;
         private List<wptType> _routePoints;
         private string _lastUsedFolder;
         private GraphicsLayer _routelayer, _poiLayer;
         private GraphicsLayer _splitLayer;
         private List<Route> _routes;
-        private DistanceAnalyzer _distanceAnalyzer;
         private string _originalFile;
         public MainScreen()
         {
@@ -46,75 +44,6 @@ namespace BikeTouringGIS
             var versionApp = typeof(App).Assembly.GetName().Version;
             //version.Text = string.Format("version {0}.{1}.{2}", versionApp.Major, versionApp.Minor,versionApp.Build);
         }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog.Filter = "GPX files (*.gpx)|*.gpx";
-            _routelayer = Map.Layers["route"] as GraphicsLayer;
-            _splitLayer = Map.Layers["split"] as GraphicsLayer;
-            _poiLayer = Map.Layers["POIs"] as GraphicsLayer;
-            openFileDialog.Multiselect = false;
-            openFileDialog.InitialDirectory = DropBoxHelper.GetDropBoxFolder();
-            if (openFileDialog.ShowDialog() == true)
-            {
-                _routelayer.Graphics.Clear();
-                _splitLayer.Graphics.Clear();
-                _poiLayer.Graphics.Clear();
-                _originalFile = openFileDialog.FileName;
-                _lastUsedFolder = Path.GetDirectoryName(_originalFile);
-                var gpxFileInformation = new GpxFileReader().LoadFile(openFileDialog.FileName);
-                foreach (var track in gpxFileInformation.Tracks)
-                {
-                    StringBuilder textBuilder = new StringBuilder();
-                    textBuilder.AppendLine($"Track {track.Name} is defined as track and not as route");
-                    textBuilder.AppendLine();
-                    textBuilder.AppendLine("routes are used by navigation-devices");
-                    textBuilder.AppendLine("tracks are to register where you have been");
-                    textBuilder.AppendLine();
-                    textBuilder.AppendLine("Do you want to convert it to a route?");
-                    var convertTrack = await ConvertTrackToRoute(textBuilder.ToString());
-                    if(convertTrack)
-                    {
-                        track.ConvertTrackToRoute();
-                    }
-                }
-                gpxFileInformation.CreateGeometries();
-                ShowData(gpxFileInformation.AllRoutes,gpxFileInformation.GetExtent());
-            }
-        }
-
-        private void ShowData(List<IRoute> routes, Envelope extent)
-        {
-            MyMapView.SetView(extent.Expand(1.2));
-            var startSymbol = grid.Resources["StartSymbol"] as SimpleMarkerSymbol;
-            var endSymbol = grid.Resources["EndSymbol"] as SimpleMarkerSymbol;
-            var routeSymbol = grid.Resources["TotalRoute"] as SimpleLineSymbol;
-            foreach (var route in routes)
-            {
-                _routelayer.Graphics.Add(route.RouteGeometry.AddSymbol(routeSymbol));
-                _routelayer.Graphics.Add(route.StartLocation.AddSymbol(startSymbol));
-                _routelayer.Graphics.Add(route.EndLocation.AddSymbol(endSymbol));
-            }
-        }
-
-        private async Task<bool> ConvertTrackToRoute(string text)
-        {
-            var window = Application.Current.MainWindow as MetroWindow;
-            var result = await window.ShowMessageAsync("Convert track to route", text, MessageDialogStyle.AffirmativeAndNegative);
-            if (result == MessageDialogResult.Affirmative)
-            {
-                return true;
-            }
-            return false;
-        }
-
-
-
-
-
-
-
 
         private void ShowWayPoints(List<wptType> waypoints)
         {
@@ -125,15 +54,6 @@ namespace BikeTouringGIS
                 _poiLayer.Graphics.Add(mapPoint);
             }
         }
-
-        /*
-        private void SetRoute(string routeName)
-        {
-            // bepaal afstand gehele route
-            _distanceAnalyzer = new DistanceAnalyzer();
-            length.Text = _distanceAnalyzer.CalculateDistance(_wayPoints[routeName]).ToString();
-        }
-        */
 
         private void DisplayPartOfTrack(List<wptType> wayPoints, Color color)
         {
@@ -151,6 +71,7 @@ namespace BikeTouringGIS
         {
             var pois = GetPOIs();
             // TODO pois bufferen om route
+            /*
                 for (int i = 0; i < _routeParts.Count; i++)
                 {
                     var filename = string.Format(@"{0}\{1}_{2}.gpx", _lastUsedFolder, prefix.Text, i + 1);
@@ -163,6 +84,7 @@ namespace BikeTouringGIS
                     gpx.wpt = pois;
                     gpxFile.Save(filename, gpx);
                 }
+                */
             SaveAllSplitPointsAndLinesInOneFile();
         }
 
@@ -190,6 +112,7 @@ namespace BikeTouringGIS
             var gpx = new gpxType();
             gpx.wpt = _routePoints.ToArray();
             var routes = new List<rteType>();
+            /*
             for (int i = 0; i < _routeParts.Count; i++)
             {
                 var rte = new rteType();
@@ -197,6 +120,7 @@ namespace BikeTouringGIS
                 rte.rtept = _routeParts[i].ToArray();
                 routes.Add(rte);
             }
+            */
             gpx.rte = routes.ToArray();
             gpxFile.Save(filename, gpx);
         }
@@ -235,27 +159,6 @@ namespace BikeTouringGIS
 
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            if (Map.Layers[0].IsVisible)
-            {
-                Map.Layers[0].IsVisible = false;
-                Map.Layers[1].IsVisible = true;
-                return;
-            }
-            if (Map.Layers[1].IsVisible)
-            {
-                Map.Layers[0].IsVisible = true;
-                Map.Layers[1].IsVisible = false;
-                return;
-            }
-        }
-
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            Map.Layers[2].IsVisible = !Map.Layers[2].IsVisible;
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
 //            _wayPoints.Reverse();
@@ -273,31 +176,6 @@ namespace BikeTouringGIS
             gpx.rte = new List<rteType>() { rte }.ToArray();
             gpx.wpt = pois;
             gpxFile.Save(filename, gpx);
-        }
-
-        private async void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
-                {
-                        var updateInfo = await mgr.CheckForUpdate();
-                        var currentVersion = updateInfo.CurrentlyInstalledVersion.Version;
-                        var futureVersion = updateInfo.FutureReleaseEntry.Version;
-                        if (currentVersion != futureVersion)
-                        {
-                            var window = Application.Current.MainWindow as MetroWindow;
-                            var controller = await window.ShowProgressAsync("Please wait...", "Updating application");
-                            await mgr.UpdateApp();
-                            await controller.CloseAsync();
-                        }
-                }
-            }
-            catch(Exception ex)
-            {
-                ILogger logger = Logger.GetLogger();
-                logger.LogException(ex);
-            }
         }
     }
 }

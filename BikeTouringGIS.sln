@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPX", "..\GPXDataAnalyzer\G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "theRightDirection.Library.Logging", "..\theRightDirection.Library.Logging\theRightDirection.Library.Logging\theRightDirection.Library.Logging.csproj", "{302E3909-04AF-4064-A533-6FAA5E6593CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinUX.Common", "..\WinUX-UWP-Toolkit\WinUX\WinUX.Common\WinUX.Common.csproj", "{55C7FA03-C3B0-4AA0-BE48-3FA435EE37C1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{302E3909-04AF-4064-A533-6FAA5E6593CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{302E3909-04AF-4064-A533-6FAA5E6593CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{302E3909-04AF-4064-A533-6FAA5E6593CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55C7FA03-C3B0-4AA0-BE48-3FA435EE37C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55C7FA03-C3B0-4AA0-BE48-3FA435EE37C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55C7FA03-C3B0-4AA0-BE48-3FA435EE37C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55C7FA03-C3B0-4AA0-BE48-3FA435EE37C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

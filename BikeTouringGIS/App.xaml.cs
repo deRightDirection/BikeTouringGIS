@@ -9,6 +9,7 @@ using System.Windows;
 using theRightDirection.Library.Logging;
 using System.Windows.Threading;
 using System.Windows.Media;
+using Squirrel;
 
 namespace BicycleTripsPreparationApp
 {

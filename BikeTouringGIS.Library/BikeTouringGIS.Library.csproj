@@ -50,7 +50,10 @@
   <ItemGroup>
     <Compile Include="BikeTouringGISGraphic.cs" />
     <Compile Include="BikeTouringGISProjectFileHandler.cs" />
+    <Compile Include="DistanceAnalyzer.cs" />
+    <Compile Include="Enumerations\GraphicType.cs" />
     <Compile Include="Enumerations\LayerType.cs" />
+    <Compile Include="Extensions\GeometryExtension.cs" />
     <Compile Include="GPXFileReader.cs" />
     <Compile Include="GeometryCreatable.cs" />
     <Compile Include="IRoute.cs" />
@@ -70,6 +73,7 @@
       <Name>GPX</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

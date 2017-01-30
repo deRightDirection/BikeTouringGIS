@@ -14,6 +14,7 @@
         <Image Grid.Column="0"
                    Width="150"
                    Height="99"
+               VerticalAlignment="Bottom"
                    Source="bike touring gis splash screen.png"
                    Stretch="Fill" />
         <Fluent:Ribbon Grid.Column="1" x:Name="ribbonMenu"
@@ -55,9 +56,8 @@
                     </Fluent:ApplicationMenu.RightPaneContent>
                     <Fluent:MenuItem Header="New" />
                     <Fluent:MenuItem Header="Open"
-                                     Command="{Binding OpenGPXFileCommand}"
-                                         Description="CTRL + O"
-                                         ToolTip="Open gpx-file"/>
+                                     Command="{Binding Map.OpenGPXFileCommand}"
+                                         ToolTip="open gpx-file"/>
                     <Fluent:MenuItem Header="Save As"/>
                     <Separator />
                     <Fluent:MenuItem Header="Exit"
@@ -67,8 +67,19 @@
             </Fluent:Ribbon.Menu>
             <Fluent:Ribbon.ContextualGroups>
                 <Fluent:RibbonContextualTabGroup Header="Layers" Visibility="Collapsed" Background="DarkGreen" BorderBrush="DarkGreen" x:Name="layerstab"/>
+                <Fluent:RibbonContextualTabGroup Header="Layer" Visibility="{Binding SelectedLayer, Converter={StaticResource notNullVisibilityConverter}}" Background="LimeGreen" BorderBrush="LimeGreen" x:Name="layertab"/>
             </Fluent:Ribbon.ContextualGroups>
             <Fluent:RibbonTabItem Header="Add data" Group="{Binding ElementName=layerstab}" />
+            <Fluent:RibbonTabItem Header="Properties" Group="{Binding ElementName=layertab}">
+                <Fluent:RibbonGroupBox>
+                    <Fluent:TwoLineLabel Text="{Binding SelectedLayer.DisplayName}"/>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem Header="Editing" Group="{Binding ElementName=layertab}">
+                <Fluent:RibbonGroupBox>
+                    <Fluent:Button Header="flip direction" Command="{Binding FlipDirectionCommand}" CommandParameter="{Binding DataContext.SelectedLayer}"/>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
         </Fluent:Ribbon>
     </Grid>
 </UserControl>

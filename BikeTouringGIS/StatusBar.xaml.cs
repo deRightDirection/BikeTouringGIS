@@ -25,12 +25,48 @@ namespace BikeTouringGIS
         public StatusBar()
         {
             InitializeComponent();
+            var bindingViewMode = new Binding("TotalLengthOfRoutes") { Mode = BindingMode.OneWay };
+            SetBinding(TotalLengthOfRoutesProperty, bindingViewMode);
+            bindingViewMode = new Binding("VersionInformation") { Mode = BindingMode.OneWay };
+            SetBinding(VersionInformationProperty, bindingViewMode);
         }
 
         public MapView MapView
         {
             get { return (MapView)GetValue(MapViewProperty); }
             set { SetValue(MapViewProperty, value); }
+        }
+
+        public int TotalLengthOfRoutes
+        {
+            get { return (int)GetValue(TotalLengthOfRoutesProperty); }
+            set { SetValue(TotalLengthOfRoutesProperty, value); }
+        }
+
+        public string VersionInformation
+        {
+            get { return (string)GetValue(VersionInformationProperty); }
+            set { SetValue(VersionInformationProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for VersionInformation.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty VersionInformationProperty =
+            DependencyProperty.Register("VersionInformation", typeof(string), typeof(StatusBar), new PropertyMetadata(string.Empty, OnVersionInformationSet));
+
+        private static void OnVersionInformationSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var context = ((StatusBar)d).DataContext;
+            ((StatusBarViewModel)context).VersionInformation = (string)e.NewValue;
+        }
+
+        // Using a DependencyProperty as the backing store for TotalLengthOfRoutes.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TotalLengthOfRoutesProperty =
+            DependencyProperty.Register("TotalLengthOfRoutes", typeof(int), typeof(StatusBar), new PropertyMetadata(0, OnLengthSet));
+
+        private static void OnLengthSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var context = ((StatusBar)d).DataContext;
+            ((StatusBarViewModel)context).TotalLengthOfRoutes = (int)e.NewValue;
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...

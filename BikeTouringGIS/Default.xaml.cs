@@ -17,6 +17,8 @@ using Squirrel;
 using MahApps.Metro.Controls.Dialogs;
 using System.Threading;
 using theRightDirection.Library.Logging;
+using Esri.ArcGISRuntime.Layers;
+using BikeTouringGIS.ViewModels;
 
 namespace BikeTouringGIS
 {
@@ -28,6 +30,31 @@ namespace BikeTouringGIS
         public Default()
         {
             InitializeComponent();
+        }
+
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
+                {
+                    var updateInfo = await mgr.CheckForUpdate();
+                    var currentVersion = updateInfo.CurrentlyInstalledVersion.Version;
+                    var futureVersion = updateInfo.FutureReleaseEntry.Version;
+                    if (currentVersion != futureVersion)
+                    {
+                        var window = Application.Current.MainWindow as MetroWindow;
+                        var controller = await window.ShowProgressAsync("Please wait...", "Updating application");
+                        await mgr.UpdateApp();
+                        await controller.CloseAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ILogger logger = Logger.GetLogger();
+                logger.LogException(ex);
+            }
         }
     }
 }
