@@ -32,6 +32,12 @@ namespace BikeTouringGIS
             Messenger.Default.Register<VisibilityTabChangedMessage>(this,ChangeVisibilityTab);
         }
 
+        public BikeTouringGISViewModel Base
+        {
+            get { return (BikeTouringGISViewModel)GetValue(BaseProperty); }
+            set { SetValue(BaseProperty, value); }
+        }
+
         public BikeTouringGISMapViewModel Map
         {
             get { return (BikeTouringGISMapViewModel)GetValue(MapProperty); }
@@ -44,14 +50,15 @@ namespace BikeTouringGIS
             set { SetValue(SelectedLayerProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for SelectedLayer.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedLayerProperty =
             DependencyProperty.Register("SelectedLayer", typeof(BikeTouringGISLayer), typeof(MainMenu), new PropertyMetadata(null));
 
 
-        // Using a DependencyProperty as the backing store for Map.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MapProperty =
             DependencyProperty.Register("Map", typeof(BikeTouringGISMapViewModel), typeof(MainMenu), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty BaseProperty =
+        DependencyProperty.Register("Base", typeof(BikeTouringGISViewModel), typeof(MainMenu), new PropertyMetadata(null));
 
         private void ChangeVisibilityTab(VisibilityTabChangedMessage message)
         {

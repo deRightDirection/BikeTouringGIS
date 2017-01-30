@@ -13,8 +13,7 @@
              xmlns:project="clr-namespace:BikeTouringGIS.Controls"
              xmlns:s="clr-namespace:System;assembly=mscorlib"
              Name="mainscreen"
-             Dialogs:DialogParticipation.Register="{Binding}"
-             >
+             Dialogs:DialogParticipation.Register="{Binding}">
     <UserControl.Resources>
         <converters:MouseButtonEventArgsToPointConverter x:Key="MouseButtonEventArgsToPointConverter" />
         <esri:SimpleMarkerSymbol x:Key="POISymbol"
@@ -50,8 +49,6 @@
                     BorderBrush="DarkGreen"
                     BorderThickness="1">
                 <StackPanel Orientation="Horizontal">
-                    <project:ProjectDetails Project="{Binding Project, Mode=TwoWay}" />
-                    <project:BikeTouringGISMenu Project="{Binding Project, Mode=TwoWay}" />
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -80,15 +77,6 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Row="1"
-                                    Grid.Column="0"
-                                    Width="125"
-                                    Margin="5"
-                                    BorderBrush="DarkGreen"
-                                    Click="Button_Click_1"
-                                    Command="{Binding FlipDirectionCommand}"
-                                    Content="Flip direction"
-                                    Style="{DynamicResource AccentedSquareButtonStyle}" />
                         </Grid>
                     </Grid>
 

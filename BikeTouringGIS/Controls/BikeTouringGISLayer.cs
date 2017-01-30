@@ -15,12 +15,30 @@ namespace BikeTouringGIS.Controls
 {
     public class BikeTouringGISLayer : GraphicsLayer
     {
+        private IEnumerable<IRoute> _routes;
+        private Dictionary<GraphicType, object> _symbols;
+        private bool _isInEditMode;
+
         public BikeTouringGISLayer(string name)
         {
             Graphics.CollectionChanged += SetVisibility;
             DisplayName = name;
             Type = LayerType.PointsOfInterest;
         }
+
+        public bool IsInEditMode
+        {
+            get { return _isInEditMode; }
+            set
+            {
+                if (value != _isInEditMode)
+                {
+                    _isInEditMode = value;
+                    OnPropertyChanged("IsInEditMode");
+                }
+            }
+        }
+
 
         private void SetVisibility(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -31,6 +49,7 @@ namespace BikeTouringGIS.Controls
 
         public BikeTouringGISLayer(string fileName, IEnumerable<IRoute> routes) : this(fileName)
         {
+            _routes = routes;
             foreach(var route in routes)
             {
                 Graphics.Add(route.StartLocation);
@@ -40,14 +59,34 @@ namespace BikeTouringGIS.Controls
             Type = LayerType.GPXRoutes;
         }
 
+        internal void FlipDirection()
+        {
+            Graphics.Clear();
+            foreach (var route in _routes)
+            {
+                Graphics.Add(route.EndLocation);
+                Graphics.Add(route.StartLocation);
+                route.Flip();
+                Graphics.Add(route.RouteGeometry);
+            }
+            SetSymbols();
+            IsInEditMode = true;
+        }
+
         public void SetSymbols(Dictionary<GraphicType, object> symbols)
         {
-            foreach(BikeTouringGISGraphic graphic in Graphics)
+            _symbols = symbols;
+            SetSymbols();
+        }
+
+        private void SetSymbols()
+        {
+            foreach (BikeTouringGISGraphic graphic in Graphics)
             {
-                var symbol = symbols[graphic.Type];
-                if(symbol is Symbol)
+                var symbol = _symbols[graphic.Type];
+                if (symbol is Symbol)
                 {
-                    graphic.Symbol = (Symbol)symbols[graphic.Type];
+                    graphic.Symbol = (Symbol)_symbols[graphic.Type];
                 }
             }
         }

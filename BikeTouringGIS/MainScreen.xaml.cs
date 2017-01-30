@@ -159,12 +159,6 @@ namespace BikeTouringGIS
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-//            _wayPoints.Reverse();
- //           SetRoute();
-        }
-
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             var pois = GetPOIs();

@@ -23,15 +23,13 @@ namespace BikeTouringGIS.ViewModels
 {
     public class BikeTouringGISMapViewModel : BikeTouringGISBaseViewModel
     {
-        public RelayCommand OpenGPXFileCommand { get; private set; }
         public RelayCommand SetupMapCommand { get; private set; }
-        private BikeTouringGISLayer _pointsOfInterestLayer, _selectedLayer;
+        private BikeTouringGISLayer _pointsOfInterestLayer;
         private Dictionary<GraphicType, object> _mapSymbols;
         private bool _showKnooppunten, _showOpenCycleMap, _showOpenStreetMap, _mapSetupIsDone;
         private int _totalLengthOfRoutes;
         public BikeTouringGISMapViewModel()
         {
-            OpenGPXFileCommand = new RelayCommand(OpenGPXFile);
             SetupMapCommand = new RelayCommand(SetupMap);
             _mapSymbols = new Dictionary<GraphicType, object>();
         }
@@ -68,6 +66,15 @@ namespace BikeTouringGIS.ViewModels
                 osm.IsVisible = value;
             }
         }
+
+        internal void AddRoutes(BikeTouringGISLayer layer)
+        {
+            layer.SetSymbols(_mapSymbols);
+            _map.Layers.Add(layer);
+            SetExtent();
+            CalculateTotalLength();
+        }
+
         //TODO MME 30012017 checken of in Quartz de binding wel goed werkt!
         public bool ShowOpenStreetMap
         {
@@ -114,50 +121,6 @@ namespace BikeTouringGIS.ViewModels
             {
                 MapView.SetView(initialExtent.Expand(1.2));
             }
-        }
-
-        private async void OpenGPXFile()
-        {
-            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog.Filter = "GPX files (*.gpx)|*.gpx";
-            openFileDialog.Multiselect = false;
-            openFileDialog.InitialDirectory = DropBoxHelper.GetDropBoxFolder();
-            if (openFileDialog.ShowDialog() == true)
-            {
-                var gpxFileInformation = new GpxFileReader().LoadFile(openFileDialog.FileName);
-                foreach (var track in gpxFileInformation.Tracks)
-                {
-                    StringBuilder textBuilder = new StringBuilder();
-                    textBuilder.AppendLine($"Track {track.Name} is defined as track and not as route");
-                    textBuilder.AppendLine();
-                    textBuilder.AppendLine("routes are used by navigation-devices");
-                    textBuilder.AppendLine("tracks are to register where you have been");
-                    textBuilder.AppendLine();
-                    textBuilder.AppendLine("Do you want to convert it to a route?");
-                    var convertTrack = await ConvertTrackToRoute(textBuilder.ToString());
-                    if (convertTrack)
-                    {
-                        track.ConvertTrackToRoute();
-                    }
-                }
-                gpxFileInformation.CreateGeometries();
-                var layer = new BikeTouringGISLayer(openFileDialog.FileName, gpxFileInformation.AllRoutes);
-                layer.SetSymbols(_mapSymbols);
-                _map.Layers.Add(layer);
-                SetExtent();
-                CalculateTotalLength();
-            }
-        }
-
-        private async Task<bool> ConvertTrackToRoute(string text)
-        {
-            var window = Application.Current.MainWindow as MetroWindow;
-            var result = await window.ShowMessageAsync("Convert track to route", text, MessageDialogStyle.AffirmativeAndNegative);
-            if (result == MessageDialogResult.Affirmative)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

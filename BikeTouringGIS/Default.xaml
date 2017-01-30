@@ -11,21 +11,21 @@
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:project="clr-namespace:BikeTouringGIS"
                    xmlns:vm="clr-namespace:BikeTouringGIS.ViewModels"
+                   Name="MainWindow"
                    Title="Bike Touring GIS"
                    d:DesignHeight="1000"
                    d:DesignWidth="1000"
-                   Background="White"
+                   Background="Green"
                    BorderBrush="DarkGreen"
                    BorderThickness="1"
                    GlowBrush="LimeGreen"
-                   Name="MainWindow"
                    Icon="bikecons_touring-32x32.png"
-                   WindowStartupLocation="CenterScreen"
                    Loaded="MainWindow_Loaded"
+                   WindowStartupLocation="CenterScreen"
                    WindowState="Maximized"
                    mc:Ignorable="d">
     <Metro:MetroWindow.DataContext>
-        <vm:BikeTouringGISViewModel/>
+        <vm:BikeTouringGISViewModel />
     </Metro:MetroWindow.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -40,16 +40,21 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
         <project:MainMenu x:Name="mainmenu"
-                          Map="{Binding DataContext, ElementName=biketouringgismap}"
-                          SelectedLayer="{Binding SelectedLayer, ElementName=layerlist}"
                           Grid.Row="0"
-                          Grid.ColumnSpan="2" />
+                          Grid.ColumnSpan="2"
+                          Base="{Binding DataContext,
+                                         ElementName=MainWindow}"
+                          Map="{Binding DataContext,
+                                        ElementName=biketouringgismap}"
+                          SelectedLayer="{Binding SelectedLayer,
+                                                  ElementName=layerlist}" />
         <project:MainScreen Grid.Row="1" Grid.ColumnSpan="2" />
-        <project:LayerList Grid.Row="2"
+        <project:LayerList x:Name="layerlist"
+                           Grid.Row="2"
                            Grid.Column="0"
                            Margin="5 0 1 5"
-                           x:Name="layerlist"
-                           Layers="{Binding Map.Layers, ElementName=biketouringgismap,
+                           Layers="{Binding Map.Layers,
+                                            ElementName=biketouringgismap,
                                             Mode=TwoWay}"
                            Menu="{Binding ElementName=mainmenu}" />
         <project:BikeTouringGISMap x:Name="biketouringgismap"
@@ -59,11 +64,13 @@
                                    Menu="{Binding ElementName=mainmenu}" />
         <project:StatusBar Grid.Row="3"
                            Grid.ColumnSpan="2"
-                           VersionInformation="{Binding DataContext.VersionInformation, ElementName=MainWindow}"
-                           TotalLengthOfRoutes="{Binding TotalLengthOfRoutes, ElementName=biketouringgismap}"
-                         />
+                           TotalLengthOfRoutes="{Binding TotalLengthOfRoutes,
+                                                         ElementName=biketouringgismap}"
+                           VersionInformation="{Binding DataContext.VersionInformation,
+                                                        ElementName=MainWindow}" />
         <project:UrlBar Grid.Row="4"
                         Grid.ColumnSpan="2"
-                        Margin="5" />
+                        Background="White"
+                        Padding="5" />
     </Grid>
 </Metro:MetroWindow>

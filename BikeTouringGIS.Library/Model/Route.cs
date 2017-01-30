@@ -46,5 +46,11 @@ namespace BikeTouringGISLibrary.Model
             Geometry = builder.ToGeometry();
             Extent = Geometry.Extent;
         }
+
+        public void Flip()
+        {
+            Points.Reverse();
+            CreateGeometry();
+        }
     }
 }

@@ -16,5 +16,6 @@ namespace BikeTouringGISLibrary
         BikeTouringGISGraphic RouteGeometry { get; }
         BikeTouringGISGraphic StartLocation { get; }
         BikeTouringGISGraphic EndLocation { get; }
+        void Flip();
     }
 }
