@@ -89,6 +89,7 @@ namespace BikeTouringGIS.ViewModels
         {
             layer.SetSymbols(_mapSymbols);
             _map.Layers.Add(layer);
+            _map.Layers.Add(layer.SplitLayer);
             SetExtent();
             CalculateTotalLength();
         }

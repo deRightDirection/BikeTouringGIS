@@ -10,7 +10,7 @@ using BikeTouringGISLibrary.Enumerations;
 using System.Collections.Specialized;
 using Esri.ArcGISRuntime.Symbology;
 using Esri.ArcGISRuntime.Geometry;
-
+using MoreLinq;
 namespace BikeTouringGIS.Controls
 {
     public class BikeTouringGISLayer : GraphicsLayer
@@ -20,11 +20,25 @@ namespace BikeTouringGIS.Controls
         private Dictionary<GraphicType, object> _symbols;
         private bool _isInEditMode;
 
-        public BikeTouringGISLayer(string name)
+        private BikeTouringGISLayer()
         {
             Graphics.CollectionChanged += SetVisibility;
+        }
+        public BikeTouringGISLayer(string name) : this()
+        {
             DisplayName = name;
             Type = LayerType.PointsOfInterest;
+        }
+        public BikeTouringGISLayer(string fileName, IEnumerable<IRoute> routes) : this(fileName)
+        {
+            _routes = routes;
+            foreach (var route in routes)
+            {
+                Graphics.Add(route.StartLocation);
+                Graphics.Add(route.EndLocation);
+                Graphics.Add(route.RouteGeometry);
+            }
+            Type = LayerType.GPXRoutes;
         }
         public BikeTouringGISLayer SplitLayer
         {
@@ -37,17 +51,6 @@ namespace BikeTouringGIS.Controls
                     OnPropertyChanged("SplitLayer");
                 }
             }
-        }
-        public BikeTouringGISLayer(string fileName, IEnumerable<IRoute> routes) : this(fileName)
-        {
-            _routes = routes;
-            foreach (var route in routes)
-            {
-                Graphics.Add(route.StartLocation);
-                Graphics.Add(route.EndLocation);
-                Graphics.Add(route.RouteGeometry);
-            }
-            Type = LayerType.GPXRoutes;
         }
         public bool IsInEditMode
         {
@@ -87,6 +90,7 @@ namespace BikeTouringGIS.Controls
         {
             _symbols = symbols;
             SetSymbols();
+            SplitLayer = new BikeTouringGISLayer() { Type = LayerType.SplitRoutes, IsVisible = false };
         }
 
         private void SetSymbols()
@@ -130,19 +134,19 @@ namespace BikeTouringGIS.Controls
 
         public void SplitRoutes(int splitDistance)
         {
-            var routeSplitter = new RouteSplitter();
-            var splitLayer = new BikeTouringGISLayer($"{splitDistance} km") { Type = LayerType.SplitRoutes };
+            var routeSplitter = new RouteSplitter(splitDistance);
+            SplitLayer.DisplayName = $"{splitDistance} km";
+            SplitLayer.Graphics.Clear();
             foreach (var route in _routes)
             {
-                routeSplitter.SplitRoute(splitDistance, route.Points);
-                var splitPoints = routeSplitter.SplitPoints;
-                splitPoints.SetSymbol();
-                var splitRoutes = routeSplitter.SplittedRoutes;
-                splitRoutes.SetSymbol();
-                splitLayer.Graphics.Add(splitPoints);
-                splitLayer.Graphics.Add(splitRoutes);
+                routeSplitter.SplitRoute(route.Points);
+                var splitPoints = routeSplitter.GetSplitPoints();
+                splitPoints.ForEach(x => x.Symbol = (Symbol)_symbols[GraphicType.SplitPoint]);
+                var splitRoutes = routeSplitter.GetSplittedRoutes();
+                splitRoutes.ForEach(x => x.Symbol = (Symbol)_symbols[GraphicType.SplitRoute]);
+                SplitLayer.Graphics.AddRange(splitPoints);
+                SplitLayer.Graphics.AddRange(splitRoutes);
             }
-            SplitLayer = splitLayer;
         }
     }
 }

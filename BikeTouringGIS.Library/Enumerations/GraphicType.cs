@@ -11,6 +11,8 @@ namespace BikeTouringGISLibrary.Enumerations
         Unknown,
         GPXRouteStartLocation,
         GPXRouteEndLocation,
-        GPXRoute
+        GPXRoute,
+        SplitPoint,
+        SplitRoute
     }
 }

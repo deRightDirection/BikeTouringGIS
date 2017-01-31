@@ -34,7 +34,7 @@ namespace BikeTouringGIS.ViewModels
 
         private void SplitRoute(BikeTouringGISLayer obj)
         {
-//            obj.SplitRoute(SplitLength);
+            obj.SplitRoutes(SplitLength);
         }
 
         public int SplitLength

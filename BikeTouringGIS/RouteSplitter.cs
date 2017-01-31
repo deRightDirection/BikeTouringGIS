@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Esri.ArcGISRuntime.Symbology;
 using GPX;
+using Esri.ArcGISRuntime.Layers;
+using BikeTouringGISLibrary;
+using Esri.ArcGISRuntime.Geometry;
+using BikeTouringGISLibrary.Enumerations;
 
 namespace BikeTouringGIS
 {
@@ -14,19 +19,11 @@ namespace BikeTouringGIS
         private List<List<wptType>> _routes = new List<List<wptType>>();
         private List<wptType> _splitPoints = new List<wptType>();
         private List<int> _splitIndices = new List<int>();
+        private int _splitDistance;
 
-        public RouteSplitter(List<wptType> route)
+        public RouteSplitter(int splitDistance)
         {
-            _wayPoints = route;
-        }
-
-        public void SplitRoute(int lengthToSplitInKilometers)
-        {
-            CalculateOriginalDistances();
-            CalculateSplitPoints(lengthToSplitInKilometers);
-            CreateSplitPoints();
-            CreateSplittedRoutes();
-
+            _splitDistance = splitDistance;
         }
 
         private void CreateSplittedRoutes()
@@ -40,15 +37,7 @@ namespace BikeTouringGIS
             }
         }
 
-        private void CreateSplitPoints()
-        {
-            foreach(var splitIndex in _splitIndices)
-            {
-                SplitPoints.Add(_wayPoints[splitIndex]);
-            }
-        }
-
-        private void CalculateSplitPoints(int lengthToSplit)
+        private void CalculateSplitPoints()
         {
             _splitIndices.Clear();
             var length = 0.0;
@@ -56,7 +45,7 @@ namespace BikeTouringGIS
             for (int i = 0; i < _wayPoints.Count - 1; i++)
             {
                 length += _distances[i];
-                var temporaryLength = lengthToSplit * 1000 * splitCounter;
+                var temporaryLength = _splitDistance * 1000 * splitCounter;
                 if (length > temporaryLength)
                 {
                     var lengthAfter = length - temporaryLength;
@@ -80,15 +69,35 @@ namespace BikeTouringGIS
             _distances = dataAnalyzer.Distances;
         }
 
-        public List<wptType> SplitPoints
+        internal void SplitRoute(List<wptType> points)
         {
-            get { return _splitPoints;  }
+            _wayPoints = points;
+            CalculateOriginalDistances();
+            CalculateSplitPoints();
+            _splitIndices.ForEach(x => _splitPoints.Add(_wayPoints[x]));
+            CreateSplittedRoutes();
         }
 
-        public List<List<wptType>> SplittedRoutes
+        internal IEnumerable<BikeTouringGISGraphic> GetSplitPoints()
         {
-            get { return _routes; }
+            var result = new List<BikeTouringGISGraphic>();
+            var sr = new SpatialReference(4326);
+            var cumulativeDistance = 0;
+            for(int i =0; i < _splitPoints.Count; i++)
+            {
+                var point = _splitPoints[i];
+                var mapPoint = new MapPoint((double)point.lon, (double)point.lat, sr);
+                var graphic = new BikeTouringGISGraphic(mapPoint, GraphicType.SplitPoint);
+                cumulativeDistance += (int)_distances[i];
+                graphic.Attributes["distance"] = cumulativeDistance;
+                result.Add(graphic);
+            }
+            return result;
         }
 
+        internal IEnumerable<BikeTouringGISGraphic> GetSplittedRoutes()
+        {
+            return new List<BikeTouringGISGraphic>();
+        }
     }
 }
