@@ -18,20 +18,32 @@ using MahApps.Metro.Controls.Dialogs;
 using MahApps.Metro.Controls;
 using System.Windows;
 using BikeTouringGISLibrary;
+using System.Collections.ObjectModel;
 
 namespace BikeTouringGIS.ViewModels
 {
     public class BikeTouringGISMapViewModel : BikeTouringGISBaseViewModel
     {
         public RelayCommand SetupMapCommand { get; private set; }
+        public RelayCommand<BikeTouringGISLayer> LayerLoadedCommand { get; private set; }
         private BikeTouringGISLayer _pointsOfInterestLayer;
+        private ObservableCollection<BikeTouringGISLayer> _bikeTouringGISLayers;
         private Dictionary<GraphicType, object> _mapSymbols;
         private bool _showKnooppunten, _showOpenCycleMap, _showOpenStreetMap, _mapSetupIsDone;
         private int _totalLengthOfRoutes;
         public BikeTouringGISMapViewModel()
         {
             SetupMapCommand = new RelayCommand(SetupMap);
+            LayerLoadedCommand = new RelayCommand<BikeTouringGISLayer>(LayerLoaded);
             _mapSymbols = new Dictionary<GraphicType, object>();
+        }
+
+        private void LayerLoaded(BikeTouringGISLayer layer)
+        {
+            if (layer != null)
+            {
+                BikeTouringGISLayers = new ObservableCollection<BikeTouringGISLayer>(_map.GetBikeTouringGISLayers());
+            }
         }
 
         public MapView MapView { get; internal set; }
@@ -39,6 +51,12 @@ namespace BikeTouringGIS.ViewModels
         {
             get { return _totalLengthOfRoutes; }
             set { Set(ref _totalLengthOfRoutes, value); }
+        }
+
+        public ObservableCollection<BikeTouringGISLayer> BikeTouringGISLayers
+        {
+            get { return _bikeTouringGISLayers; }
+            set { Set(ref _bikeTouringGISLayers, value); }
         }
 
         private void SetupMap()

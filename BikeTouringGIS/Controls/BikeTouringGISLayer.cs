@@ -16,6 +16,7 @@ namespace BikeTouringGIS.Controls
     public class BikeTouringGISLayer : GraphicsLayer
     {
         private IEnumerable<IRoute> _routes;
+        private BikeTouringGISLayer _splitLayer;
         private Dictionary<GraphicType, object> _symbols;
         private bool _isInEditMode;
 
@@ -25,7 +26,29 @@ namespace BikeTouringGIS.Controls
             DisplayName = name;
             Type = LayerType.PointsOfInterest;
         }
-
+        public BikeTouringGISLayer SplitLayer
+        {
+            get { return _splitLayer; }
+            set
+            {
+                if(value != _splitLayer)
+                {
+                    _splitLayer = value;
+                    OnPropertyChanged("SplitLayer");
+                }
+            }
+        }
+        public BikeTouringGISLayer(string fileName, IEnumerable<IRoute> routes) : this(fileName)
+        {
+            _routes = routes;
+            foreach (var route in routes)
+            {
+                Graphics.Add(route.StartLocation);
+                Graphics.Add(route.EndLocation);
+                Graphics.Add(route.RouteGeometry);
+            }
+            Type = LayerType.GPXRoutes;
+        }
         public bool IsInEditMode
         {
             get { return _isInEditMode; }
@@ -39,25 +62,12 @@ namespace BikeTouringGIS.Controls
             }
         }
 
-
         private void SetVisibility(object sender, NotifyCollectionChangedEventArgs e)
         {
            ShowLegend = Graphics.Count > 0;
         }
 
         public LayerType Type { get;private set;}
-
-        public BikeTouringGISLayer(string fileName, IEnumerable<IRoute> routes) : this(fileName)
-        {
-            _routes = routes;
-            foreach(var route in routes)
-            {
-                Graphics.Add(route.StartLocation);
-                Graphics.Add(route.EndLocation);
-                Graphics.Add(route.RouteGeometry);
-            }
-            Type = LayerType.GPXRoutes;
-        }
 
         internal void FlipDirection()
         {
@@ -90,7 +100,6 @@ namespace BikeTouringGIS.Controls
                 }
             }
         }
-
         public Envelope Extent
         {
             get
@@ -104,7 +113,6 @@ namespace BikeTouringGIS.Controls
                 return initialExtent;
             }
         }
-
         public int TotalLength
         {
             get
@@ -118,6 +126,23 @@ namespace BikeTouringGIS.Controls
                 }
                 return length;
             }
+        }
+
+        public void SplitRoutes(int splitDistance)
+        {
+            var routeSplitter = new RouteSplitter();
+            var splitLayer = new BikeTouringGISLayer($"{splitDistance} km") { Type = LayerType.SplitRoutes };
+            foreach (var route in _routes)
+            {
+                routeSplitter.SplitRoute(splitDistance, route.Points);
+                var splitPoints = routeSplitter.SplitPoints;
+                splitPoints.SetSymbol();
+                var splitRoutes = routeSplitter.SplittedRoutes;
+                splitRoutes.SetSymbol();
+                splitLayer.Graphics.Add(splitPoints);
+                splitLayer.Graphics.Add(splitRoutes);
+            }
+            SplitLayer = splitLayer;
         }
     }
 }

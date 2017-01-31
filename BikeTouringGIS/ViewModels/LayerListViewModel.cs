@@ -16,10 +16,10 @@ namespace BikeTouringGIS.ViewModels
 {
     public class LayerListViewModel : BikeTouringGISBaseViewModel
     {
-        private LayerCollection _layers;
+        private ObservableCollection<BikeTouringGISLayer> _layers;
         private BikeTouringGISLayer _selectedLayer;
 
-        public LayerCollection Layers
+        public ObservableCollection<BikeTouringGISLayer> Layers
         {
             get { return _layers; }
             set { Set(ref _layers, value); }

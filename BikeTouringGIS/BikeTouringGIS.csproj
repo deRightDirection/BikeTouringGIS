@@ -167,6 +167,7 @@
     <Compile Include="Controls\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\LayerLoadedEventArgsToBikeTouringGISLayerConverter.cs" />
     <Compile Include="Converters\MouseButtonEventArgsToPointConverter.cs" />
     <Compile Include="Converters\InverseNullToBooleanConverter.cs" />
     <Compile Include="Converters\NullToBooleanConverter.cs" />

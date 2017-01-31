@@ -39,9 +39,9 @@ namespace BikeTouringGIS
             set { SetValue(MenuProperty, value); }
         }
 
-        public LayerCollection Layers
+        public ObservableCollection<BikeTouringGISLayer> Layers
         {
-            get { return (LayerCollection)GetValue(LayersProperty); }
+            get { return (ObservableCollection<BikeTouringGISLayer>)GetValue(LayersProperty); }
             set { SetValue(LayersProperty, value); }
         }
 
@@ -56,7 +56,7 @@ namespace BikeTouringGIS
             DependencyProperty.Register("SelectedLayer", typeof(BikeTouringGISLayer), typeof(LayerList), new PropertyMetadata(null, OnLayerSet));
 
         public static readonly DependencyProperty LayersProperty =
-            DependencyProperty.Register("Layers", typeof(LayerCollection), typeof(LayerList), new PropertyMetadata(null, OnLayersSet));
+            DependencyProperty.Register("Layers", typeof(ObservableCollection<BikeTouringGISLayer>), typeof(LayerList), new PropertyMetadata(null, OnLayersSet));
 
         public static readonly DependencyProperty MenuProperty =
             DependencyProperty.Register("Menu", typeof(MainMenu), typeof(LayerList), new PropertyMetadata(null, OnMenuSet));
@@ -76,7 +76,7 @@ namespace BikeTouringGIS
         private static void OnLayersSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var context = ((LayerList)d).DataContext;
-            ((LayerListViewModel)context).Layers = e.NewValue as LayerCollection;
+            ((LayerListViewModel)context).Layers = e.NewValue as ObservableCollection<BikeTouringGISLayer>;
         }
     }
 }

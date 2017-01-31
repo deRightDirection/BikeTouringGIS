@@ -53,7 +53,7 @@
                            Grid.Row="2"
                            Grid.Column="0"
                            Margin="5 0 1 5"
-                           Layers="{Binding Map.Layers,
+                           Layers="{Binding BikeTouringGISLayers,
                                             ElementName=biketouringgismap,
                                             Mode=TwoWay}"
                            Menu="{Binding ElementName=mainmenu}" />

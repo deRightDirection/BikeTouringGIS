@@ -1,10 +1,13 @@
-﻿using BikeTouringGIS.ViewModels;
+﻿using BikeTouringGIS.Controls;
+using BikeTouringGIS.Extensions;
+using BikeTouringGIS.ViewModels;
 using BikeTouringGISLibrary.Enumerations;
 using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Layers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +38,8 @@ namespace BikeTouringGIS
             SetBinding(MapProperty, bindingViewMode);
             bindingViewMode = new Binding("TotalLengthOfRoutes") { Mode = BindingMode.OneWay};
             SetBinding(TotalLengthOfRoutesProperty, bindingViewMode);
+            bindingViewMode = new Binding("BikeTouringGISLayers") { Mode = BindingMode.OneWay };
+            SetBinding(BikeTouringGISLayersProperty, bindingViewMode);
             _vm = ((BikeTouringGISMapViewModel)DataContext);
             _vm.MapView = MapViewControl;
             SetSymbology();
@@ -81,6 +86,16 @@ namespace BikeTouringGIS
             var context = ((BikeTouringGISMap)d).DataContext;
             ((BikeTouringGISMapViewModel)context).Menu = e.NewValue as MainMenu;
         }
+
+        public ObservableCollection<BikeTouringGISLayer> BikeTouringGISLayers
+        {
+            get { return (ObservableCollection<BikeTouringGISLayer>)GetValue(BikeTouringGISLayersProperty); }
+            set { SetValue(BikeTouringGISLayersProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for BikeTouringGISLayers.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BikeTouringGISLayersProperty =
+            DependencyProperty.Register("BikeTouringGISLayers", typeof(ObservableCollection<BikeTouringGISLayer>), typeof(BikeTouringGISMap), new PropertyMetadata(null));
 
         public int TotalLengthOfRoutes
         {
