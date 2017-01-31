@@ -41,8 +41,6 @@ namespace BikeTouringGIS
         {
             InitializeComponent();
             _routes = new List<Route>();
-            var versionApp = typeof(App).Assembly.GetName().Version;
-            //version.Text = string.Format("version {0}.{1}.{2}", versionApp.Major, versionApp.Minor,versionApp.Build);
         }
 
         private void ShowWayPoints(List<wptType> waypoints)
