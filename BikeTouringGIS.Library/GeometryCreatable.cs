@@ -16,6 +16,7 @@ namespace BikeTouringGISLibrary
         public Envelope Extent { get; protected set; }
         public List<wptType> Points { get; internal set; }
         internal abstract void CreateGeometry();
+
         protected BikeTouringGISGraphic CreateBikeTouringGISGraphic(string nameAttribute, GraphicType typeOfGraphic)
         {
             var g = new BikeTouringGISGraphic(Geometry, typeOfGraphic);

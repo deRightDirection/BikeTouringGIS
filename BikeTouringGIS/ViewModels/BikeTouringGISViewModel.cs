@@ -26,23 +26,30 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand<SplitLayerProperties> ChangeSplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> FlipDirectionCommand { get; private set; }
         public RelayCommand<SplitLayerProperties> SplitRouteCommand { get; private set; }
+        public RelayCommand<BikeTouringGISLayer> RemoveSplitRouteCommand { get; private set; }
 
         public BikeTouringGISViewModel()
         {
             OpenGPXFileCommand = new RelayCommand<BikeTouringGISMapViewModel>(OpenGPXFile);
             FlipDirectionCommand = new RelayCommand<BikeTouringGISLayer>(FlipDirection);
             SplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute);
-            ChangeSplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute, CanSplitRoute);
+            ChangeSplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute, CanReSplitRoute);
+            RemoveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(RemoveSplitRoute);
         }
 
-        private bool CanSplitRoute(SplitLayerProperties parameters)
+        private void RemoveSplitRoute(BikeTouringGISLayer obj)
         {
-            return parameters.Layer.IsSplitted && parameters.Distance > 0;
+            obj.RemoveSplitRoutes();
+        }
+
+        private bool CanReSplitRoute(SplitLayerProperties parameters)
+        {
+            return parameters.CanReSplit;
         }
 
         private void SplitRoute(SplitLayerProperties obj)
         {
-            if (obj.Distance < obj.Layer.TotalLength && obj.Distance > 0)
+            if (obj.CanSplit)
             {
                 obj.Layer.SplitRoutes(obj.Distance);
             }

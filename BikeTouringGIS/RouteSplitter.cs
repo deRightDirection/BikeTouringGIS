@@ -83,16 +83,26 @@ namespace BikeTouringGIS
             var result = new List<BikeTouringGISGraphic>();
             var sr = new SpatialReference(4326);
             var cumulativeDistance = 0;
+            var startPoint = _wayPoints[0];
             for(int i =0; i < _splitPoints.Count; i++)
             {
                 var point = _splitPoints[i];
                 var mapPoint = new MapPoint((double)point.lon, (double)point.lat, sr);
                 var graphic = new BikeTouringGISGraphic(mapPoint, GraphicType.SplitPoint);
-                cumulativeDistance += (int)_distances[i];
+                cumulativeDistance += GetDistance(startPoint, point);
+                startPoint = point;
                 graphic.Attributes["distance"] = cumulativeDistance;
                 result.Add(graphic);
             }
             return result;
+        }
+
+        private int GetDistance(wptType startPoint, wptType point)
+        {
+            var startIndex = _wayPoints.IndexOf(startPoint);
+            var lastIndex = _wayPoints.IndexOf(point);
+            var distance = _distances.Skip(startIndex).Take(lastIndex - startIndex).Sum() / 1000;
+            return (int)distance;
         }
 
         internal IEnumerable<BikeTouringGISGraphic> GetSplittedRoutes()

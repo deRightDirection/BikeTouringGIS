@@ -9,26 +9,21 @@ namespace BikeTouringGISLibrary.Model
 {
     public class GpxInformation
     {
-        public List<IRoute> AllRoutes
-        {
-            get
-            {
-                var routes = Routes;
-                routes.AddRange(Tracks.Where(t => t.IsConvertedToRoute));
-                return routes.ToList<IRoute>();
-            }
-        }
+        public IEnumerable<Route> AllRoutes { get; private set; }
         public List<Route> Routes { get; private set;}
         public List<Track> Tracks { get; private set; }
         public List<WayPoint> WayPoints { get; private set; }
 
         public void CreateGeometries()
         {
-            foreach(var route in AllRoutes.Cast<Route>())
+            WayPoints.ForEach(wp => wp.CreateGeometry());
+            var routes = Routes;
+            routes.AddRange(Tracks.Where(t => t.IsConvertedToRoute));
+            AllRoutes = routes.Cast<Route>();
+            foreach (var route in AllRoutes)
             {
                 route.CreateGeometry();
             }
-            WayPoints.ForEach(wp => wp.CreateGeometry());
         }
 
         public GpxInformation()

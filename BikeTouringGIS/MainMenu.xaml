@@ -174,7 +174,7 @@
                                 Kind="ContentCut" />
                         </Fluent:Button.LargeIcon>
                         <Fluent:Button.CommandParameter>
-                            <MultiBinding Converter="{StaticResource multiConverter}">
+                            <MultiBinding Converter="{StaticResource lengthAndLayerConverter}">
                                 <Binding ElementName="menu" Path="DataContext.SelectedLayer" />
                                 <Binding ElementName="splitLengthSlider" Path="Value" />
                             </MultiBinding>

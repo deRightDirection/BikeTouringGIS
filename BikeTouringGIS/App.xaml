@@ -17,7 +17,7 @@
                     <converters:BooleanToVisibilityConverter x:Key="inverseBooleanVisibilityConverter" IsReversed="True" />
                     <converters2:NotNullToVisibilityConverter x:Key="notNullVisibilityConverter" />
                     <converters2:InverseNullToBooleanConverter x:Key="notNullConverter" />
-                    <converters2:MultiValueConverter x:Key="multiConverter"/>
+                    <converters2:LengthAndLayerConverter x:Key="lengthAndLayerConverter"/>
                     <converters2:LengthChangedConverter x:Key="lengthConverter"/>
                     <converters2:LengthToMaximumSplitLengthConverter x:Key="lengthToMaximumSplitLengthConverter" />
                 </ResourceDictionary>

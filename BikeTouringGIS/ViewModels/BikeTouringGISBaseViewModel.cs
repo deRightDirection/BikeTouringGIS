@@ -14,15 +14,8 @@ namespace BikeTouringGIS.ViewModels
     {
         private MainMenu _menu;
         protected Map _map;
-        public RelayCommand<string> ChangeVisibilityTabGroupCommand { get; private set; }
         public BikeTouringGISBaseViewModel()
         {
-            ChangeVisibilityTabGroupCommand = new RelayCommand<string>(ChangeVisibilityTabGroup);
-        }
-
-        private void ChangeVisibilityTabGroup(string tabGroupName)
-        {
-            MessengerInstance.Send(new VisibilityTabChangedMessage() { TabName = tabGroupName });
         }
 
         public MainMenu Menu

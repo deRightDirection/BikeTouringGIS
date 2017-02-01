@@ -11,7 +11,7 @@ using System.Windows.Data;
 
 namespace BikeTouringGIS.Converters
 {
-    public class MultiValueConverter : IMultiValueConverter
+    public class LengthAndLayerConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

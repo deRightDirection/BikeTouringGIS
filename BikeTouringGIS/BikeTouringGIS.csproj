@@ -177,7 +177,7 @@
     <Compile Include="Converters\LengthToMaximumSplitLengthConverter.cs" />
     <Compile Include="Converters\MouseButtonEventArgsToPointConverter.cs" />
     <Compile Include="Converters\InverseNullToBooleanConverter.cs" />
-    <Compile Include="Converters\MultiValueConverter.cs" />
+    <Compile Include="Converters\LengthAndLayerConverter.cs" />
     <Compile Include="Converters\NullToBooleanConverter.cs" />
     <Compile Include="Converters\NotNullToVisibilityConverter.cs" />
     <Compile Include="Converters\ProjectIsNotNullConverter.cs" />
