@@ -5,9 +5,14 @@
     xmlns:Fluent="urn:fluent-ribbon"
     xmlns:System="clr-namespace:System;assembly=mscorlib"
     xmlns:converters="clr-namespace:BikeTouringGIS.Converters"
+    xmlns:converters2="clr-namespace:Kent.Boogaart.Converters;assembly=Kent.Boogaart.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    x:Name="menu"
     mc:Ignorable="d">
     <UserControl.Resources>
         <converters:StringToIntConverter x:Key="stringToIntConverter" />
@@ -47,7 +52,6 @@
                                 HorizontalAlignment="Stretch"
                                 BorderBrush="#64647F"
                                 BorderThickness="0,0,0,0">
-
                                 <TextBlock
                                     Padding="12,4,4,4"
                                     Background="#F6F7F8"
@@ -57,21 +61,17 @@
                                     Text="Recent files"
                                     TextAlignment="Left" />
                             </Border>
-
                             <StackPanel Height="2" HorizontalAlignment="Stretch">
-
                                 <Border
                                     Height="1"
                                     HorizontalAlignment="Stretch"
                                     BorderBrush="#DCDDDE"
                                     BorderThickness="1" />
-
                                 <Border
                                     Height="1"
                                     HorizontalAlignment="Stretch"
                                     BorderBrush="#FEFEFF"
                                     BorderThickness="1" />
-
                             </StackPanel>
                         </StackPanel>
                     </Fluent:ApplicationMenu.RightPaneContent>
@@ -88,10 +88,10 @@
             <Fluent:Ribbon.ContextualGroups>
                 <Fluent:RibbonContextualTabGroup
                     x:Name="layertab"
-                    Background="DarkBlue"
-                    BorderBrush="LightBlue"
+                    BorderBrush="White"
+                    Foreground="LimeGreen"
                     Header="Layer"
-                    Visibility="{Binding SelectedLayer, Converter={StaticResource notNullVisibilityConverter}}" />
+                    Visibility="Visible" />
             </Fluent:Ribbon.ContextualGroups>
             <Fluent:RibbonTabItem
                 MinWidth="150"
@@ -116,15 +116,29 @@
                     </Fluent:Button>
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem MinWidth="150" Header="Settings">
+                <Fluent:RibbonGroupBox>
+                    <Fluent:TextBox
+                        Header="default split length (km)"
+                        InputWidth="40"
+                        MaxLength="3"
+                        Text="{Binding Base.SplitLength, Mode=TwoWay, Converter={StaticResource stringToIntConverter}, UpdateSourceTrigger=PropertyChanged}" />
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
             <Fluent:RibbonTabItem
-                Group="{Binding ElementName=layertab}"
+                Group="{Binding ElementName=layertab, Mode=OneWay}"
                 Header="Properties"
-                IsSelected="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}">
+                IsEnabled="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}"
+                IsSelected="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}"
+                Visibility="Visible">
                 <Fluent:RibbonGroupBox MinWidth="150">
                     <Fluent:TwoLineLabel Text="{Binding SelectedLayer.DisplayName}" />
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
-            <Fluent:RibbonTabItem Group="{Binding ElementName=layertab}" Header="Editing">
+            <Fluent:RibbonTabItem
+                Group="{Binding ElementName=layertab, Mode=OneWay}"
+                Header="Editing"
+                IsEnabled="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}">
                 <Fluent:RibbonGroupBox>
                     <Fluent:Button
                         MinWidth="100"
@@ -139,11 +153,19 @@
                                 Kind="Rotate3d" />
                         </Fluent:Button.LargeIcon>
                     </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem
+                MinWidth="150"
+                Group="{Binding ElementName=layertab, Mode=OneWay}"
+                Header="Splitting"
+                IsEnabled="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}">
+                <Fluent:RibbonGroupBox>
                     <Fluent:Button
                         MinWidth="100"
                         Command="{Binding Base.SplitRouteCommand}"
-                        CommandParameter="{Binding DataContext.SelectedLayer}"
-                        Header="split route">
+                        Header="split route"
+                        IsEnabled="{Binding SelectedLayer.IsSplitted, Converter={StaticResource inverseBooleanConverter}}">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -151,16 +173,64 @@
                                 Foreground="DarkGreen"
                                 Kind="ContentCut" />
                         </Fluent:Button.LargeIcon>
+                        <Fluent:Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource multiConverter}">
+                                <Binding ElementName="menu" Path="DataContext.SelectedLayer" />
+                                <Binding ElementName="splitLengthSlider" Path="Value" />
+                            </MultiBinding>
+                        </Fluent:Button.CommandParameter>
                     </Fluent:Button>
-                </Fluent:RibbonGroupBox>
-            </Fluent:RibbonTabItem>
-            <Fluent:RibbonTabItem MinWidth="150" Header="Settings">
-                <Fluent:RibbonGroupBox>
-                    <Fluent:TextBox
-                        Header="split length (km)"
-                        InputWidth="40"
-                        MaxLength="3"
-                        Text="{Binding Base.SplitLength, Mode=TwoWay, Converter={StaticResource stringToIntConverter}, UpdateSourceTrigger=PropertyChanged}" />
+                    <StackPanel Margin="0,5,0,0">
+                        <Slider
+                            x:Name="splitLengthSlider"
+                            Width="200"
+                            Height="50"
+                            IsSnapToTickEnabled="True"
+                            Maximum="{Binding SelectedLayer.TotalLength, Converter={StaticResource lengthToMaximumSplitLengthConverter}}"
+                            Minimum="0"
+                            TickFrequency="1"
+                            Ticks="10, 20, 30, 40, 50, 60, 70, 80, 90, 100,110,120,130,140,150"
+                            Value="{Binding Base.SplitLength}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="ValueChanged">
+                                    <mvvm:EventToCommand
+                                        Command="{Binding Base.ChangeSplitRouteCommand}"
+                                        EventArgsConverter="{StaticResource lengthConverter}"
+                                        EventArgsConverterParameter="{Binding DataContext.SelectedLayer, ElementName=menu}"
+                                        PassEventArgsToCommand="True" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Slider>
+                        <TextBlock HorizontalAlignment="Center" Text="{Binding Value, ElementName=splitLengthSlider, StringFormat={}{0} km}" />
+                    </StackPanel>
+                    <Fluent:Button
+                        MinWidth="100"
+                        Command="{Binding Base.RemoveSplitRouteCommand}"
+                        CommandParameter="{Binding DataContext.SelectedLayer}"
+                        Header="remove split route"
+                        IsEnabled="{Binding SelectedLayer.IsSplitted}">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:PackIconMaterial
+                                Width="32"
+                                Height="32"
+                                Foreground="DarkGreen"
+                                Kind="CloseCircle" />
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button
+                        MinWidth="100"
+                        Command="{Binding Base.SaveSplitRouteCommand}"
+                        CommandParameter="{Binding DataContext.SelectedLayer}"
+                        Header="save split route"
+                        IsEnabled="{Binding SelectedLayer.IsSplitted}">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:PackIconMaterial
+                                Width="32"
+                                Height="32"
+                                Foreground="DarkGreen"
+                                Kind="ContentSave" />
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
         </Fluent:Ribbon>

@@ -87,7 +87,7 @@ namespace BikeTouringGIS.ViewModels
 
         internal void AddRoutes(BikeTouringGISLayer layer)
         {
-            layer.SetSymbols(_mapSymbols);
+            layer.SetSymbolsAndSplitLayerDefaultProperties(_mapSymbols);
             _map.Layers.Add(layer);
             _map.Layers.Add(layer.SplitLayer);
             SetExtent();

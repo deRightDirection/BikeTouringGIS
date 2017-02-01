@@ -1,4 +1,5 @@
 ﻿using BikeTouringGIS.Controls;
+using BikeTouringGISLibrary.Enumerations;
 using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Layers;
 using Fluent;
@@ -22,7 +23,14 @@ namespace BikeTouringGIS.ViewModels
         public ObservableCollection<BikeTouringGISLayer> Layers
         {
             get { return _layers; }
-            set { Set(ref _layers, value); }
+            set
+            {
+                Set(ref _layers, value);
+                if(_layers != null && SelectedLayer == null)
+                {
+                    SelectedLayer = _layers.Where(x => x.Type == LayerType.GPXRoutes).FirstOrDefault();
+                }
+            }
         }
 
         public BikeTouringGISLayer SelectedLayer

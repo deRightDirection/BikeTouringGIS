@@ -171,9 +171,13 @@
     <Compile Include="Controls\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\LayerLoadedEventArgsToBikeTouringGISLayerConverter.cs" />
+    <Compile Include="Converters\LengthChangedConverter.cs" />
+    <Compile Include="Converters\LengthToMaximumSplitLengthConverter.cs" />
     <Compile Include="Converters\MouseButtonEventArgsToPointConverter.cs" />
     <Compile Include="Converters\InverseNullToBooleanConverter.cs" />
+    <Compile Include="Converters\MultiValueConverter.cs" />
     <Compile Include="Converters\NullToBooleanConverter.cs" />
     <Compile Include="Converters\NotNullToVisibilityConverter.cs" />
     <Compile Include="Converters\ProjectIsNotNullConverter.cs" />
@@ -197,6 +201,7 @@
     </Compile>
     <Compile Include="Messenges\GPXDataLoadedMessage.cs" />
     <Compile Include="Messenges\VisibilityTabChangedMessage.cs" />
+    <Compile Include="Models\SplitLayerProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteSplitter.cs" />
     <Compile Include="StatusBar.xaml.cs">

@@ -50,7 +50,7 @@ namespace BikeTouringGIS
             foreach(DictionaryEntry item in Resources)
             {
                 GraphicType enumValue;
-                EnumHelper.TryParseTextToEnumValue<GraphicType>(item.Key.ToString(), out enumValue);
+                EnumHelper.TryParseTextToEnumValue(item.Key.ToString(), out enumValue);
                 if(enumValue != GraphicType.Unknown)
                 {
                     _vm.AddSymbol(enumValue, item.Value);

@@ -1,6 +1,7 @@
 ﻿using BicycleTripsPreparationApp;
 using BikeTouringGIS.Controls;
 using BikeTouringGIS.Messenges;
+using BikeTouringGIS.Models;
 using BikeTouringGISLibrary;
 using Esri.ArcGISRuntime.Layers;
 using GalaSoft.MvvmLight.Command;
@@ -22,19 +23,29 @@ namespace BikeTouringGIS.ViewModels
         private int _splitLength = 100;
 
         public RelayCommand<BikeTouringGISMapViewModel> OpenGPXFileCommand { get; private set; }
+        public RelayCommand<SplitLayerProperties> ChangeSplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> FlipDirectionCommand { get; private set; }
-        public RelayCommand<BikeTouringGISLayer> SplitRouteCommand { get; private set; }
+        public RelayCommand<SplitLayerProperties> SplitRouteCommand { get; private set; }
 
         public BikeTouringGISViewModel()
         {
             OpenGPXFileCommand = new RelayCommand<BikeTouringGISMapViewModel>(OpenGPXFile);
             FlipDirectionCommand = new RelayCommand<BikeTouringGISLayer>(FlipDirection);
-            SplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(SplitRoute);
+            SplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute);
+            ChangeSplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute, CanSplitRoute);
         }
 
-        private void SplitRoute(BikeTouringGISLayer obj)
+        private bool CanSplitRoute(SplitLayerProperties parameters)
         {
-            obj.SplitRoutes(SplitLength);
+            return parameters.Layer.IsSplitted && parameters.Distance > 0;
+        }
+
+        private void SplitRoute(SplitLayerProperties obj)
+        {
+            if (obj.Distance < obj.Layer.TotalLength && obj.Distance > 0)
+            {
+                obj.Layer.SplitRoutes(obj.Distance);
+            }
         }
 
         public int SplitLength

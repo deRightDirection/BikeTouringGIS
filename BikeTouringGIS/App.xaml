@@ -12,15 +12,21 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <vm:ViewModelLocator x:Key="Locator" />
+                    <converters2:InverseBooleanConverter x:Key="inverseBooleanConverter" />
                     <converters:BooleanToVisibilityConverter x:Key="booleanVisibilityConverter" />
+                    <converters:BooleanToVisibilityConverter x:Key="inverseBooleanVisibilityConverter" IsReversed="True" />
                     <converters2:NotNullToVisibilityConverter x:Key="notNullVisibilityConverter" />
                     <converters2:InverseNullToBooleanConverter x:Key="notNullConverter" />
+                    <converters2:MultiValueConverter x:Key="multiConverter"/>
+                    <converters2:LengthChangedConverter x:Key="lengthConverter"/>
+                    <converters2:LengthToMaximumSplitLengthConverter x:Key="lengthToMaximumSplitLengthConverter" />
                 </ResourceDictionary>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Emerald.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Generic.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2013/Generic.xaml" />
                 <ResourceDictionary Source="Styles\Button.xaml" />
             </ResourceDictionary.MergedDictionaries>

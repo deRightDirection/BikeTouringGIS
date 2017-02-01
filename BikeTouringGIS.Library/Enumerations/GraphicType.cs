@@ -13,6 +13,7 @@ namespace BikeTouringGISLibrary.Enumerations
         GPXRouteEndLocation,
         GPXRoute,
         SplitPoint,
-        SplitRoute
+        SplitRoute,
+        SplitPointLabel
     }
 }

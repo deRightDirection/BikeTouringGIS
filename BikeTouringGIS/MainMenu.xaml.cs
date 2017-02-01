@@ -62,8 +62,10 @@ namespace BikeTouringGIS
 
         private void ChangeVisibilityTab(VisibilityTabChangedMessage message)
         {
+            /*
             var group = ribbonMenu.ContextualGroups.FirstOrDefault(x => x.Name.Equals(message.TabName));
-            group.Visibility = group.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+            group.Visibility = group?.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
+            */
         }
     }
 }

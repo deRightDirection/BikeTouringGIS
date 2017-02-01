@@ -242,16 +242,6 @@
                 x:Name="grid"
                 Grid.Column="1"
                 Margin="5">
-                <Grid.Resources>
-                    <esri:SymbolFont
-                        x:Key="LabelFont"
-                        FontSize="15"
-                        FontWeight="Bold" />
-                    <esri:TextSymbol
-                        x:Key="LabelSymbol"
-                        Font="{StaticResource LabelFont}"
-                        Color="Black" />
-                </Grid.Resources>
                 <esri:MapView
                     x:Name="MyMapView"
                     BorderBrush="LimeGreen"
@@ -266,28 +256,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     <esri:Map x:Name="Map">
-                        <esri:GraphicsLayer ID="split">
-                            <esri:GraphicsLayer.Labeling>
-                                <esri:LabelProperties IsEnabled="True">
-                                    <esri:AttributeLabelClass Symbol="{StaticResource LabelSymbol}" TextExpression="[index]" />
-                                </esri:LabelProperties>
-                            </esri:GraphicsLayer.Labeling>
-                        </esri:GraphicsLayer>
-                        <esri:GraphicsLayer ID="route" Opacity="{Binding Transparency}">
-                            <esri:GraphicsLayer.Labeling>
-                                <esri:LabelProperties IsEnabled="True">
-                                    <esri:AttributeLabelClass Symbol="{StaticResource LabelSymbol}" TextExpression="[name]" />
-                                    <esri:AttributeLabelClass Symbol="{StaticResource LabelSymbol}" TextExpression="[routename]" />
-                                </esri:LabelProperties>
-                            </esri:GraphicsLayer.Labeling>
-                        </esri:GraphicsLayer>
-                        <esri:GraphicsLayer ID="POIs">
-                            <esri:GraphicsLayer.Labeling>
-                                <esri:LabelProperties IsEnabled="True">
-                                    <esri:AttributeLabelClass Symbol="{StaticResource LabelSymbol}" TextExpression="[title]" />
-                                </esri:LabelProperties>
-                            </esri:GraphicsLayer.Labeling>
-                        </esri:GraphicsLayer>
+                        <esri:GraphicsLayer ID="POIs" />
                     </esri:Map>
                 </esri:MapView>
             </Grid>

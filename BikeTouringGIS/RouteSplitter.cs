@@ -16,7 +16,7 @@ namespace BikeTouringGIS
     {
         private List<wptType> _wayPoints;
         private List<double> _distances;
-        private List<List<wptType>> _routes = new List<List<wptType>>();
+        private List<List<wptType>> _splitRoutes = new List<List<wptType>>();
         private List<wptType> _splitPoints = new List<wptType>();
         private List<int> _splitIndices = new List<int>();
         private int _splitDistance;
@@ -33,7 +33,7 @@ namespace BikeTouringGIS
             allIndices.Add(_wayPoints.Count - 1);
             for (int i = 0; i < allIndices.Count - 1;i++)
             {
-                _routes.Add(_wayPoints.GetRange(allIndices[i], (allIndices[i+1] - allIndices[i]) + 1));
+                _splitRoutes.Add(_wayPoints.GetRange(allIndices[i], (allIndices[i+1] - allIndices[i]) + 1));
             }
         }
 
@@ -97,7 +97,25 @@ namespace BikeTouringGIS
 
         internal IEnumerable<BikeTouringGISGraphic> GetSplittedRoutes()
         {
-            return new List<BikeTouringGISGraphic>();
+            var result = new List<BikeTouringGISGraphic>();
+            var sr = new SpatialReference(4326);
+            foreach(var splitRoute in _splitRoutes)
+            {
+                var geometry = CreateGeometryFromWayPoints(splitRoute);
+                var graphic = new BikeTouringGISGraphic(geometry, GraphicType.SplitRoute);
+                result.Add(graphic);
+            }
+            return result;
+        }
+
+        private Polyline CreateGeometryFromWayPoints(List<wptType> wayPoints)
+        {
+            var builder = new PolylineBuilder(new SpatialReference(4326));
+            foreach (var wayPoint in wayPoints)
+            {
+                builder.AddPoint(new MapPoint((double)wayPoint.lon, (double)wayPoint.lat));
+            }
+            return builder.ToGeometry();
         }
     }
 }

@@ -18,6 +18,14 @@
         <vm:BikeTouringGISMapViewModel />
     </UserControl.DataContext>
     <UserControl.Resources>
+        <esri:SymbolFont
+            x:Key="LabelFont"
+            FontSize="15"
+            FontWeight="Bold" />
+        <esri:TextSymbol
+            x:Key="SplitPointLabel"
+            Font="{StaticResource LabelFont}"
+            Color="Black" />
         <esri:SimpleMarkerSymbol
             x:Key="GPXRouteStartLocation"
             Size="12"
@@ -36,18 +44,24 @@
                 <esri:SimpleLineSymbol Width="2" Color="Black" />
             </esri:SimpleMarkerSymbol.Outline>
         </esri:SimpleMarkerSymbol>
+        <esri:SimpleMarkerSymbol
+            x:Key="SplitPoint"
+            Size="10"
+            Style="Circle"
+            Color="LimeGreen">
+            <esri:SimpleMarkerSymbol.Outline>
+                <esri:SimpleLineSymbol Width="1" Color="Black" />
+            </esri:SimpleMarkerSymbol.Outline>
+        </esri:SimpleMarkerSymbol>
         <esri:SimpleLineSymbol
             x:Key="GPXRoute"
             Width="3"
             Color="LimeGreen" />
-        <esri:SymbolFont
-            x:Key="LabelFont"
-            FontSize="15"
-            FontWeight="Bold" />
-        <esri:TextSymbol
-            x:Key="LabelSymbol"
-            Font="{StaticResource LabelFont}"
-            Color="Black" />
+        <esri:SimpleLineSymbol
+            x:Key="SplitRoute"
+            Width="3"
+            Style="Dot"
+            Color="LimeGreen" />
         <converters:MouseButtonEventArgsToPointConverter x:Key="MouseButtonEventArgsToPointConverter" />
         <converters:LayerLoadedEventArgsToBikeTouringGISLayerConverter x:Key="LayerLoadedArgsConverter" />
         <esri:SimpleMarkerSymbol
@@ -96,28 +110,6 @@
                 <esri:OpenStreetMapLayer ID="opencyclemap" TemplateUri="http://{subDomain}.tile.opencyclemap.org/cycle/{level}/{col}/{row}.png" />
                 <esri:OpenStreetMapLayer ID="openstreetmap" />
                 <esri:WmsLayer ID="fietsknooppunten" ServiceUri="https://geodata.nationaalgeoregister.nl/fietsknooppuntennetwerk/wms" />
-                <esri:GraphicsLayer ID="split">
-                    <esri:GraphicsLayer.Labeling>
-                        <esri:LabelProperties IsEnabled="True">
-                            <esri:AttributeLabelClass Symbol="{StaticResource LabelSymbol}" TextExpression="[index]" />
-                        </esri:LabelProperties>
-                    </esri:GraphicsLayer.Labeling>
-                </esri:GraphicsLayer>
-                <esri:GraphicsLayer ID="route" Opacity="{Binding Transparency}">
-                    <esri:GraphicsLayer.Labeling>
-                        <esri:LabelProperties IsEnabled="True">
-                            <esri:AttributeLabelClass Symbol="{StaticResource LabelSymbol}" TextExpression="[name]" />
-                            <esri:AttributeLabelClass Symbol="{StaticResource LabelSymbol}" TextExpression="[routename]" />
-                        </esri:LabelProperties>
-                    </esri:GraphicsLayer.Labeling>
-                </esri:GraphicsLayer>
-                <esri:GraphicsLayer ID="POIs">
-                    <esri:GraphicsLayer.Labeling>
-                        <esri:LabelProperties IsEnabled="True">
-                            <esri:AttributeLabelClass Symbol="{StaticResource LabelSymbol}" TextExpression="[title]" />
-                        </esri:LabelProperties>
-                    </esri:GraphicsLayer.Labeling>
-                </esri:GraphicsLayer>
             </esri:Map>
         </esri:MapView>
         <Border
