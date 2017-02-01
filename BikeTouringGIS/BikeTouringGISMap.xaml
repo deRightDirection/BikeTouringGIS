@@ -56,12 +56,12 @@
         <esri:SimpleLineSymbol
             x:Key="GPXRoute"
             Width="3"
-            Color="LimeGreen" />
+            Color="Black" />
         <esri:SimpleLineSymbol
             x:Key="SplitRoute"
             Width="3"
             Style="Dot"
-            Color="LimeGreen" />
+            Color="Black" />
         <converters:MouseButtonEventArgsToPointConverter x:Key="MouseButtonEventArgsToPointConverter" />
         <converters:LayerLoadedEventArgsToBikeTouringGISLayerConverter x:Key="LayerLoadedArgsConverter" />
         <esri:SimpleMarkerSymbol

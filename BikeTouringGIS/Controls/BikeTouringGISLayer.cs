@@ -72,6 +72,7 @@ namespace BikeTouringGIS.Controls
         internal void RemoveSplitRoutes()
         {
             IsSplitted = false;
+            Opacity = SplitLayer.Opacity;
             SplitLayer.Graphics.Clear();
             IsVisible = true;
         }
@@ -143,7 +144,7 @@ namespace BikeTouringGIS.Controls
         {
             _symbols = symbols;
             SetSymbols();
-            SplitLayer = new BikeTouringGISLayer() { Type = LayerType.SplitRoutes, IsVisible = false, ShowLegend = false };
+            SplitLayer = new BikeTouringGISLayer() { Type = LayerType.SplitRoutes, IsVisible = false, ShowLegend = false};
             SplitLayer.Labeling.IsEnabled = true;
             SplitLayer.Labeling.LabelClasses.Add(new AttributeLabelClass() { Symbol = (TextSymbol)_symbols[GraphicType.SplitPointLabel], TextExpression = "[distance]" });
         }
@@ -182,6 +183,7 @@ namespace BikeTouringGIS.Controls
             var routeSplitter = new RouteSplitter(_splitDistance);
             SplitLayer.DisplayName = $"{splitDistance} km";
             SplitLayer.Graphics.Clear();
+            SplitLayer.Opacity = Opacity;
             var splittedRoutesCount = 0;
             foreach (var route in _routes)
             {
