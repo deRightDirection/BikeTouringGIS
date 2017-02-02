@@ -1,5 +1,4 @@
-﻿using BikeTouringGIS.Messenges;
-using Esri.ArcGISRuntime.Controls;
+﻿using Esri.ArcGISRuntime.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;

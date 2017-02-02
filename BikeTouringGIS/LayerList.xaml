@@ -9,13 +9,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
              xmlns:vm="clr-namespace:BikeTouringGIS.ViewModels"
+             x:Name="layerlist"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:LayerListViewModel />
     </UserControl.DataContext>
-    <ListView HorizontalAlignment="Stretch"
+    <ListView x:Name="layerlistview"
+              HorizontalAlignment="Stretch"
               VerticalAlignment="Stretch"
               BorderThickness="0"
               ItemsSource="{Binding Layers}"
@@ -27,7 +29,6 @@
                 <Setter Property="Margin" Value="0" />
                 <Setter Property="Template">
                     <Setter.Value>
-                        <!--  Trun off default selection  -->
                         <ControlTemplate TargetType="{x:Type ListViewItem}">
                             <Border x:Name="Bd"
                                     Background="{TemplateBinding Background}"
@@ -92,6 +93,14 @@
                                                          Converter={StaticResource booleanVisibilityConverter}}"
                                     Value="{Binding SplitLayer.Opacity,
                                                     Mode=TwoWay}" />
+                            <Button Command="{Binding Map.RemoveLayerCommand, ElementName=layerlist}" CommandParameter="{Binding SelectedItem, ElementName=layerlistview}">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial Width="32"
+                                                                Height="32"
+                                                                Foreground="DarkGreen"
+                                                                Kind="DeleteCircle" />
+                                </Button.Content>
+                            </Button>
                         </StackPanel>
                         <!--                                <Button Grid.Column="1" Content="Remove" Padding="12,4" VerticalAlignment="Center" Click="RemoveLayerButton_Click" />-->
                     </Grid>

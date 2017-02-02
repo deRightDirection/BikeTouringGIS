@@ -51,7 +51,15 @@ namespace BikeTouringGIS
             set { SetValue(SelectedLayerProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for SelectedLayer.  This enables animation, styling, binding, etc...
+        public BikeTouringGISMapViewModel Map
+        {
+            get { return (BikeTouringGISMapViewModel)GetValue(MapProperty); }
+            set { SetValue(MapProperty, value); }
+        }
+
+        public static readonly DependencyProperty MapProperty =
+            DependencyProperty.Register("Map", typeof(BikeTouringGISMapViewModel), typeof(LayerList), new PropertyMetadata(null));
+
         public static readonly DependencyProperty SelectedLayerProperty =
             DependencyProperty.Register("SelectedLayer", typeof(BikeTouringGISLayer), typeof(LayerList), new PropertyMetadata(null, OnLayerSet));
 

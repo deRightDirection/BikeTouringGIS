@@ -35,6 +35,12 @@ namespace BikeTouringGIS.ViewModels
             SplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute);
             ChangeSplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute, CanReSplitRoute);
             RemoveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(RemoveSplitRoute);
+            MessengerInstance.Register<LayerRemovedMessage>(this,LayerRemoved);
+        }
+
+        private void LayerRemoved(LayerRemovedMessage obj)
+        {
+            _loadedFiles.Remove(obj.Layer.FileName);
         }
 
         private void RemoveSplitRoute(BikeTouringGISLayer obj)

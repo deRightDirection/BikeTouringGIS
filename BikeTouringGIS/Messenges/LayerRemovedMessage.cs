@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BikeTouringGIS.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace BikeTouringGIS.Messenges
 {
-    class VisibilityTabChangedMessage
+    class LayerRemovedMessage
     {
-        public string TabName { get; internal set; }
+        public BikeTouringGISLayer Layer { get; set; }
     }
 }

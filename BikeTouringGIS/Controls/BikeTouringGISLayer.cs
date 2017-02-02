@@ -28,6 +28,7 @@ namespace BikeTouringGIS.Controls
         }
         public BikeTouringGISLayer(string name) : this()
         {
+            FileName = name;
             DisplayName = name;
             Type = LayerType.PointsOfInterest;
         }
@@ -177,6 +178,9 @@ namespace BikeTouringGIS.Controls
                 return initialExtent;
             }
         }
+
+        public string FileName { get; private set; }
+
         public void SplitRoutes(int splitDistance)
         {
             _splitDistance = splitDistance;

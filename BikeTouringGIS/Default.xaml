@@ -56,6 +56,8 @@
                            Layers="{Binding BikeTouringGISLayers,
                                             ElementName=biketouringgismap,
                                             Mode=TwoWay}"
+                           Map="{Binding DataContext,
+                                         ElementName=biketouringgismap}"
                            Menu="{Binding ElementName=mainmenu}" />
         <project:BikeTouringGISMap x:Name="biketouringgismap"
                                    Grid.Row="2"

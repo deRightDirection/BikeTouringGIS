@@ -71,7 +71,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="theRightDirection.Library.UnitTesting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\BicycleTripsPreparationApp\packages\theRightDirection.Library.UnitTesting.1.0.3\lib\net451\theRightDirection.Library.UnitTesting.dll</HintPath>
+      <HintPath>..\packages\theRightDirection.Library.UnitTesting.1.0.3\lib\net451\theRightDirection.Library.UnitTesting.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

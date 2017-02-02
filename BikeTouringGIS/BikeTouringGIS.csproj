@@ -199,8 +199,7 @@
     <Compile Include="BikeTouringGISMap.xaml.cs">
       <DependentUpon>BikeTouringGISMap.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Messenges\GPXDataLoadedMessage.cs" />
-    <Compile Include="Messenges\VisibilityTabChangedMessage.cs" />
+    <Compile Include="Messenges\LayerRemovedMessage.cs" />
     <Compile Include="Models\SplitLayerProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteSplitter.cs" />

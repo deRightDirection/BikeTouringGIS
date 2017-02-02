@@ -1,5 +1,4 @@
 ﻿using BikeTouringGIS.Controls;
-using BikeTouringGIS.Messenges;
 using BikeTouringGIS.ViewModels;
 using Fluent;
 using GalaSoft.MvvmLight.Messaging;
@@ -29,7 +28,6 @@ namespace BikeTouringGIS
         {
             InitializeComponent();
             DataContext = this;
-            Messenger.Default.Register<VisibilityTabChangedMessage>(this,ChangeVisibilityTab);
         }
 
         public BikeTouringGISViewModel Base
@@ -53,19 +51,11 @@ namespace BikeTouringGIS
         public static readonly DependencyProperty SelectedLayerProperty =
             DependencyProperty.Register("SelectedLayer", typeof(BikeTouringGISLayer), typeof(MainMenu), new PropertyMetadata(null));
 
-
         public static readonly DependencyProperty MapProperty =
             DependencyProperty.Register("Map", typeof(BikeTouringGISMapViewModel), typeof(MainMenu), new PropertyMetadata(null));
 
         public static readonly DependencyProperty BaseProperty =
         DependencyProperty.Register("Base", typeof(BikeTouringGISViewModel), typeof(MainMenu), new PropertyMetadata(null));
 
-        private void ChangeVisibilityTab(VisibilityTabChangedMessage message)
-        {
-            /*
-            var group = ribbonMenu.ContextualGroups.FirstOrDefault(x => x.Name.Equals(message.TabName));
-            group.Visibility = group?.Visibility == Visibility.Collapsed ? Visibility.Visible : Visibility.Collapsed;
-            */
-        }
     }
 }
