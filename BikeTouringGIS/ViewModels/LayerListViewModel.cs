@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,12 +26,27 @@ namespace BikeTouringGIS.ViewModels
             get { return _layers; }
             set
             {
+
                 Set(ref _layers, value);
-                if(_layers != null && SelectedLayer == null)
+                if(_layers != null)
                 {
-                    SelectedLayer = _layers.Where(x => x.Type == LayerType.GPXRoutes).FirstOrDefault();
+                    _layers.CollectionChanged += _layers_CollectionChanged;
                 }
+                SetSelection();
             }
+        }
+
+        private void SetSelection()
+        {
+            if (_layers != null && SelectedLayer == null)
+            {
+                SelectedLayer = _layers.Where(x => x.Type == LayerType.GPXRoutes).FirstOrDefault();
+            }
+        }
+
+        private void _layers_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            SetSelection();
         }
 
         public BikeTouringGISLayer SelectedLayer

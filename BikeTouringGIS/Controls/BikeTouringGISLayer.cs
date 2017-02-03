@@ -19,7 +19,7 @@ namespace BikeTouringGIS.Controls
         private BikeTouringGISLayer _splitLayer;
         private int _splitDistance;
         private Dictionary<GraphicType, object> _symbols;
-        private bool _isInEditMode, _isSplitted;
+        private bool _isInEditMode, _isSplitted, _isSelected;
         private int _totalLength;
 
         private BikeTouringGISLayer()
@@ -43,6 +43,18 @@ namespace BikeTouringGIS.Controls
             }
             SetLength();
             Type = LayerType.GPXRoutes;
+        }
+        public bool IsSelected
+        {
+            get { return _isSelected; }
+            set
+            {
+                if (value != _isSelected)
+                {
+                    _isSelected = value;
+                    OnPropertyChanged("IsSelected");
+                }
+            }
         }
 
         public bool IsSplitted

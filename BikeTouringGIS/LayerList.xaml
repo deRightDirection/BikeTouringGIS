@@ -25,6 +25,7 @@
                                      Mode=TwoWay}">
         <ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">
+                <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}" />
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 <Setter Property="Margin" Value="0" />
                 <Setter Property="Template">
@@ -93,7 +94,7 @@
                                                          Converter={StaticResource booleanVisibilityConverter}}"
                                     Value="{Binding SplitLayer.Opacity,
                                                     Mode=TwoWay}" />
-                            <Button Command="{Binding Map.RemoveLayerCommand, ElementName=layerlist}" CommandParameter="{Binding SelectedItem, ElementName=layerlistview}">
+                            <Button Command="{Binding Map.RemoveLayerCommand, ElementName=layerlist}" CommandParameter="{Binding}">
                                 <Button.Content>
                                     <iconPacks:PackIconMaterial Width="32"
                                                                 Height="32"
