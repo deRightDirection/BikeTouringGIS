@@ -16,6 +16,7 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <converters:StringToIntConverter x:Key="stringToIntConverter" />
+        <converters:NotNullAndPrefixConverter x:Key="notNullAndPrefixConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -41,7 +42,9 @@
             IsAutomaticCollapseEnabled="False"
             IsQuickAccessToolBarVisible="False"
             ShowQuickAccessToolBarAboveRibbon="False">
+            <!--
             <Fluent:Ribbon.Menu>
+
                 <Fluent:ApplicationMenu Header="File">
                     <Fluent:ApplicationMenu.RightPaneContent>
                         <StackPanel
@@ -85,7 +88,14 @@
                         KeyTip="X" />
                 </Fluent:ApplicationMenu>
             </Fluent:Ribbon.Menu>
+            -->
             <Fluent:Ribbon.ContextualGroups>
+                <Fluent:RibbonContextualTabGroup
+                    x:Name="poitab"
+                    BorderBrush="Pink"
+                    Foreground="LimeGreen"
+                    Header="Points of Interest"
+                    Visibility="Visible" />
                 <Fluent:RibbonContextualTabGroup
                     x:Name="layertab"
                     BorderBrush="White"
@@ -95,17 +105,63 @@
             </Fluent:Ribbon.ContextualGroups>
             <Fluent:RibbonTabItem
                 MinWidth="150"
-                Header="Data"
+                Header="General"
                 IsSelected="{Binding SelectedLayer, Converter={StaticResource nullConverter}}">
-                <Fluent:RibbonGroupBox Header="datasources">
+                <Fluent:RibbonGroupBox Header="data">
                     <Fluent:Button
                         MinWidth="100"
                         CanAddToQuickAccessToolBar="False"
                         Command="{Binding Base.OpenGPXFileCommand}"
                         CommandParameter="{Binding Map}"
                         Header="open gpx-file"
-                        SizeDefinition="10"
-                        ToolTip="open gpx-file">
+                        SizeDefinition="10">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:PackIconMaterial
+                                Width="32"
+                                Height="32"
+                                Foreground="DarkGreen"
+                                Kind="FileImport" />
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="tools">
+                    <Fluent:Button
+                        MinWidth="100"
+                        CanAddToQuickAccessToolBar="False"
+                        Command="{Binding Base}"
+                        CommandParameter="{Binding Map}"
+                        Header="zoom to overview"
+                        SizeDefinition="10">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:PackIconMaterial
+                                Width="32"
+                                Height="32"
+                                Foreground="DarkGreen"
+                                Kind="FileImport" />
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button
+                        MinWidth="100"
+                        CanAddToQuickAccessToolBar="False"
+                        Command="{Binding Base}"
+                        CommandParameter="{Binding Map}"
+                        Header="zoom"
+                        SizeDefinition="10">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:PackIconMaterial
+                                Width="32"
+                                Height="32"
+                                Foreground="DarkGreen"
+                                Kind="FileImport" />
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button
+                        MinWidth="100"
+                        CanAddToQuickAccessToolBar="False"
+                        Command="{Binding Base}"
+                        CommandParameter="{Binding Map}"
+                        Header="pan"
+                        SizeDefinition="10">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -116,6 +172,10 @@
                     </Fluent:Button>
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem
+                MinWidth="150"
+                Group="{Binding ElementName=poitab}"
+                Header="General" />
             <Fluent:RibbonTabItem MinWidth="150" Header="Settings">
                 <Fluent:RibbonGroupBox>
                     <Fluent:TextBox
@@ -127,13 +187,78 @@
             </Fluent:RibbonTabItem>
             <Fluent:RibbonTabItem
                 Group="{Binding ElementName=layertab, Mode=OneWay}"
-                Header="Properties"
+                Header="General"
                 IsEnabled="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}"
                 IsSelected="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}"
                 Visibility="Visible">
-                <Fluent:RibbonGroupBox MinWidth="150">
+                <Fluent:RibbonGroupBox MinWidth="150" Header="properties">
                     <Fluent:TwoLineLabel MinWidth="200" Text="{Binding SelectedLayer.DisplayName}" />
                     <Fluent:TextBox MinWidth="200" Text="{Binding SelectedLayer.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox Header="file">
+                    <Fluent:Button
+                        MinWidth="100"
+                        CanAddToQuickAccessToolBar="False"
+                        Command="{Binding Base}"
+                        CommandParameter="{Binding Map}"
+                        Header="save layer"
+                        SizeDefinition="10">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:PackIconMaterial
+                                Width="32"
+                                Height="32"
+                                Foreground="DarkGreen"
+                                Kind="FileImport" />
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button
+                        MinWidth="100"
+                        CanAddToQuickAccessToolBar="False"
+                        Command="{Binding Base}"
+                        CommandParameter="{Binding Map}"
+                        Header="save layer as..."
+                        SizeDefinition="10"
+                        ToolTip="open gpx-file">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:PackIconMaterial
+                                Width="32"
+                                Height="32"
+                                Foreground="DarkGreen"
+                                Kind="FileImport" />
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+                <Fluent:RibbonGroupBox>
+                    <Fluent:Button
+                        MinWidth="100"
+                        CanAddToQuickAccessToolBar="False"
+                        Command="{Binding Base}"
+                        CommandParameter="{Binding Map}"
+                        Header="zoom to layer"
+                        SizeDefinition="10">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:PackIconMaterial
+                                Width="32"
+                                Height="32"
+                                Foreground="DarkGreen"
+                                Kind="FileImport" />
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button
+                        MinWidth="100"
+                        CanAddToQuickAccessToolBar="False"
+                        Command="{Binding Base}"
+                        CommandParameter="{Binding Map}"
+                        Header="remove layer"
+                        SizeDefinition="10">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:PackIconMaterial
+                                Width="32"
+                                Height="32"
+                                Foreground="DarkGreen"
+                                Kind="FileImport" />
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
             <Fluent:RibbonTabItem
@@ -229,8 +354,13 @@
                         MinWidth="100"
                         Command="{Binding Base.SaveSplitRouteCommand}"
                         CommandParameter="{Binding DataContext.SelectedLayer}"
-                        Header="save split route"
-                        IsEnabled="{Binding SelectedLayer.IsSplitted}">
+                        Header="save split route">
+                        <Fluent:Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource notNullAndPrefixConverter}">
+                                <Binding Path="SelectedLayer.IsSplitted" />
+                                <Binding Path="SelectedLayer.SplitPrefix" />
+                            </MultiBinding>
+                        </Fluent:Button.IsEnabled>
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"

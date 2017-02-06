@@ -12,6 +12,13 @@ namespace BikeTouringGISLibrary.Model
 {
     public class Route : GeometryCreatable, IRoute
     {
+        public Route() { }
+
+        public Route(List<wptType> points)
+        {
+            Points = points;
+        }
+
         private int _startIndex, _endIndex;
         public string Name { get; internal set; }
         public BikeTouringGISGraphic StartLocation 

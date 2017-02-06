@@ -31,7 +31,6 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="250" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -47,29 +46,28 @@
             Base="{Binding DataContext, ElementName=MainWindow}"
             Map="{Binding DataContext, ElementName=biketouringgismap}"
             SelectedLayer="{Binding SelectedLayer, ElementName=layerlist}" />
-        <project:MainScreen Grid.Row="1" Grid.ColumnSpan="2" />
         <project:LayerList
             x:Name="layerlist"
-            Grid.Row="2"
+            Grid.Row="1"
             Grid.Column="0"
-            Margin="5,0,1,5"
+            Margin="5,5,1,5"
             Layers="{Binding BikeTouringGISLayers, ElementName=biketouringgismap, Mode=TwoWay}"
             Map="{Binding DataContext, ElementName=biketouringgismap}"
             Menu="{Binding ElementName=mainmenu}" />
         <project:BikeTouringGISMap
             x:Name="biketouringgismap"
-            Grid.Row="2"
+            Grid.Row="1"
             Grid.Column="1"
-            Margin="1,0,5,5"
+            Margin="1,5,5,5"
             Menu="{Binding ElementName=mainmenu}" />
         <project:StatusBar
-            Grid.Row="3"
+            Grid.Row="2"
             Grid.ColumnSpan="2"
             SelectedRouteLength="{Binding SelectedLayer.TotalLength, ElementName=layerlist}"
             TotalLengthOfRoutes="{Binding TotalLengthOfRoutes, ElementName=biketouringgismap}"
             VersionInformation="{Binding DataContext.VersionInformation, ElementName=MainWindow}" />
         <project:UrlBar
-            Grid.Row="4"
+            Grid.Row="3"
             Grid.ColumnSpan="2"
             Padding="5"
             Background="White" />

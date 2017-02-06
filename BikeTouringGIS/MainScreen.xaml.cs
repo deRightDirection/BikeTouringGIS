@@ -31,10 +31,7 @@ namespace BikeTouringGIS
     /// </summary>
     public partial class MainScreen : UserControl
     {
-        private List<wptType> _routePoints;
-        private string _lastUsedFolder;
         private GraphicsLayer _poiLayer;
-        private string _originalFile;
         public MainScreen()
         {
             InitializeComponent();
@@ -48,27 +45,6 @@ namespace BikeTouringGIS
                 var mapPoint = new Graphic(new MapPoint((double)point.lon, (double)point.lat, new SpatialReference(4326)), poiSymbol);
                 _poiLayer.Graphics.Add(mapPoint);
             }
-        }
-
-        private void SaveGPSTracks_Click(object sender, RoutedEventArgs e)
-        {
-            var pois = GetPOIs();
-            // TODO pois bufferen om route
-            /*
-                for (int i = 0; i < _routeParts.Count; i++)
-                {
-                    var filename = string.Format(@"{0}\{1}_{2}.gpx", _lastUsedFolder, prefix.Text, i + 1);
-                    var gpxFile = new GPXFile();
-                    var gpx = new gpxType();
-                    var rte = new rteType();
-                    rte.name = $"{i + 1}_{prefix.Text}";
-                    rte.rtept = _routeParts[i].ToArray();
-                    gpx.rte = new List<rteType>() { rte }.ToArray();
-                    gpx.wpt = pois;
-                    gpxFile.Save(filename, gpx);
-                }
-                */
-            SaveAllSplitPointsAndLinesInOneFile();
         }
 
         private wptType[] GetPOIs()
@@ -86,39 +62,6 @@ namespace BikeTouringGIS
                 result.Add(wpt);
             }
             return result.ToArray();
-        }
-
-        private void SaveAllSplitPointsAndLinesInOneFile()
-        {
-            var filename = string.Format(@"{0}\{2}_splitlines_and_points_{1}_km.gpx", _lastUsedFolder);
-            var gpxFile = new GPXFile();
-            var gpx = new gpxType();
-            gpx.wpt = _routePoints.ToArray();
-            var routes = new List<rteType>();
-            /*
-            for (int i = 0; i < _routeParts.Count; i++)
-            {
-                var rte = new rteType();
-                rte.name = string.Format("{0}_{1}", prefix.Text, i + 1);
-                rte.rtept = _routeParts[i].ToArray();
-                routes.Add(rte);
-            }
-            */
-            gpx.rte = routes.ToArray();
-            gpxFile.Save(filename, gpx);
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            var pois = GetPOIs();
-            var filename = _originalFile;
-            var gpxFile = new GPXFile();
-            var gpx = new gpxType();
-            var rte = new rteType();
-//            rte.rtept = _wayPoints.ToArray();
-            gpx.rte = new List<rteType>() { rte }.ToArray();
-            gpx.wpt = pois;
-            gpxFile.Save(filename, gpx);
         }
     }
 }

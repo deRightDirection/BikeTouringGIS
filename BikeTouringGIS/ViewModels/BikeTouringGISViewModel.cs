@@ -5,11 +5,13 @@ using BikeTouringGIS.Models;
 using BikeTouringGISLibrary;
 using Esri.ArcGISRuntime.Layers;
 using GalaSoft.MvvmLight.Command;
+using GPX;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +30,7 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand<SplitLayerProperties> SplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> RemoveSplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> SaveSplitRouteCommand { get; private set; }
+        public RelayCommand<BikeTouringGISLayer> SaveLayerCommand { get; private set; }
 
         public BikeTouringGISViewModel()
         {
@@ -36,21 +39,42 @@ namespace BikeTouringGIS.ViewModels
             SplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute);
             ChangeSplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute, CanReSplitRoute);
             RemoveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(RemoveSplitRoute);
-            SaveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(SaveSplitRoute, CanSaveSplitRoute);
+            SaveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(SaveSplitRoute);
+            SaveLayerCommand = new RelayCommand<BikeTouringGISLayer>(SaveLayer);
             MessengerInstance.Register<LayerRemovedMessage>(this,LayerRemoved);
         }
 
-        private bool CanSaveSplitRoute(BikeTouringGISLayer arg)
+        private void SaveLayer(BikeTouringGISLayer obj)
         {
-            if(arg == null)
+            if(obj != null)
             {
-                return false;
+                var gpxFile = new GPXFile();
+                var gpx = new gpxType();
+                var rte = new rteType();
+                rte.name = obj.Title;
+                rte.rtept = obj.ToRoute().Points.ToArray();
+                gpx.rte = new List<rteType>() { rte }.ToArray();
+                gpxFile.Save(obj.FileName, gpx);
+                obj.IsInEditMode = false;
             }
-            return !string.IsNullOrEmpty(arg.SplitPrefix);
         }
 
         private void SaveSplitRoute(BikeTouringGISLayer obj)
         {
+            var baseDirectory = Path.GetDirectoryName(obj.FileName);
+            int i = 1;
+            foreach (var splitRoute in obj.SplitRoutes)
+            {
+                var filename = string.Format(@"{0}\{1}_{2}.gpx", baseDirectory, obj.SplitPrefix, i);
+                var gpxFile = new GPXFile();
+                var gpx = new gpxType();
+                var rte = new rteType();
+                rte.name = $"{i}_{obj.SplitPrefix}";
+                rte.rtept = splitRoute.Points.ToArray();
+                gpx.rte = new List<rteType>() { rte }.ToArray();
+                gpxFile.Save(filename, gpx);
+                i++;
+            }
         }
 
         private void LayerRemoved(LayerRemovedMessage obj)

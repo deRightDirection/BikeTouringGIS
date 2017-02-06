@@ -9,6 +9,7 @@ using Esri.ArcGISRuntime.Layers;
 using BikeTouringGISLibrary;
 using Esri.ArcGISRuntime.Geometry;
 using BikeTouringGISLibrary.Enumerations;
+using BikeTouringGISLibrary.Model;
 
 namespace BikeTouringGIS
 {
@@ -20,11 +21,6 @@ namespace BikeTouringGIS
         private List<wptType> _splitPoints = new List<wptType>();
         private List<int> _splitIndices = new List<int>();
         private int _splitDistance;
-
-        public RouteSplitter(int splitDistance)
-        {
-            _splitDistance = splitDistance;
-        }
 
         private void CreateSplittedRoutes()
         {
@@ -69,11 +65,14 @@ namespace BikeTouringGIS
             _distances = dataAnalyzer.Distances;
         }
 
-        internal void SplitRoute(List<wptType> points)
+        internal void SplitRoute(int splitDistance, List<wptType> points)
         {
+            _splitDistance = splitDistance;
             _wayPoints = points;
             CalculateOriginalDistances();
             CalculateSplitPoints();
+            _splitPoints.Clear();
+            _splitRoutes.Clear();
             _splitIndices.ForEach(x => _splitPoints.Add(_wayPoints[x]));
             CreateSplittedRoutes();
         }
@@ -126,6 +125,19 @@ namespace BikeTouringGIS
                 builder.AddPoint(new MapPoint((double)wayPoint.lon, (double)wayPoint.lat));
             }
             return builder.ToGeometry();
+        }
+
+        public IEnumerable<IRoute> SplitRoutes
+        {
+            get
+            {
+                var result = new List<IRoute>();
+                foreach(var routePoints in _splitRoutes)
+                {
+                    result.Add(new Route(routePoints));
+                }
+                return result;
+            }
         }
     }
 }

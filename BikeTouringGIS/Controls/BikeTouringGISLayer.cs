@@ -20,11 +20,13 @@ namespace BikeTouringGIS.Controls
         private Dictionary<GraphicType, object> _symbols;
         private bool _isInEditMode, _isSplitted, _isSelected;
         private string _splitPrefix, _title;
+        private RouteSplitter _routeSplitter;
         private int _totalLength, _splitDistance;
 
         private BikeTouringGISLayer()
         {
             Graphics.CollectionChanged += SetVisibility;
+            _routeSplitter = new RouteSplitter();
         }
         public BikeTouringGISLayer(string name) : this()
         {
@@ -158,7 +160,7 @@ namespace BikeTouringGIS.Controls
             }
         }
 
-        public void SetSymbolsAndSplitLayerDefaultProperties(Dictionary<GraphicType, object> symbols)
+        internal void SetSymbolsAndSplitLayerDefaultProperties(Dictionary<GraphicType, object> symbols)
         {
             _symbols = symbols;
             SetSymbols();
@@ -207,33 +209,47 @@ namespace BikeTouringGIS.Controls
                     _title = value;
                     if(string.IsNullOrEmpty(SplitPrefix))
                     {
-                        SplitPrefix = _title.Substring(0, 15).Trim();
+                        SplitPrefix = _title.Trim();
+                        if (_title.Length > 15)
+                        {
+                            SplitPrefix = _title.Substring(0, 15).Trim();
+                        }
                     }
                     OnPropertyChanged("Title");
                 }
             }
         }
 
-        public void SplitRoute(int splitDistance)
+        internal void SplitRoute(int splitDistance)
         {
             _splitDistance = splitDistance;
-            var routeSplitter = new RouteSplitter(_splitDistance);
             SplitLayer.DisplayName = $"{splitDistance} km";
             SplitLayer.Graphics.Clear();
             SplitLayer.Opacity = Opacity;
-            var splittedRoutesCount = 0;
-            routeSplitter.SplitRoute(_route.Points);
-            var splitPoints = routeSplitter.GetSplitPoints();
-            var splitRoutes = routeSplitter.GetSplittedRoutes();
+            _routeSplitter.SplitRoute(_splitDistance, _route.Points);
+            var splitPoints = _routeSplitter.GetSplitPoints();
+            var splitRoutes = _routeSplitter.GetSplittedRoutes();
             SplitLayer.Graphics.Add(_route.StartLocation);
             SplitLayer.Graphics.Add(_route.EndLocation);
             SplitLayer.Graphics.AddRange(splitPoints);
             SplitLayer.Graphics.AddRange(splitRoutes);
-            splittedRoutesCount += splitRoutes.Count();
             SetSymbols(SplitLayer.Graphics);
             SplitLayer.IsVisible = true;
             IsVisible = false;
             IsSplitted = true;
+        }
+        
+        public IEnumerable<IRoute> SplitRoutes
+        {
+            get
+            {
+                return _routeSplitter.SplitRoutes;
+            }
+        }
+
+        public IRoute ToRoute()
+        {
+            return _route;
         }
     }
 }
