@@ -46,6 +46,8 @@ namespace BikeTouringGIS.ViewModels
             _map.Layers.Remove(obj);
             _map.Layers.Remove(splitLayer);
             BikeTouringGISLayers.Remove(obj);
+            SetExtent();
+            CalculateTotalLength();
             MessengerInstance.Send(new LayerRemovedMessage() { Layer = obj });
         }
 

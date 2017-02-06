@@ -1,29 +1,30 @@
-﻿<Metro:MetroWindow x:Class="BikeTouringGIS.Default"
-                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                   xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                   xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
-                   xmlns:Fluent="urn:fluent-ribbon"
-                   xmlns:Metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                   xmlns:System="clr-namespace:System;assembly=mscorlib"
-                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                   xmlns:local="clr-namespace:BicycleTripsPreparationApp"
-                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                   xmlns:project="clr-namespace:BikeTouringGIS"
-                   xmlns:vm="clr-namespace:BikeTouringGIS.ViewModels"
-                   Name="MainWindow"
-                   Title="Bike Touring GIS"
-                   d:DesignHeight="1000"
-                   d:DesignWidth="1000"
-                   Background="Green"
-                   BorderBrush="DarkGreen"
-                   BorderThickness="1"
-                   GlowBrush="LimeGreen"
-                   Icon="bikecons_touring-32x32.png"
-                   Loaded="MainWindow_Loaded"
-                   WindowStartupLocation="CenterScreen"
-                   WindowState="Maximized"
-                   mc:Ignorable="d">
+﻿<Metro:MetroWindow
+    x:Class="BikeTouringGIS.Default"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+    xmlns:Fluent="urn:fluent-ribbon"
+    xmlns:Metro="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:BicycleTripsPreparationApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:project="clr-namespace:BikeTouringGIS"
+    xmlns:vm="clr-namespace:BikeTouringGIS.ViewModels"
+    Name="MainWindow"
+    Title="Bike Touring GIS"
+    d:DesignHeight="1000"
+    d:DesignWidth="1000"
+    Background="Green"
+    BorderBrush="DarkGreen"
+    BorderThickness="1"
+    GlowBrush="LimeGreen"
+    Icon="bikecons_touring-32x32.png"
+    Loaded="MainWindow_Loaded"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
+    mc:Ignorable="d">
     <Metro:MetroWindow.DataContext>
         <vm:BikeTouringGISViewModel />
     </Metro:MetroWindow.DataContext>
@@ -39,40 +40,38 @@
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
-        <project:MainMenu x:Name="mainmenu"
-                          Grid.Row="0"
-                          Grid.ColumnSpan="2"
-                          Base="{Binding DataContext,
-                                         ElementName=MainWindow}"
-                          Map="{Binding DataContext,
-                                        ElementName=biketouringgismap}"
-                          SelectedLayer="{Binding SelectedLayer,
-                                                  ElementName=layerlist}" />
+        <project:MainMenu
+            x:Name="mainmenu"
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            Base="{Binding DataContext, ElementName=MainWindow}"
+            Map="{Binding DataContext, ElementName=biketouringgismap}"
+            SelectedLayer="{Binding SelectedLayer, ElementName=layerlist}" />
         <project:MainScreen Grid.Row="1" Grid.ColumnSpan="2" />
-        <project:LayerList x:Name="layerlist"
-                           Grid.Row="2"
-                           Grid.Column="0"
-                           Margin="5 0 1 5"
-                           Layers="{Binding BikeTouringGISLayers,
-                                            ElementName=biketouringgismap,
-                                            Mode=TwoWay}"
-                           Map="{Binding DataContext,
-                                         ElementName=biketouringgismap}"
-                           Menu="{Binding ElementName=mainmenu}" />
-        <project:BikeTouringGISMap x:Name="biketouringgismap"
-                                   Grid.Row="2"
-                                   Grid.Column="1"
-                                   Margin="1 0 5 5"
-                                   Menu="{Binding ElementName=mainmenu}" />
-        <project:StatusBar Grid.Row="3"
-                           Grid.ColumnSpan="2"
-                           TotalLengthOfRoutes="{Binding TotalLengthOfRoutes,
-                                                         ElementName=biketouringgismap}"
-                           VersionInformation="{Binding DataContext.VersionInformation,
-                                                        ElementName=MainWindow}" />
-        <project:UrlBar Grid.Row="4"
-                        Grid.ColumnSpan="2"
-                        Background="White"
-                        Padding="5" />
+        <project:LayerList
+            x:Name="layerlist"
+            Grid.Row="2"
+            Grid.Column="0"
+            Margin="5,0,1,5"
+            Layers="{Binding BikeTouringGISLayers, ElementName=biketouringgismap, Mode=TwoWay}"
+            Map="{Binding DataContext, ElementName=biketouringgismap}"
+            Menu="{Binding ElementName=mainmenu}" />
+        <project:BikeTouringGISMap
+            x:Name="biketouringgismap"
+            Grid.Row="2"
+            Grid.Column="1"
+            Margin="1,0,5,5"
+            Menu="{Binding ElementName=mainmenu}" />
+        <project:StatusBar
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            SelectedRouteLength="{Binding SelectedLayer.TotalLength, ElementName=layerlist}"
+            TotalLengthOfRoutes="{Binding TotalLengthOfRoutes, ElementName=biketouringgismap}"
+            VersionInformation="{Binding DataContext.VersionInformation, ElementName=MainWindow}" />
+        <project:UrlBar
+            Grid.Row="4"
+            Grid.ColumnSpan="2"
+            Padding="5"
+            Background="White" />
     </Grid>
 </Metro:MetroWindow>

@@ -27,6 +27,7 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand<BikeTouringGISLayer> FlipDirectionCommand { get; private set; }
         public RelayCommand<SplitLayerProperties> SplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> RemoveSplitRouteCommand { get; private set; }
+        public RelayCommand<BikeTouringGISLayer> SaveSplitRouteCommand { get; private set; }
 
         public BikeTouringGISViewModel()
         {
@@ -35,7 +36,21 @@ namespace BikeTouringGIS.ViewModels
             SplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute);
             ChangeSplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute, CanReSplitRoute);
             RemoveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(RemoveSplitRoute);
+            SaveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(SaveSplitRoute, CanSaveSplitRoute);
             MessengerInstance.Register<LayerRemovedMessage>(this,LayerRemoved);
+        }
+
+        private bool CanSaveSplitRoute(BikeTouringGISLayer arg)
+        {
+            if(arg == null)
+            {
+                return false;
+            }
+            return !string.IsNullOrEmpty(arg.SplitPrefix);
+        }
+
+        private void SaveSplitRoute(BikeTouringGISLayer obj)
+        {
         }
 
         private void LayerRemoved(LayerRemovedMessage obj)
@@ -57,7 +72,7 @@ namespace BikeTouringGIS.ViewModels
         {
             if (obj.CanSplit)
             {
-                obj.Layer.SplitRoutes(obj.Distance);
+                obj.Layer.SplitRoute(obj.Distance);
             }
         }
 
@@ -104,8 +119,12 @@ namespace BikeTouringGIS.ViewModels
                     }
                     _loadedFiles.Add(file);
                     gpxFileInformation.CreateGeometries();
-                    var layer = new BikeTouringGISLayer(file, gpxFileInformation.AllRoutes);
-                    mapViewModel.AddRoutes(layer);
+                    foreach(IRoute route in gpxFileInformation.AllRoutes)
+                    {
+                        var layer = new BikeTouringGISLayer(file, route);
+                        layer.Title = route.Name;
+                        mapViewModel.AddRoutes(layer);
+                    }
                 }
             }
         }

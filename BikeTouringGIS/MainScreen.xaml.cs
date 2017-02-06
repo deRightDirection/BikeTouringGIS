@@ -33,14 +33,11 @@ namespace BikeTouringGIS
     {
         private List<wptType> _routePoints;
         private string _lastUsedFolder;
-        private GraphicsLayer _routelayer, _poiLayer;
-        private GraphicsLayer _splitLayer;
-        private List<Route> _routes;
+        private GraphicsLayer _poiLayer;
         private string _originalFile;
         public MainScreen()
         {
             InitializeComponent();
-            _routes = new List<Route>();
         }
 
         private void ShowWayPoints(List<wptType> waypoints)
@@ -51,18 +48,6 @@ namespace BikeTouringGIS
                 var mapPoint = new Graphic(new MapPoint((double)point.lon, (double)point.lat, new SpatialReference(4326)), poiSymbol);
                 _poiLayer.Graphics.Add(mapPoint);
             }
-        }
-
-        private void DisplayPartOfTrack(List<wptType> wayPoints, Color color)
-        {
-            /*
-            var lineSymbol = new SimpleLineSymbol();
-            lineSymbol.Width = 4;
-            lineSymbol.Color = color;
-            var geometry = CreateGeometryFromWayPoints(wayPoints);
-            var track = new Graphic(geometry, lineSymbol);
-            _splitLayer.Graphics.Add(track);
-            */
         }
 
         private void SaveGPSTracks_Click(object sender, RoutedEventArgs e)
@@ -105,7 +90,7 @@ namespace BikeTouringGIS
 
         private void SaveAllSplitPointsAndLinesInOneFile()
         {
-            var filename = string.Format(@"{0}\{2}_splitlines_and_points_{1}_km.gpx", _lastUsedFolder, distanceTxt.Text, prefix.Text);
+            var filename = string.Format(@"{0}\{2}_splitlines_and_points_{1}_km.gpx", _lastUsedFolder);
             var gpxFile = new GPXFile();
             var gpx = new gpxType();
             gpx.wpt = _routePoints.ToArray();
@@ -121,40 +106,6 @@ namespace BikeTouringGIS
             */
             gpx.rte = routes.ToArray();
             gpxFile.Save(filename, gpx);
-        }
-
-        private void CreateSplitPoints_Click(object sender, RoutedEventArgs e)
-        {
-            if (_routelayer.Graphics.Count == 3)
-            {
-                _routelayer.Graphics.RemoveAt(0);
-            }
-            _splitLayer.Graphics.Clear();
-            _routePoints = new List<wptType>();
-            //// splits de route op naar stukken van x km
-            //var routeSplitter = new RouteSplitter(_wayPoints);
-            //routeSplitter.SplitRoute(int.Parse(distanceTxt.Text));
-            //// collectie van routes en verschillende kleuren
-            //var x = routeSplitter.SplittedRoutes;
-            //_routeParts = x;
-            //var items = ColorUtils.RgbLinearInterpolate(Colors.LightBlue, Colors.DarkBlue, x.Count, Colors.LightBlue, Colors.DarkBlue);
-            //// doorloop alle routes, teken iedere route op de kaart zet voor ieder beginpunt een stuk op de kaart plus afstand tot dit punt
-            //int distance = 0;
-            //for (int j = 0; j < x.Count; j++)
-            //{
-            //    DisplayPartOfTrack(x[j], items[j]);
-            //    if (j > 0)
-            //    {
-            //        var point = x[j][0];
-            //        var g = new Graphic(new MapPoint((double)point.lon, (double)point.lat, new SpatialReference(4326)), grid.Resources["RouteSymbol"] as SimpleMarkerSymbol);
-            //        g.Attributes["index"] = distance;
-            //        point.name = distance.ToString();
-            //        _routePoints.Add(point);
-            //        _splitLayer.Graphics.Add(g);
-            //    }
-            //    distance += _distanceAnalyzer.CalculateDistance(x[j]);
-            //}
-
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

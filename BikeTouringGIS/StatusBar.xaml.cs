@@ -29,6 +29,8 @@ namespace BikeTouringGIS
             SetBinding(TotalLengthOfRoutesProperty, bindingViewMode);
             bindingViewMode = new Binding("VersionInformation") { Mode = BindingMode.OneWay };
             SetBinding(VersionInformationProperty, bindingViewMode);
+            bindingViewMode = new Binding("SelectedRouteLength") { Mode = BindingMode.OneWay };
+            SetBinding(SelectedRouteLengthProperty, bindingViewMode);
         }
 
         public MapView MapView
@@ -43,13 +45,21 @@ namespace BikeTouringGIS
             set { SetValue(TotalLengthOfRoutesProperty, value); }
         }
 
+        public int SelectedRouteLength
+        {
+            get { return (int)GetValue(SelectedRouteLengthProperty); }
+            set { SetValue(SelectedRouteLengthProperty, value); }
+        }
+
         public string VersionInformation
         {
             get { return (string)GetValue(VersionInformationProperty); }
             set { SetValue(VersionInformationProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for VersionInformation.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedRouteLengthProperty =
+            DependencyProperty.Register("SelectedRouteLength", typeof(int), typeof(StatusBar), new PropertyMetadata(0, OnSelectedRouteSet));
+
         public static readonly DependencyProperty VersionInformationProperty =
             DependencyProperty.Register("VersionInformation", typeof(string), typeof(StatusBar), new PropertyMetadata(string.Empty, OnVersionInformationSet));
 
@@ -69,7 +79,12 @@ namespace BikeTouringGIS
             ((StatusBarViewModel)context).TotalLengthOfRoutes = (int)e.NewValue;
         }
 
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        private static void OnSelectedRouteSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var context = ((StatusBar)d).DataContext;
+            ((StatusBarViewModel)context).SelectedRouteLength = (int)e.NewValue;
+        }
+
         public static readonly DependencyProperty MapViewProperty =
             DependencyProperty.Register("MapView", typeof(MapView), typeof(StatusBar), new PropertyMetadata(null, OnMapViewSet));
 

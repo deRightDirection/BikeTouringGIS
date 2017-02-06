@@ -19,7 +19,14 @@ namespace BikeTouringGIS.Models
 
         public bool CanReSplit
         {
-            get { return Layer.IsSplitted && Distance > 0; }
+            get
+            {
+                if(Layer == null)
+                {
+                    return false;
+                }
+                return Layer.IsSplitted && Distance > 0;
+            }
         }
     }
 }

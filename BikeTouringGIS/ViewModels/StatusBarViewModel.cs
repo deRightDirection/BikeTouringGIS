@@ -11,7 +11,7 @@ namespace BikeTouringGIS.ViewModels
 {
     public class StatusBarViewModel : ViewModelBase
     {
-        private int _totalLengthOfRoutes;
+        private int _totalLengthOfRoutes, _selectedRouteLength;
         private string _versionInformation;
         private MapView _mapView;
         private double _zoom;
@@ -20,6 +20,11 @@ namespace BikeTouringGIS.ViewModels
             _zoom = 0;
         }
 
+        public int SelectedRouteLength
+        {
+            get { return _selectedRouteLength; }
+            set { Set(ref _selectedRouteLength, value); }
+        }
         public int TotalLengthOfRoutes
         {
             get { return _totalLengthOfRoutes; }

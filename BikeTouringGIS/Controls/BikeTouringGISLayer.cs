@@ -15,12 +15,12 @@ namespace BikeTouringGIS.Controls
 {
     public class BikeTouringGISLayer : GraphicsLayer
     {
-        private IEnumerable<IRoute> _routes;
+        private IRoute _route;
         private BikeTouringGISLayer _splitLayer;
-        private int _splitDistance;
         private Dictionary<GraphicType, object> _symbols;
         private bool _isInEditMode, _isSplitted, _isSelected;
-        private int _totalLength;
+        private string _splitPrefix, _title;
+        private int _totalLength, _splitDistance;
 
         private BikeTouringGISLayer()
         {
@@ -32,17 +32,14 @@ namespace BikeTouringGIS.Controls
             DisplayName = name;
             Type = LayerType.PointsOfInterest;
         }
-        public BikeTouringGISLayer(string fileName, IEnumerable<IRoute> routes) : this(fileName)
+        public BikeTouringGISLayer(string fileName, IRoute route) : this(fileName)
         {
-            _routes = routes;
-            foreach (var route in routes)
-            {
-                Graphics.Add(route.StartLocation);
-                Graphics.Add(route.EndLocation);
-                Graphics.Add(route.RouteGeometry);
-            }
+            _route = route;
+            Graphics.Add(route.StartLocation);
+            Graphics.Add(route.EndLocation);
+            Graphics.Add(route.RouteGeometry);
             SetLength();
-            Type = LayerType.GPXRoutes;
+            Type = LayerType.GPXRoute;
         }
         public bool IsSelected
         {
@@ -56,7 +53,18 @@ namespace BikeTouringGIS.Controls
                 }
             }
         }
-
+        public string SplitPrefix
+        {
+            get { return _splitPrefix; }
+            set
+            {
+                if (value != _splitPrefix)
+                {
+                    _splitPrefix = value;
+                    OnPropertyChanged("SplitPrefix");
+                }
+            }
+        }
         public bool IsSplitted
         {
             get { return _isSplitted; }
@@ -138,18 +146,15 @@ namespace BikeTouringGIS.Controls
         internal void FlipDirection()
         {
             Graphics.Clear();
-            foreach (var route in _routes)
-            {
-                route.Flip();
-                Graphics.Add(route.StartLocation);
-                Graphics.Add(route.EndLocation);
-                Graphics.Add(route.RouteGeometry);
-            }
+            _route.Flip();
+            Graphics.Add(_route.StartLocation);
+            Graphics.Add(_route.EndLocation);
+            Graphics.Add(_route.RouteGeometry);
             SetSymbols();
             IsInEditMode = true;
             if(IsSplitted)
             {
-                SplitRoutes(_splitDistance);
+                SplitRoute(_splitDistance);
             }
         }
 
@@ -192,8 +197,24 @@ namespace BikeTouringGIS.Controls
         }
 
         public string FileName { get; private set; }
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                if (value != _title)
+                {
+                    _title = value;
+                    if(string.IsNullOrEmpty(SplitPrefix))
+                    {
+                        SplitPrefix = _title.Substring(0, 15).Trim();
+                    }
+                    OnPropertyChanged("Title");
+                }
+            }
+        }
 
-        public void SplitRoutes(int splitDistance)
+        public void SplitRoute(int splitDistance)
         {
             _splitDistance = splitDistance;
             var routeSplitter = new RouteSplitter(_splitDistance);
@@ -201,28 +222,18 @@ namespace BikeTouringGIS.Controls
             SplitLayer.Graphics.Clear();
             SplitLayer.Opacity = Opacity;
             var splittedRoutesCount = 0;
-            foreach (var route in _routes)
-            {
-                routeSplitter.SplitRoute(route.Points);
-                var splitPoints = routeSplitter.GetSplitPoints();
-                var splitRoutes = routeSplitter.GetSplittedRoutes();
-                SplitLayer.Graphics.Add(route.StartLocation);
-                SplitLayer.Graphics.Add(route.EndLocation);
-                SplitLayer.Graphics.AddRange(splitPoints);
-                SplitLayer.Graphics.AddRange(splitRoutes);
-                splittedRoutesCount += splitRoutes.Count();
-            }
+            routeSplitter.SplitRoute(_route.Points);
+            var splitPoints = routeSplitter.GetSplitPoints();
+            var splitRoutes = routeSplitter.GetSplittedRoutes();
+            SplitLayer.Graphics.Add(_route.StartLocation);
+            SplitLayer.Graphics.Add(_route.EndLocation);
+            SplitLayer.Graphics.AddRange(splitPoints);
+            SplitLayer.Graphics.AddRange(splitRoutes);
+            splittedRoutesCount += splitRoutes.Count();
             SetSymbols(SplitLayer.Graphics);
-            if (splittedRoutesCount > _routes.Count())
-            {
-                SplitLayer.IsVisible = true;
-                IsVisible = false;
-                IsSplitted = true;
-            }
-            else
-            {
-                SplitLayer.ShowLegend = false;
-            }
+            SplitLayer.IsVisible = true;
+            IsVisible = false;
+            IsSplitted = true;
         }
     }
 }

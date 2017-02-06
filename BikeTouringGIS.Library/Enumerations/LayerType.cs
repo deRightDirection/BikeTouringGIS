@@ -10,7 +10,7 @@ namespace BikeTouringGISLibrary.Enumerations
     {
         Unknown,
         PointsOfInterest,
-        GPXRoutes,
+        GPXRoute,
         SplitRoutes
     }
 }

@@ -40,7 +40,7 @@ namespace BikeTouringGIS.ViewModels
         {
             if (_layers != null && SelectedLayer == null)
             {
-                SelectedLayer = _layers.Where(x => x.Type == LayerType.GPXRoutes).FirstOrDefault();
+                SelectedLayer = _layers.Where(x => x.Type == LayerType.GPXRoute).FirstOrDefault();
             }
         }
 

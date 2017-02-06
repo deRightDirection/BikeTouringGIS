@@ -14,6 +14,7 @@
                     <converters:BooleanToVisibilityConverter x:Key="booleanVisibilityConverter" />
                     <converters:BooleanToVisibilityConverter x:Key="inverseBooleanVisibilityConverter" IsReversed="True" />
                     <converters2:InverseBooleanConverter x:Key="inverseBooleanConverter" />
+                    <converters2:NullToBooleanConverter x:Key="nullConverter"/>
                     <converters2:NotNullToVisibilityConverter x:Key="notNullVisibilityConverter" />
                     <converters2:InverseNullToBooleanConverter x:Key="notNullConverter" />
                     <converters2:LengthAndLayerConverter x:Key="lengthAndLayerConverter" />
