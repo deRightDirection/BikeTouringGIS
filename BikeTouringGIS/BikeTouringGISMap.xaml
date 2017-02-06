@@ -65,7 +65,7 @@
         <converters:MouseButtonEventArgsToPointConverter x:Key="MouseButtonEventArgsToPointConverter" />
         <converters:LayerLoadedEventArgsToBikeTouringGISLayerConverter x:Key="LayerLoadedArgsConverter" />
         <esri:SimpleMarkerSymbol
-            x:Key="POISymbol"
+            x:Key="PointOfInterest"
             Size="12"
             Style="Diamond"
             Color="Pink">
@@ -75,15 +75,6 @@
         </esri:SimpleMarkerSymbol>
     </UserControl.Resources>
     <Grid x:Name="grid">
-        <i:Interaction.Triggers>
-            <i:EventTrigger EventName="GotFocus">
-                <mvvm:EventToCommand Command="{Binding ChangeVisibilityTabGroupCommand}" CommandParameter="layerstab" />
-            </i:EventTrigger>
-            <i:EventTrigger EventName="LostFocus">
-                <mvvm:EventToCommand Command="{Binding ChangeVisibilityTabGroupCommand}" CommandParameter="layerstab" />
-            </i:EventTrigger>
-        </i:Interaction.Triggers>
-        <Grid.Resources />
         <esri:MapView x:Name="MapViewControl">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="LayerLoaded">

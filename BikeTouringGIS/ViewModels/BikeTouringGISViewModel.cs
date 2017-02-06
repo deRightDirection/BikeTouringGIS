@@ -149,6 +149,7 @@ namespace BikeTouringGIS.ViewModels
                         layer.Title = route.Name;
                         mapViewModel.AddRoutes(layer);
                     }
+                    mapViewModel.AddPoIs(gpxFileInformation.WayPoints);
                 }
             }
         }

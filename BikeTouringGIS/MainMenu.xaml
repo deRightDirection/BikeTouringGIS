@@ -175,7 +175,40 @@
             <Fluent:RibbonTabItem
                 MinWidth="150"
                 Group="{Binding ElementName=poitab}"
-                Header="General" />
+                Header="General">
+                <Fluent:RibbonGroupBox>
+                    <Fluent:Button
+                        MinWidth="100"
+                        CanAddToQuickAccessToolBar="False"
+                        Command="{Binding Base}"
+                        CommandParameter="{Binding Map}"
+                        Header="add PoI"
+                        SizeDefinition="10">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:PackIconMaterial
+                                Width="32"
+                                Height="32"
+                                Foreground="DarkGreen"
+                                Kind="FileImport" />
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                    <Fluent:Button
+                        MinWidth="100"
+                        CanAddToQuickAccessToolBar="False"
+                        Command="{Binding Base}"
+                        CommandParameter="{Binding Map}"
+                        Header="delete PoI"
+                        SizeDefinition="10">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:PackIconMaterial
+                                Width="32"
+                                Height="32"
+                                Foreground="DarkGreen"
+                                Kind="FileImport" />
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
             <Fluent:RibbonTabItem MinWidth="150" Header="Settings">
                 <Fluent:RibbonGroupBox>
                     <Fluent:TextBox

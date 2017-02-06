@@ -19,6 +19,7 @@ using System.Windows;
 using BikeTouringGISLibrary;
 using System.Collections.ObjectModel;
 using BikeTouringGIS.Messenges;
+using BikeTouringGISLibrary.Model;
 
 namespace BikeTouringGIS.ViewModels
 {
@@ -153,6 +154,13 @@ namespace BikeTouringGIS.ViewModels
             {
                 MapView.SetView(initialExtent.Expand(1.2));
             }
+        }
+
+        internal void AddPoIs(List<WayPoint> wayPoints)
+        {
+            wayPoints.ForEach(x => _pointsOfInterestLayer.Graphics.Add(x.ToGraphic()));
+            _pointsOfInterestLayer.SetSymbolsAndSplitLayerDefaultProperties(_mapSymbols);
+            
         }
     }
 }

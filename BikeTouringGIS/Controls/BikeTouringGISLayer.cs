@@ -164,9 +164,12 @@ namespace BikeTouringGIS.Controls
         {
             _symbols = symbols;
             SetSymbols();
-            SplitLayer = new BikeTouringGISLayer() { Type = LayerType.SplitRoutes, IsVisible = false, ShowLegend = false};
-            SplitLayer.Labeling.IsEnabled = true;
-            SplitLayer.Labeling.LabelClasses.Add(new AttributeLabelClass() { Symbol = (TextSymbol)_symbols[GraphicType.SplitPointLabel], TextExpression = "[distance]" });
+            if (Type == LayerType.GPXRoute)
+            {
+                SplitLayer = new BikeTouringGISLayer() { Type = LayerType.SplitRoutes, IsVisible = false, ShowLegend = false };
+                SplitLayer.Labeling.IsEnabled = true;
+                SplitLayer.Labeling.LabelClasses.Add(new AttributeLabelClass() { Symbol = (TextSymbol)_symbols[GraphicType.SplitPointLabel], TextExpression = "[distance]" });
+            }
         }
 
         private void SetSymbols(GraphicCollection graphics = null)
