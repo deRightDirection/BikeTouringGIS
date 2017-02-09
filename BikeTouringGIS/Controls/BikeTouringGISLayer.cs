@@ -33,6 +33,7 @@ namespace BikeTouringGIS.Controls
             FileName = name;
             DisplayName = name;
             Type = LayerType.PointsOfInterest;
+            SplitLayer = new BikeTouringGISLayer() { ShowLegend = false };
         }
         public BikeTouringGISLayer(string fileName, IRoute route) : this(fileName)
         {
