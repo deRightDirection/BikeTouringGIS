@@ -11,6 +11,8 @@ using System.Collections.Specialized;
 using Esri.ArcGISRuntime.Symbology;
 using Esri.ArcGISRuntime.Geometry;
 using MoreLinq;
+using System.Windows.Media;
+
 namespace BikeTouringGIS.Controls
 {
     public class BikeTouringGISLayer : GraphicsLayer
@@ -42,6 +44,7 @@ namespace BikeTouringGIS.Controls
             Graphics.Add(route.EndLocation);
             Graphics.Add(route.RouteGeometry);
             SetLength();
+            SelectionColor = Colors.LimeGreen;
             Type = LayerType.GPXRoute;
         }
         public bool IsSelected
@@ -52,6 +55,13 @@ namespace BikeTouringGIS.Controls
                 if (value != _isSelected)
                 {
                     _isSelected = value;
+                    foreach (BikeTouringGISGraphic graphic in Graphics)
+                    {
+                        if (graphic.Type == GraphicType.GPXRoute)
+                        {
+                            graphic.IsSelected = _isSelected;
+                        }
+                    }
                     OnPropertyChanged("IsSelected");
                 }
             }
@@ -132,7 +142,7 @@ namespace BikeTouringGIS.Controls
             foreach (BikeTouringGISGraphic graphic in Graphics)
             {
                 var distanceAnalyzer = new DistanceAnalyzer();
-                var distance = distanceAnalyzer.CalculateDistance(graphic.Geometry);
+                var distance = distanceAnalyzer.CalculateDistance(graphic?.Geometry);
                 length += distance;
             }
             TotalLength = length;
@@ -170,6 +180,13 @@ namespace BikeTouringGIS.Controls
                 SplitLayer = new BikeTouringGISLayer() { Type = LayerType.SplitRoutes, IsVisible = false, ShowLegend = false };
                 SplitLayer.Labeling.IsEnabled = true;
                 SplitLayer.Labeling.LabelClasses.Add(new AttributeLabelClass() { Symbol = (TextSymbol)_symbols[GraphicType.SplitPointLabel], TextExpression = "[distance]" });
+            }
+            if (Type == LayerType.PointsOfInterest)
+            {
+                Labeling.IsEnabled = true;
+                Labeling.LabelClasses.Add(new AttributeLabelClass() { Symbol = (TextSymbol)_symbols[GraphicType.PoILabelXL], TextExpression = "[name]", MinScale = 49999 });
+                Labeling.LabelClasses.Add(new AttributeLabelClass() { Symbol = (TextSymbol)_symbols[GraphicType.PoILabelL], TextExpression = "[name]", MaxScale = 50000, MinScale = 99999 });
+                Labeling.LabelClasses.Add(new AttributeLabelClass() { Symbol = (TextSymbol)_symbols[GraphicType.PoILabelM], TextExpression = "[name]", MaxScale = 100000 });
             }
         }
 

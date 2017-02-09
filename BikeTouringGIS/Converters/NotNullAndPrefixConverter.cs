@@ -21,7 +21,10 @@ namespace BikeTouringGIS.Converters
             }
             if (values[1] != DependencyProperty.UnsetValue)
             {
-                hasPrefix = ((string)values[1]).Length > 0;
+                if (values[1] != null)
+                {
+                    hasPrefix = ((string)values[1]).Length > 0;
+                }
             }
             return isSplitted && hasPrefix;
         }

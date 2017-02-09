@@ -167,7 +167,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Comparers\BikeTouringGISLayerComparer.cs" />
     <Compile Include="Controls\BikeTouringGISLayer.cs" />
     <Compile Include="Controls\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
@@ -292,6 +291,9 @@
       <Project>{bdc204a2-f656-43b9-9b4b-c6308bd81404}</Project>
       <Name>BikeTouringGIS.Library</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Comparers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\ESRI\ArcGISRuntimeSDKNET10.2.7@InstallDir)ideintegration\ArcGISRuntime.targets" Condition="Exists('$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\ESRI\ArcGISRuntimeSDKNET10.2.7@InstallDir)ideintegration\ArcGISRuntime.targets')" />

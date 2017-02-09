@@ -15,6 +15,9 @@ namespace BikeTouringGISLibrary.Enumerations
         SplitPoint,
         SplitRoute,
         SplitPointLabel,
-        PointOfInterest
+        PointOfInterest,
+        PoILabelM,
+        PoILabelL,
+        PoILabelXL
     }
 }

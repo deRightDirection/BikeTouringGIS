@@ -13,7 +13,7 @@ namespace BikeTouringGISLibrary
     {
         public int CalculateDistance(Geometry routeGeometry)
         {
-            if(routeGeometry.GeometryType != GeometryType.Polyline)
+            if(routeGeometry == null || routeGeometry.GeometryType != GeometryType.Polyline)
             {
                 return 0;
             }

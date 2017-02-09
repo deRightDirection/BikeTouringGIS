@@ -20,7 +20,6 @@ using BikeTouringGISLibrary;
 using System.Collections.ObjectModel;
 using BikeTouringGIS.Messenges;
 using BikeTouringGISLibrary.Model;
-using BikeTouringGIS.Comparers;
 
 namespace BikeTouringGIS.ViewModels
 {
@@ -59,8 +58,6 @@ namespace BikeTouringGIS.ViewModels
             if (layer != null)
             {
                 BikeTouringGISLayers = new ObservableCollection<BikeTouringGISLayer>(_map.GetBikeTouringGISLayers());
-//                IComparer<LayerType> bikeTouringGISLayerComparer = new BikeTouringGISLayerComparer();
-//                BikeTouringGISLayers.OrderBy(x => x.Type, bikeTouringGISLayerComparer);
             }
         }
 
