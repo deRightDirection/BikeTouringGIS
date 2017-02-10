@@ -10,11 +10,34 @@ using theRightDirection.Library.Logging;
 using System.Windows.Threading;
 using System.Windows.Media;
 using Squirrel;
+using System.IO.IsolatedStorage;
+using BikeTouringGIS.ViewModels;
+using System.IO;
+using Newtonsoft.Json;
+using System.Security;
+using BikeTouringGIS;
 
 namespace BicycleTripsPreparationApp
 {
     public partial class App : Application
     {
+        protected override void OnExit(ExitEventArgs e)
+        {
+            try
+            {
+                var context = (BikeTouringGISViewModel)TryFindResource("BaseViewModel");
+                IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
+                StreamWriter srWriter = new StreamWriter(new IsolatedStorageFileStream("settings", FileMode.Create, isolatedStorage));
+                dynamic properties = new { SplitLength = context.SplitLength, ConvertTracksToRoutesAutomatically = context.ConvertTracksToRoutesAutomatically };
+                var propertiesAsText = JsonConvert.SerializeObject(properties);
+                srWriter.Write(propertiesAsText);
+                srWriter.Flush();
+                srWriter.Close();
+            }
+            catch (SecurityException sx)
+            {
+            }
+        }
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             AppDomain.CurrentDomain.UnhandledException += (s, ex) => LogUnhandledException((Exception)ex.ExceptionObject, "AppDomain.CurrentDomain.UnhandledException");

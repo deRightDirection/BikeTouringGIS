@@ -12,6 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <vm:ViewModelLocator x:Key="Locator" />
+                    <vm:BikeTouringGISViewModel x:Key="BaseViewModel" />
                     <converters:BooleanToVisibilityConverter x:Key="booleanVisibilityConverter" />
                     <converters:BooleanToVisibilityConverter x:Key="inverseBooleanVisibilityConverter" IsReversed="True" />
                     <converters2:InverseBooleanConverter x:Key="inverseBooleanConverter" />

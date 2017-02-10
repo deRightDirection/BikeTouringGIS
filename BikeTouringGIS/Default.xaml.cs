@@ -19,6 +19,9 @@ using System.Threading;
 using theRightDirection.Library.Logging;
 using Esri.ArcGISRuntime.Layers;
 using BikeTouringGIS.ViewModels;
+using System.IO.IsolatedStorage;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace BikeTouringGIS
 {
@@ -34,6 +37,7 @@ namespace BikeTouringGIS
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            ILogger logger = Logger.GetLogger();
             try
             {
                 using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
@@ -52,7 +56,33 @@ namespace BikeTouringGIS
             }
             catch (Exception ex)
             {
-                ILogger logger = Logger.GetLogger();
+                logger.LogException(ex);
+            }
+            var context = (BikeTouringGISViewModel)DataContext;
+            try
+            {
+                IsolatedStorageFile isolatedStorage = IsolatedStorageFile.GetUserStoreForAssembly();
+                StreamReader srReader = new StreamReader(new IsolatedStorageFileStream("settings", FileMode.OpenOrCreate, isolatedStorage));
+                if (srReader != null)
+                {
+                    string data = srReader.ReadToEnd();
+                    if (string.IsNullOrEmpty(data))
+                    {
+                        context.SplitLength = 100;
+                        context.ConvertTracksToRoutesAutomatically = false;
+                    }
+                    else
+                    {
+                        dynamic jsonObject = JsonConvert.DeserializeObject(data);
+                        context.SplitLength = jsonObject.SplitLength;
+                        context.ConvertTracksToRoutesAutomatically = jsonObject.ConvertTracksToRoutesAutomatically;
+                    }
+                    srReader.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                context.SplitLength = 100;
                 logger.LogException(ex);
             }
         }

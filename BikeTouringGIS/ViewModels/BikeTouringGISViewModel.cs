@@ -22,7 +22,8 @@ namespace BikeTouringGIS.ViewModels
     public class BikeTouringGISViewModel : BikeTouringGISBaseViewModel
     {
         private List<string> _loadedFiles = new List<string>();
-        private int _splitLength = 100;
+        private int _splitLength;
+        private bool _convertTracksToRoutesAutomatically;
 
         public RelayCommand<BikeTouringGISMapViewModel> OpenGPXFileCommand { get; private set; }
         public RelayCommand<SplitLayerProperties> ChangeSplitRouteCommand { get; private set; }
@@ -100,6 +101,12 @@ namespace BikeTouringGIS.ViewModels
             }
         }
 
+        public bool ConvertTracksToRoutesAutomatically
+        {
+            get { return _convertTracksToRoutesAutomatically; }
+            set { Set(ref _convertTracksToRoutesAutomatically, value); }
+        }
+
         public int SplitLength
         {
             get { return _splitLength; }
@@ -128,14 +135,18 @@ namespace BikeTouringGIS.ViewModels
                     var gpxFileInformation = new GpxFileReader().LoadFile(file);
                     foreach (var track in gpxFileInformation.Tracks)
                     {
-                        StringBuilder textBuilder = new StringBuilder();
-                        textBuilder.AppendLine($"Track {track.Name} is defined as track and not as route");
-                        textBuilder.AppendLine();
-                        textBuilder.AppendLine("routes are used by navigation-devices");
-                        textBuilder.AppendLine("tracks are to register where you have been");
-                        textBuilder.AppendLine();
-                        textBuilder.AppendLine("Do you want to convert it to a route?");
-                        var convertTrack = await ConvertTrackToRoute(textBuilder.ToString());
+                        bool convertTrack = ConvertTracksToRoutesAutomatically;
+                        if (!convertTrack)
+                        {
+                            StringBuilder textBuilder = new StringBuilder();
+                            textBuilder.AppendLine($"Track {track.Name} is defined as track and not as route");
+                            textBuilder.AppendLine();
+                            textBuilder.AppendLine("routes are used by navigation-devices");
+                            textBuilder.AppendLine("tracks are to register where you have been");
+                            textBuilder.AppendLine();
+                            textBuilder.AppendLine("Do you want to convert it to a route?");
+                            convertTrack = await ConvertTrackToRoute(textBuilder.ToString());
+                        }
                         if (convertTrack)
                         {
                             track.ConvertTrackToRoute();

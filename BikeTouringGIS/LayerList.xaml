@@ -1,28 +1,34 @@
-﻿<UserControl x:Class="BikeTouringGIS.LayerList"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             xmlns:local="clr-namespace:BikeTouringGIS"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
-             xmlns:vm="clr-namespace:BikeTouringGIS.ViewModels"
-             x:Name="layerlist"
-             d:DesignHeight="300"
-             d:DesignWidth="300"
-             mc:Ignorable="d">
+﻿<UserControl
+    x:Class="BikeTouringGIS.LayerList"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:BikeTouringGIS.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:local="clr-namespace:BikeTouringGIS"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+    xmlns:vm="clr-namespace:BikeTouringGIS.ViewModels"
+    x:Name="layerlist"
+    d:DesignHeight="300"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <c:LayerIsGpxRouteConverter x:Key="layerIsRouteConverter" />
+    </UserControl.Resources>
     <UserControl.DataContext>
         <vm:LayerListViewModel />
     </UserControl.DataContext>
-    <ListView x:Name="layerlistview"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Stretch"
-              BorderThickness="0"
-              ItemsSource="{Binding Layers}"
-              SelectedItem="{Binding SelectedLayer,
-                                     Mode=TwoWay}">
+    <ListView
+        x:Name="layerlistview"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        BorderThickness="0"
+        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        ItemsSource="{Binding Layers}"
+        SelectedItem="{Binding SelectedLayer, Mode=TwoWay}">
         <ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">
                 <Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}" />
@@ -31,15 +37,17 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListViewItem}">
-                            <Border x:Name="Bd"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    Padding="{TemplateBinding Padding}"
-                                    SnapsToDevicePixels="true">
-                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <Border
+                                x:Name="Bd"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="true">
+                                <ContentPresenter
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsEnabled" Value="false">
@@ -71,68 +79,89 @@
         </ListView.ItemContainerStyle>
         <ListView.ItemTemplate>
             <DataTemplate>
-                <StackPanel Margin="2" Visibility="{Binding ShowLegend, Mode=TwoWay, Converter={StaticResource booleanVisibilityConverter}}">
-                    <iconPacks:PackIconMaterial Width="16"
-                                                Height="16"
-                                                Foreground="DarkGreen"
-                                                Kind="CommentOutline"
-                                                Visibility="{Binding IsInEditMode,
-                                                                     Converter={StaticResource booleanVisibilityConverter}}" />
-                    <TextBlock Margin="0,4" Text="{Binding DisplayName}" />
-                    <Grid>
+                <Grid Margin="2" Visibility="{Binding ShowLegend, Mode=TwoWay, Converter={StaticResource booleanVisibilityConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <iconPacks:PackIconMaterial
+                            Width="16"
+                            Height="16"
+                            Margin="0,0,5,0"
+                            Foreground="Red"
+                            Kind="CommentAlertOutline"
+                            Visibility="{Binding IsInEditMode, Converter={StaticResource booleanVisibilityConverter}}" />
+                        <TextBlock FontWeight="Bold" Text="{Binding Title}" TextWrapping="WrapWithOverflow" ToolTip="{Binding Title}" />
+                        <TextBlock
+                            Margin="5,0,0,0"
+                            Text="{Binding TotalLength, StringFormat=({0} km)}"
+                            Visibility="{Binding Converter={StaticResource layerIsRouteConverter}}" />
+                    </StackPanel>
+                    <Grid Grid.Row="1" Visibility="{Binding Converter={StaticResource layerIsRouteConverter}}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel>
-                            <TextBlock Text="distance" />
-                            <TextBlock Text="filename" />
-                            <Slider Margin="0,0,20,0"
-                                    Maximum="1"
-                                    Minimum="0"
-                                    TickFrequency="0.01"
-                                    Visibility="{Binding SplitLayer.ShowLegend,
-                                                         Converter={StaticResource inverseBooleanVisibilityConverter}}"
-                                    Value="{Binding Opacity,
-                                                    Mode=TwoWay}" />
-                            <Slider Margin="0,0,20,0"
-                                    Maximum="1"
-                                    Minimum="0"
-                                    TickFrequency="0.01"
-                                    Visibility="{Binding SplitLayer.ShowLegend,
-                                                         Converter={StaticResource booleanVisibilityConverter}}"
-                                    Value="{Binding SplitLayer.Opacity,
-                                                    Mode=TwoWay}" />
-                            <Button Command="{Binding Map.RemoveLayerCommand, ElementName=layerlist}" CommandParameter="{Binding}">
+                        <TextBlock Grid.Column="0" Text="{Binding DisplayName}" ToolTip="{Binding DisplayName}" />
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <Button
+                                Command="{Binding Menu.Base.CenterToLayer, ElementName=layerlist}"
+                                CommandParameter="{Binding}"
+                                ToolTip="zoom to layer">
                                 <Button.Content>
-                                    <iconPacks:PackIconMaterial Width="32"
-                                                                Height="32"
-                                                                Foreground="DarkGreen"
-                                                                Kind="Delete" />
+                                    <iconPacks:PackIconMaterial
+                                        Width="16"
+                                        Height="16"
+                                        Foreground="DarkGreen"
+                                        Kind="FlashRedEye" />
                                 </Button.Content>
                             </Button>
-                            <Button Command="{Binding Menu.Base.SaveLayerCommand,
-                                                      ElementName=layerlist}"
-                                    CommandParameter="{Binding}"
-                                    IsEnabled="{Binding IsInEditMode}">
+                            <Button
+                                Command="{Binding Menu.Base.SaveLayerCommand, ElementName=layerlist}"
+                                CommandParameter="{Binding}"
+                                IsEnabled="{Binding IsInEditMode}"
+                                ToolTip="save layer">
                                 <Button.Content>
-                                    <iconPacks:PackIconMaterial Width="32"
-                                                                Height="32"
-                                                                Foreground="DarkGreen"
-                                                                Kind="FileOutline" />
+                                    <iconPacks:PackIconMaterial
+                                        Width="16"
+                                        Height="16"
+                                        Foreground="DarkGreen"
+                                        Kind="FileSend" />
                                 </Button.Content>
                             </Button>
-                            <Button Command="{Binding Menu.Base.CenterToLayer, ElementName=layerlist}" CommandParameter="{Binding}">
+                            <Button
+                                Command="{Binding Map.RemoveLayerCommand, ElementName=layerlist}"
+                                CommandParameter="{Binding}"
+                                ToolTip="remove layer">
                                 <Button.Content>
-                                    <iconPacks:PackIconMaterial Width="32"
-                                                                Height="32"
-                                                                Foreground="DarkGreen"
-                                                                Kind="FlashRedEye" />
+                                    <iconPacks:PackIconMaterial
+                                        Width="16"
+                                        Height="16"
+                                        Foreground="DarkGreen"
+                                        Kind="Delete" />
                                 </Button.Content>
                             </Button>
                         </StackPanel>
                     </Grid>
-                </StackPanel>
+                    <StackPanel Grid.Row="2">
+                        <Slider
+                            Margin="5"
+                            Maximum="1"
+                            Minimum="0"
+                            TickFrequency="0.01"
+                            Visibility="{Binding SplitLayer.ShowLegend, Converter={StaticResource inverseBooleanVisibilityConverter}}"
+                            Value="{Binding Opacity, Mode=TwoWay}" />
+                        <Slider
+                            Margin="5"
+                            Maximum="1"
+                            Minimum="0"
+                            TickFrequency="0.01"
+                            Visibility="{Binding SplitLayer.ShowLegend, Converter={StaticResource booleanVisibilityConverter}}"
+                            Value="{Binding SplitLayer.Opacity, Mode=TwoWay}" />
+                    </StackPanel>
+                </Grid>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

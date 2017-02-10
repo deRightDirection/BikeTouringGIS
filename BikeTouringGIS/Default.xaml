@@ -19,15 +19,13 @@
     Background="Green"
     BorderBrush="DarkGreen"
     BorderThickness="1"
+    DataContext="{StaticResource BaseViewModel}"
     GlowBrush="LimeGreen"
     Icon="bikecons_touring-32x32.png"
     Loaded="MainWindow_Loaded"
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
     mc:Ignorable="d">
-    <Metro:MetroWindow.DataContext>
-        <vm:BikeTouringGISViewModel />
-    </Metro:MetroWindow.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
