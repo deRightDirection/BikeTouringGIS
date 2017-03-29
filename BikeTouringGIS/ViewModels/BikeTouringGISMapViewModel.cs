@@ -39,6 +39,19 @@ namespace BikeTouringGIS.ViewModels
             LayerLoadedCommand = new RelayCommand<BikeTouringGISLayer>(LayerLoaded);
             RemoveLayerCommand = new RelayCommand<BikeTouringGISLayer>(RemoveLayer);
             _mapSymbols = new Dictionary<GraphicType, object>();
+            MessengerInstance.Register<ExtentChangedMessage>(this, SetNewExtent);
+        }
+
+        private void SetNewExtent(ExtentChangedMessage obj)
+        {
+            if(obj.Extent == null)
+            {
+                SetExtent();
+            }
+            else
+            {
+                MapView.SetView(obj.Extent.Expand(1.1));
+            }
         }
 
         private void RemoveLayer(BikeTouringGISLayer obj)

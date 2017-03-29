@@ -128,8 +128,7 @@
                     <Fluent:Button
                         MinWidth="100"
                         CanAddToQuickAccessToolBar="False"
-                        Command="{Binding Base}"
-                        CommandParameter="{Binding Map}"
+                        Command="{Binding Base.CenterCommand}"
                         Header="zoom to overview"
                         SizeDefinition="10">
                         <Fluent:Button.LargeIcon>
@@ -283,8 +282,8 @@
                     <Fluent:Button
                         MinWidth="100"
                         CanAddToQuickAccessToolBar="False"
-                        Command="{Binding Base}"
-                        CommandParameter="{Binding Map}"
+                        Command="{Binding Base.CenterToLayerCommand}"
+                        CommandParameter="{Binding SelectedLayer}"
                         Header="zoom to layer"
                         SizeDefinition="10">
                         <Fluent:Button.LargeIcon>

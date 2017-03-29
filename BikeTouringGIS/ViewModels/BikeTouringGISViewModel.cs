@@ -32,6 +32,8 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand<BikeTouringGISLayer> RemoveSplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> SaveSplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> SaveLayerCommand { get; private set; }
+        public RelayCommand<BikeTouringGISLayer> CenterToLayerCommand { get; private set; }
+        public RelayCommand CenterCommand { get; private set; }
 
         public BikeTouringGISViewModel()
         {
@@ -42,7 +44,14 @@ namespace BikeTouringGIS.ViewModels
             RemoveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(RemoveSplitRoute);
             SaveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(SaveSplitRoute);
             SaveLayerCommand = new RelayCommand<BikeTouringGISLayer>(SaveLayer);
+            CenterToLayerCommand = new RelayCommand<BikeTouringGISLayer>(CenterMap);
+            CenterCommand = new RelayCommand(() => CenterMap(null));
             MessengerInstance.Register<LayerRemovedMessage>(this,LayerRemoved);
+        }
+
+        private void CenterMap(BikeTouringGISLayer obj)
+        {
+            MessengerInstance.Send(new ExtentChangedMessage() { Extent = obj?.Extent });
         }
 
         private void SaveLayer(BikeTouringGISLayer obj)

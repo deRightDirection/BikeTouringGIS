@@ -107,7 +107,7 @@
                         <TextBlock Grid.Column="0" Text="{Binding DisplayName}" ToolTip="{Binding DisplayName}" />
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
                             <Button
-                                Command="{Binding Menu.Base.CenterToLayer, ElementName=layerlist}"
+                                Command="{Binding Menu.Base.CenterToLayerCommand, ElementName=layerlist}"
                                 CommandParameter="{Binding}"
                                 ToolTip="zoom to layer">
                                 <Button.Content>
