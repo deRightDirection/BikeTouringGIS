@@ -251,6 +251,7 @@
                         CanAddToQuickAccessToolBar="False"
                         Command="{Binding Base}"
                         CommandParameter="{Binding Map}"
+                        IsEnabled="{Binding SelectedLayer.IsInEditMode}"
                         Header="save layer"
                         SizeDefinition="10">
                         <Fluent:Button.LargeIcon>
@@ -297,8 +298,8 @@
                     <Fluent:Button
                         MinWidth="100"
                         CanAddToQuickAccessToolBar="False"
-                        Command="{Binding Base}"
-                        CommandParameter="{Binding Map}"
+                        Command="{Binding Base.RemoveLayerCommand}"
+                        CommandParameter="{Binding SelectedLayer}"
                         Header="remove layer"
                         SizeDefinition="10">
                         <Fluent:Button.LargeIcon>

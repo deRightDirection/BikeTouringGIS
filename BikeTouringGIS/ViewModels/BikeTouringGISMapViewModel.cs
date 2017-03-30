@@ -27,7 +27,6 @@ namespace BikeTouringGIS.ViewModels
     {
         public RelayCommand SetupMapCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> LayerLoadedCommand { get; private set; }
-        public RelayCommand<BikeTouringGISLayer> RemoveLayerCommand { get; private set; }
         private BikeTouringGISLayer _pointsOfInterestLayer;
         private ObservableCollection<BikeTouringGISLayer> _bikeTouringGISLayers;
         private Dictionary<GraphicType, object> _mapSymbols;
@@ -37,9 +36,9 @@ namespace BikeTouringGIS.ViewModels
         {
             SetupMapCommand = new RelayCommand(SetupMap);
             LayerLoadedCommand = new RelayCommand<BikeTouringGISLayer>(LayerLoaded);
-            RemoveLayerCommand = new RelayCommand<BikeTouringGISLayer>(RemoveLayer);
             _mapSymbols = new Dictionary<GraphicType, object>();
             MessengerInstance.Register<ExtentChangedMessage>(this, SetNewExtent);
+            MessengerInstance.Register<LayerRemovedMessage>(this, LayerRemoved);
         }
 
         private void SetNewExtent(ExtentChangedMessage obj)
@@ -54,16 +53,16 @@ namespace BikeTouringGIS.ViewModels
             }
         }
 
-        private void RemoveLayer(BikeTouringGISLayer obj)
+        private void LayerRemoved(LayerRemovedMessage message)
         {
-            var splitLayer = obj.SplitLayer;
-            _map.Layers.Remove(obj);
+            var layer = message.Layer;
+            var splitLayer = layer.SplitLayer;
+            _map.Layers.Remove(layer);
             _map.Layers.Remove(splitLayer);
-            BikeTouringGISLayers.Remove(obj);
+            BikeTouringGISLayers.Remove(layer);
             SetExtent();
             CalculateTotalLength();
             PlacePointsOfInterestLayerOnTop();
-            MessengerInstance.Send(new LayerRemovedMessage() { Layer = obj });
         }
 
         private void LayerLoaded(BikeTouringGISLayer layer)

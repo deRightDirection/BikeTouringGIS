@@ -30,15 +30,18 @@ namespace BikeTouringGIS.Controls
             Graphics.CollectionChanged += SetVisibility;
             _routeSplitter = new RouteSplitter();
         }
-        public BikeTouringGISLayer(string name) : this()
+        public BikeTouringGISLayer(string title) : this(null, title)
+        { }
+        public BikeTouringGISLayer(string filename, string title) : this()
         {
-            FileName = name;
-            DisplayName = name;
-            Title = name;
+            FileName = filename;
+            DisplayName = filename;
+            Title = title;
+            IsInEditMode = false;
             Type = LayerType.PointsOfInterest;
             SplitLayer = new BikeTouringGISLayer() { ShowLegend = false };
         }
-        public BikeTouringGISLayer(string fileName, IRoute route) : this(fileName)
+        public BikeTouringGISLayer(string fileName, IRoute route, string title) : this(fileName, title)
         {
             _route = route;
             Graphics.Add(route.StartLocation);
@@ -229,6 +232,7 @@ namespace BikeTouringGIS.Controls
                 if (value != _title)
                 {
                     _title = value;
+                    IsInEditMode = true;
                     if(string.IsNullOrEmpty(SplitPrefix))
                     {
                         SplitPrefix = _title.Trim();

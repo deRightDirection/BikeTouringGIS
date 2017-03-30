@@ -33,6 +33,7 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand<BikeTouringGISLayer> SaveSplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> SaveLayerCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> CenterToLayerCommand { get; private set; }
+        public RelayCommand<BikeTouringGISLayer> RemoveLayerCommand { get; private set; }
         public RelayCommand CenterCommand { get; private set; }
 
         public BikeTouringGISViewModel()
@@ -42,11 +43,11 @@ namespace BikeTouringGIS.ViewModels
             SplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute);
             ChangeSplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute, CanReSplitRoute);
             RemoveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(RemoveSplitRoute);
+            RemoveLayerCommand = new RelayCommand<BikeTouringGISLayer>(RemoveLayer);
             SaveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(SaveSplitRoute);
             SaveLayerCommand = new RelayCommand<BikeTouringGISLayer>(SaveLayer);
             CenterToLayerCommand = new RelayCommand<BikeTouringGISLayer>(CenterMap);
             CenterCommand = new RelayCommand(() => CenterMap(null));
-            MessengerInstance.Register<LayerRemovedMessage>(this,LayerRemoved);
         }
 
         private void CenterMap(BikeTouringGISLayer obj)
@@ -87,9 +88,10 @@ namespace BikeTouringGIS.ViewModels
             }
         }
 
-        private void LayerRemoved(LayerRemovedMessage obj)
+        private void RemoveLayer(BikeTouringGISLayer layer)
         {
-            _loadedFiles.Remove(obj.Layer.FileName);
+            _loadedFiles.Remove(layer.FileName);
+            MessengerInstance.Send(new LayerRemovedMessage() { Layer = layer });
         }
 
         private void RemoveSplitRoute(BikeTouringGISLayer obj)
@@ -165,8 +167,7 @@ namespace BikeTouringGIS.ViewModels
                     gpxFileInformation.CreateGeometries();
                     foreach(IRoute route in gpxFileInformation.AllRoutes)
                     {
-                        var layer = new BikeTouringGISLayer(file, route);
-                        layer.Title = route.Name;
+                        var layer = new BikeTouringGISLayer(file, route, route.Name);
                         mapViewModel.AddRoutes(layer);
                     }
                     mapViewModel.AddPoIs(gpxFileInformation.WayPoints);

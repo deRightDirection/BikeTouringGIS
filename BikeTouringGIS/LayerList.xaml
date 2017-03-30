@@ -132,7 +132,7 @@
                                 </Button.Content>
                             </Button>
                             <Button
-                                Command="{Binding Map.RemoveLayerCommand, ElementName=layerlist}"
+                                Command="{Binding Menu.Base.RemoveLayerCommand, ElementName=layerlist}"
                                 CommandParameter="{Binding}"
                                 ToolTip="remove layer">
                                 <Button.Content>
