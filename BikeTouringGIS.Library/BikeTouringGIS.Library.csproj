@@ -53,8 +53,10 @@
     <Compile Include="BikeTouringGISGraphic.cs" />
     <Compile Include="BikeTouringGISProjectFileHandler.cs" />
     <Compile Include="DistanceAnalyzer.cs" />
+    <Compile Include="Enumerations\ExtentChangedReason.cs" />
     <Compile Include="Enumerations\GraphicType.cs" />
     <Compile Include="Enumerations\LayerType.cs" />
+    <Compile Include="Enumerations\ZoomOption.cs" />
     <Compile Include="Extensions\GeometryExtension.cs" />
     <Compile Include="GPXFileReader.cs" />
     <Compile Include="GeometryCreatable.cs" />

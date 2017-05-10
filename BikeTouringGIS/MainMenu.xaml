@@ -114,7 +114,8 @@
                         Command="{Binding Base.OpenGPXFileCommand}"
                         CommandParameter="{Binding Map}"
                         Header="open gpx-file"
-                        SizeDefinition="10">
+                        SizeDefinition="10"
+                        ToolTip="open gpx-file and add it to the map">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -130,7 +131,8 @@
                         CanAddToQuickAccessToolBar="False"
                         Command="{Binding Base.CenterCommand}"
                         Header="zoom to overview"
-                        SizeDefinition="10">
+                        SizeDefinition="10"
+                        ToolTip="center map to all data in the map">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -142,10 +144,10 @@
                     <Fluent:Button
                         MinWidth="100"
                         CanAddToQuickAccessToolBar="False"
-                        Command="{Binding Base}"
-                        CommandParameter="{Binding Map}"
+                        Command="{Binding Base.ZoomInCommand}"
                         Header="zoom in"
-                        SizeDefinition="10">
+                        SizeDefinition="10"
+                        ToolTip="zoom in the current view of the map">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -157,10 +159,10 @@
                     <Fluent:Button
                         MinWidth="100"
                         CanAddToQuickAccessToolBar="False"
-                        Command="{Binding Base}"
-                        CommandParameter="{Binding Map}"
+                        Command="{Binding Base.ZoomOutCommand}"
                         Header="zoom out"
-                        SizeDefinition="10">
+                        SizeDefinition="10"
+                        ToolTip="zoom out the current view of the map">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -169,6 +171,7 @@
                                 Kind="Minus" />
                         </Fluent:Button.LargeIcon>
                     </Fluent:Button>
+                    <!--
                     <Fluent:Button
                         MinWidth="100"
                         CanAddToQuickAccessToolBar="False"
@@ -184,6 +187,7 @@
                                 Kind="HandPaperOutline" />
                         </Fluent:Button.LargeIcon>
                     </Fluent:Button>
+                    -->
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
             <!--

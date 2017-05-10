@@ -26,8 +26,8 @@
         HorizontalAlignment="Stretch"
         VerticalAlignment="Stretch"
         BorderThickness="0"
-        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
         ItemsSource="{Binding Layers}"
+        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
         SelectedItem="{Binding SelectedLayer, Mode=TwoWay}">
         <ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">
@@ -93,7 +93,11 @@
                             Foreground="Red"
                             Kind="CommentAlertOutline"
                             Visibility="{Binding IsInEditMode, Converter={StaticResource booleanVisibilityConverter}}" />
-                        <TextBlock FontWeight="Bold" Text="{Binding Title}" TextWrapping="WrapWithOverflow" ToolTip="{Binding Title}" />
+                        <TextBlock
+                            FontWeight="Bold"
+                            Text="{Binding Title}"
+                            TextWrapping="WrapWithOverflow"
+                            ToolTip="{Binding Title}" />
                         <TextBlock
                             Margin="5,0,0,0"
                             Text="{Binding TotalLength, StringFormat=({0} km)}"
@@ -104,7 +108,10 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding DisplayName}" ToolTip="{Binding DisplayName}" />
+                        <TextBlock
+                            Grid.Column="0"
+                            Text="{Binding DisplayName}"
+                            ToolTip="{Binding DisplayName}" />
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
                             <Button
                                 Command="{Binding Menu.Base.CenterToLayerCommand, ElementName=layerlist}"

@@ -3,6 +3,7 @@ using BikeTouringGIS.Controls;
 using BikeTouringGIS.Messenges;
 using BikeTouringGIS.Models;
 using BikeTouringGISLibrary;
+using BikeTouringGISLibrary.Enumerations;
 using Esri.ArcGISRuntime.Layers;
 using GalaSoft.MvvmLight.Command;
 using GPX;
@@ -34,6 +35,8 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand<BikeTouringGISLayer> SaveLayerCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> CenterToLayerCommand { get; private set; }
         public RelayCommand CenterCommand { get; private set; }
+        public RelayCommand ZoomInCommand { get; private set; }
+        public RelayCommand ZoomOutCommand { get; private set; }
 
         public BikeTouringGISViewModel()
         {
@@ -46,12 +49,21 @@ namespace BikeTouringGIS.ViewModels
             SaveLayerCommand = new RelayCommand<BikeTouringGISLayer>(SaveLayer);
             CenterToLayerCommand = new RelayCommand<BikeTouringGISLayer>(CenterMap);
             CenterCommand = new RelayCommand(() => CenterMap(null));
+            ZoomInCommand = new RelayCommand(() => ZoomInOrOutMap(ZoomOption.ZoomIn));
+            ZoomOutCommand = new RelayCommand(() => ZoomInOrOutMap(ZoomOption.ZoomOut));
             MessengerInstance.Register<LayerRemovedMessage>(this,LayerRemoved);
+        }
+
+        private void ZoomInOrOutMap(ZoomOption zoomOption)
+        {
+            var message = zoomOption == ZoomOption.ZoomIn ? new ExtentChangedMessage(ExtentChangedReason.ZoomIn) : new ExtentChangedMessage(ExtentChangedReason.ZoomOut);
+            MessengerInstance.Send(message);
         }
 
         private void CenterMap(BikeTouringGISLayer obj)
         {
-            MessengerInstance.Send(new ExtentChangedMessage() { Extent = obj?.Extent });
+            var message = obj == null ? new ExtentChangedMessage(ExtentChangedReason.CenterMap) : new ExtentChangedMessage(ExtentChangedReason.CenterLayer) { Extent = obj?.Extent };
+            MessengerInstance.Send(message);
         }
 
         private void SaveLayer(BikeTouringGISLayer obj)
