@@ -101,7 +101,7 @@
                     BorderBrush="White"
                     Foreground="LimeGreen"
                     Header="Layer"
-                    Visibility="Visible" />
+                    Visibility="{Binding SelectedLayer, Converter={StaticResource notNullVisibilityConverter}}" />
             </Fluent:Ribbon.ContextualGroups>
             <Fluent:RibbonTabItem
                 MinWidth="150"
