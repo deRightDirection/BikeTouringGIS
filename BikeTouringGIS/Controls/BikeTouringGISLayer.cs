@@ -13,6 +13,7 @@ using Esri.ArcGISRuntime.Geometry;
 using MoreLinq;
 using System.Windows.Media;
 using GPX;
+using System.IO;
 
 namespace BikeTouringGIS.Controls
 {
@@ -42,10 +43,9 @@ namespace BikeTouringGIS.Controls
         public BikeTouringGISLayer(string fileName, IRoute route) : this(fileName)
         {
             _route = route;
-            if (!string.IsNullOrEmpty(route.Name))
-            {
-                Title = route.Name;
-            }
+            Title = string.IsNullOrEmpty(route.Name) ? Path.GetFileNameWithoutExtension(fileName) : route.Name;
+            var subStringLength = Title.Length > 15 ? 15 : Title.Length;
+            SplitPrefix = Title.Substring(0, subStringLength);
             Graphics.Add(route.StartLocation);
             Graphics.Add(route.EndLocation);
             Graphics.Add(route.RouteGeometry);
@@ -248,15 +248,7 @@ namespace BikeTouringGIS.Controls
             {
                 if (value != _title)
                 {
-                    _title = value;
-                    if(string.IsNullOrEmpty(SplitPrefix))
-                    {
-                        SplitPrefix = _title.Trim();
-                        if (_title.Length > 15)
-                        {
-                            SplitPrefix = _title.Substring(0, 15).Trim();
-                        }
-                    }
+                    _title = value.Trim();
                     IsInEditMode = true;
                     OnPropertyChanged("Title");
                 }
