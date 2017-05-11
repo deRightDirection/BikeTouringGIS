@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="MapSource 6.13.7" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensions/v3/GpxExtensionsv3.xsd http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+
+  <metadata>
+    <link href="http://www.garmin.com">
+      <text>Garmin International</text>
+    </link>
+    <time>2011-11-23T03:56:13Z</time>
+    <bounds maxlat="62.4911383" maxlon="-106.0681231" minlat="39.6283633" minlon="-150.3153709"/>
+  </metadata>
+
+  <wpt lat="39.6725644" lon="-106.0905186">
+    <ele>2632.9165039</ele>
+    <name>002</name>
+    <cmt>08-OCT-09 6:19:43AM</cmt>
+    <desc>08-OCT-09 6:19:43AM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="39.7110123" lon="-106.1672460">
+    <ele>2890.0673828</ele>
+    <name>003</name>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="39.6891431" lon="-106.1381769">
+    <ele>3061.9013672</ele>
+    <name>004</name>
+    <cmt>10-OCT-09 8:02:57AM</cmt>
+    <desc>10-OCT-09 8:02:57AM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="39.6891966" lon="-106.1379927">
+    <ele>3062.3823242</ele>
+    <name>005</name>
+    <cmt>10-OCT-09 8:04:22AM</cmt>
+    <desc>10-OCT-09 8:04:22AM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="39.6891479" lon="-106.1381763">
+    <ele>3063.3432617</ele>
+    <name>006</name>
+    <cmt>10-OCT-09 8:05:44AM</cmt>
+    <desc>10-OCT-09 8:05:44AM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="39.6731197" lon="-106.1606847">
+    <ele>3297.4228516</ele>
+    <name>007</name>
+    <cmt>12-OCT-09 3:01:52PM</cmt>
+    <desc>12-OCT-09 3:01:52PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.1167843" lon="-149.7974897">
+    <ele>161.8664551</ele>
+    <name>008</name>
+    <cmt>18-NOV-10 1:27:12PM</cmt>
+    <desc>18-NOV-10 1:27:12PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.9168581" lon="-150.1704356">
+    <ele>188.3026123</ele>
+    <name>009</name>
+    <cmt>18-NOV-10 2:51:20PM</cmt>
+    <desc>18-NOV-10 2:51:20PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.9097074" lon="-150.1622157">
+    <ele>196.2333984</ele>
+    <name>010</name>
+    <cmt>18-NOV-10 2:51:38PM</cmt>
+    <desc>18-NOV-10 2:51:38PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.9077535" lon="-150.1582613">
+    <ele>356.2916260</ele>
+    <name>011</name>
+    <cmt>18-NOV-10 2:54:55PM</cmt>
+    <desc>18-NOV-10 2:54:55PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.8953130" lon="-150.1581567">
+    <ele>366.1451416</ele>
+    <name>012</name>
+    <cmt>18-NOV-10 2:55:36PM</cmt>
+    <desc>18-NOV-10 2:55:36PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.8854235" lon="-150.1550347">
+    <ele>312.0712891</ele>
+    <name>013</name>
+    <cmt>18-NOV-10 2:56:51PM</cmt>
+    <desc>18-NOV-10 2:56:51PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.8726346" lon="-150.2879174">
+    <ele>167.8746338</ele>
+    <name>014</name>
+    <cmt>18-NOV-10 3:00:16PM</cmt>
+    <desc>18-NOV-10 3:00:16PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.8830237" lon="-150.2313160">
+    <ele>154.4162598</ele>
+    <name>015</name>
+    <cmt>18-NOV-10 3:01:21PM</cmt>
+    <desc>18-NOV-10 3:01:21PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.8848992" lon="-150.1677524">
+    <ele>168.1149902</ele>
+    <name>016</name>
+    <cmt>18-NOV-10 3:02:25PM</cmt>
+    <desc>18-NOV-10 3:02:25PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.8310371" lon="-150.2196638">
+    <ele>191.1865234</ele>
+    <name>017</name>
+    <cmt>18-NOV-10 3:04:40PM</cmt>
+    <desc>18-NOV-10 3:04:40PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.8215106" lon="-150.2416594">
+    <ele>195.0317383</ele>
+    <name>018</name>
+    <cmt>18-NOV-10 3:05:09PM</cmt>
+    <desc>18-NOV-10 3:05:09PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.8046903" lon="-150.2665036">
+    <ele>189.2639160</ele>
+    <name>019</name>
+    <cmt>18-NOV-10 3:05:51PM</cmt>
+    <desc>18-NOV-10 3:05:51PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.7978118" lon="-150.2451052">
+    <ele>195.7526855</ele>
+    <name>020</name>
+    <cmt>18-NOV-10 3:06:27PM</cmt>
+    <desc>18-NOV-10 3:06:27PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.7766450" lon="-150.2556407">
+    <ele>237.3294678</ele>
+    <name>021</name>
+    <cmt>18-NOV-10 3:09:50PM</cmt>
+    <desc>18-NOV-10 3:09:50PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.7842033" lon="-150.2544719">
+    <ele>205.3658447</ele>
+    <name>022</name>
+    <cmt>18-NOV-10 3:10:59PM</cmt>
+    <desc>18-NOV-10 3:10:59PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.7845272" lon="-150.2607708">
+    <ele>170.5181885</ele>
+    <name>023</name>
+    <cmt>18-NOV-10 3:11:56PM</cmt>
+    <desc>18-NOV-10 3:11:56PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="62.4911383" lon="-150.2745655">
+    <ele>204.8851318</ele>
+    <name>127 Parking</name>
+    <cmt>03-JAN-10 10:27:56AM</cmt>
+    <desc>03-JAN-10 10:27:56AM</desc>
+    <sym>Geocache Found</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.9974000" lon="-147.7823017">
+    <ele>40.5009766</ele>
+    <name>ambulance</name>
+    <cmt>16-JUL-11 7:01:49PM</cmt>
+    <desc>16-JUL-11 7:01:49PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.0501500" lon="-149.7269167">
+    <ele>410.6055908</ele>
+    <name>AMMOCAN</name>
+    <cmt>8' NNE OF LG SPRUCE UNDER BIRC</cmt>
+    <desc>8' NNE OF LG SPRUCE UNDER BIRC</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.0646602" lon="-149.7609658">
+    <ele>342.5928955</ele>
+    <name>ASHCURVE</name>
+    <cmt>Ashland Dr</cmt>
+    <desc>Ashland Dr</desc>
+    <sym>Flag, Blue</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.0622692" lon="-149.7606468">
+    <ele>345.2364502</ele>
+    <name>ASHLAND</name>
+    <cmt>Ashland Dr and Rosemont Dr</cmt>
+    <desc>Ashland Dr and Rosemont Dr</desc>
+    <sym>Flag, Blue</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.0987045" lon="-149.6837638">
+    <name>BLUE S LP</name>
+    <cmt>Blueberry Loop Trail Southside</cmt>
+    <desc>Blueberry Loop Trail Southside</desc>
+    <sym>Trail Head</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.0631275" lon="-149.7734356">
+    <ele>251.2683105</ele>
+    <name>BLUEBELL</name>
+    <cmt>Golden Vw Dr and Bluebell Dr</cmt>
+    <desc>Golden Vw Dr and Bluebell Dr</desc>
+    <sym>Flag, Blue</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.6930963" lon="-150.0933002">
+    <ele>66.9370117</ele>
+    <name>Cabin</name>
+    <cmt>26-SEP-09 6:22:23PM</cmt>
+    <desc>26-SEP-09 6:22:23PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="39.6828976" lon="-106.1454172">
+    <ele>3136.1625977</ele>
+    <name>Camp</name>
+    <cmt>09-OCT-09 11:06:32AM</cmt>
+    <desc>09-OCT-09 11:06:32AM</desc>
+    <sym>Geocache Found</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.1389625" lon="-149.7777495">
+    <ele>114.5218506</ele>
+    <name>Car</name>
+    <cmt>19-SEP-09 3:47:46PM</cmt>
+    <desc>19-SEP-09 3:47:46PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.1530333" lon="-149.8821833">
+    <name>CREEK</name>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.0903791" lon="-149.6687668">
+    <name>FLATTOP</name>
+    <cmt>Flattop Peak Trail</cmt>
+    <desc>Flattop Peak Trail</desc>
+    <sym>Trail Head</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="62.0490755" lon="-146.8968052">
+    <ele>1012.1462402</ele>
+    <name>moose Camp</name>
+    <cmt>03-SEP-11 6:08:42AM</cmt>
+    <desc>03-SEP-11 6:08:42AM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.1034679" lon="-149.6832490">
+    <name>PARKLOT</name>
+    <cmt>Restrooms</cmt>
+    <desc>Restrooms</desc>
+    <sym>Restroom</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="62.4123075" lon="-150.2579461">
+    <ele>165.7116699</ele>
+    <name>Rv</name>
+    <cmt>16-JAN-10 9:16:14AM</cmt>
+    <desc>16-JAN-10 9:16:14AM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.0954974" lon="-149.6773776">
+    <name>SADDLE</name>
+    <cmt>Flattop Peak Trail</cmt>
+    <desc>Flattop Peak Trail</desc>
+    <sym>Trail Head</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="39.6283633" lon="-106.0681231">
+    <ele>2682.9042969</ele>
+    <name>SILVERTHORNE</name>
+    <cmt>Arapaho National Forest</cmt>
+    <desc>Arapaho National Forest</desc>
+    <sym>Crossing</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.0636425" lon="-149.7664833">
+    <ele>301.2565918</ele>
+    <name>SPAIN</name>
+    <cmt>Bluebell Dr and Spain Dr and A</cmt>
+    <desc>Bluebell Dr and Spain Dr and A</desc>
+    <sym>Flag, Blue</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.0603809" lon="-149.7569561">
+    <ele>391.3793945</ele>
+    <name>Steam1</name>
+    <cmt>Steamboat Dr and Rosemont Dr</cmt>
+    <desc>Steamboat Dr and Rosemont Dr</desc>
+    <sym>Flag, Blue</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.0586643" lon="-149.7565269">
+    <ele>413.9703369</ele>
+    <name>SteamboatDr</name>
+    <cmt>Steamboat Dr and Mountainside</cmt>
+    <desc>Steamboat Dr and Mountainside</desc>
+    <sym>Flag, Blue</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.0580167" lon="-149.7577666">
+    <name>STEWART</name>
+    <cmt>RED GATE Lower Stewart Hmstd R</cmt>
+    <desc>RED GATE Lower Stewart Hmstd R</desc>
+    <sym>Trail Head</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.0543848" lon="-149.7443390">
+    <name>SWITCHBK</name>
+    <cmt>Southside Switchback Trail</cmt>
+    <desc>Southside Switchback Trail</desc>
+    <sym>Trail Head</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.1420166" lon="-149.7659000">
+    <name>TARZAN</name>
+    <cmt>SIDE TRAIL AT POST 21 OR 25 -</cmt>
+    <desc>SIDE TRAIL AT POST 21 OR 25 -</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="39.6312329" lon="-106.0739108">
+    <ele>2670.1674805</ele>
+    <name>THE MINT</name>
+    <cmt>STEAKHOUSE</cmt>
+    <desc>STEAKHOUSE</desc>
+    <sym>Bar</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="39.7110123" lon="-106.1672460">
+    <ele>2890.0673828</ele>
+    <name>trailhead</name>
+    <cmt>08-OCT-09 6:58:27AM</cmt>
+    <desc>08-OCT-09 6:58:27AM</desc>
+    <sym>Geocache Found</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="61.1165147" lon="-149.7984131">
+    <ele>140.4774170</ele>
+    <name>TRAP</name>
+    <sym>Residence</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <wpt lat="62.0897941" lon="-146.8878618">
+    <ele>895.8273926</ele>
+    <name>Weelers</name>
+    <cmt>03-SEP-11 7:07:07PM</cmt>
+    <desc>03-SEP-11 7:07:07PM</desc>
+    <sym>Geocache</sym>
+    <extensions>
+      <gpxx:WaypointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:DisplayMode>SymbolAndName</gpxx:DisplayMode>
+      </gpxx:WaypointExtension>
+    </extensions>
+  </wpt>
+
+  <rte>
+    <name>BLUEBELL TO A</name>
+    <extensions>
+      <gpxx:RouteExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+        <gpxx:IsAutoNamed>false</gpxx:IsAutoNamed>
+      </gpxx:RouteExtension>
+    </extensions>
+    <rtept lat="61.0631275" lon="-149.7734356">
+      <ele>251.2683105</ele>
+      <name>BLUEBELL</name>
+      <cmt>Golden Vw Dr and Bluebell Dr</cmt>
+      <desc>Golden Vw Dr and Bluebell Dr</desc>
+      <sym>Flag, Blue</sym>
+      <extensions>
+        <gpxx:RoutePointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+          <gpxx:Subclass>000000000000ffffffffffffffffffffffff</gpxx:Subclass>
+        </gpxx:RoutePointExtension>
+      </extensions>
+    </rtept>
+    <rtept lat="61.0636425" lon="-149.7664833">
+      <ele>301.2565918</ele>
+      <name>SPAIN</name>
+      <cmt>Bluebell Dr and Spain Dr and A</cmt>
+      <desc>Bluebell Dr and Spain Dr and A</desc>
+      <sym>Flag, Blue</sym>
+      <extensions>
+        <gpxx:RoutePointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+          <gpxx:Subclass>000000000000ffffffffffffffffffffffff</gpxx:Subclass>
+        </gpxx:RoutePointExtension>
+      </extensions>
+    </rtept>
+    <rtept lat="61.0646602" lon="-149.7609658">
+      <ele>342.5928955</ele>
+      <name>ASHCURVE</name>
+      <cmt>Ashland Dr</cmt>
+      <desc>Ashland Dr</desc>
+      <sym>Flag, Blue</sym>
+      <extensions>
+        <gpxx:RoutePointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+          <gpxx:Subclass>000000000000ffffffffffffffffffffffff</gpxx:Subclass>
+        </gpxx:RoutePointExtension>
+      </extensions>
+    </rtept>
+    <rtept lat="61.0622692" lon="-149.7606468">
+      <ele>345.2364502</ele>
+      <name>ASHLAND</name>
+      <cmt>Ashland Dr and Rosemont Dr</cmt>
+      <desc>Ashland Dr and Rosemont Dr</desc>
+      <sym>Flag, Blue</sym>
+      <extensions>
+        <gpxx:RoutePointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+          <gpxx:Subclass>000000000000ffffffffffffffffffffffff</gpxx:Subclass>
+        </gpxx:RoutePointExtension>
+      </extensions>
+    </rtept>
+    <rtept lat="61.0603809" lon="-149.7569561">
+      <ele>391.3793945</ele>
+      <name>Steam1</name>
+      <cmt>Steamboat Dr and Rosemont Dr</cmt>
+      <desc>Steamboat Dr and Rosemont Dr</desc>
+      <sym>Flag, Blue</sym>
+      <extensions>
+        <gpxx:RoutePointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+          <gpxx:Subclass>000000000000ffffffffffffffffffffffff</gpxx:Subclass>
+        </gpxx:RoutePointExtension>
+      </extensions>
+    </rtept>
+    <rtept lat="61.0586643" lon="-149.7565269">
+      <ele>413.9703369</ele>
+      <name>SteamboatDr</name>
+      <cmt>Steamboat Dr and Mountainside</cmt>
+      <desc>Steamboat Dr and Mountainside</desc>
+      <sym>Flag, Blue</sym>
+      <extensions>
+        <gpxx:RoutePointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+          <gpxx:Subclass>000000000000ffffffffffffffffffffffff</gpxx:Subclass>
+        </gpxx:RoutePointExtension>
+      </extensions>
+    </rtept>
+    <rtept lat="61.0580167" lon="-149.7577666">
+      <name>STEWART</name>
+      <cmt>RED GATE Lower Stewart Hmstd R</cmt>
+      <desc>RED GATE Lower Stewart Hmstd R</desc>
+      <sym>Trail Head</sym>
+      <extensions>
+        <gpxx:RoutePointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+          <gpxx:Subclass>000000000000ffffffffffffffffffffffff</gpxx:Subclass>
+        </gpxx:RoutePointExtension>
+      </extensions>
+    </rtept>
+    <rtept lat="61.0543848" lon="-149.7443390">
+      <name>SWITCHBK</name>
+      <cmt>Southside Switchback Trail</cmt>
+      <desc>Southside Switchback Trail</desc>
+      <sym>Trail Head</sym>
+      <extensions>
+        <gpxx:RoutePointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+          <gpxx:Subclass>000000000000ffffffffffffffffffffffff</gpxx:Subclass>
+        </gpxx:RoutePointExtension>
+      </extensions>
+    </rtept>
+    <rtept lat="61.0501500" lon="-149.7269167">
+      <ele>410.6055908</ele>
+      <name>AMMOCAN</name>
+      <cmt>8' NNE OF LG SPRUCE UNDER BIRC</cmt>
+      <desc>8' NNE OF LG SPRUCE UNDER BIRC</desc>
+      <sym>Geocache</sym>
+      <extensions>
+        <gpxx:RoutePointExtension xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3">
+          <gpxx:Subclass>000000000000ffffffffffffffffffffffff</gpxx:Subclass>
+        </gpxx:RoutePointExtension>
+      </extensions>
+    </rtept>
+  </rte>
+</gpx>

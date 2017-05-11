@@ -42,16 +42,12 @@ namespace BikeTouringGISLibrary.UnitTests
         public void LoadFile_Check_If_All_Have_Length()
         {
             var gpxInfo = LoadGPXData("Sample.gpx");
+            gpxInfo.Tracks.ForEach(x => x.ConvertTrackToRoute());
+            gpxInfo.CreateGeometries();
             foreach(var route in gpxInfo.Routes)
             {
                 var layer = new BikeTouringGISLayer("testroute", route);
                 layer.Extent.Should().NotBeNull($"route, {route.Name}");
-            }
-            foreach (var track in gpxInfo.Tracks)
-            {
-                track.ConvertTrackToRoute();
-                var layer = new BikeTouringGISLayer("testtrack", track);
-                layer.Extent.Should().NotBeNull($"track, {track.Name}");
             }
         }
 
@@ -59,6 +55,7 @@ namespace BikeTouringGISLibrary.UnitTests
         {
             var path = Path.Combine(UnitTestDirectory, fileName);
             var gpxInfo = _fileReader.LoadFile(path);
+            gpxInfo.CreateGeometries();
             return gpxInfo;
         }
 
