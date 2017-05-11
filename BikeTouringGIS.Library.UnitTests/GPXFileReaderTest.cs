@@ -51,6 +51,17 @@ namespace BikeTouringGISLibrary.UnitTests
             }
         }
 
+        [TestMethod]
+        // bug #69
+        public void LoadFile_All_WayPoints_Do_Have_Description()
+        {
+            var gpxInfo = LoadGPXData("dwingeloo.gpx");
+            foreach(var wpt in gpxInfo.WayPoints)
+            {
+                wpt.Name.Should().NotBeNullOrEmpty(wpt.Points[0].ToString());
+            }
+        }
+
         private GpxInformation LoadGPXData(string fileName)
         {
             var path = Path.Combine(UnitTestDirectory, fileName);
