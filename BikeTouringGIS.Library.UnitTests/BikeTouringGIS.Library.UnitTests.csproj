@@ -89,6 +89,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BikeTouringGISLayerComparerTest.cs" />
+    <Compile Include="BikeTouringGISLayerTest.cs" />
     <Compile Include="GPXFileReaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

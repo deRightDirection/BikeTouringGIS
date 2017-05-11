@@ -178,7 +178,6 @@ namespace BikeTouringGIS.ViewModels
                     foreach(IRoute route in gpxFileInformation.AllRoutes)
                     {
                         var layer = new BikeTouringGISLayer(file, route);
-                        layer.Title = route.Name;
                         mapViewModel.AddRoutes(layer);
                     }
                     mapViewModel.AddPoIs(gpxFileInformation.WayPoints);

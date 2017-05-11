@@ -41,12 +41,17 @@ namespace BikeTouringGIS.Controls
         public BikeTouringGISLayer(string fileName, IRoute route) : this(fileName)
         {
             _route = route;
+            if (!string.IsNullOrEmpty(route.Name))
+            {
+                Title = route.Name;
+            }
             Graphics.Add(route.StartLocation);
             Graphics.Add(route.EndLocation);
             Graphics.Add(route.RouteGeometry);
             SetLength();
             SelectionColor = Colors.LimeGreen;
             Type = LayerType.GPXRoute;
+            IsInEditMode = false;
         }
         public bool IsSelected
         {
@@ -237,6 +242,7 @@ namespace BikeTouringGIS.Controls
                             SplitPrefix = _title.Substring(0, 15).Trim();
                         }
                     }
+                    IsInEditMode = true;
                     OnPropertyChanged("Title");
                 }
             }
