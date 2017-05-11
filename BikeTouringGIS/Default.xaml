@@ -49,8 +49,8 @@
             Grid.Row="1"
             Grid.Column="0"
             Margin="5,5,1,5"
-            Layers="{Binding BikeTouringGISLayers, ElementName=biketouringgismap, Mode=TwoWay}"
             Map="{Binding DataContext, ElementName=biketouringgismap}"
+            Layers="{Binding BikeTouringGISLayers, ElementName=biketouringgismap, Mode=TwoWay}"
             Menu="{Binding ElementName=mainmenu}" />
         <project:BikeTouringGISMap
             x:Name="biketouringgismap"
@@ -61,6 +61,7 @@
         <project:StatusBar
             Grid.Row="2"
             Grid.ColumnSpan="2"
+            Map="{Binding DataContext, ElementName=biketouringgismap}"
             SelectedRouteLength="{Binding SelectedLayer.TotalLength, ElementName=layerlist}"
             TotalLengthOfRoutes="{Binding TotalLengthOfRoutes, ElementName=biketouringgismap}"
             VersionInformation="{Binding DataContext.VersionInformation, ElementName=MainWindow}" />

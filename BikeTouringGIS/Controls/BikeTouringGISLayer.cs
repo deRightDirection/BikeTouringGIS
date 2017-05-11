@@ -12,6 +12,8 @@ using Esri.ArcGISRuntime.Symbology;
 using Esri.ArcGISRuntime.Geometry;
 using MoreLinq;
 using System.Windows.Media;
+using GPX;
+using System.IO;
 
 namespace BikeTouringGIS.Controls
 {
@@ -44,12 +46,16 @@ namespace BikeTouringGIS.Controls
         public BikeTouringGISLayer(string fileName, IRoute route, string title) : this(fileName, title)
         {
             _route = route;
+            Title = string.IsNullOrEmpty(route.Name) ? Path.GetFileNameWithoutExtension(fileName) : route.Name;
+            var subStringLength = Title.Length > 15 ? 15 : Title.Length;
+            SplitPrefix = Title.Substring(0, subStringLength);
             Graphics.Add(route.StartLocation);
             Graphics.Add(route.EndLocation);
             Graphics.Add(route.RouteGeometry);
             SetLength();
             SelectionColor = Colors.LimeGreen;
             Type = LayerType.GPXRoute;
+            IsInEditMode = false;
         }
         public bool IsSelected
         {
@@ -140,6 +146,20 @@ namespace BikeTouringGIS.Controls
                 }
             }
         }
+
+        internal void Save(string fileName = null)
+        {
+            var gpxFile = new GPXFile();
+            var gpx = new gpxType();
+            var rte = new rteType();
+            rte.name = Title;
+            rte.rtept = ToRoute().Points.ToArray();
+            gpx.rte = new List<rteType>() { rte }.ToArray();
+            var fileNameToSave = string.IsNullOrEmpty(fileName) ? FileName : fileName;
+            gpxFile.Save(fileNameToSave, gpx);
+            IsInEditMode = false;
+        }
+
         private void SetLength()
         {
             var length = 0;
@@ -231,16 +251,8 @@ namespace BikeTouringGIS.Controls
             {
                 if (value != _title)
                 {
-                    _title = value;
+                    _title = value.Trim();
                     IsInEditMode = true;
-                    if(string.IsNullOrEmpty(SplitPrefix))
-                    {
-                        SplitPrefix = _title.Trim();
-                        if (_title.Length > 15)
-                        {
-                            SplitPrefix = _title.Substring(0, 15).Trim();
-                        }
-                    }
                     OnPropertyChanged("Title");
                 }
             }

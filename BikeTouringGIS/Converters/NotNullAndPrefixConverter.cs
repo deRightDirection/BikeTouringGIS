@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
-
+using WinUX;
 namespace BikeTouringGIS.Converters
 {
     public class NotNullAndPrefixConverter : IMultiValueConverter
@@ -23,7 +23,9 @@ namespace BikeTouringGIS.Converters
             {
                 if (values[1] != null)
                 {
-                    hasPrefix = ((string)values[1]).Length > 0;
+                    var valueToCheck = ((string)values[1]);
+                    hasPrefix = valueToCheck.Length > 0;
+                    hasPrefix = valueToCheck.IsValidFileName();
                 }
             }
             return isSplitted && hasPrefix;

@@ -89,6 +89,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BikeTouringGISLayerComparerTest.cs" />
+    <Compile Include="BikeTouringGISLayerTest.cs" />
     <Compile Include="GPXFileReaderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -107,8 +108,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="34.gpx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
     <None Include="BRM300BNK16 v2.GPX">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="dwingeloo.gpx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />

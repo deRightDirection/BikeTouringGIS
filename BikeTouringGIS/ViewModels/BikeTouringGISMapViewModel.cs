@@ -43,13 +43,29 @@ namespace BikeTouringGIS.ViewModels
 
         private void SetNewExtent(ExtentChangedMessage obj)
         {
-            if(obj.Extent == null)
+            switch(obj.ReasonToChangeExtent)
             {
-                SetExtent();
-            }
-            else
-            {
-                MapView.SetView(obj.Extent.Expand(1.1));
+                case ExtentChangedReason.CenterLayer:
+                    MapView.SetView(obj.Extent.Expand(1.1));
+                    break;
+                case ExtentChangedReason.CenterMap:
+                    SetExtent();
+                    break;
+                case ExtentChangedReason.ZoomIn:
+                    MapView.SetView(MapView.Extent.Expand(0.75));
+                    break;
+                case ExtentChangedReason.ZoomOut:
+                    MapView.SetView(MapView.Extent.Expand(1.25));
+                    break;
+                case ExtentChangedReason.StatusBarZoomInOrZoomOut:
+                    // TODO blokkeren dat extent groter wordt dan bepaald zoom extent
+                    try
+                    {
+                        MapView.SetView(MapView.Extent.Expand(obj.ZoomFactor));
+                    }
+                    // error komt als je flink bent uitgezoomd en nog verder wil uitzoomen
+                    catch (NullReferenceException e) { }
+                    break;
             }
         }
 
@@ -164,6 +180,9 @@ namespace BikeTouringGIS.ViewModels
             TotalLengthOfRoutes = length;
         }
 
+        /// <summary>
+        /// zet de extent naar de union van extents van de lagen aanwezig in de kaart
+        /// </summary>
         private void SetExtent()
         {
             Envelope initialExtent = null;

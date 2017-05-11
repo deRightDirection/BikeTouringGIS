@@ -26,16 +26,17 @@
             Value="{Binding SelectedRouteLength, StringFormat=length of selected route {0} km}" />
         <Fluent:StatusBarItem Title="map zoom" HorizontalAlignment="Right">
             <Slider
+                Width="150"
                 x:Name="zoomSlider"
                 IsDirectionReversed="False"
                 IsSnapToTickEnabled="True"
-                LargeChange="0.5"
-                Maximum="1"
-                Minimum="-1"
-                SmallChange="0.25"
+                LargeChange="0.25"
+                Maximum="10"
+                Minimum="0"
+                SmallChange="0.10"
                 Style="{DynamicResource ZoomSliderStyle}"
                 TickFrequency="0.25"
-                Value="{Binding Zoom}" />
+                Value="{Binding Zoom, Mode=TwoWay}" />
         </Fluent:StatusBarItem>
         <Fluent:StatusBarItem
             Title="versie"
