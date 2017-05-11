@@ -32,18 +32,15 @@ namespace BikeTouringGIS.Controls
             Graphics.CollectionChanged += SetVisibility;
             _routeSplitter = new RouteSplitter();
         }
-        public BikeTouringGISLayer(string title) : this(null, title)
-        { }
-        public BikeTouringGISLayer(string filename, string title) : this()
+        public BikeTouringGISLayer(string name) : this()
         {
-            FileName = filename;
-            DisplayName = filename;
-            Title = title;
-            IsInEditMode = false;
+            FileName = name;
+            DisplayName = name;
+            Title = name;
             Type = LayerType.PointsOfInterest;
             SplitLayer = new BikeTouringGISLayer() { ShowLegend = false };
         }
-        public BikeTouringGISLayer(string fileName, IRoute route, string title) : this(fileName, title)
+        public BikeTouringGISLayer(string fileName, IRoute route) : this(fileName)
         {
             _route = route;
             Title = string.IsNullOrEmpty(route.Name) ? Path.GetFileNameWithoutExtension(fileName) : route.Name;

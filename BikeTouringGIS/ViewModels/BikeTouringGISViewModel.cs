@@ -35,7 +35,6 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand<BikeTouringGISLayer> SaveLayerCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> SaveLayerAsCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> CenterToLayerCommand { get; private set; }
-        public RelayCommand<BikeTouringGISLayer> RemoveLayerCommand { get; private set; }
         public RelayCommand CenterCommand { get; private set; }
         public RelayCommand ZoomInCommand { get; private set; }
         public RelayCommand ZoomOutCommand { get; private set; }
@@ -47,7 +46,6 @@ namespace BikeTouringGIS.ViewModels
             SplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute);
             ChangeSplitRouteCommand = new RelayCommand<SplitLayerProperties>(SplitRoute, CanReSplitRoute);
             RemoveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(RemoveSplitRoute);
-            RemoveLayerCommand = new RelayCommand<BikeTouringGISLayer>(RemoveLayer);
             SaveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(SaveSplitRoute);
             SaveLayerCommand = new RelayCommand<BikeTouringGISLayer>(SaveLayer);
             SaveLayerAsCommand = new RelayCommand<BikeTouringGISLayer>(SaveLayerAs);
@@ -108,10 +106,9 @@ namespace BikeTouringGIS.ViewModels
             }
         }
 
-        private void RemoveLayer(BikeTouringGISLayer layer)
+        private void LayerRemoved(LayerRemovedMessage obj)
         {
-            _loadedFiles.Remove(layer.FileName);
-            MessengerInstance.Send(new LayerRemovedMessage() { Layer = layer });
+            _loadedFiles.Remove(obj.Layer.FileName);
         }
 
         private void RemoveSplitRoute(BikeTouringGISLayer obj)
