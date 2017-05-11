@@ -33,12 +33,6 @@ namespace BikeTouringGIS
             SetBinding(SelectedRouteLengthProperty, bindingViewMode);
         }
 
-        public MapView MapView
-        {
-            get { return (MapView)GetValue(MapViewProperty); }
-            set { SetValue(MapViewProperty, value); }
-        }
-
         public int TotalLengthOfRoutes
         {
             get { return (int)GetValue(TotalLengthOfRoutesProperty); }
@@ -85,13 +79,13 @@ namespace BikeTouringGIS
             ((StatusBarViewModel)context).SelectedRouteLength = (int)e.NewValue;
         }
 
-        public static readonly DependencyProperty MapViewProperty =
-            DependencyProperty.Register("MapView", typeof(MapView), typeof(StatusBar), new PropertyMetadata(null, OnMapViewSet));
-
-        private static void OnMapViewSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public BikeTouringGISMapViewModel Map
         {
-            var context = ((StatusBar)d).DataContext;
-            ((StatusBarViewModel)context).MapView = e.NewValue as MapView;
+            get { return (BikeTouringGISMapViewModel)GetValue(MapProperty); }
+            set { SetValue(MapProperty, value); }
         }
+
+        public static readonly DependencyProperty MapProperty =
+            DependencyProperty.Register("Map", typeof(BikeTouringGISMapViewModel), typeof(StatusBar), new PropertyMetadata(null));
     }
 }

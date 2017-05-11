@@ -58,6 +58,15 @@ namespace BikeTouringGIS.ViewModels
                 case ExtentChangedReason.ZoomOut:
                     MapView.SetView(MapView.Extent.Expand(1.25));
                     break;
+                case ExtentChangedReason.StatusBarZoomInOrZoomOut:
+                    // TODO blokkeren dat extent groter wordt dan bepaald zoom extent
+                    try
+                    {
+                        MapView.SetView(MapView.Extent.Expand(obj.ZoomFactor));
+                    }
+                    // error komt als je flink bent uitgezoomd en nog verder wil uitzoomen
+                    catch (NullReferenceException e) { }
+                    break;
             }
         }
 

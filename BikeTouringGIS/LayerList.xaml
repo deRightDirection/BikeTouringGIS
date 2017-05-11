@@ -116,7 +116,7 @@
                             <Button
                                 Command="{Binding Menu.Base.CenterToLayerCommand, ElementName=layerlist}"
                                 CommandParameter="{Binding}"
-                                ToolTip="zoom to layer">
+                                ToolTip="center map to layer">
                                 <Button.Content>
                                     <iconPacks:PackIconMaterial
                                         Width="16"
@@ -129,7 +129,7 @@
                                 Command="{Binding Menu.Base.SaveLayerCommand, ElementName=layerlist}"
                                 CommandParameter="{Binding}"
                                 IsEnabled="{Binding IsInEditMode}"
-                                ToolTip="save layer">
+                                ToolTip="save layer to same file">
                                 <Button.Content>
                                     <iconPacks:PackIconMaterial
                                         Width="16"
@@ -141,7 +141,7 @@
                             <Button
                                 Command="{Binding Map.RemoveLayerCommand, ElementName=layerlist}"
                                 CommandParameter="{Binding}"
-                                ToolTip="remove layer">
+                                ToolTip="remove layer from map">
                                 <Button.Content>
                                     <iconPacks:PackIconMaterial
                                         Width="16"

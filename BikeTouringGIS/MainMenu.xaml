@@ -101,8 +101,8 @@
                     BorderBrush="White"
                     Foreground="LimeGreen"
                     Header="Layer"
-                    IsEnabled="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}" 
-                    Visibility="Visible"/>
+                    IsEnabled="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}"
+                    Visibility="Visible" />
             </Fluent:Ribbon.ContextualGroups>
             <Fluent:RibbonTabItem
                 MinWidth="150"
@@ -254,10 +254,12 @@
                     <Fluent:Button
                         MinWidth="100"
                         CanAddToQuickAccessToolBar="False"
-                        Command="{Binding Base}"
-                        CommandParameter="{Binding Map}"
+                        Command="{Binding Base.SaveLayerCommand}"
+                        CommandParameter="{Binding SelectedLayer}"
                         Header="save layer"
-                        SizeDefinition="10">
+                        IsEnabled="{Binding SelectedLayer.IsInEditMode}"
+                        SizeDefinition="10"
+                        ToolTip="save layer to same file">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -269,11 +271,11 @@
                     <Fluent:Button
                         MinWidth="100"
                         CanAddToQuickAccessToolBar="False"
-                        Command="{Binding Base}"
-                        CommandParameter="{Binding Map}"
+                        Command="{Binding Base.SaveLayerAsCommand}"
+                        CommandParameter="{Binding SelectedLayer}"
                         Header="save layer as..."
                         SizeDefinition="10"
-                        ToolTip="open gpx-file">
+                        ToolTip="save layer to new file">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -290,7 +292,8 @@
                         Command="{Binding Base.CenterToLayerCommand}"
                         CommandParameter="{Binding SelectedLayer}"
                         Header="zoom to layer"
-                        SizeDefinition="10">
+                        SizeDefinition="10"
+                        ToolTip="center map to layer">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -302,10 +305,11 @@
                     <Fluent:Button
                         MinWidth="100"
                         CanAddToQuickAccessToolBar="False"
-                        Command="{Binding Base}"
-                        CommandParameter="{Binding Map}"
+                        Command="{Binding Map.RemoveLayerCommand}"
+                        CommandParameter="{Binding SelectedLayer}"
                         Header="remove layer"
-                        SizeDefinition="10">
+                        SizeDefinition="10"
+                        ToolTip="remove layer from map">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -326,7 +330,8 @@
                         Command="{Binding Base.FlipDirectionCommand}"
                         CommandParameter="{Binding DataContext.SelectedLayer}"
                         Header="flip direction"
-                        IsEnabled="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}">
+                        IsEnabled="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}"
+                        ToolTip="flip the direction of the route and so the drive direction">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -347,7 +352,8 @@
                         MinWidth="100"
                         Command="{Binding Base.SplitRouteCommand}"
                         Header="split route"
-                        IsEnabled="{Binding SelectedLayer.IsSplitted, Converter={StaticResource inverseBooleanConverter}}">
+                        IsEnabled="{Binding SelectedLayer.IsSplitted, Converter={StaticResource inverseBooleanConverter}}"
+                        ToolTip="split the route in parts of the same length">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -372,6 +378,7 @@
                             Minimum="10"
                             TickFrequency="1"
                             Ticks="10, 20, 30, 40, 50, 60, 70, 80, 90, 100,110,120,130,140,150"
+                            ToolTip="select the length of a splitted route part"
                             Value="{Binding Base.SplitLength}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="ValueChanged">
@@ -390,7 +397,8 @@
                         Command="{Binding Base.RemoveSplitRouteCommand}"
                         CommandParameter="{Binding DataContext.SelectedLayer}"
                         Header="remove split route"
-                        IsEnabled="{Binding SelectedLayer.IsSplitted}">
+                        IsEnabled="{Binding SelectedLayer.IsSplitted}"
+                        ToolTip="remove the splitted route and show the original route again">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
                                 Width="32"
@@ -404,12 +412,14 @@
                         Header="prefix"
                         InputWidth="150"
                         IsEnabled="{Binding SelectedLayer.IsSplitted}"
-                        Text="{Binding SelectedLayer.SplitPrefix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding SelectedLayer.SplitPrefix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        ToolTip="determine the prefix of the files with the splitted parts of the route" />
                     <Fluent:Button
                         MinWidth="100"
                         Command="{Binding Base.SaveSplitRouteCommand}"
                         CommandParameter="{Binding DataContext.SelectedLayer}"
-                        Header="save split route">
+                        Header="save split route"
+                        ToolTip="save the splitted parts of the route to new files">
                         <Fluent:Button.IsEnabled>
                             <MultiBinding Converter="{StaticResource notNullAndPrefixConverter}">
                                 <Binding Path="SelectedLayer.IsSplitted" />

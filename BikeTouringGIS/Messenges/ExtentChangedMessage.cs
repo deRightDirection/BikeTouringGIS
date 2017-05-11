@@ -16,5 +16,6 @@ namespace BikeTouringGIS.Messenges
         }
         public Envelope Extent { get; internal set; }
         public ExtentChangedReason ReasonToChangeExtent { get; private set; }
+        public double ZoomFactor { get; internal set; }
     }
 }

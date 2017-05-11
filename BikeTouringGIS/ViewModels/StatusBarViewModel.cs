@@ -1,4 +1,6 @@
-﻿using Esri.ArcGISRuntime.Controls;
+﻿using BikeTouringGIS.Messenges;
+using BikeTouringGISLibrary.Enumerations;
+using Esri.ArcGISRuntime.Controls;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -9,15 +11,14 @@ using System.Windows;
 
 namespace BikeTouringGIS.ViewModels
 {
-    public class StatusBarViewModel : ViewModelBase
+    public class StatusBarViewModel : BikeTouringGISBaseViewModel
     {
         private int _totalLengthOfRoutes, _selectedRouteLength;
         private string _versionInformation;
-        private MapView _mapView;
         private double _zoom;
         public StatusBarViewModel()
         {
-            _zoom = 0;
+            _zoom = 1;
         }
 
         public int SelectedRouteLength
@@ -35,24 +36,21 @@ namespace BikeTouringGIS.ViewModels
             get { return _versionInformation; }
             set { Set(ref _versionInformation, value); }
         }
-        public MapView MapView
-        {
-            set { Set(ref _mapView, value); }
-        }
 
         public double Zoom
         {
             get { return _zoom; }
             set
             {
+                ZoomMap(1 - (value- _zoom));
                 Set(ref _zoom, value);
-                ZoomMap();
             }
         }
 
-        private void ZoomMap()
+        private void ZoomMap(double zoomFactor)
         {
-            _mapView.ZoomAsync(Zoom);
+            var message = new ExtentChangedMessage(ExtentChangedReason.StatusBarZoomInOrZoomOut) { ZoomFactor = zoomFactor };
+            MessengerInstance.Send(message);
         }
     }
 }

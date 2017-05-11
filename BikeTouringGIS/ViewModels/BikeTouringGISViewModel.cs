@@ -33,6 +33,7 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand<BikeTouringGISLayer> RemoveSplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> SaveSplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> SaveLayerCommand { get; private set; }
+        public RelayCommand<BikeTouringGISLayer> SaveLayerAsCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> CenterToLayerCommand { get; private set; }
         public RelayCommand CenterCommand { get; private set; }
         public RelayCommand ZoomInCommand { get; private set; }
@@ -47,6 +48,7 @@ namespace BikeTouringGIS.ViewModels
             RemoveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(RemoveSplitRoute);
             SaveSplitRouteCommand = new RelayCommand<BikeTouringGISLayer>(SaveSplitRoute);
             SaveLayerCommand = new RelayCommand<BikeTouringGISLayer>(SaveLayer);
+            SaveLayerAsCommand = new RelayCommand<BikeTouringGISLayer>(SaveLayerAs);
             CenterToLayerCommand = new RelayCommand<BikeTouringGISLayer>(CenterMap);
             CenterCommand = new RelayCommand(() => CenterMap(null));
             ZoomInCommand = new RelayCommand(() => ZoomInOrOutMap(ZoomOption.ZoomIn));
@@ -65,19 +67,24 @@ namespace BikeTouringGIS.ViewModels
             var message = obj == null ? new ExtentChangedMessage(ExtentChangedReason.CenterMap) : new ExtentChangedMessage(ExtentChangedReason.CenterLayer) { Extent = obj?.Extent };
             MessengerInstance.Send(message);
         }
-
+        private void SaveLayerAs(BikeTouringGISLayer obj)
+        {
+            if (obj != null)
+            {
+                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
+                saveFileDialog.Filter = "GPX files (*.gpx)|*.gpx";
+                saveFileDialog.InitialDirectory = DropBoxHelper.GetDropBoxFolder();
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    obj.Save(saveFileDialog.FileName);
+                }
+            }
+        }
         private void SaveLayer(BikeTouringGISLayer obj)
         {
             if(obj != null)
             {
-                var gpxFile = new GPXFile();
-                var gpx = new gpxType();
-                var rte = new rteType();
-                rte.name = obj.Title;
-                rte.rtept = obj.ToRoute().Points.ToArray();
-                gpx.rte = new List<rteType>() { rte }.ToArray();
-                gpxFile.Save(obj.FileName, gpx);
-                obj.IsInEditMode = false;
+                obj.Save();
             }
         }
 

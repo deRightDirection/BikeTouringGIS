@@ -13,6 +13,7 @@ namespace BikeTouringGISLibrary.Enumerations
         CenterLayer,
         ZoomIn,
         ZoomOut,
-        Pan
+        Pan,
+        StatusBarZoomInOrZoomOut
     }
 }

@@ -12,6 +12,7 @@ using Esri.ArcGISRuntime.Symbology;
 using Esri.ArcGISRuntime.Geometry;
 using MoreLinq;
 using System.Windows.Media;
+using GPX;
 
 namespace BikeTouringGIS.Controls
 {
@@ -142,6 +143,20 @@ namespace BikeTouringGIS.Controls
                 }
             }
         }
+
+        internal void Save(string fileName = null)
+        {
+            var gpxFile = new GPXFile();
+            var gpx = new gpxType();
+            var rte = new rteType();
+            rte.name = Title;
+            rte.rtept = ToRoute().Points.ToArray();
+            gpx.rte = new List<rteType>() { rte }.ToArray();
+            var fileNameToSave = string.IsNullOrEmpty(fileName) ? FileName : fileName;
+            gpxFile.Save(fileNameToSave, gpx);
+            IsInEditMode = false;
+        }
+
         private void SetLength()
         {
             var length = 0;
