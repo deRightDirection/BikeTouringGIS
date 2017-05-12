@@ -91,6 +91,7 @@
     <Compile Include="BikeTouringGISLayerComparerTest.cs" />
     <Compile Include="BikeTouringGISLayerTest.cs" />
     <Compile Include="GPXFileReaderTest.cs" />
+    <Compile Include="GPXFileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="34.gpx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="70.gpx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="70_2.gpx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="app.config" />
