@@ -28,6 +28,7 @@ namespace BikeTouringGISLibrary
         {
             var mappoint = new MapPoint((double)location.lon, (double)location.lat, new SpatialReference(4326));
             var g = new BikeTouringGISGraphic(mappoint, typeOfPoint);
+            g.ZIndex = 1;
             g.Attributes["name"] = nameAttribute;
             return g;
         }
