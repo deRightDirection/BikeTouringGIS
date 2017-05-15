@@ -38,7 +38,7 @@ namespace BikeTouringGIS.Controls
             DisplayName = name;
             Title = name;
             Type = LayerType.PointsOfInterest;
-            SplitLayer = new BikeTouringGISLayer() { ShowLegend = false };
+            SplitLayer = new BikeTouringGISLayer() { ShowLegend = false, Type = LayerType.SplitRoutes };
         }
         public BikeTouringGISLayer(string fileName, IRoute route) : this(fileName)
         {

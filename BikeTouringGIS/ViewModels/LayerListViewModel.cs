@@ -52,7 +52,18 @@ namespace BikeTouringGIS.ViewModels
         public BikeTouringGISLayer SelectedLayer
         {
             get { return _selectedLayer; }
-            set { Set(ref _selectedLayer, value); }
+            set
+            {
+                if (_selectedLayer != value)
+                {
+                    _selectedLayer = value;
+                    if (value?.Type == LayerType.PointsOfInterest)
+                    {
+                        _selectedLayer = null;
+                    }
+                    RaisePropertyChanged("SelectedLayer");
+                }
+            }
         }
     }
 }
