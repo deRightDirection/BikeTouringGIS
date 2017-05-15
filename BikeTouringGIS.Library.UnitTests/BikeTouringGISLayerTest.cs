@@ -29,6 +29,16 @@ namespace BikeTouringGISLibrary.UnitTests
             layer.IsInEditMode.ShouldBeEquivalentTo(true);
         }
 
+        [TestMethod]
+        // bug #63
+        public void Title_Is_Correct()
+        {
+            var layer = CreateLayer("dwingeloo.gpx");
+            layer.Title.ShouldBeEquivalentTo("MTB Dwingeloo");
+            layer = CreateLayer("63.gpx");
+            layer.Title.ShouldBeEquivalentTo("Holland Classic - 30 km");
+        }
+
         private BikeTouringGISLayer CreateLayer(string fileName)
         {
             var path = Path.Combine(UnitTestDirectory, fileName);

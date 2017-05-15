@@ -120,6 +120,9 @@
     <None Include="34.gpx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="63.gpx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="70.gpx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

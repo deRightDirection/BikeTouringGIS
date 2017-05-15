@@ -30,12 +30,12 @@ namespace BikeTouringGISLibrary
             foreach (var track in gpx.GetTracks())
             {
                 var gpxTrack = new Track();
-                if (string.IsNullOrEmpty(track.name))
+                if (string.IsNullOrEmpty(track.name) && string.IsNullOrEmpty(gpx.Name))
                 {
                     track.name = $"t{trackIndex.ToString()}";
                     trackIndex++;
                 }
-                gpxTrack.Name = track.name;
+                gpxTrack.Name = string.IsNullOrEmpty(track.name) ? gpx.Name : track.name;
                 gpxTrack.Segments = track.trkseg;
                 _gpxData.Tracks.Add(gpxTrack);
             }
