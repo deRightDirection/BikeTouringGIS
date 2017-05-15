@@ -86,11 +86,11 @@ namespace BikeTouringGIS.ViewModels
 
         private void RemoveLayer(BikeTouringGISLayer obj)
         {
-            RemovePointsOfInterestOfRemovedLayer(obj);
             var splitLayer = obj.SplitLayer;
             _map.Layers.Remove(obj);
             _map.Layers.Remove(splitLayer);
             BikeTouringGISLayers.Remove(obj);
+            RemovePointsOfInterestOfRemovedLayer(obj);
             SetExtent();
             CalculateTotalLength();
             PlacePointsOfInterestLayerOnTop();
@@ -100,10 +100,14 @@ namespace BikeTouringGIS.ViewModels
         private void RemovePointsOfInterestOfRemovedLayer(BikeTouringGISLayer obj)
         {
             var source = obj.FileName;
-            var graphicsToRemove = _pointsOfInterestLayer.Graphics.Where(x => x.Attributes["source"].Equals(source));
-            var poiPoints = _pointsOfInterestLayer.Graphics.ToList();
-            poiPoints.RemoveItems(graphicsToRemove);
-            _pointsOfInterestLayer.Graphics = new GraphicCollection(poiPoints);
+            var layersWithSameSource = BikeTouringGISLayers.Any(x => x.FileName.Equals(source));
+            if (!layersWithSameSource)
+            {
+                var graphicsToRemove = _pointsOfInterestLayer.Graphics.Where(x => x.Attributes["source"].Equals(source));
+                var poiPoints = _pointsOfInterestLayer.Graphics.ToList();
+                poiPoints.RemoveItems(graphicsToRemove);
+                _pointsOfInterestLayer.Graphics = new GraphicCollection(poiPoints);
+            }
         }
 
         private void LayerLoaded(BikeTouringGISLayer layer)
@@ -161,6 +165,7 @@ namespace BikeTouringGIS.ViewModels
             SetExtent();
             CalculateTotalLength();
             PlacePointsOfInterestLayerOnTop();
+//            LayerLoaded(layer);
         }
 
         private void PlacePointsOfInterestLayerOnTop()

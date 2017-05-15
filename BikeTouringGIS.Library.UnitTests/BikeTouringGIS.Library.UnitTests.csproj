@@ -103,6 +103,10 @@
       <Project>{159F1FC4-4759-4DB0-8695-FFD423302DB4}</Project>
       <Name>GPX</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\WinUX-UWP-Toolkit\WinUX\WinUX.Common\WinUX.Common.csproj">
+      <Project>{55c7fa03-c3b0-4aa0-be48-3fa435ee37c1}</Project>
+      <Name>WinUX.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BikeTouringGIS.Library\BikeTouringGIS.Library.csproj">
       <Project>{bdc204a2-f656-43b9-9b4b-c6308bd81404}</Project>
       <Name>BikeTouringGISLibrary</Name>
