@@ -12,6 +12,7 @@ namespace BikeTouringGISLibrary.Model
     public class WayPoint : GeometryCreatable
     {
         public string Name { get; internal set; }
+        public string Source { get; internal set; }
 
         internal override void CreateGeometry()
         {
@@ -21,7 +22,9 @@ namespace BikeTouringGISLibrary.Model
 
         public BikeTouringGISGraphic ToGraphic()
         {
-            return CreateBikeTouringGISGraphic(Name, GraphicType.PointOfInterest);
+            var graphic = CreateBikeTouringGISGraphic(Name, GraphicType.PointOfInterest);
+            graphic.Attributes["source"] = Source;
+            return graphic;
         }
     }
 }

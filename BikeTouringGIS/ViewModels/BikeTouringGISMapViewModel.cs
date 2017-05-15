@@ -42,6 +42,20 @@ namespace BikeTouringGIS.ViewModels
             MessengerInstance.Register<ExtentChangedMessage>(this, SetNewExtent);
         }
 
+        /// <summary>
+        /// constructor alleen voor unit-testing, moet wel gerefactored worden
+        /// https://github.com/MannusEtten/BikeTouringGIS/issues/83
+        /// </summary>
+        internal BikeTouringGISMapViewModel(bool createMap) : this()
+        {
+            _map = new Map();
+            var poiLayer = new BikeTouringGISLayer("Points of Interest");
+            _map.Layers.Add(poiLayer);
+            _pointsOfInterestLayer = poiLayer;
+            LayerLoaded(_pointsOfInterestLayer);
+            MapView = new MapView() { Map = _map };
+        }
+
         private void SetNewExtent(ExtentChangedMessage obj)
         {
             switch(obj.ReasonToChangeExtent)
@@ -72,6 +86,7 @@ namespace BikeTouringGIS.ViewModels
 
         private void RemoveLayer(BikeTouringGISLayer obj)
         {
+            RemovePointsOfInterestOfRemovedLayer(obj);
             var splitLayer = obj.SplitLayer;
             _map.Layers.Remove(obj);
             _map.Layers.Remove(splitLayer);
@@ -80,6 +95,15 @@ namespace BikeTouringGIS.ViewModels
             CalculateTotalLength();
             PlacePointsOfInterestLayerOnTop();
             MessengerInstance.Send(new LayerRemovedMessage() { Layer = obj });
+        }
+
+        private void RemovePointsOfInterestOfRemovedLayer(BikeTouringGISLayer obj)
+        {
+            var source = obj.FileName;
+            var graphicsToRemove = _pointsOfInterestLayer.Graphics.Where(x => x.Attributes["source"].Equals(source));
+            var poiPoints = _pointsOfInterestLayer.Graphics.ToList();
+            poiPoints.RemoveItems(graphicsToRemove);
+            _pointsOfInterestLayer.Graphics = new GraphicCollection(poiPoints);
         }
 
         private void LayerLoaded(BikeTouringGISLayer layer)

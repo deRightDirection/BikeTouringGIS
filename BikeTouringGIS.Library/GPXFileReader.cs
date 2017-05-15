@@ -11,11 +11,13 @@ namespace BikeTouringGISLibrary
     public class GpxFileReader
     {
         private GpxInformation _gpxData;
+        private string _fileName;
 
         public GpxInformation LoadFile(string fileName)
         {
             _gpxData = new GpxInformation();
-            var gpx = new GPXFile(fileName);
+            _fileName = fileName;
+            var gpx = new GPXFile(_fileName);
             LoadRoutes(gpx);
             LoadWayPoints(gpx);
             LoadTracks(gpx);
@@ -46,6 +48,7 @@ namespace BikeTouringGISLibrary
             {
                 var wPoint = new WayPoint();
                 wPoint.Name = waypoint.name;
+                wPoint.Source = _fileName;
                 wPoint.Points = new List<wptType>() { waypoint };
                 _gpxData.WayPoints.Add(wPoint);
             }
