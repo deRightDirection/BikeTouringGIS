@@ -26,6 +26,7 @@ namespace BikeTouringGIS.Controls
         private string _splitPrefix, _title;
         private RouteSplitter _routeSplitter;
         private int _totalLength, _splitDistance;
+        private Envelope _extent;
 
         private BikeTouringGISLayer()
         {
@@ -244,17 +245,33 @@ namespace BikeTouringGIS.Controls
                 }
             }
         }
+
+        internal void SetExtentToFitWithWaypoints(Envelope wayPointsExtent)
+        {
+            Extent = Extent.Union(wayPointsExtent);
+        }
+
         public Envelope Extent
         {
             get
             {
-                Envelope initialExtent = null;
-                foreach (var graphic in Graphics)
+                if(_extent == null)
                 {
-                    var graphicExtent = graphic.Geometry.Extent;
-                    initialExtent = initialExtent == null ? initialExtent = graphicExtent : initialExtent = initialExtent.Union(graphicExtent);
+                    foreach (var graphic in Graphics)
+                    {
+                        var graphicExtent = graphic.Geometry.Extent;
+                        _extent = _extent == null ? graphicExtent : _extent.Union(graphicExtent);
+                    }
                 }
-                return initialExtent;
+                return _extent;
+            }
+            set
+            {
+                if(value != _extent)
+                {
+                    _extent = value;
+                    OnPropertyChanged("Extent");
+                }
             }
         }
 

@@ -13,6 +13,19 @@ namespace BikeTouringGISLibrary.Model
         public List<Route> Routes { get; private set;}
         public List<Track> Tracks { get; private set; }
         public List<WayPoint> WayPoints { get; private set; }
+        public Envelope WayPointsExtent
+        {
+            get
+            {
+                Envelope initialExtent = null;
+                foreach (var wayPoint in WayPoints)
+                {
+                    var graphicExtent = wayPoint.Extent;
+                    initialExtent = initialExtent == null ? initialExtent = graphicExtent : initialExtent = initialExtent.Union(graphicExtent);
+                }
+                return initialExtent;
+            }
+        }
 
         public void CreateGeometries()
         {

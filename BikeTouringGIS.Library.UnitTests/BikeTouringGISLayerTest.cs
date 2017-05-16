@@ -39,13 +39,23 @@ namespace BikeTouringGISLibrary.UnitTests
             layer.Title.ShouldBeEquivalentTo("Holland Classic - 30 km");
         }
 
+        [TestMethod]
+        // bug #65
+        public void Check_Extent_Is_Big_Enough_For_Also_Waypoints()
+        {
+            var layer = CreateLayer("65.gpx");
+            layer.Extent.XMax.Should().BeGreaterOrEqualTo(6.732440000);
+        }
+
         private BikeTouringGISLayer CreateLayer(string fileName)
         {
             var path = Path.Combine(UnitTestDirectory, fileName);
             var gpxInfo = new GpxFileReader().LoadFile(path);
             gpxInfo.Tracks.ForEach(x => x.ConvertTrackToRoute());
             gpxInfo.CreateGeometries();
-            return new BikeTouringGISLayer("testroute", gpxInfo.Routes.First());
+            var layer = new BikeTouringGISLayer("testroute", gpxInfo.Routes.First());
+            layer.SetExtentToFitWithWaypoints(gpxInfo.WayPointsExtent);
+            return layer;
         }
     }
 }

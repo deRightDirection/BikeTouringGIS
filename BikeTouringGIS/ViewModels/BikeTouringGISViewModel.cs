@@ -185,6 +185,7 @@ namespace BikeTouringGIS.ViewModels
                     foreach(IRoute route in gpxFileInformation.AllRoutes)
                     {
                         var layer = new BikeTouringGISLayer(file, route);
+                        layer.SetExtentToFitWithWaypoints(gpxFileInformation.WayPointsExtent);
                         mapViewModel.AddRoutes(layer);
                     }
                     mapViewModel.AddPoIs(gpxFileInformation.WayPoints);
