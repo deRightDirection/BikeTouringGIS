@@ -40,7 +40,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>bikecons_touring-16x16.ico</ApplicationIcon>
+    <ApplicationIcon>biketouringgislogo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=2.2.0.4, Culture=neutral, PublicKeyToken=f08b075e934b7045, processorArchitecture=MSIL">
@@ -274,15 +274,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="bikecons_touring-16x16.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <SplashScreen Include="bike touring gis splash screen.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="bikecons_touring-32x32.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="biketouringgislogo.ico" />
+    <Resource Include="biketouringgislogo_transparant.ico" />
     <Content Include="Log4NetConfiguration.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

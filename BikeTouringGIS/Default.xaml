@@ -21,7 +21,7 @@
     BorderThickness="1"
     DataContext="{StaticResource BaseViewModel}"
     GlowBrush="LimeGreen"
-    Icon="bikecons_touring-32x32.png"
+    Icon="biketouringgislogo_transparant.ico"
     Loaded="MainWindow_Loaded"
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
