@@ -38,7 +38,7 @@ namespace BikeTouringGIS.Controls
             DisplayName = name;
             Title = name;
             Type = LayerType.PointsOfInterest;
-            SplitLayer = new BikeTouringGISLayer() { ShowLegend = false, Type = LayerType.SplitRoutes };
+            SplitLayer = new BikeTouringGISLayer() { ShowLegend = false, Type = LayerType.SplitRoutes, SelectionColor = Colors.LimeGreen };
         }
         public BikeTouringGISLayer(string fileName, IRoute route) : this(fileName)
         {
@@ -62,17 +62,28 @@ namespace BikeTouringGIS.Controls
                 if (value != _isSelected)
                 {
                     _isSelected = value;
-                    foreach (BikeTouringGISGraphic graphic in Graphics)
+                    if (SplitLayer != null)
                     {
-                        if (graphic.Type == GraphicType.GPXRoute)
-                        {
-                            graphic.IsSelected = _isSelected;
-                        }
+                        SplitLayer.IsSelected = value;
+                        SplitLayer.SetSelectionColorOfGraphics();
                     }
+                    SetSelectionColorOfGraphics();
                     OnPropertyChanged("IsSelected");
                 }
             }
         }
+
+        private void SetSelectionColorOfGraphics()
+        {
+            foreach (BikeTouringGISGraphic graphic in Graphics)
+            {
+                if (graphic.Type == GraphicType.GPXRoute || graphic.Type == GraphicType.SplitRoute)
+                {
+                    graphic.IsSelected = IsSelected;
+                }
+            }
+        }
+
         public string SplitPrefix
         {
             get { return _splitPrefix; }
@@ -198,7 +209,7 @@ namespace BikeTouringGIS.Controls
             SetSymbols();
             if (Type == LayerType.GPXRoute)
             {
-                SplitLayer = new BikeTouringGISLayer() { Type = LayerType.SplitRoutes, IsVisible = false, ShowLegend = false };
+                SplitLayer = new BikeTouringGISLayer() { Type = LayerType.SplitRoutes, IsVisible = false, ShowLegend = false, SelectionColor = Colors.LimeGreen };
                 SplitLayer.Labeling.IsEnabled = true;
                 SplitLayer.Labeling.LabelClasses.Add(new AttributeLabelClass() { Symbol = (TextSymbol)_symbols[GraphicType.SplitPointLabel], TextExpression = "[distance]" });
             }
@@ -272,6 +283,7 @@ namespace BikeTouringGIS.Controls
             SplitLayer.IsVisible = true;
             IsVisible = false;
             IsSplitted = true;
+            SplitLayer.SetSelectionColorOfGraphics();
         }
         
         public IEnumerable<IRoute> SplitRoutes

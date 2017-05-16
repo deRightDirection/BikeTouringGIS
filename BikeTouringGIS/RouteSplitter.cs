@@ -88,6 +88,7 @@ namespace BikeTouringGIS
                 var point = _splitPoints[i];
                 var mapPoint = new MapPoint((double)point.lon, (double)point.lat, sr);
                 var graphic = new BikeTouringGISGraphic(mapPoint, GraphicType.SplitPoint);
+                graphic.ZIndex = 1;
                 cumulativeDistance += GetDistance(startPoint, point);
                 startPoint = point;
                 graphic.Attributes["distance"] = cumulativeDistance;
