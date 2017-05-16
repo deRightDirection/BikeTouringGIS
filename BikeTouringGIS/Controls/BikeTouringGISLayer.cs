@@ -131,7 +131,14 @@ namespace BikeTouringGIS.Controls
 
         public bool IsInEditMode
         {
-            get { return _isInEditMode; }
+            get
+            {
+                if(Type == LayerType.PointsOfInterest)
+                {
+                    return false;
+                }
+                return _isInEditMode;
+            }
             set
             {
                 if (value != _isInEditMode)
