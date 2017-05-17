@@ -47,6 +47,21 @@ namespace BikeTouringGISLibrary.UnitTests
             layer.Extent.XMax.Should().BeGreaterOrEqualTo(6.732440000);
         }
 
+        // bug #69
+        [TestMethod]
+        public void Save_And_Check_For_POIs()
+        {
+            string fileName = "65.gpx";
+            string outFileName = "69.gpx";
+            var path = Path.Combine(UnitTestDirectory, fileName);
+            var gpxInfo = new GpxFileReader().LoadFile(path);
+            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(4);
+            var layer = CreateLayer(fileName);
+            layer.Save(Path.Combine(UnitTestDirectory, outFileName));
+            path = Path.Combine(UnitTestDirectory, outFileName);
+            gpxInfo = new GpxFileReader().LoadFile(path);
+            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(4);
+        }
         private BikeTouringGISLayer CreateLayer(string fileName)
         {
             var path = Path.Combine(UnitTestDirectory, fileName);
