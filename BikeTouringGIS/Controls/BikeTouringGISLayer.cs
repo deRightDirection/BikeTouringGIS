@@ -248,7 +248,10 @@ namespace BikeTouringGIS.Controls
 
         internal void SetExtentToFitWithWaypoints(Envelope wayPointsExtent)
         {
-            Extent = Extent.Union(wayPointsExtent);
+            if (wayPointsExtent != null)
+            {
+                Extent = Extent.Union(wayPointsExtent);
+            }
         }
 
         public Envelope Extent
