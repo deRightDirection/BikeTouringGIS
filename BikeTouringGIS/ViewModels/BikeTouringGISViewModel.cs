@@ -132,41 +132,45 @@ namespace BikeTouringGIS.ViewModels
             {
                 foreach (var file in openFileDialog.FileNames)
                 {
-                    if(_loadedFiles.Contains(file))
+                    if (!_loadedFiles.Contains(file))
                     {
-                        continue;
+                        OpenGpxFile(mapViewModel, file);
                     }
-                    var gpxFileInformation = new GpxFileReader().LoadFile(file);
-                    foreach (var track in gpxFileInformation.Tracks)
-                    {
-                        bool convertTrack = ConvertTracksToRoutesAutomatically;
-                        if (!convertTrack)
-                        {
-                            StringBuilder textBuilder = new StringBuilder();
-                            textBuilder.AppendLine($"Track {track.Name} is defined as track and not as route");
-                            textBuilder.AppendLine();
-                            textBuilder.AppendLine("routes are used by navigation-devices");
-                            textBuilder.AppendLine("tracks are to register where you have been");
-                            textBuilder.AppendLine();
-                            textBuilder.AppendLine("Do you want to convert it to a route?");
-                            convertTrack = await ConvertTrackToRoute(textBuilder.ToString());
-                        }
-                        if (convertTrack)
-                        {
-                            track.ConvertTrackToRoute();
-                        }
-                    }
-                    _loadedFiles.Add(file);
-                    gpxFileInformation.CreateGeometries();
-                    foreach(IRoute route in gpxFileInformation.AllRoutes)
-                    {
-                        var layer = new BikeTouringGISLayer(file, route);
-                        layer.SetExtentToFitWithWaypoints(gpxFileInformation.WayPointsExtent);
-                        mapViewModel.AddRoutes(layer);
-                    }
-                    mapViewModel.AddPoIs(gpxFileInformation.WayPoints);
                 }
             }
+        }
+
+        internal async void OpenGpxFile(BikeTouringGISMapViewModel mapViewModel, string path)
+        {
+            var gpxFileInformation = new GpxFileReader().LoadFile(path);
+            foreach (var track in gpxFileInformation.Tracks)
+            {
+                bool convertTrack = ConvertTracksToRoutesAutomatically;
+                if (!convertTrack)
+                {
+                    StringBuilder textBuilder = new StringBuilder();
+                    textBuilder.AppendLine($"Track {track.Name} is defined as track and not as route");
+                    textBuilder.AppendLine();
+                    textBuilder.AppendLine("routes are used by navigation-devices");
+                    textBuilder.AppendLine("tracks are to register where you have been");
+                    textBuilder.AppendLine();
+                    textBuilder.AppendLine("Do you want to convert it to a route?");
+                    convertTrack = await ConvertTrackToRoute(textBuilder.ToString());
+                }
+                if (convertTrack)
+                {
+                    track.ConvertTrackToRoute();
+                }
+            }
+            _loadedFiles.Add(path);
+            gpxFileInformation.CreateGeometries();
+            foreach (IRoute route in gpxFileInformation.AllRoutes)
+            {
+                var layer = new BikeTouringGISLayer(path, route);
+                layer.SetExtentToFitWithWaypoints(gpxFileInformation.WayPointsExtent);
+                mapViewModel.AddRoutes(layer);
+            }
+            mapViewModel.AddPoIs(gpxFileInformation.WayPoints);
         }
 
         private async Task<bool> ConvertTrackToRoute(string text)

@@ -97,6 +97,7 @@
     <Compile Include="Library\Model\WayPointTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BikeTouringGISMapViewModelTest.cs" />
+    <Compile Include="ViewModels\BikeTouringGISViewModelTest.cs" />
     <Compile Include="ViewModels\LayerListViewModelTest.cs" />
   </ItemGroup>
   <ItemGroup>
