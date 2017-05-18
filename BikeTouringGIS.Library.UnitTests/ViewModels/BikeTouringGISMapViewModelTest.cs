@@ -65,6 +65,20 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
             GetPOIsCount().ShouldBeEquivalentTo(0);
         }
 
+        // bug #69
+        [TestMethod]
+        public void Save_And_Check_For_POIs()
+        {
+            string fileName = "65.gpx";
+            var path = Path.Combine(UnitTestDirectory, fileName);
+            var layers = GetLayers(path);
+            GetPOIsCount().ShouldBeEquivalentTo(4);
+            _vm.SaveLayerCommand.Execute(layers.First());
+            var gpxInfo = new GpxFileReader().LoadFile(path);
+            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(4);
+        }
+
+
         private List<BikeTouringGISLayer> GetLayers(string path)
         {
             var gpxData = GetGPXData(path);

@@ -254,7 +254,7 @@
                     <Fluent:Button
                         MinWidth="100"
                         CanAddToQuickAccessToolBar="False"
-                        Command="{Binding Base.SaveLayerCommand}"
+                        Command="{Binding Map.SaveLayerCommand}"
                         CommandParameter="{Binding SelectedLayer}"
                         Header="save layer"
                         IsEnabled="{Binding SelectedLayer.IsInEditMode}"
@@ -271,7 +271,7 @@
                     <Fluent:Button
                         MinWidth="100"
                         CanAddToQuickAccessToolBar="False"
-                        Command="{Binding Base.SaveLayerAsCommand}"
+                        Command="{Binding Map.SaveLayerAsCommand}"
                         CommandParameter="{Binding SelectedLayer}"
                         Header="save layer as..."
                         SizeDefinition="10"

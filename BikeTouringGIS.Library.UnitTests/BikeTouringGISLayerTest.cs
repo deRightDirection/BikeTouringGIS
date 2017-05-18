@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using theRightDirection.Library.UnitTesting;
 using FluentAssertions;
+using BikeTouringGISLibrary.Model;
+using GPX;
+
 namespace BikeTouringGISLibrary.UnitTests
 {
     [TestClass]
@@ -56,8 +59,10 @@ namespace BikeTouringGISLibrary.UnitTests
             var path = Path.Combine(UnitTestDirectory, fileName);
             var gpxInfo = new GpxFileReader().LoadFile(path);
             gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(4);
+            var wayPoints = new List<wptType>();
+            gpxInfo.WayPoints.ForEach(x => wayPoints.Add(x));
             var layer = CreateLayer(fileName);
-            layer.Save(Path.Combine(UnitTestDirectory, outFileName));
+            layer.Save(wayPoints, Path.Combine(UnitTestDirectory, outFileName));
             path = Path.Combine(UnitTestDirectory, outFileName);
             gpxInfo = new GpxFileReader().LoadFile(path);
             gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(4);

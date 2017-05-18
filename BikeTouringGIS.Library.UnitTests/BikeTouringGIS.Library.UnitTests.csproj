@@ -94,6 +94,7 @@
     <Compile Include="BikeTouringGISLayerTest.cs" />
     <Compile Include="GPXFileReaderTest.cs" />
     <Compile Include="GPXFileTest.cs" />
+    <Compile Include="Library\Model\WayPointTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BikeTouringGISMapViewModelTest.cs" />
     <Compile Include="ViewModels\LayerListViewModelTest.cs" />

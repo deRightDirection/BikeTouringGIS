@@ -126,7 +126,7 @@
                                 </Button.Content>
                             </Button>
                             <Button
-                                Command="{Binding Menu.Base.SaveLayerCommand, ElementName=layerlist}"
+                                Command="{Binding Menu.Map.SaveLayerCommand, ElementName=layerlist}"
                                 CommandParameter="{Binding}"
                                 IsEnabled="{Binding IsInEditMode}"
                                 ToolTip="save layer to same file">

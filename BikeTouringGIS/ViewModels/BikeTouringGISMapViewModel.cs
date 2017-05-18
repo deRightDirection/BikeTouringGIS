@@ -20,6 +20,7 @@ using BikeTouringGISLibrary;
 using System.Collections.ObjectModel;
 using BikeTouringGIS.Messenges;
 using BikeTouringGISLibrary.Model;
+using GPX;
 
 namespace BikeTouringGIS.ViewModels
 {
@@ -28,6 +29,8 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand SetupMapCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> LayerLoadedCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> RemoveLayerCommand { get; private set; }
+        public RelayCommand<BikeTouringGISLayer> SaveLayerCommand { get; private set; }
+        public RelayCommand<BikeTouringGISLayer> SaveLayerAsCommand { get; private set; }
         private BikeTouringGISLayer _pointsOfInterestLayer;
         private ObservableCollection<BikeTouringGISLayer> _bikeTouringGISLayers;
         private Dictionary<GraphicType, object> _mapSymbols;
@@ -38,6 +41,8 @@ namespace BikeTouringGIS.ViewModels
             SetupMapCommand = new RelayCommand(SetupMap);
             LayerLoadedCommand = new RelayCommand<BikeTouringGISLayer>(LayerLoaded);
             RemoveLayerCommand = new RelayCommand<BikeTouringGISLayer>(RemoveLayer);
+            SaveLayerCommand = new RelayCommand<BikeTouringGISLayer>(SaveLayer);
+            SaveLayerAsCommand = new RelayCommand<BikeTouringGISLayer>(SaveLayerAs);
             _mapSymbols = new Dictionary<GraphicType, object>();
             MessengerInstance.Register<ExtentChangedMessage>(this, SetNewExtent);
         }
@@ -54,6 +59,27 @@ namespace BikeTouringGIS.ViewModels
             _pointsOfInterestLayer = poiLayer;
             LayerLoaded(_pointsOfInterestLayer);
             MapView = new MapView() { Map = _map };
+        }
+
+        private void SaveLayerAs(BikeTouringGISLayer obj)
+        {
+            if (obj != null)
+            {
+                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
+                saveFileDialog.Filter = "GPX files (*.gpx)|*.gpx";
+                saveFileDialog.InitialDirectory = DropBoxHelper.GetDropBoxFolder();
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    obj.Save(GetWayPoints(obj), saveFileDialog.FileName);
+                }
+            }
+        }
+        private void SaveLayer(BikeTouringGISLayer obj)
+        {
+            if (obj != null)
+            {
+                obj.Save(GetWayPoints(obj));
+            }
         }
 
         private void SetNewExtent(ExtentChangedMessage obj)
@@ -228,9 +254,18 @@ namespace BikeTouringGIS.ViewModels
 
         internal void AddPoIs(List<WayPoint> wayPoints)
         {
-            wayPoints.ForEach(x => _pointsOfInterestLayer.Graphics.Add(x.ToGraphic()));
+            _pointsOfInterestLayer.WayPoints = wayPoints;
             _pointsOfInterestLayer.SetSymbolsAndSplitLayerDefaultProperties(_mapSymbols);
             
+        }
+
+        private IEnumerable<wptType> GetWayPoints(BikeTouringGISLayer layer)
+        {
+            var source = layer.FileName;
+            var selection = _pointsOfInterestLayer.WayPoints.Where(x => x.Source.Equals(source));
+            var result = new List<wptType>();
+            selection.ForEach(x => result.Add(x));
+            return result;
         }
     }
 }

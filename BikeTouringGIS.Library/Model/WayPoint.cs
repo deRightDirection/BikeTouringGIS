@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using BikeTouringGISLibrary.Enumerations;
+using GPX;
 
 namespace BikeTouringGISLibrary.Model
 {
@@ -13,10 +14,13 @@ namespace BikeTouringGISLibrary.Model
     {
         public string Name { get; internal set; }
         public string Source { get; internal set; }
-
+        public decimal Lat { get; private set; }
+        public decimal Lon { get; private set; }
         internal override void CreateGeometry()
         {
-            Geometry = new MapPoint((double)Points[0].lon, (double)Points[0].lat, new SpatialReference(4326));
+            Lat = Points[0].lat;
+            Lon = Points[0].lon;
+            Geometry = new MapPoint((double)Lon, (double)Lat, new SpatialReference(4326));
             Extent = Geometry.Extent;
         }
 
@@ -25,6 +29,15 @@ namespace BikeTouringGISLibrary.Model
             var graphic = CreateBikeTouringGISGraphic(Name, GraphicType.PointOfInterest);
             graphic.Attributes["source"] = Source;
             return graphic;
+        }
+
+        public static implicit operator wptType(WayPoint waypoint)
+        {
+            var wptType = new wptType();
+            wptType.name = waypoint.Name;
+            wptType.lon = waypoint.Lon;
+            wptType.lat = waypoint.Lat;
+            return wptType;
         }
     }
 }

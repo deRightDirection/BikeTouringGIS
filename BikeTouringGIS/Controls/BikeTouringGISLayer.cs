@@ -163,7 +163,7 @@ namespace BikeTouringGIS.Controls
             }
         }
 
-        internal void Save(string fileName = null)
+        internal void Save(IEnumerable<wptType> waypoints, string fileName = null)
         {
             var gpxFile = new GPXFile();
             var gpx = new gpxType();
@@ -171,6 +171,7 @@ namespace BikeTouringGIS.Controls
             rte.name = Title;
             rte.rtept = ToRoute().Points.ToArray();
             gpx.rte = new List<rteType>() { rte }.ToArray();
+            gpx.wpt = waypoints.ToArray();
             var fileNameToSave = string.IsNullOrEmpty(fileName) ? FileName : fileName;
             gpxFile.Save(fileNameToSave, gpx);
             IsInEditMode = false;
@@ -318,6 +319,25 @@ namespace BikeTouringGIS.Controls
             get
             {
                 return _routeSplitter.SplitRoutes;
+            }
+        }
+
+        // later refactoren want dit moet dus in de speciale POILayer
+        private List<WayPoint> _wayPoints;
+        public List<WayPoint> WayPoints
+        {
+            get
+            {
+                return _wayPoints;
+            }
+            internal set
+            {
+                _wayPoints = value;
+                if(_wayPoints != null)
+                {
+                    Graphics.Clear();
+                    value.ForEach(x => Graphics.Add(x.ToGraphic()));
+                }
             }
         }
 
