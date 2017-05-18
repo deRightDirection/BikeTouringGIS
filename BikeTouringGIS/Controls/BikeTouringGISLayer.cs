@@ -335,7 +335,6 @@ namespace BikeTouringGIS.Controls
                 _wayPoints = value;
                 if(_wayPoints != null)
                 {
-                    Graphics.Clear();
                     value.ForEach(x => Graphics.Add(x.ToGraphic()));
                 }
             }
