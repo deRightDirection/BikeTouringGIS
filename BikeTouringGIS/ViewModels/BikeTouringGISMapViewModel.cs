@@ -126,10 +126,10 @@ namespace BikeTouringGIS.ViewModels
         private void RemovePointsOfInterestOfRemovedLayer(BikeTouringGISLayer obj)
         {
             var source = obj.FileName;
-            var layersWithSameSource = BikeTouringGISLayers.Any(x => x.FileName.Equals(source));
+            var layersWithSameSource = BikeTouringGISLayers.Any(x => x.FileName.Equals(source) && x.Type == LayerType.GPXRoute);
             if (!layersWithSameSource)
             {
-                var wayPointsToRemove = _pointsOfInterestLayer.WayPoints.Where(x => x.Source.Equals(source));
+                var wayPointsToRemove = _pointsOfInterestLayer.WayPoints.Where(x => x.Source.Equals(source)).ToList();
                 _pointsOfInterestLayer.RemovePoIs(wayPointsToRemove);
             }
         }
@@ -252,7 +252,7 @@ namespace BikeTouringGIS.ViewModels
 
         internal void AddPoIs(List<WayPoint> wayPoints)
         {
-            _pointsOfInterestLayer.WayPoints = wayPoints;
+            _pointsOfInterestLayer.AddPoIs(wayPoints);
             _pointsOfInterestLayer.SetSymbolsAndSplitLayerDefaultProperties(_mapSymbols);
             
         }

@@ -40,13 +40,28 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
         }
 
         [TestMethod]
+        // bug #88
+        public void RemoveLayer_Remove_Correct_PoIs()
+        {
+            var filename = "dwingeloo.gpx";
+            var filename2 = "88.gpx";
+            var path = Path.Combine(UnitTestDirectory, filename);
+            var path2 = Path.Combine(UnitTestDirectory, filename2);
+            List<BikeTouringGISLayer> layers = GetLayers(path);
+            layers = GetLayers(path2);
+            GetPOIsCount().ShouldBeEquivalentTo(165);
+            _vm.RemoveLayerCommand.Execute(layers.Where(x => x.Type == LayerType.GPXRoute).First());
+            GetPOIsCount().ShouldBeEquivalentTo(162);
+        }
+
+        [TestMethod]
         public void RemoveLayer_Removed_All_Poi_As_Well()
         {
             var filename = "dwingeloo.gpx";
             var path = Path.Combine(UnitTestDirectory, filename);
             List<BikeTouringGISLayer> layers = GetLayers(path);
             GetPOIsCount().ShouldBeEquivalentTo(3);
-            _vm.RemoveLayerCommand.Execute(layers.First());
+            _vm.RemoveLayerCommand.Execute(layers.Where(x => x.Type == LayerType.GPXRoute).First());
             GetPOIsCount().ShouldBeEquivalentTo(0);
         }
 
@@ -57,7 +72,7 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
             var path = Path.Combine(UnitTestDirectory, file);
             List<BikeTouringGISLayer> layers = GetLayers(path);
             GetPOIsCount().ShouldBeEquivalentTo(49);
-            layers.ForEach(x =>
+            layers.Where(x => x.Type == LayerType.GPXRoute).ForEach(x =>
             {
                 GetPOIsCount().ShouldBeEquivalentTo(49);
                 _vm.RemoveLayerCommand.Execute(x);
@@ -73,7 +88,7 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
             var path = Path.Combine(UnitTestDirectory, fileName);
             var layers = GetLayers(path);
             GetPOIsCount().ShouldBeEquivalentTo(4);
-            _vm.SaveLayerCommand.Execute(layers.First());
+            _vm.SaveLayerCommand.Execute(layers.Where(x => x.Type == LayerType.GPXRoute).First());
             var gpxInfo = new GpxFileReader().LoadFile(path);
             gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(4);
         }
@@ -83,15 +98,13 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
         {
             var gpxData = GetGPXData(path);
             _vm.AddPoIs(gpxData.WayPoints);
-            var layers = new List<BikeTouringGISLayer>();
             gpxData.AllRoutes.ForEach(x =>
             {
                 var layer = new BikeTouringGISLayer(path, x);
-                layers.Add(layer);
                 _vm.AddRoutes(layer);
             });
             _vm.BikeTouringGISLayers = new ObservableCollection<BikeTouringGISLayer>(_vm.Map.GetBikeTouringGISLayers());
-            return layers;
+            return _vm.BikeTouringGISLayers.ToList();
         }
 
         private GpxInformation GetGPXData(string fileName)

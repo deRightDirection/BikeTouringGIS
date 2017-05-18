@@ -323,20 +323,12 @@ namespace BikeTouringGIS.Controls
         }
 
         // later refactoren want dit moet dus in de speciale POILayer
-        private List<WayPoint> _wayPoints;
+        protected List<WayPoint> _wayPoints = new List<WayPoint>();
         public List<WayPoint> WayPoints
         {
             get
             {
                 return _wayPoints;
-            }
-            internal set
-            {
-                _wayPoints = value;
-                if(_wayPoints != null)
-                {
-                    value.ForEach(x => Graphics.Add(x.ToGraphic()));
-                }
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿using BikeTouringGIS.Comparers;
 using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Layers;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,27 @@ namespace BikeTouringGIS.Controls
         {
         }
 
+        internal void AddPoIs(IEnumerable<WayPoint> wayPoints)
+        {
+            foreach(var wayPoint in wayPoints)
+            {
+                _wayPoints.Add(wayPoint);
+                Graphics.Add(wayPoint.ToGraphic());
+            }
+        }
+
         // ook refactoren en in aparte poilayer plaatsen
         internal void RemovePoIs(IEnumerable<WayPoint> wayPoints)
         {
-            foreach (var wayPoint in WayPoints)
+            foreach (var wayPoint in wayPoints)
             {
                 var g = wayPoint.ToGraphic();
                 var index = FindIndexOfPointOfInterest(g);
-                Graphics.RemoveAt(index);
+                if (index > -1)
+                {
+                    _wayPoints.Remove(wayPoint);
+                    Graphics.RemoveAt(index);
+                }
             }
         }
 

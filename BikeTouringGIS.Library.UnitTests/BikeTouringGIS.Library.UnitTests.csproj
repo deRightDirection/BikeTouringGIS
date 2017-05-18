@@ -133,6 +133,9 @@
     <None Include="70_2.gpx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="88.gpx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
     <None Include="BRM300BNK16 v2.GPX">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
