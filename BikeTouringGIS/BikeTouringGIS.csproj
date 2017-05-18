@@ -179,10 +179,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Comparers\GraphicComparer.cs" />
     <Compile Include="Controls\BikeTouringGISLayer.cs" />
     <Compile Include="Controls\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PointsOfInterestLayer.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\LayerIsGpxRouteConverter.cs" />
     <Compile Include="Converters\LayerLoadedEventArgsToBikeTouringGISLayerConverter.cs" />
@@ -302,9 +304,7 @@
       <Name>BikeTouringGIS.Library</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Comparers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\ESRI\ArcGISRuntimeSDKNET10.2.7@InstallDir)ideintegration\ArcGISRuntime.targets" Condition="Exists('$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\ESRI\ArcGISRuntimeSDKNET10.2.7@InstallDir)ideintegration\ArcGISRuntime.targets')" />
   <Target Name="ESRI_ArcGISRuntime_Deployment_ErrorIfTargetsMissing" BeforeTargets="PrepareForBuild;PrepareForClean">

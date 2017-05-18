@@ -31,7 +31,7 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand<BikeTouringGISLayer> RemoveLayerCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> SaveLayerCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> SaveLayerAsCommand { get; private set; }
-        private BikeTouringGISLayer _pointsOfInterestLayer;
+        private PointsOfInterestLayer _pointsOfInterestLayer;
         private ObservableCollection<BikeTouringGISLayer> _bikeTouringGISLayers;
         private Dictionary<GraphicType, object> _mapSymbols;
         private bool _showKnooppunten, _showOpenCycleMap, _showOpenStreetMap, _mapSetupIsDone;
@@ -54,7 +54,7 @@ namespace BikeTouringGIS.ViewModels
         internal BikeTouringGISMapViewModel(bool createMap) : this()
         {
             _map = new Map();
-            var poiLayer = new BikeTouringGISLayer("Points of Interest");
+            var poiLayer = new PointsOfInterestLayer("Points of Interest");
             _map.Layers.Add(poiLayer);
             _pointsOfInterestLayer = poiLayer;
             LayerLoaded(_pointsOfInterestLayer);
@@ -129,10 +129,8 @@ namespace BikeTouringGIS.ViewModels
             var layersWithSameSource = BikeTouringGISLayers.Any(x => x.FileName.Equals(source));
             if (!layersWithSameSource)
             {
-                var graphicsToRemove = _pointsOfInterestLayer.Graphics.Where(x => x.Attributes["source"].Equals(source));
-                var poiPoints = _pointsOfInterestLayer.Graphics.ToList();
-                poiPoints.RemoveItems(graphicsToRemove);
-                _pointsOfInterestLayer.Graphics = new GraphicCollection(poiPoints);
+                var wayPointsToRemove = _pointsOfInterestLayer.WayPoints.Where(x => x.Source.Equals(source));
+                _pointsOfInterestLayer.RemovePoIs(wayPointsToRemove);
             }
         }
 
@@ -164,7 +162,7 @@ namespace BikeTouringGIS.ViewModels
                 ShowOpenCycleMap = false;
                 ShowOpenStreetMap = true;
                 ShowKnooppunten = false;
-                _pointsOfInterestLayer = new BikeTouringGISLayer("Points of Interest");
+                _pointsOfInterestLayer = new PointsOfInterestLayer("Points of Interest");
                 _map.Layers.Add(_pointsOfInterestLayer);
                 _map.Layers.ForEach(x => x.ShowLegend = false);
                 _mapSetupIsDone = true;
