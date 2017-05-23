@@ -39,7 +39,7 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
         // #85
         public void OpenGPXFile_Cant_Load_Two_Times_Same_File()
         {
-            var filename = "70.gpx";
+            var filename = "85.gpx";
             var path = Path.Combine(UnitTestDirectory, filename);
             _vm.OpenGpxFile(_map, path);
             _map.BikeTouringGISLayers.Count.ShouldBeEquivalentTo(2);

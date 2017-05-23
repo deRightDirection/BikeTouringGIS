@@ -142,6 +142,10 @@ namespace BikeTouringGIS.ViewModels
 
         internal async void OpenGpxFile(BikeTouringGISMapViewModel mapViewModel, string path)
         {
+            if (_loadedFiles.Exists(x => x.Equals(path)))
+            {
+                return;
+            }
             var gpxFileInformation = new GpxFileReader().LoadFile(path);
             foreach (var track in gpxFileInformation.Tracks)
             {

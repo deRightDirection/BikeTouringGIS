@@ -177,7 +177,10 @@ namespace BikeTouringGIS.ViewModels
             {
                 Set(ref _showOpenCycleMap, value);
                 var osm = _map.Layers?["opencyclemap"] as OpenStreetMapLayer;
-                osm.IsVisible = value;
+                if (osm != null)
+                {
+                    osm.IsVisible = value;
+                }
             }
         }
 
@@ -189,7 +192,7 @@ namespace BikeTouringGIS.ViewModels
             SetExtent();
             CalculateTotalLength();
             PlacePointsOfInterestLayerOnTop();
-//            LayerLoaded(layer);
+            LayerLoaded(layer);
         }
 
         private void PlacePointsOfInterestLayerOnTop()
@@ -207,7 +210,10 @@ namespace BikeTouringGIS.ViewModels
             {
                 Set(ref _showOpenStreetMap, value);
                 var osm = _map.Layers?["openstreetmap"] as OpenStreetMapLayer;
-                osm.IsVisible = value;
+                if (osm != null)
+                {
+                    osm.IsVisible = value;
+                }
             }
         }
         //TODO MME 30012017 checken of in Quartz de binding wel goed werkt!
@@ -218,7 +224,10 @@ namespace BikeTouringGIS.ViewModels
             {
                 Set(ref _showKnooppunten, value);
                 var wms = _map.Layers?["fietsknooppunten"] as WmsLayer;
-                wms.IsVisible = value;
+                if (wms != null)
+                {
+                    wms.IsVisible = value;
+                }
             }
         }
 
