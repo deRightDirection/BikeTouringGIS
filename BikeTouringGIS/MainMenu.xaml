@@ -17,6 +17,7 @@
     <UserControl.Resources>
         <converters:StringToIntConverter x:Key="stringToIntConverter" />
         <converters:NotNullAndPrefixConverter x:Key="notNullAndPrefixConverter" />
+        <converters:SplitIsEnabledConverter x:Key="splitIsEnabledConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -352,7 +353,6 @@
                         MinWidth="100"
                         Command="{Binding Base.SplitRouteCommand}"
                         Header="split route"
-                        IsEnabled="{Binding SelectedLayer.IsSplitted, Converter={StaticResource inverseBooleanConverter}}"
                         ToolTip="split the route in parts of the same length">
                         <Fluent:Button.LargeIcon>
                             <iconPacks:PackIconMaterial
@@ -367,6 +367,13 @@
                                 <Binding ElementName="splitLengthSlider" Path="Value" />
                             </MultiBinding>
                         </Fluent:Button.CommandParameter>
+                        <Fluent:Button.IsEnabled>
+                            <MultiBinding Converter="{StaticResource splitIsEnabledConverter}">
+                                <Binding Path="SelectedLayer.IsSplitted"/>
+                                <Binding Path="Base.SplitLength"/>
+                                <Binding Path="SelectedLayer.TotalLength"/>
+                            </MultiBinding>
+                        </Fluent:Button.IsEnabled>
                     </Fluent:Button>
                     <StackPanel Margin="0,5,0,0">
                         <Slider
