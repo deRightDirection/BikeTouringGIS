@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GPX;
+﻿using BikeTouringGISLibrary.Extensions;
 using Esri.ArcGISRuntime.Geometry;
-using BikeTouringGISLibrary.Extensions;
+using GPX;
+using System.Linq;
 
 namespace BikeTouringGISLibrary
 {
@@ -13,7 +9,7 @@ namespace BikeTouringGISLibrary
     {
         public int CalculateDistance(Geometry routeGeometry)
         {
-            if(routeGeometry == null || routeGeometry.GeometryType != GeometryType.Polyline)
+            if (routeGeometry == null || routeGeometry.GeometryType != GeometryType.Polyline)
             {
                 return 0;
             }

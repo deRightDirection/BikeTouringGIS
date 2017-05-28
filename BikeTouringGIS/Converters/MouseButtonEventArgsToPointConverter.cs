@@ -1,17 +1,12 @@
 ﻿using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Geometry;
 using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace BikeTouringGIS.Converters
 {
-    class MouseButtonEventArgsToPointConverter : IEventArgsConverter
+    internal class MouseButtonEventArgsToPointConverter : IEventArgsConverter
     {
         public object Convert(object value, object parameter)
         {

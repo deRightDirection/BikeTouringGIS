@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BikeTouringGISLibrary.Model
+﻿namespace BikeTouringGISLibrary.Model
 {
     public class BikeTouringGISProject
     {
-        public string ProjectFileLocation { get; set; }
-        public string Name { get; set; }
         public string Description { get; set; }
+
         public bool IsLoaded
         {
             get
@@ -18,5 +11,8 @@ namespace BikeTouringGISLibrary.Model
                 return !string.IsNullOrEmpty(ProjectFileLocation) && !string.IsNullOrEmpty(Name);
             }
         }
+
+        public string Name { get; set; }
+        public string ProjectFileLocation { get; set; }
     }
 }

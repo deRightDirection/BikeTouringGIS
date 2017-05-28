@@ -1,20 +1,12 @@
 ﻿using BikeTouringGISLibrary.Model;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using JetBrains.Annotations;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+
 namespace BikeTouringGIS.ViewModels
 {
     public class NewProjectDialogContent : ViewModelBase
     {
-
         private string _projectName;
         private string _description;
         private Action<BikeTouringGISProject> _closeAction;
@@ -58,13 +50,13 @@ namespace BikeTouringGIS.ViewModels
             set { Set(() => Description, ref _description, value); }
         }
 
-//        public event PropertyChangedEventHandler PropertyChanged;
+        //        public event PropertyChangedEventHandler PropertyChanged;
 
- //       [NotifyPropertyChangedInvocator]
-  //      protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-   //     {
-    //        var handler = PropertyChanged;
-     //       if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-      //  }
+        //       [NotifyPropertyChangedInvocator]
+        //      protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        //     {
+        //        var handler = PropertyChanged;
+        //       if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+        //  }
     }
 }

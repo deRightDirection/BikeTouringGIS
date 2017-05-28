@@ -17,7 +17,7 @@
     <UserControl.Resources>
         <converters:StringToIntConverter x:Key="stringToIntConverter" />
         <converters:NotNullAndPrefixConverter x:Key="notNullAndPrefixConverter" />
-        <converters:SplitIsEnabledConverter x:Key="splitIsEnabledConverter"/>
+        <converters:SplitIsEnabledConverter x:Key="splitIsEnabledConverter" />
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -369,9 +369,9 @@
                         </Fluent:Button.CommandParameter>
                         <Fluent:Button.IsEnabled>
                             <MultiBinding Converter="{StaticResource splitIsEnabledConverter}">
-                                <Binding Path="SelectedLayer.IsSplitted"/>
-                                <Binding Path="Base.SplitLength"/>
-                                <Binding Path="SelectedLayer.TotalLength"/>
+                                <Binding Path="SelectedLayer.IsSplitted" />
+                                <Binding Path="Base.SplitLength" />
+                                <Binding Path="SelectedLayer.TotalLength" />
                             </MultiBinding>
                         </Fluent:Button.IsEnabled>
                     </Fluent:Button>

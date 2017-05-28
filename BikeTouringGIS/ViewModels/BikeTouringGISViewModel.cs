@@ -4,16 +4,12 @@ using BikeTouringGIS.Messenges;
 using BikeTouringGIS.Models;
 using BikeTouringGISLibrary;
 using BikeTouringGISLibrary.Enumerations;
-using Esri.ArcGISRuntime.Layers;
 using GalaSoft.MvvmLight.Command;
 using GPX;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -49,7 +45,7 @@ namespace BikeTouringGIS.ViewModels
             CenterCommand = new RelayCommand(() => CenterMap(null));
             ZoomInCommand = new RelayCommand(() => ZoomInOrOutMap(ZoomOption.ZoomIn));
             ZoomOutCommand = new RelayCommand(() => ZoomInOrOutMap(ZoomOption.ZoomOut));
-            MessengerInstance.Register<LayerRemovedMessage>(this,LayerRemoved);
+            MessengerInstance.Register<LayerRemovedMessage>(this, LayerRemoved);
         }
 
         private void ZoomInOrOutMap(ZoomOption zoomOption)

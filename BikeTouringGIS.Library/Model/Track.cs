@@ -1,16 +1,12 @@
-﻿using System;
+﻿using GPX;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GPX;
 
 namespace BikeTouringGISLibrary.Model
 {
     public class Track : Route
     {
-        public trksegType[] Segments { get; internal set; }
         public bool IsConvertedToRoute { get; private set; }
+        public trksegType[] Segments { get; internal set; }
 
         public void ConvertTrackToRoute()
         {

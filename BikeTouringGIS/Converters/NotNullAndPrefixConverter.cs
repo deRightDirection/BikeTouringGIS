@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using WinUX;
+
 namespace BikeTouringGIS.Converters
 {
     public class NotNullAndPrefixConverter : IMultiValueConverter
@@ -15,7 +12,7 @@ namespace BikeTouringGIS.Converters
         {
             bool isSplitted = false;
             bool hasPrefix = false;
-            if(values[0] != DependencyProperty.UnsetValue)
+            if (values[0] != DependencyProperty.UnsetValue)
             {
                 isSplitted = (bool)values[0];
             }

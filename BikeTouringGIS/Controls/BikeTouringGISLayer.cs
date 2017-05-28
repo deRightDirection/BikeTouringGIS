@@ -1,19 +1,15 @@
-﻿using Esri.ArcGISRuntime.Layers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BikeTouringGISLibrary.Model;
-using BikeTouringGISLibrary;
+﻿using BikeTouringGISLibrary;
 using BikeTouringGISLibrary.Enumerations;
-using System.Collections.Specialized;
-using Esri.ArcGISRuntime.Symbology;
+using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Geometry;
-using MoreLinq;
-using System.Windows.Media;
+using Esri.ArcGISRuntime.Layers;
+using Esri.ArcGISRuntime.Symbology;
 using GPX;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
+using System.Windows.Media;
 
 namespace BikeTouringGIS.Controls
 {
@@ -33,6 +29,7 @@ namespace BikeTouringGIS.Controls
             Graphics.CollectionChanged += SetVisibility;
             _routeSplitter = new RouteSplitter();
         }
+
         public BikeTouringGISLayer(string name) : this()
         {
             FileName = name;
@@ -41,6 +38,7 @@ namespace BikeTouringGIS.Controls
             Type = LayerType.PointsOfInterest;
             SplitLayer = new BikeTouringGISLayer() { ShowLegend = false, Type = LayerType.SplitRoutes, SelectionColor = Colors.LimeGreen };
         }
+
         public BikeTouringGISLayer(string fileName, IRoute route) : this(fileName)
         {
             _route = route;
@@ -55,6 +53,7 @@ namespace BikeTouringGIS.Controls
             Type = LayerType.GPXRoute;
             IsInEditMode = false;
         }
+
         public bool IsSelected
         {
             get { return _isSelected; }
@@ -97,24 +96,26 @@ namespace BikeTouringGIS.Controls
                 }
             }
         }
+
         public bool IsSplitted
         {
             get { return _isSplitted; }
             set
             {
-                if(value != _isSplitted)
+                if (value != _isSplitted)
                 {
                     _isSplitted = value;
                     OnPropertyChanged("IsSplitted");
                 }
             }
         }
+
         public BikeTouringGISLayer SplitLayer
         {
             get { return _splitLayer; }
             set
             {
-                if(value != _splitLayer)
+                if (value != _splitLayer)
                 {
                     _splitLayer = value;
                     OnPropertyChanged("SplitLayer");
@@ -134,7 +135,7 @@ namespace BikeTouringGIS.Controls
         {
             get
             {
-                if(Type == LayerType.PointsOfInterest)
+                if (Type == LayerType.PointsOfInterest)
                 {
                     return false;
                 }
@@ -155,7 +156,7 @@ namespace BikeTouringGIS.Controls
             get { return _totalLength; }
             set
             {
-                if(value != _totalLength)
+                if (value != _totalLength)
                 {
                     _totalLength = value;
                     OnPropertyChanged("TotalLength");
@@ -189,13 +190,12 @@ namespace BikeTouringGIS.Controls
             TotalLength = length;
         }
 
-
         private void SetVisibility(object sender, NotifyCollectionChangedEventArgs e)
         {
-           ShowLegend = Graphics.Count > 0;
+            ShowLegend = Graphics.Count > 0;
         }
 
-        public LayerType Type { get;private set;}
+        public LayerType Type { get; private set; }
 
         internal void FlipDirection()
         {
@@ -206,7 +206,7 @@ namespace BikeTouringGIS.Controls
             Graphics.Add(_route.RouteGeometry);
             SetSymbols();
             IsInEditMode = true;
-            if(IsSplitted)
+            if (IsSplitted)
             {
                 SplitRoute(_splitDistance);
             }
@@ -233,7 +233,7 @@ namespace BikeTouringGIS.Controls
 
         private void SetSymbols(GraphicCollection graphics = null)
         {
-            if(graphics == null)
+            if (graphics == null)
             {
                 graphics = Graphics;
             }
@@ -259,7 +259,7 @@ namespace BikeTouringGIS.Controls
         {
             get
             {
-                if(_extent == null)
+                if (_extent == null)
                 {
                     foreach (var graphic in Graphics)
                     {
@@ -271,7 +271,7 @@ namespace BikeTouringGIS.Controls
             }
             set
             {
-                if(value != _extent)
+                if (value != _extent)
                 {
                     _extent = value;
                     OnPropertyChanged("Extent");
@@ -280,6 +280,7 @@ namespace BikeTouringGIS.Controls
         }
 
         public string FileName { get; private set; }
+
         public string Title
         {
             get { return _title; }
@@ -313,7 +314,7 @@ namespace BikeTouringGIS.Controls
             IsSplitted = true;
             SplitLayer.SetSelectionColorOfGraphics();
         }
-        
+
         public IEnumerable<IRoute> SplitRoutes
         {
             get
@@ -324,6 +325,7 @@ namespace BikeTouringGIS.Controls
 
         // later refactoren want dit moet dus in de speciale POILayer
         protected List<WayPoint> _wayPoints = new List<WayPoint>();
+
         public List<WayPoint> WayPoints
         {
             get

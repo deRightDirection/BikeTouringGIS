@@ -1,18 +1,23 @@
 ﻿using Esri.ArcGISRuntime.Geometry;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BikeTouringGISLibrary.Model
 {
     public class GpxInformation
     {
+        public GpxInformation()
+        {
+            Routes = new List<Route>();
+            Tracks = new List<Track>();
+            WayPoints = new List<WayPoint>();
+        }
+
         public IEnumerable<Route> AllRoutes { get; private set; }
-        public List<Route> Routes { get; private set;}
+        public List<Route> Routes { get; private set; }
         public List<Track> Tracks { get; private set; }
         public List<WayPoint> WayPoints { get; private set; }
+
         public Envelope WayPointsExtent
         {
             get
@@ -37,13 +42,6 @@ namespace BikeTouringGISLibrary.Model
             {
                 route.CreateGeometry();
             }
-        }
-
-        public GpxInformation()
-        {
-            Routes = new List<Route>();
-            Tracks = new List<Track>();
-            WayPoints = new List<WayPoint>();
         }
     }
 }

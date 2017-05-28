@@ -1,26 +1,18 @@
 ﻿using BikeTouringGIS.Controls;
+using BikeTouringGIS.Extensions;
+using BikeTouringGIS.Messenges;
 using BikeTouringGISLibrary.Enumerations;
-using Esri.ArcGISRuntime.Layers;
-using Esri.ArcGISRuntime.Symbology;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WinUX.Common;
+using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Geometry;
-using BikeTouringGIS.Extensions;
-using WinUX;
+using Esri.ArcGISRuntime.Layers;
 using GalaSoft.MvvmLight.Command;
-using MahApps.Metro.Controls.Dialogs;
-using MahApps.Metro.Controls;
-using System.Windows;
-using BikeTouringGISLibrary;
-using System.Collections.ObjectModel;
-using BikeTouringGIS.Messenges;
-using BikeTouringGISLibrary.Model;
 using GPX;
+using MoreLinq;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace BikeTouringGIS.ViewModels
 {
@@ -36,6 +28,7 @@ namespace BikeTouringGIS.ViewModels
         private Dictionary<GraphicType, object> _mapSymbols;
         private bool _showKnooppunten, _showOpenCycleMap, _showOpenStreetMap, _mapSetupIsDone;
         private int _totalLengthOfRoutes;
+
         public BikeTouringGISMapViewModel()
         {
             SetupMapCommand = new RelayCommand(SetupMap);
@@ -74,6 +67,7 @@ namespace BikeTouringGIS.ViewModels
                 }
             }
         }
+
         private void SaveLayer(BikeTouringGISLayer obj)
         {
             if (obj != null)
@@ -84,20 +78,24 @@ namespace BikeTouringGIS.ViewModels
 
         private void SetNewExtent(ExtentChangedMessage obj)
         {
-            switch(obj.ReasonToChangeExtent)
+            switch (obj.ReasonToChangeExtent)
             {
                 case ExtentChangedReason.CenterLayer:
                     MapView.SetView(obj.Extent.Expand(1.1));
                     break;
+
                 case ExtentChangedReason.CenterMap:
                     SetExtent();
                     break;
+
                 case ExtentChangedReason.ZoomIn:
                     MapView.SetView(MapView.Extent.Expand(0.75));
                     break;
+
                 case ExtentChangedReason.ZoomOut:
                     MapView.SetView(MapView.Extent.Expand(1.25));
                     break;
+
                 case ExtentChangedReason.StatusBarZoomInOrZoomOut:
                     // TODO blokkeren dat extent groter wordt dan bepaald zoom extent
                     try
@@ -143,6 +141,7 @@ namespace BikeTouringGIS.ViewModels
         }
 
         public MapView MapView { get; internal set; }
+
         public int TotalLengthOfRoutes
         {
             get { return _totalLengthOfRoutes; }
@@ -216,6 +215,7 @@ namespace BikeTouringGIS.ViewModels
                 }
             }
         }
+
         //TODO MME 30012017 checken of in Quartz de binding wel goed werkt!
         public bool ShowKnooppunten
         {
@@ -251,9 +251,9 @@ namespace BikeTouringGIS.ViewModels
             Envelope initialExtent = null;
             foreach (var layer in _map.GetBikeTouringGISLayers())
             {
-                    initialExtent = initialExtent == null ? initialExtent = layer.Extent : initialExtent = initialExtent.Union(layer.Extent);
+                initialExtent = initialExtent == null ? initialExtent = layer.Extent : initialExtent = initialExtent.Union(layer.Extent);
             }
-            if(initialExtent != null)
+            if (initialExtent != null)
             {
                 MapView.SetView(initialExtent.Expand(1.2));
             }
@@ -263,7 +263,6 @@ namespace BikeTouringGIS.ViewModels
         {
             _pointsOfInterestLayer.AddPoIs(wayPoints);
             _pointsOfInterestLayer.SetSymbolsAndSplitLayerDefaultProperties(_mapSymbols);
-            
         }
 
         private IEnumerable<wptType> GetWayPoints(BikeTouringGISLayer layer)

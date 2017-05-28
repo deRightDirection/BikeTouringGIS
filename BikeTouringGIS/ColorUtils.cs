@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows.Media;
 
 namespace BikeTouringGIS
 {
-
     public class ColorUtils
     {
         public static List<Color> RgbLinearInterpolate(Color start, Color end, int colorCount)
@@ -29,9 +24,10 @@ namespace BikeTouringGIS
 
             return ret;
         }
+
         public static List<Color> RgbLinearInterpolate(Color start, Color end, int colorCount, Color defaultColorOne, Color defaultColorTwo)
         {
-            if(colorCount == 2)
+            if (colorCount == 2)
                 return new List<Color>() { defaultColorOne, defaultColorTwo };
             if (colorCount == 1)
                 return new List<Color>() { defaultColorOne };

@@ -1,32 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GPX;
+﻿using BikeTouringGISLibrary.Enumerations;
 using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
-using BikeTouringGISLibrary.Enumerations;
+using GPX;
+using System.Collections.Generic;
 
 namespace BikeTouringGISLibrary.Model
 {
     public class Route : GeometryCreatable, IRoute
     {
-        public Route() { }
+        public Route()
+        {
+        }
 
         public Route(List<wptType> points)
         {
             Points = points;
         }
 
-        public string Name { get; internal set; }
-        public BikeTouringGISGraphic StartLocation 
-        {
-            get
-            {
-                return CreateBikeTouringGISPointGraphic(Points[0], "start", GraphicType.GPXRouteStartLocation);
-            }
-        }
         public BikeTouringGISGraphic EndLocation
         {
             get
@@ -35,12 +24,28 @@ namespace BikeTouringGISLibrary.Model
             }
         }
 
+        public string Name { get; internal set; }
+
         public BikeTouringGISGraphic RouteGeometry
         {
             get
             {
                 return CreateBikeTouringGISGraphic(Name, GraphicType.GPXRoute);
             }
+        }
+
+        public BikeTouringGISGraphic StartLocation
+        {
+            get
+            {
+                return CreateBikeTouringGISPointGraphic(Points[0], "start", GraphicType.GPXRouteStartLocation);
+            }
+        }
+
+        public void Flip()
+        {
+            Points.Reverse();
+            CreateGeometry();
         }
 
         internal override void CreateGeometry()
@@ -52,12 +57,6 @@ namespace BikeTouringGISLibrary.Model
             }
             Geometry = builder.ToGeometry();
             Extent = Geometry.Extent;
-        }
-
-        public void Flip()
-        {
-            Points.Reverse();
-            CreateGeometry();
         }
     }
 }

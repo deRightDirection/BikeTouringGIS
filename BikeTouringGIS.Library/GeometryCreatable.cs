@@ -1,20 +1,16 @@
 ﻿using BikeTouringGISLibrary.Enumerations;
 using Esri.ArcGISRuntime.Geometry;
-using Esri.ArcGISRuntime.Layers;
 using GPX;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BikeTouringGISLibrary
 {
     public abstract class GeometryCreatable
     {
-        protected Geometry Geometry { get; set; }
         public Envelope Extent { get; protected set; }
         public List<wptType> Points { get; internal set; }
+        protected Geometry Geometry { get; set; }
+
         internal abstract void CreateGeometry();
 
         protected BikeTouringGISGraphic CreateBikeTouringGISGraphic(string nameAttribute, GraphicType typeOfGraphic)

@@ -1,12 +1,7 @@
 ﻿using BikeTouringGIS.Comparers;
 using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Layers;
-using MoreLinq;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BikeTouringGIS.Controls
 {
@@ -18,7 +13,7 @@ namespace BikeTouringGIS.Controls
 
         internal void AddPoIs(IEnumerable<WayPoint> wayPoints)
         {
-            foreach(var wayPoint in wayPoints)
+            foreach (var wayPoint in wayPoints)
             {
                 _wayPoints.Add(wayPoint);
                 Graphics.Add(wayPoint.ToGraphic());
@@ -44,10 +39,10 @@ namespace BikeTouringGIS.Controls
         {
             int index = -1;
             var comparer = new GraphicComparer();
-            for(int i = 0; i < Graphics.Count; i++)
+            for (int i = 0; i < Graphics.Count; i++)
             {
                 var graphicToCompare = Graphics[i];
-                if(comparer.Equals(g, graphicToCompare))
+                if (comparer.Equals(g, graphicToCompare))
                 {
                     return i;
                 }

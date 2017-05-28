@@ -1,17 +1,13 @@
 ﻿using BikeTouringGISLibrary.Model;
 using GPX;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BikeTouringGISLibrary
 {
     public class GpxFileReader
     {
-        private GpxInformation _gpxData;
         private string _fileName;
+        private GpxInformation _gpxData;
 
         public GpxInformation LoadFile(string fileName)
         {
@@ -22,6 +18,23 @@ namespace BikeTouringGISLibrary
             LoadWayPoints(gpx);
             LoadTracks(gpx);
             return _gpxData;
+        }
+
+        private void LoadRoutes(GPXFile gpx)
+        {
+            var routeIndex = 1;
+            foreach (var route in gpx.GetRoutes())
+            {
+                var gpxRoute = new Route();
+                if (string.IsNullOrEmpty(route.name))
+                {
+                    route.name = string.Format("r{0}", routeIndex.ToString());
+                    routeIndex++;
+                }
+                gpxRoute.Name = route.name;
+                gpxRoute.Points = route.RouteWayPoints;
+                _gpxData.Routes.Add(gpxRoute);
+            }
         }
 
         private void LoadTracks(GPXFile gpx)
@@ -41,33 +54,15 @@ namespace BikeTouringGISLibrary
             }
         }
 
-
         private void LoadWayPoints(GPXFile gpx)
         {
-            foreach(var waypoint in gpx.GetWaypoints())
+            foreach (var waypoint in gpx.GetWaypoints())
             {
                 var wPoint = new WayPoint();
                 wPoint.Name = waypoint.name;
                 wPoint.Source = _fileName;
                 wPoint.Points = new List<wptType>() { waypoint };
                 _gpxData.WayPoints.Add(wPoint);
-            }
-        }
-
-        private void LoadRoutes(GPXFile gpx)
-        {
-            var routeIndex = 1;
-            foreach (var route in gpx.GetRoutes())
-            {
-                var gpxRoute = new Route();
-                if (string.IsNullOrEmpty(route.name))
-                {
-                    route.name = string.Format("r{0}",routeIndex.ToString());
-                    routeIndex++;
-                }
-                gpxRoute.Name = route.name;
-                gpxRoute.Points = route.RouteWayPoints;
-                _gpxData.Routes.Add(gpxRoute);
             }
         }
     }

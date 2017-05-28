@@ -1,10 +1,6 @@
 ﻿using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BikeTouringGIS.Comparers
 {
@@ -15,7 +11,7 @@ namespace BikeTouringGIS.Comparers
         /// </summary>
         public bool Equals(Graphic x, Graphic y)
         {
-            if(x.Geometry.GeometryType == GeometryType.Point && y.Geometry.GeometryType == GeometryType.Point)
+            if (x.Geometry.GeometryType == GeometryType.Point && y.Geometry.GeometryType == GeometryType.Point)
             {
                 var pX = x.Geometry as MapPoint;
                 var pY = y.Geometry as MapPoint;

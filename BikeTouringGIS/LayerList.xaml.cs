@@ -1,23 +1,9 @@
 ﻿using BikeTouringGIS.Controls;
 using BikeTouringGIS.ViewModels;
-using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Layers;
-using Fluent;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace BikeTouringGIS
 {
@@ -78,7 +64,7 @@ namespace BikeTouringGIS
         private static void OnLayerSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var context = ((LayerList)d).DataContext;
-            ((LayerListViewModel)context).SelectedLayer= e.NewValue as BikeTouringGISLayer;
+            ((LayerListViewModel)context).SelectedLayer = e.NewValue as BikeTouringGISLayer;
         }
 
         private static void OnLayersSet(DependencyObject d, DependencyPropertyChangedEventArgs e)

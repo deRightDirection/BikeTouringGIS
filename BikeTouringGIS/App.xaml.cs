@@ -1,21 +1,13 @@
-﻿using Esri.ArcGISRuntime;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
-using theRightDirection.Library.Logging;
-using System.Windows.Threading;
-using System.Windows.Media;
-using Squirrel;
-using System.IO.IsolatedStorage;
-using BikeTouringGIS.ViewModels;
-using System.IO;
+﻿using BikeTouringGIS.ViewModels;
+using Esri.ArcGISRuntime;
 using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Security;
-using BikeTouringGIS;
+using System.Windows;
+using System.Windows.Media;
+using theRightDirection.Library.Logging;
 
 namespace BicycleTripsPreparationApp
 {
@@ -38,6 +30,7 @@ namespace BicycleTripsPreparationApp
             {
             }
         }
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             AppDomain.CurrentDomain.UnhandledException += (s, ex) => LogUnhandledException((Exception)ex.ExceptionObject, "AppDomain.CurrentDomain.UnhandledException");
@@ -54,7 +47,7 @@ namespace BicycleTripsPreparationApp
                 // Initialize the ArcGIS Runtime before any components are created.
                 ArcGISRuntimeEnvironment.Initialize();
 
-                // Standard level functionality can be enabled once the ArcGIS Runtime is initialized.                
+                // Standard level functionality can be enabled once the ArcGIS Runtime is initialized.
                 // To enable Standard level functionality you must either:
                 // 1. Allow the app user to authenticate with ArcGIS Online or Portal for ArcGIS then call the set license method with their license info.
                 // ArcGISRuntimeEnvironment.License.SetLicense(LicenseInfo object returned from an ArcGIS Portal instance)

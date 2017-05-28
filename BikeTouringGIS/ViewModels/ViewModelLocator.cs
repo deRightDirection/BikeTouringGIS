@@ -1,5 +1,4 @@
 ﻿using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 
 namespace BikeTouringGIS.ViewModels
@@ -11,6 +10,7 @@ namespace BikeTouringGIS.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<MainScreenViewModel>();
         }
+
         public MainScreenViewModel Main
         {
             get

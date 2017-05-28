@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Esri.ArcGISRuntime.Symbology;
-using GPX;
-using Esri.ArcGISRuntime.Layers;
-using BikeTouringGISLibrary;
-using Esri.ArcGISRuntime.Geometry;
+﻿using BikeTouringGISLibrary;
 using BikeTouringGISLibrary.Enumerations;
 using BikeTouringGISLibrary.Model;
+using Esri.ArcGISRuntime.Geometry;
+using GPX;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BikeTouringGIS
 {
-    class RouteSplitter
+    internal class RouteSplitter
     {
         private List<wptType> _wayPoints;
         private List<double> _distances;
@@ -27,9 +22,9 @@ namespace BikeTouringGIS
             var allIndices = _splitIndices.ToList();
             allIndices.Insert(0, 0);
             allIndices.Add(_wayPoints.Count - 1);
-            for (int i = 0; i < allIndices.Count - 1;i++)
+            for (int i = 0; i < allIndices.Count - 1; i++)
             {
-                _splitRoutes.Add(_wayPoints.GetRange(allIndices[i], (allIndices[i+1] - allIndices[i]) + 1));
+                _splitRoutes.Add(_wayPoints.GetRange(allIndices[i], (allIndices[i + 1] - allIndices[i]) + 1));
             }
         }
 
@@ -83,7 +78,7 @@ namespace BikeTouringGIS
             var sr = new SpatialReference(4326);
             var cumulativeDistance = 0;
             var startPoint = _wayPoints[0];
-            for(int i =0; i < _splitPoints.Count; i++)
+            for (int i = 0; i < _splitPoints.Count; i++)
             {
                 var point = _splitPoints[i];
                 var mapPoint = new MapPoint((double)point.lon, (double)point.lat, sr);
@@ -109,7 +104,7 @@ namespace BikeTouringGIS
         {
             var result = new List<BikeTouringGISGraphic>();
             var sr = new SpatialReference(4326);
-            foreach(var splitRoute in _splitRoutes)
+            foreach (var splitRoute in _splitRoutes)
             {
                 var geometry = CreateGeometryFromWayPoints(splitRoute);
                 var graphic = new BikeTouringGISGraphic(geometry, GraphicType.SplitRoute);
@@ -133,7 +128,7 @@ namespace BikeTouringGIS
             get
             {
                 var result = new List<IRoute>();
-                foreach(var routePoints in _splitRoutes)
+                foreach (var routePoints in _splitRoutes)
                 {
                     result.Add(new Route(routePoints));
                 }

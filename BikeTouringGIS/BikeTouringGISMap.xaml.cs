@@ -1,25 +1,12 @@
 ﻿using BikeTouringGIS.Controls;
-using BikeTouringGIS.Extensions;
 using BikeTouringGIS.ViewModels;
 using BikeTouringGISLibrary.Enumerations;
 using Esri.ArcGISRuntime.Controls;
-using Esri.ArcGISRuntime.Layers;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WinUX.Common;
 
 namespace BikeTouringGIS
@@ -30,13 +17,14 @@ namespace BikeTouringGIS
     public partial class BikeTouringGISMap : UserControl
     {
         private BikeTouringGISMapViewModel _vm;
+
         public BikeTouringGISMap()
         {
             InitializeComponent();
             Map = MapControl;
             var bindingViewMode = new Binding("Map") { Mode = BindingMode.TwoWay };
             SetBinding(MapProperty, bindingViewMode);
-            bindingViewMode = new Binding("TotalLengthOfRoutes") { Mode = BindingMode.OneWay};
+            bindingViewMode = new Binding("TotalLengthOfRoutes") { Mode = BindingMode.OneWay };
             SetBinding(TotalLengthOfRoutesProperty, bindingViewMode);
             bindingViewMode = new Binding("BikeTouringGISLayers") { Mode = BindingMode.OneWay };
             SetBinding(BikeTouringGISLayersProperty, bindingViewMode);
@@ -47,11 +35,11 @@ namespace BikeTouringGIS
 
         private void SetSymbology()
         {
-            foreach(DictionaryEntry item in Resources)
+            foreach (DictionaryEntry item in Resources)
             {
                 GraphicType enumValue;
                 EnumHelper.TryParseTextToEnumValue(item.Key.ToString(), out enumValue);
-                if(enumValue != GraphicType.Unknown)
+                if (enumValue != GraphicType.Unknown)
                 {
                     _vm.AddSymbol(enumValue, item.Value);
                 }
@@ -79,8 +67,10 @@ namespace BikeTouringGIS
             get { return (MainMenu)GetValue(MenuProperty); }
             set { SetValue(MenuProperty, value); }
         }
+
         public static readonly DependencyProperty MenuProperty =
             DependencyProperty.Register("Menu", typeof(MainMenu), typeof(BikeTouringGISMap), new PropertyMetadata(null, OnMenuSet));
+
         private static void OnMenuSet(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var context = ((BikeTouringGISMap)d).DataContext;
