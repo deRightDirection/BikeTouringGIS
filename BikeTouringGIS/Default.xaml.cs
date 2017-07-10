@@ -29,7 +29,7 @@ namespace BikeTouringGIS
                 using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
                 {
                     var updateInfo = await mgr.CheckForUpdate();
-                    var currentVersion = updateInfo.CurrentlyInstalledVersion.Version;
+                    var currentVersion = updateInfo.CurrentlyInstalledVersion?.Version;
                     var futureVersion = updateInfo.FutureReleaseEntry.Version;
                     if (currentVersion != futureVersion)
                     {
