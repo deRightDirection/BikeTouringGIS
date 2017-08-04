@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.0" creator="QGIS">
+  <wpt lat="46.528970000000" lon="14.173370000000">
+    <name>Juritz -Feistritz in Rosental [&lt;51] (15/04-30/09) -CCA (456m) &gt;00-4342282115</name>
+    <ele>0</ele>
+  </wpt>
+  <wpt lat="46.536240000000" lon="14.267980000000">
+    <name>Radcamping Schutz - Kirschentheuer [&lt;51] (01/05-30/09)  (430m) &gt;00-4342272482</name>
+  </wpt>
+  <wpt lat="46.543890000000" lon="14.390530000000">
+    <name>Rosental ROZ - Dobrowa (01/04-31/10)  (420m) &gt;00-43422681000</name>
+  </wpt>
+  <wpt lat="46.558410000000" lon="14.751500000000">
+    <name>Pirkdorfer See - Pirkdorf (01/05-30/09)  (526m) &gt;00-434230321</name>
+  </wpt>
+  <wpt lat="46.568530000000" lon="13.930630000000">
+    <name>Florian-Sandbank - Faak am See (01/01-31/12)  (562m) &gt;00-4342542261</name>
+  </wpt>
+  <wpt lat="46.569800000000" lon="13.907100000000">
+    <name>Poglitsch - Faak am See (01/04-15/10)  (556m) &gt;00-4342542718</name>
+  </wpt>
+  <wpt lat="46.570440000000" lon="13.951610000000">
+    <name>Am Walde - Ledenitzen (01/05-25/09)  (580m) &gt;00-4342542670</name>
+  </wpt>
+  <wpt lat="46.572100000000" lon="13.934460000000">
+    <name>Gruber - Faak am See (01/04-20/09)  (562m) &gt;00-4342542298</name>
+  </wpt>
+  <wpt lat="46.573270000000" lon="13.935580000000">
+    <name>Anderwald - Faak am See (10/04-15/10)  (564m) &gt;00-4342542297</name>
+  </wpt>
+  <wpt lat="46.574340000000" lon="13.936330000000">
+    <name>Arneitz - Faak am See (25/04-30/09) -CCA (560m) &gt;00-4342542137</name>
+  </wpt>
+  <wpt lat="46.574990000000" lon="14.624560000000">
+    <name>Gosselsdorfersee - Gosselsdorf (01/05-30/09) -CCA (474m) &gt;00-4342362168</name>
+  </wpt>
+  <wpt lat="46.578020000000" lon="14.150520000000">
+    <name>Naturist - Mullerhof am Keutschachersee - Keutschach am See (01/05-30/09)  (533m) &gt;00-4342732517</name>
+  </wpt>
+  <wpt lat="46.578070000000" lon="14.151910000000">
+    <name>Naturist - Sabotnik - Keutschach (16/05-30/09)  (531m) &gt;00-4342732509</name>
+  </wpt>
+  <wpt lat="46.582920000000" lon="14.228220000000">
+    <name>Reichmann - Keutschach [&lt;51] (01/05-30/09)  (523m) &gt;00-4369915000057</name>
+  </wpt>
+  <wpt lat="46.583500000000" lon="14.168340000000">
+    <name>Naturist - Turkwiese - Keutschach [&lt;51] (01/06-31/08)  (518m) &gt;00-43422481218</name>
+  </wpt>
+  <wpt lat="46.583850000000" lon="14.626080000000">
+    <name>Naturist - Rutar Lido - Eberndorf (01/01-31/12) -CCA (463m) &gt;00-43423622620</name>
+  </wpt>
+  <wpt lat="46.584810000000" lon="14.172150000000">
+    <name>Bruckler Sud - Keutschach (01/05-30/09) -CCA (516m) &gt;00-4342732773</name>
+  </wpt>
+  <wpt lat="46.585690000000" lon="14.565980000000">
+    <name>Breznik - St. Primus-Turnersee (15/04-30/09) -CC-CCA (491m) &gt;00-4342392350</name>
+  </wpt>
+  <wpt lat="46.586150000000" lon="14.580980000000">
+    <name>Terrassencamping - Obersammelsdorf (01/05-31/10)  (498m) &gt;00-4342392285</name>
+  </wpt>
+  <wpt lat="46.586240000000" lon="14.228000000000">
+    <name>Reautschnighof - Keutschach [&lt;51] (01/05-30/09)  (525m) &gt;00-43463281106</name>
+  </wpt>
+  <wpt lat="46.587660000000" lon="14.584490000000">
+    <name>Panorama II - St. Kanzian (01/05-25/10)  (526m) &gt;00-4342392285</name>
+  </wpt>
+  <wpt lat="46.587680000000" lon="14.150420000000">
+    <name>Valentinitsch - Keutschach [&lt;51] (01/05-30/09)  (521m) &gt;00-4342733780</name>
+  </wpt>
+  <wpt lat="46.589780000000" lon="14.136930000000">
+    <name>Hafnersee - Keutschach (01/05-30/09)  (518m) &gt;00-43427323750</name>
+  </wpt>
+  <wpt lat="46.590320000000" lon="13.913300000000">
+    <name>Wiesencamping Marhof - Drobollach [&lt;51] (01/04-30/09)  (599m) &gt;00-4342542888</name>
+  </wpt>
+  <wpt lat="46.591550000000" lon="14.168880000000">
+    <name>Bruckler Nord - Keutschach am See (01/05-30/09) -CC (509m) &gt;00-4342732384</name>
+  </wpt>
+  <wpt lat="46.596280000000" lon="13.893290000000">
+    <name>Mittewald - Mittewald [&lt;51] (01/04-30/09)  (590m) &gt;00-436605288887</name>
+  </wpt>
+  <wpt lat="46.599190000000" lon="14.582570000000">
+    <name>Ferienzentrum Sud - St. Kanzian am Klopeiner See (01/05-25/09)  (462m) &gt;00-4342392322</name>
+  </wpt>
+  <wpt lat="46.602470000000" lon="14.341230000000">
+    <name>Naturist - Auenweg - Klagenfurt  (433m)</name>
+  </wpt>
+  <wpt lat="46.607640000000" lon="14.258660000000">
+    <name>Michelin - Klagenfurt [&lt;51] (01/01-31/12)  (444m) &gt;00-43463294656</name>
+  </wpt>
+  <wpt lat="46.608460000000" lon="14.585150000000">
+    <name>Nord - Sankt Kanzian (01/05-30/09)  (460m) &gt;00-434239222432</name>
+  </wpt>
+  <wpt lat="46.615000000000" lon="13.805950000000">
+    <name>Gerli - Villach-Fellach [&lt;51] (01/01-31/12) -BD (575m) &gt;00-43424257402</name>
+  </wpt>
+  <wpt lat="46.618550000000" lon="14.256180000000">
+    <name>Strandbad - Klagenfurt (20/04-30/09)  (442m) &gt;00-434635216391</name>
+  </wpt>
+  <wpt lat="46.619020000000" lon="14.105450000000">
+    <name>Weisses Rossl - Auen-Schiefling [&lt;51] (15/04-05/10)  (473m) &gt;00-4342742898</name>
+  </wpt>
+  <wpt lat="46.632780000000" lon="13.857310000000">
+    <name>Seehof am Vassachersee - Villach [&lt;51] (01/05-30/09)  (526m) &gt;00-43676843740713</name>
+  </wpt>
+  <wpt lat="46.633980000000" lon="14.690960000000">
+    <name>Stausee - Volkermarkt (01/05-31/10)  (396m) &gt;00-436502644996</name>
+  </wpt>
+  <wpt lat="46.647970000000" lon="14.932820000000">
+    <name>Lavamund - Lavamund [&lt;51] (01/04-31/10)  (353m) &gt;00-436504229194</name>
+  </wpt>
+  <wpt lat="46.653020000000" lon="13.933530000000">
+    <name>Berghof -Villach-Landskron (15/04-20/10) -CCA (524m) &gt;00-43424241133</name>
+  </wpt>
+  <wpt lat="46.653600000000" lon="13.937270000000">
+    <name>Mentl - Villach-Landskron (20/04-30/09) -BD (521m) &gt;00-43424241886</name>
+  </wpt>
+  <wpt lat="46.655170000000" lon="13.940090000000">
+    <name>Plorz - Villach-Landskron [&lt;51] (01/04-25/10)  (518m) &gt;00-436763221494</name>
+  </wpt>
+  <wpt lat="46.656200000000" lon="13.891100000000">
+    <name>Ossiacher See - Annenheim (15/04-30/09) -CCA (502m) &gt;00-4342482757</name>
+  </wpt>
+  <wpt lat="46.657520000000" lon="13.888500000000">
+    <name>Lindenhof - Annenheim [&lt;51] (01/05-30/09)  (519m) &gt;00-4342482703</name>
+  </wpt>
+  <wpt lat="46.658430000000" lon="14.166110000000">
+    <name>Schlossbad - Moosburg [&lt;51] (01/05-30/09)  (516m) &gt;00-43427282237</name>
+  </wpt>
+  <wpt lat="46.659040000000" lon="14.165640000000">
+    <name>Dammwirt - Moosburg [&lt;51] (01/05-30/09)  (510m) &gt;00-43427282053</name>
+  </wpt>
+  <wpt lat="46.662170000000" lon="13.972730000000">
+    <name>Kolbl - Ossiach (01/01-31/12) -CCA (509m) &gt;00-4342438223</name>
+  </wpt>
+  <wpt lat="46.663590000000" lon="13.974610000000">
+    <name>Ossiacher See - Ossiach (01/05-30/09) -CCA (513m) &gt;00-434243436</name>
+  </wpt>
+  <wpt lat="46.665320000000" lon="13.976930000000">
+    <name>Parth - Ossiach (01/04-31/10)  (520m) &gt;00-43424327440</name>
+  </wpt>
+  <wpt lat="46.679200000000" lon="13.970860000000">
+    <name>Blasge - Bodensdorf [&lt;51] (11/04-05/11)  (508m) &gt;00-436644232006</name>
+  </wpt>
+  <wpt lat="46.682710000000" lon="13.998700000000">
+    <name>Lampele - Ossiach (01/05-30/09) -CCA (507m) &gt;00-434243529</name>
+  </wpt>
+  <wpt lat="46.683650000000" lon="14.178580000000">
+    <name>Naturist - Tigringer See - Moosburg [&lt;51] (01/05-30/09)  (556m) &gt;00-43427283542</name>
+  </wpt>
+  <wpt lat="46.685730000000" lon="14.012940000000">
+    <name>Jodl - Ossiach (20/04-30/09)  (514m) &gt;00-4342438779</name>
+  </wpt>
+  <wpt lat="46.687000000000" lon="14.020000000000">
+    <name>Kalkgruber - Ossiach [&lt;51] (20/04-30/09) -CCA (508m) &gt;00-434243527</name>
+  </wpt>
+  <wpt lat="46.689080000000" lon="14.032690000000">
+    <name>Prefelnig - Ossiach [&lt;51] (01/05-31/10)  (517m) &gt;00-4342438226</name>
+  </wpt>
+  <wpt lat="46.692960000000" lon="15.253020000000">
+    <name>Olspur - Eibiswald [&lt;51] (15/04-15/10)  (353m) &gt;00-436603490810</name>
+  </wpt>
+  <wpt lat="46.693420000000" lon="13.990830000000">
+    <name>Morgenfurt - Steindorf [&lt;51] (15/05-31/08)  (507m) &gt;00-4342432290</name>
+  </wpt>
+  <wpt lat="46.694400000000" lon="14.009250000000">
+    <name>Seecamping Laggner - Steindorf [&lt;51] (01/05-30/09) -CCA (503m) &gt;00-436507300706</name>
+  </wpt>
+  <wpt lat="46.694940000000" lon="13.996630000000">
+    <name>Hoffmann - Steindorf (01/05-30/09) -CCA (515m) &gt;00-4342438704</name>
+  </wpt>
+  <wpt lat="46.695720000000" lon="14.004290000000">
+    <name>Seecamping Nagele - Steindorf (01/05-30/09)  (506m) &gt;00-4342438314</name>
+  </wpt>
+  <wpt lat="46.700400000000" lon="14.143680000000">
+    <name>Maltschachersee - Briefelsdorf (01/05-30/09)  (594m) &gt;00-4342772644</name>
+  </wpt>
+  <wpt lat="46.703870000000" lon="14.145770000000">
+    <name>Seewirt - Maltschach [&lt;51] (01/05-30/09)  (598m) &gt;00-4342772637</name>
+  </wpt>
+  <wpt lat="46.704780000000" lon="15.772380000000">
+    <name>Mureck - Mureck [&lt;51] (01/04-30/11)  (234m) &gt;00-4334722164</name>
+  </wpt>
+  <wpt lat="46.717500000000" lon="15.798010000000">
+    <name>International Gosdorf - Misselsdorf (01/04-31/10)  (230m) &gt;00-4334723459</name>
+  </wpt>
+  <wpt lat="46.718110000000" lon="15.799650000000">
+    <name>Rocksee -Misselsdorf (01/04-31/10)  (230m) &gt;00-4334722292</name>
+  </wpt>
+  <wpt lat="46.724380000000" lon="15.293080000000">
+    <name>Eden Resort - Polfing-Brunn [&lt;51] (01/01-31/12)  (319m) &gt;00-4369913000110</name>
+  </wpt>
+  <wpt lat="46.750560000000" lon="14.870170000000">
+    <name>Dachbergschenke - Maria Rojach [&lt;51]  (454m) &gt;00-4343553002</name>
+  </wpt>
+  <wpt lat="46.751690000000" lon="15.361240000000">
+    <name>Weinland - Gleinstatten [&lt;51] (01/04-03/11)  (307m) &gt;00-4334573344</name>
+  </wpt>
+  <wpt lat="46.774600000000" lon="15.513610000000">
+    <name>Sulmsee - Tillmitsch (01/05-30/09)  (273m) &gt;00-43345282866</name>
+  </wpt>
+  <wpt lat="46.778560000000" lon="15.528970000000">
+    <name>Leibnitz - Leibnitz [&lt;51] (01/05-15/09)  (269m) &gt;00-43345282463</name>
+  </wpt>
+  <wpt lat="46.802290000000" lon="14.412450000000">
+    <name>Wieser - St Georgen-Bernaich (01/05-10/10) -CCA (573m) &gt;00-4342123535</name>
+  </wpt>
+  <wpt lat="46.985850000000" lon="15.427440000000">
+    <name>Schwarzl-See - Unterpremstatten (15/04-30/09)  (330m) &gt;00-43313553577</name>
+  </wpt>
+  <wpt lat="47.024690000000" lon="15.397190000000">
+    <name>Reisemobil Stellplatz - Graz (01/01-31/12)  (353m) &gt;00-436763785102</name>
+  </wpt>
+  <wpt lat="47.051700000000" lon="15.066150000000">
+    <name>Piberstein - Koflach [&lt;51]  (480m) &gt;00-4331447095950</name>
+  </wpt>
+  <wpt lat="47.137560000000" lon="15.567950000000">
+    <name>Naturist - Freie Menschen - Purgstall (09/05-19/10)  (437m) &gt;00-436644104215</name>
+  </wpt>
+  <wpt lat="47.252000000000" lon="15.318000000000">
+    <name>Lanzmaierhof - Frohnleiten [&lt;51] (25/03-15/10)  (426m) &gt;00-4331262360</name>
+  </wpt>
+  <wpt lat="47.287610000000" lon="15.492080000000">
+    <name>Almenland-Am Bauernhof - Fladnitz an der Teichalm [&lt;51] (01/01-31/12)  (680m) &gt;00-433179238888</name>
+  </wpt>
+  <wpt lat="47.361060000000" lon="15.065760000000">
+    <name>Hinterberg - Leoben  (15/04-30/09)  (562m) &gt;00-43384226758</name>
+  </wpt>
+  <wpt lat="47.403040000000" lon="15.227270000000">
+    <name>Gasthof Pichler - Oberaich [&lt;51] (01/01-31/12)  (491m) &gt;00-43386251418</name>
+  </wpt>
+  <wpt lat="47.468040000000" lon="15.348870000000">
+    <name>Naturist - Gluckliche Freizeit - St. Lorenzen im Murztal [&lt;51] (19/05-01/11)  (521m) &gt;00-436641761386</name>
+  </wpt>
+  <wpt lat="47.506690000000" lon="15.075030000000">
+    <name>Freizeitsee Zenz - Tragoss [&lt;51] (01/01-31/12)  (750m) &gt;00-4338688410</name>
+  </wpt>
+  <wpt lat="47.553840000000" lon="15.312960000000">
+    <name>Rosskogler - Aflenz-Land [&lt;51] (01/01-31/12)  (740m) &gt;00-436767576131</name>
+  </wpt>
+  <wpt lat="47.569450000000" lon="15.619640000000">
+    <name>Europa - Langenwang [&lt;51] (01/01-31/12)  (634m) &gt;00-4338542950</name>
+  </wpt>
+  <wpt lat="47.819760000000" lon="15.532770000000">
+    <name>Gipfelblick - Sankt Aegyd am Neuwalde (01/01-31/12)  (720m) &gt;00-4327682544</name>
+  </wpt>
+  <wpt lat="47.887340000000" lon="15.959610000000">
+    <name>KohlhofMuhl - Neusiedl [&lt;51] (01/01-31/12)  (449m) &gt;00-43263274035</name>
+  </wpt>
+  <wpt lat="47.926380000000" lon="15.474760000000">
+    <name>Spittelberg - Turnitz [&lt;51] (01/01-31/12)  (489m) &gt;00-436649201239</name>
+  </wpt>
+  <wpt lat="47.937420000000" lon="15.497180000000">
+    <name>Gravogl - Turnitz [&lt;51] (01/01-31/12)  (456m) &gt;00-4327698201</name>
+  </wpt>
+  <wpt lat="47.980560000000" lon="15.732390000000">
+    <name>Voralpen - Kleinzell (01/01-31/12)  (486m) &gt;00-432766275</name>
+  </wpt>
+  <wpt lat="48.019660000000" lon="15.943420000000">
+    <name>Paradise Garden - Thenneberg-Kaumberg (01/04-30/09) -CCA-BD (449m) &gt;00-436764741966</name>
+  </wpt>
+  <wpt lat="48.039870000000" lon="15.756020000000">
+    <name>Golsental - Hainfeld (01/03-31/10)  (408m) &gt;00-43676842246272</name>
+  </wpt>
+  <wpt lat="48.042040000000" lon="15.603640000000">
+    <name>Terrassen Traisen - Traisen (15/02-15/11) -CCA-BD (406m) &gt;00-43276262900</name>
+  </wpt>
+  <wpt lat="48.105060000000" lon="16.133640000000">
+    <name>Wienerwald - Sulz [&lt;51] (15/04-15/10)  (430m) &gt;00-436644609796</name>
+  </wpt>
+  <wpt lat="48.135800000000" lon="16.255620000000">
+    <name>Rodaun - Wien-Bezirk (15/03-05/11)  (241m) &gt;00-4318884154</name>
+  </wpt>
+  <wpt lat="48.150250000000" lon="16.300400000000">
+    <name>Wien Sud - Wien-Bezirk (01/05-30/09)  (206m) &gt;00-4318673649</name>
+  </wpt>
+  <wpt lat="48.204830000000" lon="16.488970000000">
+    <name>Naturist - Lobau - Wenen (01/05-15/09)  (156m) &gt;00-4312804254</name>
+  </wpt>
+  <wpt lat="48.208480000000" lon="16.447330000000">
+    <name>Neue Donau - Wien Ost (01/05-30/09)  (168m) &gt;00-4312024010</name>
+  </wpt>
+  <wpt lat="48.213950000000" lon="16.250060000000">
+    <name>Wien West - Penzing (16/02-01/02)  (245m) &gt;00-4319142314</name>
+  </wpt>
+  <wpt lat="48.221450000000" lon="16.034900000000">
+    <name>Krackingberg - Kracking [&lt;51] (01/01-31/12)  (339m) &gt;00-4322748344</name>
+  </wpt>
+  <wpt lat="48.221590000000" lon="15.913430000000">
+    <name>Finsterhof - Neulengbach (01/01-31/12)  (211m) &gt;00-43277252130</name>
+  </wpt>
+  <wpt lat="48.224350000000" lon="15.658870000000">
+    <name>Am See - Sankt Polten (15/04-31/10) -CCA (253m) &gt;00-43676898798898</name>
+  </wpt>
+  <wpt lat="48.310890000000" lon="16.327960000000">
+    <name>Donaupark Klosterneuburg - Klosterneuburg (15/03-31/10) -CCA (168m) &gt;00-43224325877</name>
+  </wpt>
+  <wpt lat="48.332530000000" lon="16.072280000000">
+    <name>Donaupark Tulln - Tulln an der Donau (01/04-15/10) -CCA (175m) &gt;00-43227265200</name>
+  </wpt>
+  <wpt lat="48.347420000000" lon="15.905500000000">
+    <name>An der Donau - Zwentendorf [&lt;51] (16/04-30/09)  (182m) &gt;00-4322772444</name>
+  </wpt>
+  <wpt lat="44.879530000000" lon="18.414180000000">
+    <name>Zebed - Gradacac [&lt;51] (01/05-30/09)  (144m) &gt;00-38735852505</name>
+  </wpt>
+  <wpt lat="45.045950000000" lon="18.996710000000">
+    <name>Spacva - Lipovac (01/05-30/09)  (83m) &gt;00-38532341880</name>
+  </wpt>
+  <wpt lat="45.387560000000" lon="15.614270000000">
+    <name>Radonja - Karlovac [&lt;51] (01/04-31/10)  (122m) &gt;00-38547718295</name>
+  </wpt>
+  <wpt lat="45.417550000000" lon="16.627620000000">
+    <name>Tradicije Cigoc - Kratecko [&lt;51]  (95m) &gt;00-38544715124</name>
+  </wpt>
+  <wpt lat="45.419620000000" lon="15.483770000000">
+    <name>Autocamp Slapic**** - Duga Resa [&lt;51] (01/04-31/10) -CCA-BD (134m) &gt;00-38598860601</name>
+  </wpt>
+  <wpt lat="45.520530000000" lon="15.314560000000">
+    <name>Jankovic - Adlesici [&lt;51] (01/05-30/09)  (206m) &gt;00-38573070570</name>
+  </wpt>
+  <wpt lat="45.561290000000" lon="15.389360000000">
+    <name>Srakovcic - Ribnik [&lt;51] (01/04-31/10)  (237m) &gt;00-38547609090</name>
+  </wpt>
+  <wpt lat="45.599170000000" lon="18.784840000000">
+    <name>Family Kopacevo - Bilje [&lt;51] (15/04-15/10)  (83m) &gt;00-38531752318</name>
+  </wpt>
+  <wpt lat="45.752220000000" lon="15.708740000000">
+    <name>Etno kuca pod Okicem - Klake [&lt;51] (01/06-30/09)  (327m) &gt;00-38513382335</name>
+  </wpt>
+  <wpt lat="45.774370000000" lon="15.878330000000">
+    <name>Plitvice - Lucko-Zagreb (01/05-31/10)  (120m) &gt;00-38516530446</name>
+  </wpt>
+  <wpt lat="45.802110000000" lon="15.827040000000">
+    <name>Zagreb Kamp - Rakitje (01/01-31/12) -CCA (119m) &gt;00-38513324567</name>
+  </wpt>
+  <wpt lat="46.004540000000" lon="18.891940000000">
+    <name>Davod - Davod  (83m) &gt;00-3679481041</name>
+  </wpt>
+  <wpt lat="46.174850000000" lon="18.945860000000">
+    <name>Sugovica - Baja  (92m) &gt;00-3679321755</name>
+  </wpt>
+  <wpt lat="46.177880000000" lon="18.945850000000">
+    <name>Ifjusagi Szallo - Baja (01/05-01/09)  (91m) &gt;00-3679522230</name>
+  </wpt>
+  <wpt lat="44.577340000000" lon="20.388330000000">
+    <name>Zornica Kuca - Bacevac [&lt;51] (15/03-30/10)  (167m) &gt;00-381112540254</name>
+  </wpt>
+  <wpt lat="44.878580000000" lon="20.354740000000">
+    <name>Dunav - Zemun [&lt;51] (01/05-30/09)  (88m) &gt;00-381112199072</name>
+  </wpt>
+  <wpt lat="44.960850000000" lon="19.522710000000">
+    <name>Zasavica - Sremska Mitrovica [&lt;51] (25/04-01/11)  (76m) &gt;00-38122656214</name>
+  </wpt>
+  <wpt lat="45.173750000000" lon="19.929220000000">
+    <name>Eko Fruska Gora - Sremski Karlovci [&lt;51] (01/05-30/09)  (152m) &gt;00-38121882511</name>
+  </wpt>
+  <wpt lat="45.717050000000" lon="18.919180000000">
+    <name>Apatin - Budzak [&lt;51] (22/04-30/09)  (78m) &gt;00-38145741563</name>
+  </wpt>
+  <wpt lat="45.457800000000" lon="15.250480000000">
+    <name>Katra - Vinica [&lt;51] (01/05-30/09)  (169m) &gt;00-38641368312</name>
+  </wpt>
+  <wpt lat="45.458730000000" lon="15.254240000000">
+    <name>Kolpa - Vinica (01/01-31/12) -BD (166m) &gt;00-38641615560</name>
+  </wpt>
+  <wpt lat="45.459810000000" lon="15.258580000000">
+    <name>Benetic - Vinica [&lt;51] (01/05-30/09)  (160m) &gt;00-38641643630</name>
+  </wpt>
+  <wpt lat="45.465930000000" lon="15.092310000000">
+    <name>Sotorisce Kanu Kamp - Stari trg ob Kolpi [&lt;51] (22/04-30/09)  (186m) &gt;00-38641518536</name>
+  </wpt>
+  <wpt lat="45.494050000000" lon="15.056570000000">
+    <name>Muhvic - Stari trg ob Kolpi [&lt;51] (01/05-15/09)  (195m) &gt;00-38618943675</name>
+  </wpt>
+  <wpt lat="45.495400000000" lon="15.051760000000">
+    <name>Konda - Stari trg ob Kolpi (01/01-31/12)  (183m) &gt;00-38618943671</name>
+  </wpt>
+  <wpt lat="45.516110000000" lon="14.911140000000">
+    <name>Zaga - Kostel [&lt;51] (01/05-30/09)  (210m) &gt;00-39641218049</name>
+  </wpt>
+  <wpt lat="45.525270000000" lon="15.189750000000">
+    <name>Maleric - Dragatus [&lt;51] (01/01-31/12)  (159m) &gt;00-38673057120</name>
+  </wpt>
+  <wpt lat="45.569700000000" lon="15.297870000000">
+    <name>Pezdirc - Gradac [&lt;51] (01/06-30/09)  (140m) &gt;00-38640306051</name>
+  </wpt>
+  <wpt lat="45.593640000000" lon="15.282930000000">
+    <name>Krasinec - Gradac [&lt;51] (20/04-30/09)  (134m) &gt;00-38640555183</name>
+  </wpt>
+  <wpt lat="45.604900000000" lon="15.275940000000">
+    <name>Podzemelj - Gradac-Metlika  (135m) &gt;00-38673069572</name>
+  </wpt>
+  <wpt lat="45.634390000000" lon="15.310120000000">
+    <name>Lovsin - Metlika [&lt;51] (01/05-15/09)  (136m) &gt;00-38641883969</name>
+  </wpt>
+  <wpt lat="45.758850000000" lon="15.055140000000">
+    <name>Dolenjske Toplice - Dolenjske Toplice [&lt;51]  (174m) &gt;00-38640466589</name>
+  </wpt>
+  <wpt lat="45.837770000000" lon="15.237830000000">
+    <name>Otocec - Otocec [&lt;51] (01/04-15/10)  (158m) &gt;00-38640466589</name>
+  </wpt>
+  <wpt lat="45.987180000000" lon="14.822120000000">
+    <name>Pristava - Ivancna Gorica [&lt;51] (01/01-31/12)  (670m) &gt;00-38631505400</name>
+  </wpt>
+  <wpt lat="46.097520000000" lon="14.518700000000">
+    <name>Ljubljana Resort*** - Ljubljana-Jezica (01/01-31/12) -CCA (288m) &gt;00-38615683913</name>
+  </wpt>
+  <wpt lat="46.174350000000" lon="14.415850000000">
+    <name>Smlednik ** - Smlednik (01/05-15/10)  (345m) &gt;00-38613627002</name>
+  </wpt>
+  <wpt lat="46.227240000000" lon="14.619020000000">
+    <name>Resnik - Kamnik [&lt;51] (01/05-30/09)  (389m) &gt;00-38618317314</name>
+  </wpt>
+  <wpt lat="46.274380000000" lon="13.947980000000">
+    <name>Danica - Bohinjska Bistrica (01/01-31/12) -CCA-BD (505m) &gt;00-38645721702</name>
+  </wpt>
+  <wpt lat="46.279020000000" lon="13.836060000000">
+    <name>Zlatorog - Bohinj (01/05-30/09)  (530m) &gt;00-38645723064</name>
+  </wpt>
+  <wpt lat="46.298980000000" lon="14.400340000000">
+    <name>Bizjak - Preddvor [&lt;51] (01/01-31/12)  (484m) &gt;00-38642555600</name>
+  </wpt>
+  <wpt lat="46.303330000000" lon="14.286430000000">
+    <name>Trnovc - Naklo [&lt;51] (01/05-30/09)  (413m) &gt;00-38645331000</name>
+  </wpt>
+  <wpt lat="46.305000000000" lon="14.611020000000">
+    <name>Kraljev hrib - Stahovica [&lt;51] (01/05-15/10)  (590m) &gt;00-38641816477</name>
+  </wpt>
+  <wpt lat="46.305330000000" lon="14.608050000000">
+    <name>Alpe - Stahovica [&lt;51] (01/01-31/12)  (530m) &gt;00-38618327258</name>
+  </wpt>
+  <wpt lat="46.347720000000" lon="14.172840000000">
+    <name>Radovljica - Radovljica (01/06-15/09)  (497m) &gt;00-38645315770</name>
+  </wpt>
+  <wpt lat="46.356190000000" lon="14.149520000000">
+    <name>Sobec *** - Lesce (15/04-30/09)  (421m) &gt;00-38645353700</name>
+  </wpt>
+  <wpt lat="46.361740000000" lon="14.082000000000">
+    <name>Bled*** - Bled (01/04-15/10) -CCA-BD (478m) &gt;00-38645752000</name>
+  </wpt>
+  <wpt lat="46.369340000000" lon="15.086450000000">
+    <name>Jezero - Velenje (26/04-31/10) -CCA (372m) &gt;00-38631455977</name>
+  </wpt>
+  <wpt lat="46.389050000000" lon="13.747570000000">
+    <name>Trenta - Soca [&lt;51] (01/05-30/09) -BD (689m) &gt;00-38651615966</name>
+  </wpt>
+  <wpt lat="46.399380000000" lon="14.280850000000">
+    <name>Podljubelj  -Trzic [&lt;51] (15/06-15/09)  (673m) &gt;00-38640554436</name>
+  </wpt>
+  <wpt lat="46.402480000000" lon="14.506590000000">
+    <name>Stara Posta - Jezersko [&lt;51] (01/04-30/09)  (888m) &gt;00-38670542123</name>
+  </wpt>
+  <wpt lat="46.407960000000" lon="14.520890000000">
+    <name>Senkove domacija - Jezersko [&lt;51] (15/04-15/10)  (915m) &gt;00-38631777188</name>
+  </wpt>
+  <wpt lat="46.415230000000" lon="14.105620000000">
+    <name>Perun Lipce - Blejska Dobrava [&lt;51] (01/04-15/10)  (525m) &gt;00-38641666187</name>
+  </wpt>
+  <wpt lat="46.422360000000" lon="15.854260000000">
+    <name>Terme Ptuj - Ptuj (01/01-31/12) -CCA-BD (222m) &gt;00-38627494580</name>
+  </wpt>
+  <wpt lat="46.464470000000" lon="13.957740000000">
+    <name>Kamne * - Mojstrana [&lt;51] (01/01-31/12) -BD (657m) &gt;00-38645891105</name>
+  </wpt>
+  <wpt lat="46.484790000000" lon="13.838060000000">
+    <name>Spik - Gozd Martuljek (01/01-31/12) -CCA-BD (742m) &gt;00-38651634466</name>
+  </wpt>
+  <wpt lat="46.492390000000" lon="13.779560000000">
+    <name>Natura Eco (tents only) - Krajska Gora [&lt;51] (01/06-15/09)  (827m) &gt;00-38664121966</name>
+  </wpt>
+  <wpt lat="46.535690000000" lon="15.604510000000">
+    <name>Kekec - Maribor (01/01-31/12) -CCA-BD (298m) &gt;00-38640225386</name>
+  </wpt>
+</gpx>

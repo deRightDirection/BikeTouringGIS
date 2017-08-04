@@ -2,11 +2,15 @@
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:common="using:Template10.Common"
-                     xmlns:converters="using:WinUX.Xaml.Converters"
+                     xmlns:winux="using:WinUX.Xaml.Converters"
                      RequestedTheme="Light">
     <Application.Resources>
         <ResourceDictionary>
+            <winux:SelectionChangedConverter x:Name="selectionChangedConverter"/>
+            <winux:StringFormatConverter x:Key="stringFormatConverter"/>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles\Styles.xaml"/>
+                <ResourceDictionary Source="Styles\Datatemplates.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

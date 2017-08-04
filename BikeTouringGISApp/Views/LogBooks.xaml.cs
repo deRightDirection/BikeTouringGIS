@@ -1,5 +1,4 @@
-﻿using BikeTouringGISApp.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,13 +20,11 @@ namespace BikeTouringGISApp.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class CreateNewLog : Page
+    public sealed partial class LogBooks : Page
     {
-        public CreateNewLog()
+        public LogBooks()
         {
             this.InitializeComponent();
-            var vm = DataContext as CreateNewLogViewModel;
-            vm.RichTextBox = textbox;
         }
     }
 }

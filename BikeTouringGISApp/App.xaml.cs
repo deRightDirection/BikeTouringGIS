@@ -8,6 +8,8 @@ using GalaSoft.MvvmLight.Ioc;
 using WinUX.CloudServices;
 using WinUX.CloudServices.OneDrive;
 using Template10.Common;
+using BikeTouringGISApp.Services;
+using WinUX.CloudServices.Facebook;
 
 namespace BikeTouringGISApp
 {
@@ -20,9 +22,6 @@ namespace BikeTouringGISApp
         {
             InitializeComponent();
             SplashFactory = (e) => new Views.Splash(e);
-
-            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            SimpleIoc.Default.Register<ICloudService, OneDriveService>();
         }
 
         public override async Task OnInitializeAsync(IActivatedEventArgs args)
@@ -45,7 +44,16 @@ namespace BikeTouringGISApp
 
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
-            NavigationService.Navigate(typeof(Views.Logs));
+            ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            await FileService.Instance.SetMainFolder();
+
+            /*
+            SimpleIoc.Default.Register<ICloudService, OneDriveService>();
+            var fbClient = new FacebookClient();
+            await fbClient.LoginAsync("687964081409306");
+            SimpleIoc.Default.Register<FacebookClient>(() => fbClient);
+            */
+            NavigationService.Navigate(typeof(Views.CreateNewLog));
         }
     }
 }

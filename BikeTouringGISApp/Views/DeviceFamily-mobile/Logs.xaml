@@ -4,9 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BikeTouringGISApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:vm="using:BikeTouringGISApp.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Page"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    </Grid>
+    <Page.DataContext>
+        <vm:LogsViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="5">
+        <ListView ItemTemplate="{StaticResource LogTemplate}" ItemsSource="{Binding Logs,Mode=OneWay}" ItemContainerStyle="{StaticResource listviewitem}"/>
+    </StackPanel>
 </Page>

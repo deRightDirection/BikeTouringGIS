@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BikeTouringGISApp.Library
+namespace BikeTouringGISApp.Library.Enumerations
 {
-    public class Class1
+    public enum LogStoryLanguage
     {
+        Unknown,
+        Dutch,
+        English
     }
 }

@@ -1,10 +1,9 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Template10.Mvvm;
 using WinUX.CloudServices;
 using WinUX.CloudServices.OneDrive;
 
@@ -17,7 +16,7 @@ namespace BikeTouringGISApp.ViewModels
 
         public BikeTouringGISBaseViewModel()
         {
-            _oneDrive = SimpleIoc.Default.GetInstance<ICloudService>();
+            // _oneDrive = SimpleIoc.Default.GetInstance<ICloudService>();
             CheckOneDrive();
         }
 
@@ -32,8 +31,7 @@ namespace BikeTouringGISApp.ViewModels
 
         private async void CheckOneDrive()
         {
-            var resultOneDrive = await _oneDrive.Connect();
-            OneDriveIsOnline = resultOneDrive.IsConnected;
+            // var resultOneDrive = await _oneDrive.Connect(); OneDriveIsOnline = resultOneDrive.IsConnected;
         }
     }
 }

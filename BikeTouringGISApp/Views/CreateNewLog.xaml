@@ -4,10 +4,133 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:BikeTouringGISApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:vm="using:BikeTouringGISApp.ViewModels"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:telerik="using:Telerik.UI.Xaml.Controls.Input"
+    x:Name="Page"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:CreateNewLogViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="5" DataContext="{Binding Log}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="location" Grid.Column="0" Grid.RowSpan="2" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBlock Text="{Binding DataContext.Latitude, ElementName=Page}" Grid.Column="1" Grid.Row="0"/>
+            <TextBlock Text="{Binding DataContext.Longitude, ElementName=Page}" Grid.Column="1" Grid.Row="1"/>
+            <Button Command="{Binding DataContext.UpdateGPSCommand, ElementName=Page}" Content="refresh" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Right"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="date" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center"/>
+            <DatePicker Date="{Binding Date, Mode=TwoWay}" Grid.Column="1"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="distance" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center"/>
+            <telerik:RadNumericBox Value="{Binding Distance, Mode=TwoWay}" Minimum="0" Maximum="750" ValueFormat="{}{0} km" SmallChange="1" LargeChange="10" Grid.Column="1" InputScope="Number"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="travel time" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal">
+                <telerik:RadNumericBox Value="{Binding TravelTimeHours, Mode=TwoWay}" Minimum="0" Maximum="23" ValueFormat="{}{0}h" SmallChange="1" LargeChange="10" InputScope="Number" AcceptsDecimalSeparator="False"/>
+                <TextBlock Margin="2 0 2 0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    :
+                </TextBlock>
+                <telerik:RadNumericBox Value="{Binding TravelTimeMinutes, Mode=TwoWay}" Minimum="0" Maximum="59" ValueFormat="{}{0}m" SmallChange="1" LargeChange="10" InputScope="Number" AcceptsDecimalSeparator="False"/>
+                <TextBlock Margin="2 0 2 0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    :
+                </TextBlock>
+                <telerik:RadNumericBox Value="{Binding TravelTimeSeconds, Mode=TwoWay}" Minimum="0" Maximum="59" ValueFormat="{}{0}s" SmallChange="1" LargeChange="10" InputScope="Number" AcceptsDecimalSeparator="False"/>
+            </StackPanel>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="startpoint" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding Start, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="endpoint" Grid.Column="0" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBox Text="{Binding End, Mode=TwoWay}" Grid.Column="1"/>
+        </Grid>
+        <TextBlock Text="story" FontWeight="Bold"/>
+        <RichEditBox x:Name="textbox"
+                     MinHeight="250"
+                     Height="auto"
+                     Background="White"
+                     FontSize="12">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="TextChanged">
+                    <core:InvokeCommandAction Command="{Binding DataContext.SaveTextCommand, ElementName=Page}" CommandParameter="{Binding Document, ElementName=textbox}"/>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+        </RichEditBox>
+        <Button Command="{Binding DataContext.SaveLogCommand, ElementName=Page}" Content="save log" MinWidth="250" HorizontalAlignment="Center"/>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    </Grid>
+        <TextBlock FontStyle="Italic" FontSize="8" Text="* logboek selecteren"/>
+        <TextBlock FontStyle="Italic" FontSize="8" Text="* Facebook place"/>
+        <TextBlock FontStyle="Italic" FontSize="8" Text="* foto's"/>
+        <TextBlock FontStyle="Italic" FontSize="8" Text="* posten op Facebook"/>
+        <TextBlock FontStyle="Italic" FontSize="8" Text="* tekst in NL en EN"/>
+        <!--
+        <Image Source="{Binding ImageSource}" Width="40" Height="40"/>
+        <ListView ItemsSource="{Binding FacebookPages}" SelectionMode="Multiple"
+                  ItemTemplate="{StaticResource FacebookPageTemplate}" Name="listWithFacebookPages">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="SelectionChanged">
+                    <core:InvokeCommandAction Command="{Binding SelectionChangedCommand}"
+                                      InputConverter="{StaticResource selectionChangedConverter}"
+                                      InputConverterParameter="{Binding ElementName=listWithFacebookPages}"/>
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+        </ListView>
+        <Button Command="{Binding PostToFacebookCommand}" Content="Post"/>
+        -->
+    </StackPanel>
 </Page>

@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DataTemplate x:Key="FacebookPageTemplate">
+        <StackPanel Orientation="Horizontal">
+            <Image Source="{Binding PictureUrl}" Width="40" Height="40"/>
+            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" Margin="5 0 0 0" FontWeight="Bold"/>
+        </StackPanel>
+    </DataTemplate>
+    <DataTemplate x:Key="LogTemplate">
+        <StackPanel>
+            <TextBlock Text="{Binding Date, Converter={StaticResource stringFormatConverter}, ConverterParameter='{}{0:dd-MM-yyyy}'}" FontWeight="Bold"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="{Binding Distance}"/>
+                    <TextBlock Text="{Binding Start}"/>
+                    <TextBlock Text="{Binding End}"/>
+                </StackPanel>
+                <Button Content="edit" Command="{Binding DataContext.EditLogCommand,ElementName=Page}" CommandParameter="{Binding}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+            </Grid>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

@@ -17,8 +17,8 @@
                             NavAreaBackground="LightGreen"
                             NavButtonBackground="DarkGreen"
                             NavButtonCheckedBackground="LimeGreen"
-                            NavButtonCheckedForeground="Black"
-                            NavButtonForeground="Black"
+                            NavButtonCheckedForeground="White"
+                            NavButtonForeground="White"
                             NavButtonHoverBackground="DarkGreen"
                             NavButtonHoverForeground="Black"
                             NavButtonPressedBackground="LimeGreen"
@@ -49,6 +49,7 @@
                                 Height="48"
                                 Symbol="Message"/>
                     <TextBlock Margin="12,0,0,0"
+                               FontWeight="Bold"
                                VerticalAlignment="Center"
                                Text="create new log"/>
                 </StackPanel>
@@ -61,14 +62,30 @@
                                 Height="48"
                                 Symbol="List"/>
                     <TextBlock Margin="12,0,0,0"
+                               FontWeight="Bold"
                                VerticalAlignment="Center"
                                Text="logs"/>
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
+            <!--
+            <Controls:HamburgerButtonInfo AutomationProperties.Name="Jerry"
+                                          ClearHistory="True"
+                                          PageType="views:LogBooks">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48"
+                                Height="48"
+                                Symbol="ShowResults"/>
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               Text="logbooks"/>
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            -->
         </Controls:HamburgerMenu.PrimaryButtons>
 
+        <!--
         <Controls:HamburgerMenu.SecondaryButtons>
-            <!--  settingspage button  -->
             <Controls:HamburgerButtonInfo x:Name="SettingsButton"
                                           PageParameter="0"
                                           PageType="views:Settings">
@@ -80,10 +97,12 @@
                                 Height="48"
                                 Symbol="Setting"/>
                     <TextBlock Margin="12,0,0,0"
+                               FontWeight="Bold"
                                VerticalAlignment="Center"
                                Text="settings"/>
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
         </Controls:HamburgerMenu.SecondaryButtons>
+    -->
     </Controls:HamburgerMenu>
 </Page>
