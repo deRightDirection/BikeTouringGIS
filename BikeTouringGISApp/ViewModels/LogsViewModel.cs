@@ -87,8 +87,7 @@ namespace BikeTouringGISApp.ViewModels
         {
             Busy.SetBusy(true, "Loading logs...");
             var logs = await FileService.Instance.GetLogs();
-
-            logs.OrderByDescending(x => x.Date);
+            logs = logs.OrderByDescending(x => x.Date);
             Logs = new ObservableCollection<Log>(logs);
 
             RaisePropertyChanged("LogsDirectory");

@@ -11,7 +11,9 @@
     <Page.DataContext>
         <vm:LogsViewModel x:Name="ViewModel"/>
     </Page.DataContext>
-    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="5">
-        <ListView ItemTemplate="{StaticResource LogTemplate}" ItemsSource="{Binding Logs,Mode=OneWay}" ItemContainerStyle="{StaticResource listviewitem}"/>
-    </StackPanel>
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="5">
+        <ListView ItemTemplate="{StaticResource LogTemplate}" ItemsSource="{Binding Logs,Mode=OneWay}" ItemContainerStyle="{StaticResource listviewitem}" RelativePanel.AlignBottomWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignRightWithPanel="True"/>
+    </RelativePanel>
 </Page>
