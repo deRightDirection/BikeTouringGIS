@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +24,10 @@ namespace BikeTouringGISApp.Library.Model
         public string End { get; set; }
         public string FileName { get; set; }
         public double Latitude { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public Guid LogBook { get; set; }
+
         public double Longitude { get; set; }
         public string Start { get; set; }
         public IEnumerable<LogStory> Stories { get { return _stories; } }

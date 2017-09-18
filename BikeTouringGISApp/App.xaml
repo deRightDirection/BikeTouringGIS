@@ -2,12 +2,16 @@
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:common="using:Template10.Common"
+                     xmlns:converters="using:BikeTouringGISApp.Converters"
                      xmlns:winux="using:WinUX.Xaml.Converters"
                      RequestedTheme="Light">
     <Application.Resources>
         <ResourceDictionary>
+            <converters:ObjectToLogBookConverter x:Name="objectToLogBookConverter"/>
             <winux:SelectionChangedConverter x:Name="selectionChangedConverter"/>
             <winux:StringFormatConverter x:Key="stringFormatConverter"/>
+            <winux:BooleanToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+            <winux:InverseBooleanToVisibilityConverter x:Key="inverseBoolToVisibilityConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles\Styles.xaml"/>
                 <ResourceDictionary Source="Styles\Datatemplates.xaml"/>

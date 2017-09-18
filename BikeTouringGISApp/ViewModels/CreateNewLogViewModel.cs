@@ -16,6 +16,9 @@ using System.Threading.Tasks;
 using BikeTouringGISApp.Views;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Controls;
+using WinUX.Collections.ObjectModel;
+using BikeTouringGISApp.Library.Interfaces;
+using WinUX;
 
 namespace BikeTouringGISApp.ViewModels
 {
@@ -28,15 +31,21 @@ namespace BikeTouringGISApp.ViewModels
         // _facebookPages; private string _imageSource;
         private Log _log;
 
+        private IRepository<LogBook> _logBookRepository;
+        private ObservableItemCollection<LogBook> _logBooks;
+        private int _selectedLogBookIndex;
         // private bool _postToUserFeed; private IEnumerable<FacebookPage> _selectedPages;
 
         public CreateNewLogViewModel()
         {
+            _logBookRepository = SimpleIoc.Default.GetInstance<IRepository<LogBook>>();
+            LoadLogBooks();
             // PostToFacebookCommand = new RelayCommand(Post); SelectionChangedCommand = new RelayCommand<IList<object>>(SetSelectedPages);
             SaveTextCommand = new RelayCommand<ITextDocument>(SaveText);
             UpdateGPSCommand = new RelayCommand(UpdateGPS);
             // LoadTextCommand = new RelayCommand<ITextDocument>(LoadText);
             SaveLogCommand = new RelayCommand(SaveLog);
+            _selectedLogBookIndex = -1;
             // _facebook = SimpleIoc.Default.GetInstance<FacebookClient>();
             _log = new Log();
         }
@@ -50,7 +59,21 @@ namespace BikeTouringGISApp.ViewModels
         public Log Log
         {
             get { return _log; }
-            set { Set(() => Log, ref _log, value); }
+            set
+            {
+                Set(() => Log, ref _log, value);
+                if (_log.LogBook != null)
+                {
+                    var foundLogBook = _logBookRepository.Entities.Where(x => x.Identifier.Equals(_log.LogBook)).FirstOrDefault();
+                    SelectedLogBookIndex = _logBookRepository.Entities.ToList().IndexOf(foundLogBook);
+                }
+            }
+        }
+
+        public ObservableItemCollection<LogBook> LogBooks
+        {
+            get { return _logBooks; }
+            set { Set(() => LogBooks, ref _logBooks, value); }
         }
 
         public double Longitude
@@ -60,9 +83,16 @@ namespace BikeTouringGISApp.ViewModels
         }
 
         public RichEditBox RichTextBox { get; internal set; }
+
         public RelayCommand SaveLogCommand { get; private set; }
 
         public RelayCommand<ITextDocument> SaveTextCommand { get; private set; }
+
+        public int SelectedLogBookIndex
+        {
+            get { return _selectedLogBookIndex; }
+            set { Set(() => SelectedLogBookIndex, ref _selectedLogBookIndex, value); }
+        }
 
         public RelayCommand UpdateGPSCommand { get; private set; }
 
@@ -70,6 +100,7 @@ namespace BikeTouringGISApp.ViewModels
         {
             if (parameter != null)
             {
+                await LoadLogBooks();
                 Log = (Log)parameter;
                 var story = Log.Stories.Where(x => x.Language == LogStoryLanguage.Dutch).FirstOrDefault();
                 if (story != null)
@@ -79,6 +110,13 @@ namespace BikeTouringGISApp.ViewModels
                 Latitude = Log.Latitude;
                 Longitude = Log.Longitude;
             }
+        }
+
+        private async Task LoadLogBooks()
+        {
+            await _logBookRepository.LoadData();
+            var items = new List<LogBook>();
+            LogBooks = new ObservableItemCollection<LogBook>(_logBookRepository.Entities);
         }
 
         private async void SaveLog()
@@ -91,6 +129,8 @@ namespace BikeTouringGISApp.ViewModels
                 }
                 _log.Latitude = Latitude;
                 _log.Longitude = Longitude;
+                var item = LogBooks.ElementAt(SelectedLogBookIndex);
+                _log.LogBook = item.Identifier;
                 await FileService.Instance.SaveLog(_log);
             }
             catch

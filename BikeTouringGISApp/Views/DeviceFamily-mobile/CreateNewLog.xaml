@@ -17,6 +17,8 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="5" DataContext="{Binding Log}">
         <ScrollViewer>
             <StackPanel>
+                <TextBlock Text="logbook" FontWeight="Bold"/>
+                <ListView ItemsSource="{Binding DataContext.LogBooks}" SelectedItem="{Binding DataContext.LogBook, Mode=TwoWay}" ItemTemplate="{StaticResource LogBookName}"/>
                 <TextBlock Text="location" FontWeight="Bold"/>
                 <Grid>
                     <Grid.ColumnDefinitions>

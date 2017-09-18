@@ -10,6 +10,9 @@ using WinUX.CloudServices.OneDrive;
 using Template10.Common;
 using BikeTouringGISApp.Services;
 using WinUX.CloudServices.Facebook;
+using BikeTouringGISApp.Library.Interfaces;
+using BikeTouringGISApp.Library.Model;
+using BikeTouringGISApp.Repositories;
 
 namespace BikeTouringGISApp
 {
@@ -45,6 +48,7 @@ namespace BikeTouringGISApp
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
+            SimpleIoc.Default.Register<IRepository<LogBook>>(() => new LogBookRepository());
             await FileService.Instance.SetMainFolder();
 
             /*

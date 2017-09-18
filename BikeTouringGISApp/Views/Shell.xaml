@@ -67,7 +67,6 @@
                                Text="logs"/>
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
-            <!--
             <Controls:HamburgerButtonInfo AutomationProperties.Name="Jerry"
                                           ClearHistory="True"
                                           PageType="views:LogBooks">
@@ -81,7 +80,6 @@
                                Text="logbooks"/>
                 </StackPanel>
             </Controls:HamburgerButtonInfo>
-            -->
         </Controls:HamburgerMenu.PrimaryButtons>
 
         <!--

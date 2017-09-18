@@ -11,7 +11,8 @@ namespace BikeTouringGISApp.Services
     {
         internal static async Task<bool> IsInternetConnectionAvailable()
         {
-            return NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
+            return false;
+            // return NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
         }
     }
 }

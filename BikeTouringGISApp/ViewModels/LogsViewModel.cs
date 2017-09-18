@@ -1,4 +1,5 @@
-﻿using BikeTouringGISApp.Library.Model;
+﻿using BikeTouringGISApp.Library.Interfaces;
+using BikeTouringGISApp.Library.Model;
 using BikeTouringGISApp.Services;
 using BikeTouringGISApp.Views;
 using GalaSoft.MvvmLight.Command;
@@ -10,7 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
+using WinUX;
 using WinUX.CloudServices.Facebook;
+using WinUX.Collections.ObjectModel;
 
 namespace BikeTouringGISApp.ViewModels
 {
