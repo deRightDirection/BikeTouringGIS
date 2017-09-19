@@ -11,7 +11,11 @@
         <vm:LogsViewModel x:Name="ViewModel"/>
     </Page.DataContext>
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="5">
-        <TextBlock Text="{Binding LogsDirectory, Mode=OneWay}" x:Name="logsdirectory"/>
+        <CommandBar x:Name="commandbar">
+            <AppBarButton Icon="Sync" Label="sync logs with OneDrive" Command="{Binding SyncLogsCommand}"/>
+        </CommandBar>
+        <TextBlock Text="{Binding LogsDirectory, Mode=OneWay}" x:Name="logsdirectory"
+                  RelativePanel.Below="commandbar"/>
         <ListView ItemTemplate="{StaticResource LogTemplate}" ItemsSource="{Binding Logs,Mode=OneWay}" ItemContainerStyle="{StaticResource listviewitem}" RelativePanel.AlignBottomWithPanel="True"
                   RelativePanel.AlignLeftWithPanel="True"
                   RelativePanel.AlignRightWithPanel="True"

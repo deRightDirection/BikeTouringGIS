@@ -7,7 +7,6 @@
                      RequestedTheme="Light">
     <Application.Resources>
         <ResourceDictionary>
-            <converters:ObjectToLogBookConverter x:Name="objectToLogBookConverter"/>
             <winux:SelectionChangedConverter x:Name="selectionChangedConverter"/>
             <winux:StringFormatConverter x:Key="stringFormatConverter"/>
             <winux:BooleanToVisibilityConverter x:Key="boolToVisibilityConverter"/>

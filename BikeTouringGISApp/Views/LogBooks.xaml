@@ -26,6 +26,7 @@ xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                 <CommandBar>
                     <AppBarButton Icon="Add" Label="New logbook" Command="{Binding DataContext.NewLogBookCommand,ElementName=page}"/>
                     <AppBarButton Icon="Back" Label="Back"/>
+                    <AppBarButton Icon="Sync" Label="Sync logbooks" Command="{Binding DataContext.SyncLogBooksCommand, ElementName=page}"/>
                 </CommandBar>
             </controls:MasterDetailsView.MasterCommandBar>
             <controls:MasterDetailsView.DetailsCommandBar>

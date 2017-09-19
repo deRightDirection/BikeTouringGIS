@@ -1,5 +1,7 @@
 ﻿using BikeTouringGISApp.Library.Interfaces;
 using BikeTouringGISApp.Library.Model;
+using BikeTouringGISApp.Repositories;
+using BikeTouringGISApp.Views;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Toolkit.Uwp.UI.Controls;
@@ -22,6 +24,7 @@ namespace BikeTouringGISApp.ViewModels
         public LogBooksViewModel()
         {
             NewLogBookCommand = new RelayCommand(NewLogBook);
+            SyncLogBooksCommand = new RelayCommand(SyncLogBooks);
             EditLogBookCommand = new RelayCommand<LogBookViewModel>(EditLogBook);
             CancelLogBookCommand = new RelayCommand<LogBookViewModel>(CancelLogBook);
             DeleteLogBookCommand = new RelayCommand<LogBookViewModel>(DeleteLogBook);
@@ -45,6 +48,8 @@ namespace BikeTouringGISApp.ViewModels
         public RelayCommand NewLogBookCommand { get; private set; }
 
         public RelayCommand<LogBookViewModel> SaveLogBookCommand { get; private set; }
+
+        public RelayCommand SyncLogBooksCommand { get; private set; }
 
         private void CancelLogBook(LogBookViewModel obj)
         {
@@ -80,6 +85,14 @@ namespace BikeTouringGISApp.ViewModels
         private void SaveLogBook(LogBookViewModel obj)
         {
             _logBookRepository.AddEntity(obj.LogBook);
+        }
+
+        private async void SyncLogBooks()
+        {
+            Busy.SetBusy(true, "sync logbooks with OneDrive");
+            var onedrive = new OneDriveRepository();
+            await onedrive.GetLogBooks();
+            Busy.SetBusy(false);
         }
     }
 }

@@ -29,6 +29,7 @@ namespace BikeTouringGISApp.ViewModels
         public LogsViewModel()
         {
             EditLogCommand = new RelayCommand<Log>(EditLog);
+            SyncLogsCommand = new RelayCommand(SyncLogs);
             SetInitialData();
             /*
             ImageSource = "ms-appx:///Assets/SplashScreen.png";
@@ -51,9 +52,35 @@ namespace BikeTouringGISApp.ViewModels
             get { return FileService.Instance.Path; }
         }
 
+        public RelayCommand SyncLogsCommand { get; private set; }
+
         private void EditLog(Log log)
         {
             NavigationService.Navigate(typeof(CreateNewLog), log);
+        }
+
+        private async void SetInitialData()
+        {
+            Busy.SetBusy(true, "Loading logs...");
+            var logs = await FileService.Instance.GetLogs();
+            logs = logs.OrderByDescending(x => x.Date);
+            Logs = new ObservableCollection<Log>(logs);
+
+            RaisePropertyChanged("LogsDirectory");
+
+            Busy.SetBusy(false);
+
+            /*
+            var pages = await _facebook.GetPagesAsync();
+            FacebookPages = new ObservableCollection<FacebookPage>(pages);
+            var userPicture = await _facebook.FacebookService.GetUserPictureInfoAsync();
+            */
+        }
+
+        private void SyncLogs()
+        {
+            Busy.SetBusy(true, "sync logs with OneDrive");
+            Busy.SetBusy(false);
         }
 
         /*
@@ -85,25 +112,6 @@ namespace BikeTouringGISApp.ViewModels
             // "http://www.basketbalnieuws.nl", ImageSource);
         }
         */
-
-        private async void SetInitialData()
-        {
-            Busy.SetBusy(true, "Loading logs...");
-            var logs = await FileService.Instance.GetLogs();
-            logs = logs.OrderByDescending(x => x.Date);
-            Logs = new ObservableCollection<Log>(logs);
-
-            RaisePropertyChanged("LogsDirectory");
-
-            Busy.SetBusy(false);
-
-            /*
-            var pages = await _facebook.GetPagesAsync();
-            FacebookPages = new ObservableCollection<FacebookPage>(pages);
-            var userPicture = await _facebook.FacebookService.GetUserPictureInfoAsync();
-            */
-        }
-
         /*
         private void SetSelectedPages(IList<object> obj)
         {
