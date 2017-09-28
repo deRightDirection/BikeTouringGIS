@@ -1,4 +1,5 @@
-﻿using BikeTouringGISApp.Library.Model;
+﻿using BikeTouringGISApp.Library.Enumerations;
+using BikeTouringGISApp.Library.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,9 @@ namespace BikeTouringGISApp.Repositories
 
         internal async Task<IEnumerable<LogBook>> GetLogBooks()
         {
-            return await GetItems<LogBook>(LOGBOOKSDIRECTORYNAME);
+            var items = await GetItems<LogBook>(LOGBOOKSDIRECTORYNAME);
+            items.ForEach(x => x.Source = RepositorySource.OneDrive);
+            return items;
         }
 
         internal async Task<IEnumerable<Log>> GetLogs()
@@ -29,12 +32,22 @@ namespace BikeTouringGISApp.Repositories
             return await GetItems<Log>(LOGSDIRECTORYNAME);
         }
 
-        internal async Task UpdateLog(Log log)
+        internal async Task SaveOrUpdateLog(Log log)
         {
+            var isConnected = await ConnectToOneDrive();
+            if (isConnected)
+            {
+                await UpdateAsync($"{log.Identifier}.json", JsonConvert.SerializeObject(log), LOGSDIRECTORYNAME);
+            }
         }
 
-        internal async Task UpdateLogBook(LogBook logBook)
+        internal async Task SaveOrUpdateLogBook(LogBook logBook)
         {
+            var isConnected = await ConnectToOneDrive();
+            if (isConnected)
+            {
+                await UpdateAsync($"{logBook.Identifier}.json", JsonConvert.SerializeObject(logBook), LOGBOOKSDIRECTORYNAME);
+            }
         }
 
         private async Task<bool> ConnectToOneDrive()
@@ -56,7 +69,7 @@ namespace BikeTouringGISApp.Repositories
                 var isConnected = await ConnectToOneDrive();
                 if (isConnected)
                 {
-                    var content = await GetAllItemsAsync(LOGBOOKSDIRECTORYNAME);
+                    var content = await GetAllItemsAsync(folderName);
                     content.ForEach(item =>
                     {
                         var realObject = JsonConvert.DeserializeObject<T>(item);

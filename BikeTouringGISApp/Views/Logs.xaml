@@ -11,7 +11,7 @@
         <vm:LogsViewModel x:Name="ViewModel"/>
     </Page.DataContext>
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="5">
-        <CommandBar x:Name="commandbar">
+        <CommandBar x:Name="commandbar" Background="White">
             <AppBarButton Icon="Sync" Label="sync logs with OneDrive" Command="{Binding SyncLogsCommand}"/>
         </CommandBar>
         <TextBlock Text="{Binding LogsDirectory, Mode=OneWay}" x:Name="logsdirectory"

@@ -9,7 +9,7 @@ using Windows.Storage;
 
 namespace BikeTouringGISApp.Repositories
 {
-    public abstract class Repository<T> where T : IEntity
+    public abstract class Repository<T> where T : IEntity<T>
     {
         private readonly string APPLICATIONFOLDERNAME;
         private readonly string FOLDERNAME;

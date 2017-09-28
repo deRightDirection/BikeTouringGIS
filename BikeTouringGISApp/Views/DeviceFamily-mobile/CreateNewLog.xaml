@@ -18,7 +18,7 @@
         <ScrollViewer>
             <StackPanel>
                 <TextBlock Text="logbook" FontWeight="Bold"/>
-                <ListView ItemsSource="{Binding DataContext.LogBooks}" SelectedItem="{Binding DataContext.LogBook, Mode=TwoWay}" ItemTemplate="{StaticResource LogBookName}"/>
+                <ListView SelectionMode="Single" ItemsSource="{Binding DataContext.LogBooks, ElementName=Page}" SelectedIndex="{Binding DataContext.SelectedLogBookIndex, Mode=TwoWay, ElementName=Page}" ItemTemplate="{StaticResource LogBookName}"/>
                 <TextBlock Text="location" FontWeight="Bold"/>
                 <Grid>
                     <Grid.ColumnDefinitions>

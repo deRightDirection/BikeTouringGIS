@@ -129,6 +129,7 @@ namespace BikeTouringGISApp.ViewModels
                 }
                 _log.Latitude = Latitude;
                 _log.Longitude = Longitude;
+                _log.LastModificationDate = DateTime.Now;
                 var item = LogBooks.ElementAt(SelectedLogBookIndex);
                 _log.LogBook = item.Identifier;
                 await FileService.Instance.SaveLog(_log);

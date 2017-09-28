@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BikeTouringGISApp.Library.Interfaces
 {
-    public interface IRepository<T> where T : IEntity
+    public interface IRepository<T> where T : IEntity<T>
     {
         IEnumerable<T> Entities { get; }
 

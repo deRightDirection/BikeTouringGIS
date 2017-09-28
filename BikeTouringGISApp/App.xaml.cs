@@ -49,6 +49,7 @@ namespace BikeTouringGISApp
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<IRepository<LogBook>>(() => new LogBookRepository());
+            SimpleIoc.Default.Register<IRepository<Log>>(() => new LogRepository());
             await FileService.Instance.SetMainFolder();
 
             /*

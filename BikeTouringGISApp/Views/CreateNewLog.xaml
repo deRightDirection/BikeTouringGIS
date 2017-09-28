@@ -125,7 +125,6 @@
         </RichEditBox>
         <Button Command="{Binding DataContext.SaveLogCommand, ElementName=Page}" Content="save log" MinWidth="250" HorizontalAlignment="Center"/>
 
-        <TextBlock FontStyle="Italic" FontSize="8" Text="* logboek selecteren"/>
         <TextBlock FontStyle="Italic" FontSize="8" Text="* Facebook place"/>
         <TextBlock FontStyle="Italic" FontSize="8" Text="* foto's"/>
         <TextBlock FontStyle="Italic" FontSize="8" Text="* posten op Facebook"/>

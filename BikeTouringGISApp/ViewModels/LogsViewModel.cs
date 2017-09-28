@@ -77,9 +77,12 @@ namespace BikeTouringGISApp.ViewModels
             */
         }
 
-        private void SyncLogs()
+        private async void SyncLogs()
         {
             Busy.SetBusy(true, "sync logs with OneDrive");
+            var syncService = new SynchronizingDataService();
+            await syncService.SynchronizeLogs();
+            SetInitialData();
             Busy.SetBusy(false);
         }
 

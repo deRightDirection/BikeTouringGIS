@@ -10,22 +10,22 @@ using WinUX;
 
 namespace BikeTouringGISApp.Repositories
 {
-    public class LogBookRepository : Repository<LogBook>, IRepository<LogBook>
+    public class LogRepository : Repository<Log>, IRepository<Log>
     {
-        private IEnumerable<LogBook> _entities = null;
+        private IEnumerable<Log> _entities = null;
 
-        public LogBookRepository() : base("logbooks")
+        public LogRepository() : base("logs")
         {
         }
 
-        public IEnumerable<LogBook> Entities => _entities;
+        public IEnumerable<Log> Entities => _entities;
 
-        public async Task AddEntity(LogBook entityToAdd)
+        public async Task AddEntity(Log entityToAdd)
         {
             await Save(entityToAdd);
         }
 
-        public async Task DeleteEntity(LogBook entityToDelete)
+        public async Task DeleteEntity(Log entityToDelete)
         {
             await Delete(entityToDelete);
         }
@@ -36,7 +36,7 @@ namespace BikeTouringGISApp.Repositories
             _entities.ForEach(x => x.Source = RepositorySource.Local);
         }
 
-        public Task ModifyEntity(LogBook entityToModify)
+        public Task ModifyEntity(Log entityToModify)
         {
             throw new NotImplementedException();
         }

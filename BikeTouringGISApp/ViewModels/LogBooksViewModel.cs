@@ -1,6 +1,7 @@
 ﻿using BikeTouringGISApp.Library.Interfaces;
 using BikeTouringGISApp.Library.Model;
 using BikeTouringGISApp.Repositories;
+using BikeTouringGISApp.Services;
 using BikeTouringGISApp.Views;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
@@ -84,14 +85,15 @@ namespace BikeTouringGISApp.ViewModels
 
         private void SaveLogBook(LogBookViewModel obj)
         {
+            obj.LogBook.LastModificationDate = DateTime.Now;
             _logBookRepository.AddEntity(obj.LogBook);
         }
 
         private async void SyncLogBooks()
         {
             Busy.SetBusy(true, "sync logbooks with OneDrive");
-            var onedrive = new OneDriveRepository();
-            await onedrive.GetLogBooks();
+            var syncService = new SynchronizingDataService();
+            await syncService.SynchronizeLogBooks();
             Busy.SetBusy(false);
         }
     }
