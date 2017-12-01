@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.10
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BikeTouringGIS", "BikeTouringGIS\BikeTouringGIS.csproj", "{39DE280E-2709-4C05-8F0C-01F8774D73C7}"
 EndProject
@@ -25,19 +25,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinUX.UWP", "..\WinUX-UWP-T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinUX.UWP.Xaml", "..\WinUX-UWP-Toolkit\WinUX\WinUX.UWP.Xaml\WinUX.UWP.Xaml.csproj", "{0D958504-42C8-4B04-B9A7-2C6CB6E8009C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Toolkit.Uwp.Services", "..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.Services\Microsoft.Toolkit.Uwp.Services.csproj", "{7189A42D-6F1A-4FA3-8E00-E2C14FDF167A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Uwp.Services", "..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.Services\Microsoft.Toolkit.Uwp.Services.csproj", "{7189A42D-6F1A-4FA3-8E00-E2C14FDF167A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Toolkit.Uwp", "..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp\Microsoft.Toolkit.Uwp.csproj", "{805F80DF-75C6-4C2F-8FD9-B47F6D0DF5A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Uwp", "..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp\Microsoft.Toolkit.Uwp.csproj", "{805F80DF-75C6-4C2F-8FD9-B47F6D0DF5A3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Services", "..\UWPCommunityToolkit\Microsoft.Toolkit.Services\Microsoft.Toolkit.Services.csproj", "{1C8A345B-FA57-4F22-B648-C703599F6F00}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit", "..\UWPCommunityToolkit\Microsoft.Toolkit\Microsoft.Toolkit.csproj", "{1C743253-00DD-406B-A0A9-7F956344838F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Toolkit.Uwp.UI.Controls", "..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.UI.Controls\Microsoft.Toolkit.Uwp.UI.Controls.csproj", "{E9FAABFB-D726-42C1-83C1-CB46A29FEA81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Uwp.UI.Controls", "..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.UI.Controls\Microsoft.Toolkit.Uwp.UI.Controls.csproj", "{E9FAABFB-D726-42C1-83C1-CB46A29FEA81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Toolkit.Uwp.UI.Animations", "..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.UI.Animations\Microsoft.Toolkit.Uwp.UI.Animations.csproj", "{B24A296C-B3EB-4E06-A64E-74AC2D1ACC91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Uwp.UI.Animations", "..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.UI.Animations\Microsoft.Toolkit.Uwp.UI.Animations.csproj", "{B24A296C-B3EB-4E06-A64E-74AC2D1ACC91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Toolkit.Uwp.UI", "..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.UI\Microsoft.Toolkit.Uwp.UI.csproj", "{3DD8AA7C-3569-4E51-992F-0C2257E8878E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Toolkit.Uwp.UI", "..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.UI\Microsoft.Toolkit.Uwp.UI.csproj", "{3DD8AA7C-3569-4E51-992F-0C2257E8878E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -431,9 +431,7 @@ Global
 		{772BF105-4384-4701-A398-8756CB5BA908}.Debug (Version 1511)|x86.ActiveCfg = Debug|x86
 		{772BF105-4384-4701-A398-8756CB5BA908}.Debug (Version 1511)|x86.Build.0 = Debug|x86
 		{772BF105-4384-4701-A398-8756CB5BA908}.Debug (Version 1511)|x86.Deploy.0 = Debug|x86
-		{772BF105-4384-4701-A398-8756CB5BA908}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{772BF105-4384-4701-A398-8756CB5BA908}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{772BF105-4384-4701-A398-8756CB5BA908}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{772BF105-4384-4701-A398-8756CB5BA908}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{772BF105-4384-4701-A398-8756CB5BA908}.Debug|ARM.ActiveCfg = Debug|ARM
 		{772BF105-4384-4701-A398-8756CB5BA908}.Debug|ARM.Build.0 = Debug|ARM
 		{772BF105-4384-4701-A398-8756CB5BA908}.Debug|ARM.Deploy.0 = Debug|ARM
