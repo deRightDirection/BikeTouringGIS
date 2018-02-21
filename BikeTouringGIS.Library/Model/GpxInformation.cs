@@ -12,8 +12,6 @@ namespace BikeTouringGISLibrary.Model
             Tracks = new List<Track>();
             WayPoints = new List<WayPoint>();
         }
-
-        public IEnumerable<Route> AllRoutes { get; private set; }
         public List<Route> Routes { get; private set; }
         public List<Track> Tracks { get; private set; }
         public List<WayPoint> WayPoints { get; private set; }
@@ -41,6 +39,13 @@ namespace BikeTouringGISLibrary.Model
             foreach (var route in AllRoutes)
             {
                 route.CreateGeometry();
+            }
+            var tracks = Tracks.ToList();
+            tracks.AddRange(Tracks.Where(t => !t.IsConvertedToRoute));
+            AllTracks = tracks.Cast<Track>();
+            foreach (var track in AllTracks)
+            {
+                track.CreateGeometry();
             }
         }
     }

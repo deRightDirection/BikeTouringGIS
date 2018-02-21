@@ -8,9 +8,8 @@ namespace BikeTouringGISLibrary
         BikeTouringGISGraphic EndLocation { get; }
         string Name { get; }
         List<wptType> Points { get; }
-        BikeTouringGISGraphic RouteGeometry { get; }
+        BikeTouringGISGraphic Geometry { get; }
         BikeTouringGISGraphic StartLocation { get; }
-
         void Flip();
     }
 }

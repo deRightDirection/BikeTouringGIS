@@ -4,7 +4,7 @@ using GPX;
 
 namespace BikeTouringGISLibrary.Model
 {
-    public class WayPoint : GeometryCreatable
+    public class WayPoint : GeometryData
     {
         public decimal Lat { get; private set; }
         public decimal Lon { get; private set; }

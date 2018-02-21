@@ -214,6 +214,7 @@
     <Compile Include="Models\SplitLayerProperties.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteSplitter.cs" />
+    <Compile Include="Services\LayerFactory.cs" />
     <Compile Include="StatusBar.xaml.cs">
       <DependentUpon>StatusBar.xaml</DependentUpon>
     </Compile>
