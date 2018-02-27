@@ -10,6 +10,7 @@ using theRightDirection.Library.UnitTesting;
 using FluentAssertions;
 using BikeTouringGISLibrary.Model;
 using GPX;
+using BikeTouringGISLibrary.Services;
 
 namespace BikeTouringGISLibrary.UnitTests
 {
@@ -71,8 +72,9 @@ namespace BikeTouringGISLibrary.UnitTests
         {
             var path = Path.Combine(UnitTestDirectory, fileName);
             var gpxInfo = new GpxFileReader().LoadFile(path);
-            gpxInfo.Tracks.ForEach(x => x.ConvertTrackToRoute());
-            gpxInfo.CreateGeometries();
+            gpxInfo.Tracks.ForEach(x => x.IsConvertedToRoute = true);
+            var factory = new GeometryFactory(gpxInfo);
+            factory.CreateGeometries();
             var layer = new BikeTouringGISLayer("testroute", gpxInfo.Routes.First());
             layer.SetExtentToFitWithWaypoints(gpxInfo.WayPointsExtent);
             return layer;

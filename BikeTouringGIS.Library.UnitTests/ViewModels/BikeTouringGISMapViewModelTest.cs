@@ -15,6 +15,8 @@ using WinUX;
 using BikeTouringGISLibrary.Model;
 using System.Collections.ObjectModel;
 using BikeTouringGIS.Extensions;
+using BikeTouringGISLibrary.Services;
+using BikeTouringGIS.Services;
 
 namespace BikeTouringGISLibrary.UnitTests.ViewModels
 {
@@ -98,11 +100,8 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
         {
             var gpxData = GetGPXData(path);
             _vm.AddPoIs(gpxData.WayPoints);
-            gpxData.AllRoutes.ForEach(x =>
-            {
-                var layer = new BikeTouringGISLayer(path, x);
-                _vm.AddRoutes(layer);
-            });
+            var layerFactory = new LayerFactory(gpxData.WayPointsExtent);
+            _vm.AddRoutes(layerFactory.CreateRoutes(gpxData.Routes));
             _vm.BikeTouringGISLayers = new ObservableCollection<BikeTouringGISLayer>(_vm.Map.GetBikeTouringGISLayers());
             return _vm.BikeTouringGISLayers.ToList();
         }
@@ -110,11 +109,9 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
         private GpxInformation GetGPXData(string fileName)
         {
             var gpxFileInformation = new GpxFileReader().LoadFile(fileName);
-            foreach (var track in gpxFileInformation.Tracks)
-            {
-                track.ConvertTrackToRoute();
-            }
-            gpxFileInformation.CreateGeometries();
+            gpxFileInformation.Tracks.ForEach(t => t.IsConvertedToRoute = true);
+            var factory = new GeometryFactory(gpxFileInformation);
+            factory.CreateGeometries();
             return gpxFileInformation;
         }
 

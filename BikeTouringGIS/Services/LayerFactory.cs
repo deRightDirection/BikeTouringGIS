@@ -1,6 +1,7 @@
 ﻿using BikeTouringGIS.Controls;
 using BikeTouringGISLibrary;
 using BikeTouringGISLibrary.Model;
+using Esri.ArcGISRuntime.Geometry;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,24 +12,33 @@ namespace BikeTouringGIS.Services
 {
     public class LayerFactory
     {
-        internal static List<BikeTouringGISLayer> CreateRoutes(List<Route> routes)
+        private Envelope _wayPointsExtent;
+
+        public LayerFactory(Envelope wayPointsExtent)
+        {
+            _wayPointsExtent = wayPointsExtent;
+        }
+
+        internal List<BikeTouringGISLayer> CreateRoutes(List<Route> routes)
         {
             var result = new List<BikeTouringGISLayer>();   
-            foreach (IRoute route in routes)
+            foreach (Route route in routes)
             {
-                var layer = new BikeTouringGISLayer(path, route);
-                layer.SetExtentToFitWithWaypoints(gpxFileInformation.WayPointsExtent);
+                var layer = new BikeTouringGISLayer(route.FileName, route);
+                layer.SetExtentToFitWithWaypoints(_wayPointsExtent);
                 result.Add(layer);
             }
             return result;
         }
 
-        internal static List<BikeTouringGISLayer> CreateTracks(List<Track> tracks)
+        internal List<BikeTouringGISLayer> CreateTracks(List<Track> tracks)
         {
             var result = new List<BikeTouringGISLayer>();
             foreach (Track track in tracks)
             {
-                result.Add(new BikeTouringGISLayer(path, track));
+                var layer = new BikeTouringGISLayer(track.FileName, track);
+                layer.SetExtentToFitWithWaypoints(_wayPointsExtent);
+                result.Add(layer);
             }
             return result;
         }

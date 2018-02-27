@@ -50,6 +50,7 @@ namespace BikeTouringGISLibrary.Services
                 }
                 gpxTrack.Name = string.IsNullOrEmpty(track.name) ? gpx.Name : track.name;
                 gpxTrack.Segments = track.trkseg;
+                gpxTrack.FileName = _fileName;
                 _gpxData.Tracks.Add(gpxTrack);
             }
         }

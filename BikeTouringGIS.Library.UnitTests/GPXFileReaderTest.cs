@@ -4,13 +4,14 @@ using FluentAssertions;
 using System.IO;
 using BikeTouringGISLibrary.Model;
 using BikeTouringGIS.Controls;
+using BikeTouringGISLibrary.Services;
 
 namespace BikeTouringGISLibrary.UnitTests
 {
     [TestClass]
     public class GPXFileReaderTest : UnitTestingBase
     {
-        private GpxFileReader _fileReader;
+        private GeometryFactory _geometryFactory;
 
         [TestMethod]
         // bug #69
@@ -28,8 +29,8 @@ namespace BikeTouringGISLibrary.UnitTests
         public void LoadFile_Check_If_All_Have_Length()
         {
             var gpxInfo = LoadGPXData("Sample.gpx");
-            gpxInfo.Tracks.ForEach(x => x.ConvertTrackToRoute());
-            gpxInfo.CreateGeometries();
+            gpxInfo.Tracks.ForEach(x => x.IsConvertedToRoute = true);
+            _geometryFactory.CreateGeometries();
             foreach (var route in gpxInfo.Routes)
             {
                 var layer = new BikeTouringGISLayer("testroute", route);
@@ -79,14 +80,14 @@ namespace BikeTouringGISLibrary.UnitTests
         [TestInitialize]
         public void Setup()
         {
-            _fileReader = new GpxFileReader();
         }
 
         private GpxInformation LoadGPXData(string fileName)
         {
+            var fileReader = new GpxFileReader();
             var path = Path.Combine(UnitTestDirectory, fileName);
-            var gpxInfo = _fileReader.LoadFile(path);
-            gpxInfo.CreateGeometries();
+            var gpxInfo = fileReader.LoadFile(path);
+            _geometryFactory = new GeometryFactory(gpxInfo);
             return gpxInfo;
         }
     }

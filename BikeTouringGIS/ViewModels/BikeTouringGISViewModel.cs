@@ -174,10 +174,12 @@ namespace BikeTouringGIS.ViewModels
                 }
             }
             _loadedFiles.Add(path);
-            GeometryFactory.CreateGeometriesFromGpxFile(gpxFileInformation);
-            var routes = LayerFactory.CreateRoutes(gpxFileInformation.Routes);
+            var geometryFactory = new GeometryFactory(gpxFileInformation);
+            geometryFactory.CreateGeometries();
+            var layerFactory = new LayerFactory(gpxFileInformation.WayPointsExtent);
+            var routes = layerFactory.CreateRoutes(gpxFileInformation.Routes);
             mapViewModel.AddRoutes(routes);
-            var tracks = LayerFactory.CreateTracks(gpxFileInformation.Tracks);
+            var tracks = layerFactory.CreateTracks(gpxFileInformation.Tracks);
             mapViewModel.AddTracks(tracks);
             mapViewModel.AddPoIs(gpxFileInformation.WayPoints);
         }

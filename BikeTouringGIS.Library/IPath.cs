@@ -1,15 +1,16 @@
-﻿using GPX;
+﻿using BikeTouringGISLibrary.Enumerations;
+using GPX;
 using System.Collections.Generic;
 
 namespace BikeTouringGISLibrary
 {
-    public interface IRoute
+    public interface IPath
     {
         BikeTouringGISGraphic EndLocation { get; }
         string Name { get; }
         List<wptType> Points { get; }
         BikeTouringGISGraphic Geometry { get; }
         BikeTouringGISGraphic StartLocation { get; }
-        void Flip();
+        PathType Type { get; set; }
     }
 }

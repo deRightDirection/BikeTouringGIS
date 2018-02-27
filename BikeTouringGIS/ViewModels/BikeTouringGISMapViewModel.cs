@@ -32,7 +32,7 @@ namespace BikeTouringGIS.ViewModels
         public BikeTouringGISMapViewModel()
         {
             SetupMapCommand = new RelayCommand(SetupMap);
-            LayerLoadedCommand = new RelayCommand<BikeTouringGISLayer>(LayersLoaded);
+            LayerLoadedCommand = new RelayCommand<BikeTouringGISLayer>(LayerLoaded);
             RemoveLayerCommand = new RelayCommand<BikeTouringGISLayer>(RemoveLayer);
             SaveLayerCommand = new RelayCommand<BikeTouringGISLayer>(SaveLayer);
             SaveLayerAsCommand = new RelayCommand<BikeTouringGISLayer>(SaveLayerAs);
@@ -50,7 +50,7 @@ namespace BikeTouringGIS.ViewModels
             var poiLayer = new PointsOfInterestLayer("Points of Interest");
             _map.Layers.Add(poiLayer);
             _pointsOfInterestLayer = poiLayer;
-            LayersLoaded(_pointsOfInterestLayer);
+            LayerLoaded(_pointsOfInterestLayer);
             MapView = new MapView() { Map = _map };
         }
 
@@ -132,9 +132,9 @@ namespace BikeTouringGIS.ViewModels
             }
         }
 
-        private void LayersLoaded(List<BikeTouringGISLayer> layers)
+        private void LayerLoaded(BikeTouringGISLayer layer)
         {
-            if (layers != null && layers.Count > 0)
+            if (layer != null)
             {
                 BikeTouringGISLayers = new ObservableCollection<BikeTouringGISLayer>(_map.GetBikeTouringGISLayers());
             }
@@ -191,10 +191,10 @@ namespace BikeTouringGIS.ViewModels
             SetExtent();
             CalculateTotalLength();
             PlacePointsOfInterestLayerOnTop();
-            LayerLoaded(routes);
+            routes.ForEach(x => LayerLoaded(x));
         }
 
-        internal void AddTracks(List<BikeTouringGISTrackLayer> tracks)
+        internal void AddTracks(List<BikeTouringGISLayer> tracks)
         {
             /*
             _map.Layers.Add(layer);

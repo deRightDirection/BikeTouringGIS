@@ -6,7 +6,7 @@ using GPX;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace BikeTouringGIS
+namespace BikeTouringGIS.Services
 {
     internal class RouteSplitter
     {
@@ -123,14 +123,14 @@ namespace BikeTouringGIS
             return builder.ToGeometry();
         }
 
-        public IEnumerable<IRoute> SplitRoutes
+        public IEnumerable<Route> SplitRoutes
         {
             get
             {
-                var result = new List<IRoute>();
+                var result = new List<Route>();
                 foreach (var routePoints in _splitRoutes)
                 {
-                    result.Add(new Route(routePoints));
+                    result.Add(new Route() { Points = routePoints });
                 }
                 return result;
             }

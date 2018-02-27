@@ -3,15 +3,19 @@ using BikeTouringGISLibrary.Services;
 using Esri.ArcGISRuntime.Geometry;
 using GPX;
 using System.Collections.Generic;
-
+using WinUX;
 namespace BikeTouringGISLibrary.Model
 {
-    public class Route : GeometryData, IRoute
+    public class Route : Track
     {
+        public Route()
+        {
+            Type = PathType.Route;
+        }
         public void Flip()
         {
             Points.Reverse();
-            Geometry = GeometryFactory.ReversePoints(Points);
+            Geometry = GeometryOperator.ReversePoints(Points);
         }
     }
 }

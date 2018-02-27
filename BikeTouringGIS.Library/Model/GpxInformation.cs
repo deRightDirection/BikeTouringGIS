@@ -12,9 +12,9 @@ namespace BikeTouringGISLibrary.Model
             Tracks = new List<Track>();
             WayPoints = new List<WayPoint>();
         }
-        public List<Route> Routes { get; private set; }
-        public List<Track> Tracks { get; private set; }
-        public List<WayPoint> WayPoints { get; private set; }
+        public List<Route> Routes { get; set; }
+        public List<Track> Tracks { get; set; }
+        public List<WayPoint> WayPoints { get; set; }
 
         public Envelope WayPointsExtent
         {
@@ -27,25 +27,6 @@ namespace BikeTouringGISLibrary.Model
                     initialExtent = initialExtent == null ? initialExtent = graphicExtent : initialExtent = initialExtent.Union(graphicExtent);
                 }
                 return initialExtent;
-            }
-        }
-
-        public void CreateGeometries()
-        {
-            WayPoints.ForEach(wp => wp.CreateGeometry());
-            var routes = Routes;
-            routes.AddRange(Tracks.Where(t => t.IsConvertedToRoute));
-            AllRoutes = routes.Cast<Route>();
-            foreach (var route in AllRoutes)
-            {
-                route.CreateGeometry();
-            }
-            var tracks = Tracks.ToList();
-            tracks.AddRange(Tracks.Where(t => !t.IsConvertedToRoute));
-            AllTracks = tracks.Cast<Track>();
-            foreach (var track in AllTracks)
-            {
-                track.CreateGeometry();
             }
         }
     }
