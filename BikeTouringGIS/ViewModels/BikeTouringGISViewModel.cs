@@ -2,12 +2,16 @@
 using BikeTouringGIS.Controls;
 using BikeTouringGIS.Messenges;
 using BikeTouringGIS.Models;
+using BikeTouringGIS.Services;
 using BikeTouringGISLibrary;
 using BikeTouringGISLibrary.Enumerations;
+using BikeTouringGISLibrary.Model;
+using BikeTouringGISLibrary.Services;
 using GalaSoft.MvvmLight.Command;
 using GPX;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -146,6 +150,7 @@ namespace BikeTouringGIS.ViewModels
             foreach (var track in gpxFileInformation.Tracks)
             {
                 bool convertTrack = ConvertTracksToRoutesAutomatically;
+                var convertTrackDialogResult = convertTrack ? MessageDialogResult.Affirmative : MessageDialogResult.FirstAuxiliary;
                 if (!convertTrack)
                 {
                     StringBuilder textBuilder = new StringBuilder();
@@ -155,33 +160,40 @@ namespace BikeTouringGIS.ViewModels
                     textBuilder.AppendLine("tracks are to register where you have been");
                     textBuilder.AppendLine();
                     textBuilder.AppendLine("Do you want to convert it to a route?");
-                    convertTrack = await ConvertTrackToRoute(textBuilder.ToString());
+                    convertTrackDialogResult = await ConvertTrackToRoute(textBuilder.ToString());
                 }
-                if (convertTrack)
+                switch (convertTrackDialogResult)
                 {
-                    track.ConvertTrackToRoute();
+                    case MessageDialogResult.Affirmative:
+                        track.IsConvertedToRoute = true;
+                        break;
+                    case MessageDialogResult.Negative:
+                        break;
+                    case MessageDialogResult.FirstAuxiliary:
+                        return;
                 }
             }
             _loadedFiles.Add(path);
-            gpxFileInformation.CreateGeometries();
-            foreach (IRoute route in gpxFileInformation.AllRoutes)
-            {
-                var layer = new BikeTouringGISLayer(path, route);
-                layer.SetExtentToFitWithWaypoints(gpxFileInformation.WayPointsExtent);
-                mapViewModel.AddRoutes(layer);
-            }
+            var geometryFactory = new GeometryFactory(gpxFileInformation);
+            geometryFactory.CreateGeometries();
+            var layerFactory = new LayerFactory(gpxFileInformation.WayPointsExtent);
+            var routes = layerFactory.CreateRoutes(gpxFileInformation.Routes);
+            mapViewModel.AddRoutes(routes);
+            var tracks = layerFactory.CreateTracks(gpxFileInformation.Tracks);
+            mapViewModel.AddTracks(tracks);
             mapViewModel.AddPoIs(gpxFileInformation.WayPoints);
         }
 
-        private async Task<bool> ConvertTrackToRoute(string text)
+        private async Task<MessageDialogResult> ConvertTrackToRoute(string text)
         {
             var window = Application.Current.MainWindow as MetroWindow;
-            var result = await window.ShowMessageAsync("Convert track to route", text, MessageDialogStyle.AffirmativeAndNegative);
-            if (result == MessageDialogResult.Affirmative)
+            var dialogSettings = new MetroDialogSettings()
             {
-                return true;
-            }
-            return false;
+                AffirmativeButtonText = "Convert to route",
+                NegativeButtonText = "Keep as track",
+                FirstAuxiliaryButtonText = "Cancel"
+            };
+            return await window.ShowMessageAsync("Convert track to route", text, MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogSettings);
         }
 
         public string VersionInformation

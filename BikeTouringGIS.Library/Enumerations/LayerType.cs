@@ -5,6 +5,7 @@
         Unknown,
         PointsOfInterest,
         GPXRoute,
-        SplitRoutes
+        SplitRoutes,
+        GPXTrack
     }
 }

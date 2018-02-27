@@ -26,7 +26,7 @@ namespace BikeTouringGISLibrary.UnitTests
         [TestMethod]
         public void OrderBy()
         {
-            Mock<IRoute> mock = new Mock<IRoute>();
+            Mock<IPath> mock = new Mock<IPath>();
             var list = new List<BikeTouringGISLayer>() { new BikeTouringGISLayer("abc", mock.Object), new BikeTouringGISLayer("Points of Interest"), new BikeTouringGISLayer("def", mock.Object) };
             var result = list.OrderBy(x => x.Type);
             var firstItem = result.First().Type == LayerType.PointsOfInterest;

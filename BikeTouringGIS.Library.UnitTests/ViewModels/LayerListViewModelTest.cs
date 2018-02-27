@@ -10,19 +10,21 @@ using FluentAssertions;
 using BikeTouringGIS.Controls;
 using BikeTouringGISLibrary.Enumerations;
 using Moq;
+using BikeTouringGISLibrary.Model;
+using Ploeh.AutoFixture;
 namespace BikeTouringGISLibrary.UnitTests.ViewModels
 {
     [TestClass]
     public class LayerListViewModelTest : UnitTestingBase
     {
         private LayerListViewModel _vm;
-        private IRoute _route;
+        private IPath _route;
 
         [TestInitialize]
         public void Setup()
         {
             _vm = new LayerListViewModel();
-            _route = new Mock<IRoute>().Object;
+            _route = new Mock<IPath>().Object;
         }
 
         [TestMethod]
@@ -42,6 +44,7 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
         [TestMethod]
         public void SelectedLayer_Is_Not_Null_With_GPXLayer()
         {
+            _route = _fixture.Build<Route>().OmitAutoProperties().Create();
             var layer = new BikeTouringGISLayer("test", _route);
             _vm.SelectedLayer = layer;
             _vm.SelectedLayer.Type.ShouldBeEquivalentTo(LayerType.GPXRoute);

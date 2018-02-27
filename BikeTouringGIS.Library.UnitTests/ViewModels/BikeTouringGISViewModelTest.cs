@@ -42,9 +42,9 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
             var filename = "85.gpx";
             var path = Path.Combine(UnitTestDirectory, filename);
             _vm.OpenGpxFile(_map, path);
-            _map.BikeTouringGISLayers.Count.ShouldBeEquivalentTo(2);
+            _map.BikeTouringGISLayers.Count.ShouldBeEquivalentTo(1);
             _vm.OpenGpxFile(_map, path);
-            _map.BikeTouringGISLayers.Count.ShouldBeEquivalentTo(2);
+            _map.BikeTouringGISLayers.Count.ShouldBeEquivalentTo(1);
         }
 
 

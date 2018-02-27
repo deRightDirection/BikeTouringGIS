@@ -1,0 +1,24 @@
+﻿<Page
+    x:Class="BikeTouringGISApp.Views.Logs"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:vm="using:BikeTouringGISApp.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     x:Name="Page"
+   mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:LogsViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="5">
+        <CommandBar x:Name="commandbar" Background="White">
+            <AppBarButton Icon="Sync" Label="sync logs with OneDrive" Command="{Binding SyncLogsCommand}"/>
+        </CommandBar>
+        <TextBlock Text="{Binding LogsDirectory, Mode=OneWay}" x:Name="logsdirectory"
+                  RelativePanel.Below="commandbar"/>
+        <ListView ItemTemplate="{StaticResource LogTemplate}" ItemsSource="{Binding Logs,Mode=OneWay}" ItemContainerStyle="{StaticResource listviewitem}" RelativePanel.AlignBottomWithPanel="True"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignRightWithPanel="True"
+                  RelativePanel.Below="logsdirectory"/>
+    </RelativePanel>
+</Page>

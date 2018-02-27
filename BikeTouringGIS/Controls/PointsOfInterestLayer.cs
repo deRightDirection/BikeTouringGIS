@@ -2,6 +2,7 @@
 using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Layers;
 using System.Collections.Generic;
+using WinUX;
 
 namespace BikeTouringGIS.Controls
 {
@@ -13,11 +14,8 @@ namespace BikeTouringGIS.Controls
 
         internal void AddPoIs(IEnumerable<WayPoint> wayPoints)
         {
-            foreach (var wayPoint in wayPoints)
-            {
-                _wayPoints.Add(wayPoint);
-                Graphics.Add(wayPoint.ToGraphic());
-            }
+            _wayPoints.AddRange(wayPoints);
+            wayPoints.ForEach(wp => Graphics.Add(wp.Geometry));
         }
 
         // ook refactoren en in aparte poilayer plaatsen
@@ -25,7 +23,7 @@ namespace BikeTouringGIS.Controls
         {
             foreach (var wayPoint in wayPoints)
             {
-                var g = wayPoint.ToGraphic();
+                var g = wayPoint.Geometry;
                 var index = FindIndexOfPointOfInterest(g);
                 if (index > -1)
                 {

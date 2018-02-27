@@ -4,18 +4,38 @@ using FluentAssertions;
 using System.IO;
 using BikeTouringGISLibrary.Model;
 using BikeTouringGIS.Controls;
+using BikeTouringGISLibrary.Services;
 
 namespace BikeTouringGISLibrary.UnitTests
 {
     [TestClass]
     public class GPXFileReaderTest : UnitTestingBase
     {
-        private GpxFileReader _fileReader;
+        private GeometryFactory _geometryFactory;
 
-        [TestInitialize]
-        public void Setup()
+        [TestMethod]
+        // bug #69
+        public void LoadFile_All_WayPoints_Do_Have_Description()
         {
-            _fileReader = new GpxFileReader();
+            var gpxInfo = LoadGPXData("dwingeloo.gpx");
+            foreach (var wpt in gpxInfo.WayPoints)
+            {
+                wpt.Name.Should().NotBeNullOrEmpty(wpt.Points[0].ToString());
+            }
+        }
+
+        [TestMethod]
+        // bug #34
+        public void LoadFile_Check_If_All_Have_Length()
+        {
+            var gpxInfo = LoadGPXData("Sample.gpx");
+            gpxInfo.Tracks.ForEach(x => x.IsConvertedToRoute = true);
+            _geometryFactory.CreateGeometries();
+            foreach (var route in gpxInfo.Routes)
+            {
+                var layer = new BikeTouringGISLayer("testroute", route);
+                layer.Extent.Should().NotBeNull($"route, {route.Name}");
+            }
         }
 
         [TestMethod]
@@ -38,37 +58,37 @@ namespace BikeTouringGISLibrary.UnitTests
         }
 
         [TestMethod]
-        // bug #34
-        public void LoadFile_Check_If_All_Have_Length()
+        // #100 file gecorrigeerd en geen fouten
+        public void LoadFile_Counts_Waypoints_Are_Correct()
         {
-            var gpxInfo = LoadGPXData("Sample.gpx");
-            gpxInfo.Tracks.ForEach(x => x.ConvertTrackToRoute());
-            gpxInfo.CreateGeometries();
-            foreach(var route in gpxInfo.Routes)
-            {
-                var layer = new BikeTouringGISLayer("testroute", route);
-                layer.Extent.Should().NotBeNull($"route, {route.Name}");
-            }
+            var gpxInfo = LoadGPXData("pois.gpx");
+            gpxInfo.Routes.Count.ShouldBeEquivalentTo(0);
+            gpxInfo.Tracks.Count.ShouldBeEquivalentTo(0);
+            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(157);
         }
 
         [TestMethod]
-        // bug #69
-        public void LoadFile_All_WayPoints_Do_Have_Description()
+        // #100
+        public void LoadFile_Counts_Waypoints_Are_Correct2()
         {
-            var gpxInfo = LoadGPXData("dwingeloo.gpx");
-            foreach(var wpt in gpxInfo.WayPoints)
-            {
-                wpt.Name.Should().NotBeNullOrEmpty(wpt.Points[0].ToString());
-            }
+            var gpxInfo = LoadGPXData("pois2.gpx");
+            gpxInfo.Routes.Count.ShouldBeEquivalentTo(0);
+            gpxInfo.Tracks.Count.ShouldBeEquivalentTo(0);
+            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(157);
+        }
+
+        [TestInitialize]
+        public void Setup()
+        {
         }
 
         private GpxInformation LoadGPXData(string fileName)
         {
+            var fileReader = new GpxFileReader();
             var path = Path.Combine(UnitTestDirectory, fileName);
-            var gpxInfo = _fileReader.LoadFile(path);
-            gpxInfo.CreateGeometries();
+            var gpxInfo = fileReader.LoadFile(path);
+            _geometryFactory = new GeometryFactory(gpxInfo);
             return gpxInfo;
         }
-
     }
 }

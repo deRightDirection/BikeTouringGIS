@@ -183,15 +183,25 @@ namespace BikeTouringGIS.ViewModels
             }
         }
 
-        internal void AddRoutes(BikeTouringGISLayer layer)
+        internal void AddRoutes(List<BikeTouringGISLayer> routes)
         {
-            layer.SetSymbolsAndSplitLayerDefaultProperties(_mapSymbols);
-            _map.Layers.Add(layer);
-            _map.Layers.Add(layer.SplitLayer);
+            routes.ForEach(x => x.SetSymbolsAndSplitLayerDefaultProperties(_mapSymbols));
+            routes.ForEach(x => _map.Layers.Add(x));
+            routes.ForEach(x => _map.Layers.Add(x.SplitLayer));
             SetExtent();
             CalculateTotalLength();
             PlacePointsOfInterestLayerOnTop();
+            routes.ForEach(x => LayerLoaded(x));
+        }
+
+        internal void AddTracks(List<BikeTouringGISLayer> tracks)
+        {
+            /*
+            _map.Layers.Add(layer);
+            SetExtent();
+            CalculateTotalLength();
             LayerLoaded(layer);
+            */
         }
 
         private void PlacePointsOfInterestLayerOnTop()

@@ -1,0 +1,106 @@
+﻿<Page
+    x:Class="BikeTouringGISApp.Views.Shell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Controls="using:Template10.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:vm="using:BikeTouringGISApp.ViewModels"
+    xmlns:views="using:BikeTouringGISApp.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:ShellViewModel x:Name="ViewModel"/>
+    </Page.DataContext>
+    <Controls:HamburgerMenu x:Name="MyHamburgerMenu"
+                            HamburgerBackground="Green"
+                            HamburgerForeground="White"
+                            NavAreaBackground="LightGreen"
+                            NavButtonBackground="DarkGreen"
+                            NavButtonCheckedBackground="LimeGreen"
+                            NavButtonCheckedForeground="White"
+                            NavButtonForeground="White"
+                            NavButtonHoverBackground="DarkGreen"
+                            NavButtonHoverForeground="Black"
+                            NavButtonPressedBackground="LimeGreen"
+                            NavButtonPressedForeground="Black"
+                            SecondarySeparator="DarkGreen">
+
+        <Controls:HamburgerMenu.PrimaryButtons>
+            <!--  mainpage button  -->
+            <!--
+            <Controls:HamburgerButtonInfo AutomationProperties.Name="Jerry"
+                                          ClearHistory="True"
+                                          PageType="views:MainPage">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48"
+                                Height="48"
+                                Symbol="Home"/>
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               Text="home"/>
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            -->
+            <Controls:HamburgerButtonInfo AutomationProperties.Name="Jerry"
+                                          ClearHistory="True"
+                                          PageType="views:CreateNewLog">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48"
+                                Height="48"
+                                Symbol="Message"/>
+                    <TextBlock Margin="12,0,0,0"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Text="create new log"/>
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo AutomationProperties.Name="Jerry"
+                                          ClearHistory="True"
+                                          PageType="views:Logs">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48"
+                                Height="48"
+                                Symbol="List"/>
+                    <TextBlock Margin="12,0,0,0"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Text="logs"/>
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+            <Controls:HamburgerButtonInfo AutomationProperties.Name="Jerry"
+                                          ClearHistory="True"
+                                          PageType="views:LogBooks">
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48"
+                                Height="48"
+                                Symbol="ShowResults"/>
+                    <TextBlock Margin="12,0,0,0"
+                               VerticalAlignment="Center"
+                               FontWeight="Bold"
+                               Text="logbooks"/>
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+        </Controls:HamburgerMenu.PrimaryButtons>
+
+        <!--
+        <Controls:HamburgerMenu.SecondaryButtons>
+            <Controls:HamburgerButtonInfo x:Name="SettingsButton"
+                                          PageParameter="0"
+                                          PageType="views:Settings">
+                <Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                    <SuppressNavigationTransitionInfo/>
+                </Controls:HamburgerButtonInfo.NavigationTransitionInfo>
+                <StackPanel Orientation="Horizontal">
+                    <SymbolIcon Width="48"
+                                Height="48"
+                                Symbol="Setting"/>
+                    <TextBlock Margin="12,0,0,0"
+                               FontWeight="Bold"
+                               VerticalAlignment="Center"
+                               Text="settings"/>
+                </StackPanel>
+            </Controls:HamburgerButtonInfo>
+        </Controls:HamburgerMenu.SecondaryButtons>
+    -->
+    </Controls:HamburgerMenu>
+</Page>

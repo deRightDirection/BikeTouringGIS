@@ -1,4 +1,5 @@
-﻿using BikeTouringGISLibrary;
+﻿using BikeTouringGIS.Services;
+using BikeTouringGISLibrary;
 using BikeTouringGISLibrary.Enumerations;
 using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Geometry;
@@ -15,7 +16,7 @@ namespace BikeTouringGIS.Controls
 {
     public class BikeTouringGISLayer : GraphicsLayer
     {
-        private IRoute _route;
+        private IPath _routeOrTrack;
         private BikeTouringGISLayer _splitLayer;
         private Dictionary<GraphicType, object> _symbols;
         private bool _isInEditMode, _isSplitted, _isSelected;
@@ -39,18 +40,24 @@ namespace BikeTouringGIS.Controls
             SplitLayer = new BikeTouringGISLayer() { ShowLegend = false, Type = LayerType.SplitRoutes, SelectionColor = Colors.LimeGreen };
         }
 
-        public BikeTouringGISLayer(string fileName, IRoute route) : this(fileName)
+        public BikeTouringGISLayer(string fileName, IPath routeOrTrack) : this(fileName)
         {
-            _route = route;
-            Title = string.IsNullOrEmpty(route.Name) ? Path.GetFileNameWithoutExtension(fileName) : route.Name;
+            _routeOrTrack = routeOrTrack;
+            Title = string.IsNullOrEmpty(_routeOrTrack.Name) ? Path.GetFileNameWithoutExtension(fileName) : _routeOrTrack.Name;
             var subStringLength = Title.Length > 15 ? 15 : Title.Length;
             SplitPrefix = Title.Substring(0, subStringLength);
-            Graphics.Add(route.StartLocation);
-            Graphics.Add(route.EndLocation);
-            Graphics.Add(route.RouteGeometry);
+            Graphics.Add(_routeOrTrack.StartLocation);
+            Graphics.Add(_routeOrTrack.EndLocation);
+            Graphics.Add(_routeOrTrack.Geometry);
             SetLength();
             SelectionColor = Colors.LimeGreen;
-            Type = LayerType.GPXRoute;
+            switch(routeOrTrack.Type)
+            {
+                case PathType.Route: Type = LayerType.GPXRoute;
+                    break;
+                case PathType.Track: Type = LayerType.GPXTrack;
+                    break;
+            }
             IsInEditMode = false;
         }
 
@@ -199,16 +206,21 @@ namespace BikeTouringGIS.Controls
 
         internal void FlipDirection()
         {
-            Graphics.Clear();
-            _route.Flip();
-            Graphics.Add(_route.StartLocation);
-            Graphics.Add(_route.EndLocation);
-            Graphics.Add(_route.RouteGeometry);
-            SetSymbols();
-            IsInEditMode = true;
-            if (IsSplitted)
+            if (Type == LayerType.GPXRoute)
             {
-                SplitRoute(_splitDistance);
+                Graphics.Clear();
+                var route = (Route)_routeOrTrack;
+                route.Flip();
+                // TODO nieuwe graphics maken
+                Graphics.Add(_routeOrTrack.StartLocation);
+                Graphics.Add(_routeOrTrack.EndLocation);
+                Graphics.Add(_routeOrTrack.Geometry);
+                SetSymbols();
+                IsInEditMode = true;
+                if (IsSplitted)
+                {
+                    SplitRoute(_splitDistance);
+                }
             }
         }
 
@@ -301,11 +313,11 @@ namespace BikeTouringGIS.Controls
             SplitLayer.DisplayName = $"{splitDistance} km";
             SplitLayer.Graphics.Clear();
             SplitLayer.Opacity = Opacity;
-            _routeSplitter.SplitRoute(_splitDistance, _route.Points);
+            _routeSplitter.SplitRoute(_splitDistance, _routeOrTrack.Points);
             var splitPoints = _routeSplitter.GetSplitPoints();
             var splitRoutes = _routeSplitter.GetSplittedRoutes();
-            SplitLayer.Graphics.Add(_route.StartLocation);
-            SplitLayer.Graphics.Add(_route.EndLocation);
+            SplitLayer.Graphics.Add(_routeOrTrack.StartLocation);
+            SplitLayer.Graphics.Add(_routeOrTrack.EndLocation);
             SplitLayer.Graphics.AddRange(splitPoints);
             SplitLayer.Graphics.AddRange(splitRoutes);
             SetSymbols(SplitLayer.Graphics);
@@ -315,7 +327,7 @@ namespace BikeTouringGIS.Controls
             SplitLayer.SetSelectionColorOfGraphics();
         }
 
-        public IEnumerable<IRoute> SplitRoutes
+        public IEnumerable<IPath> SplitRoutes
         {
             get
             {
@@ -334,9 +346,9 @@ namespace BikeTouringGIS.Controls
             }
         }
 
-        public IRoute ToRoute()
+        public IPath ToRoute()
         {
-            return _route;
+            return _routeOrTrack;
         }
     }
 }

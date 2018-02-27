@@ -55,22 +55,29 @@
     <Compile Include="Enumerations\ExtentChangedReason.cs" />
     <Compile Include="Enumerations\GraphicType.cs" />
     <Compile Include="Enumerations\LayerType.cs" />
+    <Compile Include="Enumerations\PathType.cs" />
     <Compile Include="Enumerations\ZoomOption.cs" />
     <Compile Include="Extensions\GeometryExtension.cs" />
-    <Compile Include="GPXFileReader.cs" />
-    <Compile Include="GeometryCreatable.cs" />
-    <Compile Include="IRoute.cs" />
+    <Compile Include="Services\GeometryOperator.cs" />
+    <Compile Include="Services\GPXFileReader.cs" />
+    <Compile Include="GeometryData.cs" />
+    <Compile Include="IPath.cs" />
     <Compile Include="Model\GpxInformation.cs" />
     <Compile Include="Model\BikeTouringGISProject.cs" />
     <Compile Include="Model\Route.cs" />
     <Compile Include="Model\Track.cs" />
     <Compile Include="Model\WayPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\GeometryFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\GPXDataAnalyzer\GPX\GPX.csproj">
       <Project>{159f1fc4-4759-4db0-8695-ffd423302db4}</Project>
       <Name>GPX</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WinUX-UWP-Toolkit\WinUX\WinUX.Common\WinUX.Common.csproj">
+      <Project>{55c7fa03-c3b0-4aa0-be48-3fa435ee37c1}</Project>
+      <Name>WinUX.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

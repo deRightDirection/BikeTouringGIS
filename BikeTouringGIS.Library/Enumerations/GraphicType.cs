@@ -12,6 +12,7 @@
         PointOfInterest,
         PoILabelM,
         PoILabelL,
-        PoILabelXL
+        PoILabelXL,
+        GPXTrack
     }
 }

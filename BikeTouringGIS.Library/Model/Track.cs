@@ -1,22 +1,50 @@
-﻿using GPX;
+﻿using BikeTouringGISLibrary.Enumerations;
+using Esri.ArcGISRuntime.Geometry;
+using GPX;
 using System.Collections.Generic;
-
+using WinUX;
 namespace BikeTouringGISLibrary.Model
 {
-    public class Track : Route
+    public class Track : GeometryData, IPath
     {
-        public bool IsConvertedToRoute { get; private set; }
-        public trksegType[] Segments { get; internal set; }
-
-        public void ConvertTrackToRoute()
+        private bool _isConverted;
+        public Track()
         {
-            var waypoints = new List<wptType>();
-            foreach (var segment in Segments)
+            Type = PathType.Track;
+        }
+        public BikeTouringGISGraphic StartLocation { get; internal set; }
+        public BikeTouringGISGraphic EndLocation { get; internal set; }
+        public bool IsConvertedToRoute
+        {
+            get { return _isConverted; }
+            set
             {
-                waypoints.AddRange(segment.trkpt);
+                if (value != _isConverted)
+                {
+                    _isConverted = value;
+                    Type = _isConverted ? PathType.Route : PathType.Track;
+                }
             }
-            Points = waypoints;
-            IsConvertedToRoute = true;
+        }
+        public trksegType[] Segments
+        {
+            set
+            {
+                var waypoints = new List<wptType>();
+                foreach (var segment in value)
+                {
+                    waypoints.AddRange(segment.trkpt);
+                }
+                Points = waypoints;
+            }
+        }
+        public PathType Type { get; set; }
+        public Route ConvertTrack()
+        {
+            var newRoute = new Route();
+            this.CopyProperties(newRoute, new string[] { "Segments"}, true);
+            newRoute.Type = PathType.Route;
+            return newRoute;
         }
     }
 }
