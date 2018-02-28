@@ -17,6 +17,7 @@ namespace BikeTouringGISLibrary.Services
         {
             _gpxInformation = gpxData;
         }
+        public GeometryFactory() { }
         public void CreateGeometries()
         {
             _gpxInformation.WayPoints.ForEach(wp => CreateWayPointGeometry(wp));
@@ -38,7 +39,7 @@ namespace BikeTouringGISLibrary.Services
         {
             CreateGeometryAndExtentForTrackOrRoute(track, GraphicType.GPXTrack);
         }
-        private void CreateRouteGeometry(Route route)
+        public void CreateRouteGeometry(Route route)
         {
             CreateGeometryAndExtentForTrackOrRoute(route, GraphicType.GPXRoute);
             route.StartLocation = CreateBikeTouringGISPointGraphic(route.Points.First(), route.Name, GraphicType.GPXRouteStartLocation);
@@ -61,6 +62,7 @@ namespace BikeTouringGISLibrary.Services
                 ZIndex = 1
             };
             g.Attributes["name"] = nameAttribute;
+            g.Attributes["type"] = typeOfPoint;
             return g;
         }
         private void CreateGeometryAndExtentForTrackOrRoute(GeometryData data, GraphicType typeOfGraphic)
@@ -75,6 +77,7 @@ namespace BikeTouringGISLibrary.Services
             var geometry = new BikeTouringGISGraphic(esriGeometry, typeOfGraphic);
             geometry.Attributes["name"] = data.Name;
             geometry.Attributes["filename"] = data.FileName;
+            geometry.Attributes["type"] = typeOfGraphic;
             data.Geometry = geometry;
         }
 

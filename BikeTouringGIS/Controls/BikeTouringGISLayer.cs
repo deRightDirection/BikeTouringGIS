@@ -6,6 +6,7 @@ using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Symbology;
 using GPX;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
@@ -210,8 +211,8 @@ namespace BikeTouringGIS.Controls
             {
                 Graphics.Clear();
                 var route = (Route)_routeOrTrack;
+                RemoveRouteGeometries();
                 route.Flip();
-                // TODO nieuwe graphics maken
                 Graphics.Add(_routeOrTrack.StartLocation);
                 Graphics.Add(_routeOrTrack.EndLocation);
                 Graphics.Add(_routeOrTrack.Geometry);
@@ -222,6 +223,13 @@ namespace BikeTouringGIS.Controls
                     SplitRoute(_splitDistance);
                 }
             }
+        }
+
+        private void RemoveRouteGeometries()
+        {
+            Graphics.Remove(_routeOrTrack.StartLocation);
+            Graphics.Remove(_routeOrTrack.EndLocation);
+            Graphics.Remove(_routeOrTrack.Geometry);
         }
 
         internal void SetSymbolsAndSplitLayerDefaultProperties(Dictionary<GraphicType, object> symbols)

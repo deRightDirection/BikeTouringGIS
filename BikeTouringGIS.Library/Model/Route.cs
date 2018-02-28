@@ -14,8 +14,7 @@ namespace BikeTouringGISLibrary.Model
         }
         public void Flip()
         {
-            Points.Reverse();
-            Geometry = GeometryOperator.ReversePoints(Points);
+            GeometryOperator.ReverseRoute(this);
         }
     }
 }
