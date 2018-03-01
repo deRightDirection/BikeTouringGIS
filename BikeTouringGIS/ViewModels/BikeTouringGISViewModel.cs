@@ -122,7 +122,7 @@ namespace BikeTouringGIS.ViewModels
             obj.FlipDirection();
         }
 
-        private async void OpenGPXFile(BikeTouringGISMapViewModel mapViewModel)
+        private void OpenGPXFile(BikeTouringGISMapViewModel mapViewModel)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.Filter = "GPX files (*.gpx)|*.gpx";
@@ -134,7 +134,14 @@ namespace BikeTouringGIS.ViewModels
                 {
                     if (!_loadedFiles.Contains(file))
                     {
-                        OpenGpxFile(mapViewModel, file);
+                        try
+                        {
+                            OpenGpxFile(mapViewModel, file);
+                        }
+                        catch(Exception e)
+                        {
+
+                        }
                     }
                 }
             }
@@ -182,6 +189,7 @@ namespace BikeTouringGIS.ViewModels
             var tracks = layerFactory.CreateTracks(gpxFileInformation.Tracks);
             mapViewModel.AddTracks(tracks);
             mapViewModel.AddPoIs(gpxFileInformation.WayPoints);
+            mapViewModel.SetExtent();
         }
 
         private async Task<MessageDialogResult> ConvertTrackToRoute(string text)

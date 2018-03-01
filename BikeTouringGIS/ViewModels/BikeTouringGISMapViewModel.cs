@@ -115,7 +115,6 @@ namespace BikeTouringGIS.ViewModels
             _map.Layers.Remove(splitLayer);
             BikeTouringGISLayers.Remove(obj);
             RemovePointsOfInterestOfRemovedLayer(obj);
-            SetExtent();
             CalculateTotalLength();
             PlacePointsOfInterestLayerOnTop();
             MessengerInstance.Send(new LayerRemovedMessage() { Layer = obj });
@@ -188,7 +187,6 @@ namespace BikeTouringGIS.ViewModels
             routes.ForEach(x => x.SetSymbolsAndSplitLayerDefaultProperties(_mapSymbols));
             routes.ForEach(x => _map.Layers.Add(x));
             routes.ForEach(x => _map.Layers.Add(x.SplitLayer));
-            SetExtent();
             CalculateTotalLength();
             PlacePointsOfInterestLayerOnTop();
             routes.ForEach(x => LayerLoaded(x));
@@ -198,7 +196,6 @@ namespace BikeTouringGIS.ViewModels
         {
             /*
             _map.Layers.Add(layer);
-            SetExtent();
             CalculateTotalLength();
             LayerLoaded(layer);
             */
@@ -256,7 +253,7 @@ namespace BikeTouringGIS.ViewModels
         /// <summary>
         /// zet de extent naar de union van extents van de lagen aanwezig in de kaart
         /// </summary>
-        private void SetExtent()
+        public void SetExtent()
         {
             Envelope initialExtent = null;
             foreach (var layer in _map.GetBikeTouringGISLayers())
@@ -265,7 +262,9 @@ namespace BikeTouringGIS.ViewModels
             }
             if (initialExtent != null)
             {
-                MapView.SetView(initialExtent.Expand(1.2));
+                var expandedExtent = initialExtent.Expand(1.2);
+                _map.InitialViewpoint = new Viewpoint(expandedExtent);
+                MapView.SetView(expandedExtent);
             }
         }
 

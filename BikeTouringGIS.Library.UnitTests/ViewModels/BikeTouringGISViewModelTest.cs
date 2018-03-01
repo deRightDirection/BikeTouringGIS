@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using theRightDirection.Library.UnitTesting;
 using FluentAssertions;
+using BikeTouringGISLibrary.Services;
+
 namespace BikeTouringGISLibrary.UnitTests.ViewModels
 {
     [TestClass]
@@ -47,6 +49,21 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
             _map.BikeTouringGISLayers.Count.ShouldBeEquivalentTo(1);
         }
 
-
+        [TestMethod]
+        public void OpenGPXFile_Check_If_Extent_Is_Proper_Set()
+        {
+            var filename = "85_alleen_wpt.gpx";
+            var path = Path.Combine(UnitTestDirectory, filename);
+            var gpxFileInformation = new GpxFileReader().LoadFile(path);
+            var geometryFactory = new GeometryFactory(gpxFileInformation);
+            geometryFactory.CreateGeometries();
+            var waypointsExtent = gpxFileInformation.WayPointsExtent.Expand(1.2);
+            _vm.OpenGpxFile(_map, path);
+            Assert.Fail("nog uitzoeken hoe extent te controleren is");
+//            extent.XMax.ShouldBeEquivalentTo(waypointsExtent.XMax);
+//            extent.XMin.ShouldBeEquivalentTo(waypointsExtent.XMin);
+//            extent.YMax.ShouldBeEquivalentTo(waypointsExtent.YMax);
+//            extent.YMin.ShouldBeEquivalentTo(waypointsExtent.YMin);
+        }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using BikeTouringGIS.Comparers;
 using BikeTouringGISLibrary.Model;
+using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
+using System;
 using System.Collections.Generic;
 using WinUX;
 
@@ -17,7 +19,7 @@ namespace BikeTouringGIS.Controls
             _wayPoints.AddRange(wayPoints);
             wayPoints.ForEach(wp => Graphics.Add(wp.Geometry));
         }
-
+ 
         // ook refactoren en in aparte poilayer plaatsen
         internal void RemovePoIs(IEnumerable<WayPoint> wayPoints)
         {

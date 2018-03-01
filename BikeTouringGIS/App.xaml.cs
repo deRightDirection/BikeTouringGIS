@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Security;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using theRightDirection.Library.Logging;
@@ -13,6 +14,14 @@ namespace BicycleTripsPreparationApp
 {
     public partial class App : Application
     {
+        public App()
+        {
+            AppDomain.CurrentDomain.UnhandledException += (s, ex) => LogUnhandledException((Exception)ex.ExceptionObject, "AppDomain.CurrentDomain.UnhandledException");
+            Dispatcher.UnhandledException += (s, ex) => LogUnhandledException(ex.Exception, "Dispatcher.UnhandledException");
+            Current.DispatcherUnhandledException += (s, ex) => LogUnhandledException(ex.Exception, "Current.DispatcherUnhandledException");
+            TaskScheduler.UnobservedTaskException += (s, ex) => LogUnhandledException(ex.Exception, "TaskScheduler.UnobservedTaskException");
+        }
+
         protected override void OnExit(ExitEventArgs e)
         {
             try
@@ -33,8 +42,6 @@ namespace BicycleTripsPreparationApp
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            AppDomain.CurrentDomain.UnhandledException += (s, ex) => LogUnhandledException((Exception)ex.ExceptionObject, "AppDomain.CurrentDomain.UnhandledException");
-            DispatcherUnhandledException += (s, ex) => LogUnhandledException(ex.Exception, "Application.Current.DispatcherUnhandledException");
             try
             {
                 var x = Application.Current.Resources["RibbonThemeColorBrush"] = new SolidColorBrush(Colors.DarkGreen);

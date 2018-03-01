@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gpx xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1" xmlns="http://www.topografix.com/GPX/1/1">
+  <wpt lat="52.820060000" lon="6.458230000">
+    <name>Start</name>
+  </wpt>
+  <wpt lat="52.831710000" lon="6.427910000">
+    <name>Head north</name>
+  </wpt>
+  <wpt lat="52.832730000" lon="6.429910000">
+    <name>Head north</name>
+  </wpt>
+</gpx>
