@@ -173,6 +173,9 @@
     </ApplicationDefinition>
     <Compile Include="Comparers\GraphicComparer.cs" />
     <Compile Include="Controls\BikeTouringGISLayer.cs" />
+    <Compile Include="Controls\LayerTypeSymbol.xaml.cs">
+      <DependentUpon>LayerTypeSymbol.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\NewProjectDialog.xaml.cs">
       <DependentUpon>NewProjectDialog.xaml</DependentUpon>
     </Compile>
@@ -180,6 +183,7 @@
     <Compile Include="Converters\InverseBooleanConverter.cs" />
     <Compile Include="Converters\LayerIsGpxRouteConverter.cs" />
     <Compile Include="Converters\LayerLoadedEventArgsToBikeTouringGISLayerConverter.cs" />
+    <Compile Include="Converters\LayerTypeToValueConverter.cs" />
     <Compile Include="Converters\LengthChangedConverter.cs" />
     <Compile Include="Converters\LengthToMaximumSplitLengthConverter.cs" />
     <Compile Include="Converters\MouseButtonEventArgsToPointConverter.cs" />
@@ -226,6 +230,10 @@
     <Compile Include="ViewModels\NewProjectDialogContent.cs" />
     <Compile Include="ViewModels\StatusBarViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Page Include="Controls\LayerTypeSymbol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\NewProjectDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

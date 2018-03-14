@@ -29,5 +29,7 @@ namespace BikeTouringGISLibrary.Model
                 return initialExtent;
             }
         }
+
+        public string FileName { get; internal set; }
     }
 }

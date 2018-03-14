@@ -194,11 +194,9 @@ namespace BikeTouringGIS.ViewModels
 
         internal void AddTracks(List<BikeTouringGISLayer> tracks)
         {
-            /*
-            _map.Layers.Add(layer);
+            tracks.ForEach(x => _map.Layers.Add(x));
             CalculateTotalLength();
-            LayerLoaded(layer);
-            */
+            tracks.ForEach(x => LayerLoaded(x));
         }
 
         private void PlacePointsOfInterestLayerOnTop()

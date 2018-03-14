@@ -1,6 +1,7 @@
 ﻿using BikeTouringGISLibrary.Model;
 using GPX;
 using System.Collections.Generic;
+using System.IO;
 
 namespace BikeTouringGISLibrary.Services
 {
@@ -17,6 +18,7 @@ namespace BikeTouringGISLibrary.Services
             LoadRoutes(gpx);
             LoadWayPoints(gpx);
             LoadTracks(gpx);
+            _gpxData.FileName = Path.GetFileName(fileName);
             return _gpxData;
         }
 

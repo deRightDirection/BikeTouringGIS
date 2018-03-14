@@ -188,7 +188,7 @@ namespace BikeTouringGIS.ViewModels
             mapViewModel.AddRoutes(routes);
             var tracks = layerFactory.CreateTracks(gpxFileInformation.Tracks);
             mapViewModel.AddTracks(tracks);
-            mapViewModel.AddPoIs(gpxFileInformation.WayPoints);
+//            mapViewModel.AddPoIs(gpxFileInformation.WayPoints);
             mapViewModel.SetExtent();
         }
 

@@ -22,6 +22,10 @@ namespace BikeTouringGISLibrary.Services
         {
             _gpxInformation.WayPoints.ForEach(wp => CreateWayPointGeometry(wp));
             var tracksToConvert = _gpxInformation.Tracks.Where(t => t.IsConvertedToRoute);
+            _gpxInformation.Routes.ForEach(r =>
+            {
+                CreateRouteGeometry(r);
+            });
             var routes = new List<Route>();
             tracksToConvert.ForEach(t =>
             {
@@ -29,7 +33,7 @@ namespace BikeTouringGISLibrary.Services
                 CreateRouteGeometry(newRoute);
                 routes.Add(newRoute);
             });
-            _gpxInformation.Routes = routes;
+            _gpxInformation.Routes.AddRange(routes);
             var tracks = _gpxInformation.Tracks.Where(t => !t.IsConvertedToRoute);
             tracks.ForEach(t => CreateTrackGeometry(t));
             _gpxInformation.Tracks = tracks.ToList();
@@ -44,6 +48,10 @@ namespace BikeTouringGISLibrary.Services
             CreateGeometryAndExtentForTrackOrRoute(route, GraphicType.GPXRoute);
             route.StartLocation = CreateBikeTouringGISPointGraphic(route.Points.First(), route.Name, GraphicType.GPXRouteStartLocation);
             route.EndLocation = CreateBikeTouringGISPointGraphic(route.Points.Last(), route.Name, GraphicType.GPXRouteEndLocation);
+            if (string.IsNullOrEmpty(route.FileName))
+            {
+                route.FileName = _gpxInformation.FileName;
+            }
         }
 
         private void CreateWayPointGeometry(WayPoint wayPoint)
@@ -51,6 +59,7 @@ namespace BikeTouringGISLibrary.Services
             var graphic = CreateBikeTouringGISPointGraphic(wayPoint.Points[0], wayPoint.Name, GraphicType.PointOfInterest);
             graphic.Attributes["source"] = wayPoint.Source;
             wayPoint.Geometry = graphic;
+            wayPoint.FileName = _gpxInformation.FileName;
             wayPoint.Extent = graphic.Geometry.Extent;
         }
 
@@ -79,6 +88,10 @@ namespace BikeTouringGISLibrary.Services
             geometry.Attributes["filename"] = data.FileName;
             geometry.Attributes["type"] = typeOfGraphic;
             data.Geometry = geometry;
+            if (string.IsNullOrEmpty(data.FileName))
+            {
+                data.FileName = _gpxInformation.FileName;
+            }
         }
 
     }
