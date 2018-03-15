@@ -48,16 +48,23 @@ namespace BikeTouringGIS.Controls
             Title = string.IsNullOrEmpty(_routeOrTrack.Name) ? Path.GetFileNameWithoutExtension(fileName) : _routeOrTrack.Name;
             var subStringLength = Title.Length > 15 ? 15 : Title.Length;
             SplitPrefix = Title.Substring(0, subStringLength);
-            Graphics.Add(_routeOrTrack.StartLocation);
-            Graphics.Add(_routeOrTrack.EndLocation);
+            if(_routeOrTrack.StartLocation != null)
+            {
+                Graphics.Add(_routeOrTrack.StartLocation);
+            }
+            if(_routeOrTrack.EndLocation != null)
+            {
+                Graphics.Add(_routeOrTrack.EndLocation);
+            }
             Graphics.Add(_routeOrTrack.Geometry);
             SetLength();
-            SelectionColor = Colors.LimeGreen;
             switch(routeOrTrack.Type)
             {
                 case PathType.Route: Type = LayerType.GPXRoute;
+                    SelectionColor = Colors.LimeGreen;
                     break;
                 case PathType.Track: Type = LayerType.GPXTrack;
+                    SelectionColor = Colors.LightGray;
                     break;
             }
             IsInEditMode = false;
@@ -86,7 +93,7 @@ namespace BikeTouringGIS.Controls
         {
             foreach (BikeTouringGISGraphic graphic in Graphics)
             {
-                if (graphic.Type == GraphicType.GPXRoute || graphic.Type == GraphicType.SplitRoute)
+                if (graphic.Type == GraphicType.GPXRoute || graphic.Type == GraphicType.SplitRoute || graphic.Type == GraphicType.GPXTrack)
                 {
                     graphic.IsSelected = IsSelected;
                 }
@@ -284,8 +291,8 @@ namespace BikeTouringGIS.Controls
                 {
                     foreach (var graphic in Graphics)
                     {
-                        var graphicExtent = graphic.Geometry.Extent;
-                        _extent = _extent == null ? graphicExtent : _extent.Union(graphicExtent);
+                            var graphicExtent = graphic.Geometry.Extent;
+                            _extent = _extent == null ? graphicExtent : _extent.Union(graphicExtent);
                     }
                 }
                 return _extent;

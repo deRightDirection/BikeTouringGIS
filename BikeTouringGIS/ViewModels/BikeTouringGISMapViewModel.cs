@@ -116,7 +116,6 @@ namespace BikeTouringGIS.ViewModels
             BikeTouringGISLayers.Remove(obj);
             RemovePointsOfInterestOfRemovedLayer(obj);
             CalculateTotalLength();
-            PlacePointsOfInterestLayerOnTop();
             MessengerInstance.Send(new LayerRemovedMessage() { Layer = obj });
         }
 
@@ -188,22 +187,15 @@ namespace BikeTouringGIS.ViewModels
             routes.ForEach(x => _map.Layers.Add(x));
             routes.ForEach(x => _map.Layers.Add(x.SplitLayer));
             CalculateTotalLength();
-            PlacePointsOfInterestLayerOnTop();
             routes.ForEach(x => LayerLoaded(x));
         }
 
         internal void AddTracks(List<BikeTouringGISLayer> tracks)
         {
+            tracks.ForEach(x => x.SetSymbolsAndSplitLayerDefaultProperties(_mapSymbols));
             tracks.ForEach(x => _map.Layers.Add(x));
             CalculateTotalLength();
             tracks.ForEach(x => LayerLoaded(x));
-        }
-
-        private void PlacePointsOfInterestLayerOnTop()
-        {
-            var poiLayer = _map.GetBikeTouringGISLayers().FirstOrDefault(x => x.Type == LayerType.PointsOfInterest);
-            _map.Layers.Remove(poiLayer);
-            _map.Layers.Add(poiLayer);
         }
 
         //TODO MME 30012017 checken of in Quartz de binding wel goed werkt!

@@ -12,15 +12,16 @@ namespace BikeTouringGIS.Comparers
     {
         public int Compare(LayerType x, LayerType y)
         {
-            if (x == LayerType.PointsOfInterest)
-            {
-                return -1;
-            }
-            if(x  != LayerType.PointsOfInterest && y == LayerType.PointsOfInterest)
-            {
-                return 1;
-            }
-            return 0;
+            return x.CompareTo(y);
+//            if (x == LayerType.PointsOfInterest)
+//            {
+//                return -1;
+//            }
+//            if(x  != LayerType.PointsOfInterest && y == LayerType.PointsOfInterest)
+//            {
+ //               return 1;
+  //          }
+  //          return 0;
         }
     }
 }

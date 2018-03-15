@@ -62,6 +62,9 @@
         <esri:SimpleLineSymbol x:Key="GPXRoute"
                                Width="3"
                                Color="Black" />
+        <esri:SimpleLineSymbol x:Key="GPXTrack"
+                               Width="2"
+                               Color="DarkGray" />
         <esri:SimpleLineSymbol x:Key="SplitRoute"
                                Width="3"
                                Style="Dot"
