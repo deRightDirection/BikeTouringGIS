@@ -170,6 +170,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Comparers\BikeTouringGISLayerComparer.cs" />
     <Compile Include="Comparers\GraphicComparer.cs" />
     <Compile Include="Controls\BikeTouringGISLayer.cs" />
     <Compile Include="Controls\LayerTypeSymbol.xaml.cs">

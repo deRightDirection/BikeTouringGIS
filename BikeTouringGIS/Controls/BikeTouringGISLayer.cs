@@ -44,6 +44,7 @@ namespace BikeTouringGIS.Controls
         public BikeTouringGISLayer(string fileName, IPath routeOrTrack) : this(fileName)
         {
             _routeOrTrack = routeOrTrack;
+            FileName = fileName;
             Title = string.IsNullOrEmpty(_routeOrTrack.Name) ? Path.GetFileNameWithoutExtension(fileName) : _routeOrTrack.Name;
             var subStringLength = Title.Length > 15 ? 15 : Title.Length;
             SplitPrefix = Title.Substring(0, subStringLength);

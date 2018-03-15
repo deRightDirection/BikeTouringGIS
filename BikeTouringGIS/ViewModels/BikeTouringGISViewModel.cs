@@ -142,10 +142,7 @@ namespace BikeTouringGIS.ViewModels
                         {
                             OpenGpxFile(mapViewModel, file);
                         }
-                        catch(Exception e)
-                        {
-
-                        }
+                        catch (Exception e) { }
                     }
                 }
             }
