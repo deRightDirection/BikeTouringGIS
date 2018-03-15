@@ -35,6 +35,7 @@ namespace BikeTouringGISLibrary.UnitTests
 
         [TestMethod]
         // bug #63
+        [DeploymentItem("dwingeloo.gpx")]
         public void Title_Is_Correct()
         {
             var layer = CreateLayer("dwingeloo.gpx");

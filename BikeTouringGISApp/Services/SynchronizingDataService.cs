@@ -17,11 +17,11 @@ namespace BikeTouringGISApp.Services
     {
         private IRepository<LogBook> _logBooksRepository;
         private IRepository<Log> _logsRepository;
-        private OneDriveRepository _oneDriveRepository;
+//        private OneDriveRepository _oneDriveRepository;
 
         public SynchronizingDataService()
         {
-            _oneDriveRepository = new OneDriveRepository();
+//            _oneDriveRepository = new OneDriveRepository();
             _logBooksRepository = SimpleIoc.Default.GetInstance<IRepository<LogBook>>();
             _logsRepository = SimpleIoc.Default.GetInstance<IRepository<Log>>();
         }
@@ -38,28 +38,32 @@ namespace BikeTouringGISApp.Services
 
         public void SaveToOneDrive(LogBook logbook)
         {
-            _oneDriveRepository.SaveOrUpdateLogBook(logbook);
+            // TODO: fixen
+//            _oneDriveRepository.SaveOrUpdateLogBook(logbook);
         }
 
         public void SaveToOneDrive(Log log)
         {
-            _oneDriveRepository.SaveOrUpdateLog(log);
+            // TODO: fixen
+//            _oneDriveRepository.SaveOrUpdateLog(log);
         }
 
         public async Task SynchronizeLogBooks()
         {
             await _logBooksRepository.LoadData();
-            var itemsFromOneDrive = await _oneDriveRepository.GetLogBooks();
-            var itemsLocal = _logBooksRepository.Entities;
-            SyncEntities<LogBook>(itemsLocal, itemsFromOneDrive, SaveToOneDrive, SaveToLocal);
+            // TODO: fixen
+//            var itemsFromOneDrive = await _oneDriveRepository.GetLogBooks();
+//            var itemsLocal = _logBooksRepository.Entities;
+//            SyncEntities<LogBook>(itemsLocal, itemsFromOneDrive, SaveToOneDrive, SaveToLocal);
         }
 
         public async Task SynchronizeLogs()
         {
             await _logsRepository.LoadData();
-            var itemsFromOneDrive = await _oneDriveRepository.GetLogs();
-            var itemsLocal = _logsRepository.Entities;
-            SyncEntities<Log>(itemsLocal, itemsFromOneDrive, SaveToOneDrive, SaveToLocal);
+            // TODO: fixen
+//            var itemsFromOneDrive = await _oneDriveRepository.GetLogs();
+//            var itemsLocal = _logsRepository.Entities;
+//            SyncEntities<Log>(itemsLocal, itemsFromOneDrive, SaveToOneDrive, SaveToLocal);
         }
 
         private async Task SyncEntities<T>(IEnumerable<T> localItems, IEnumerable<T> oneDriveItems, Action<T> saveToOneDrive, Action<T> saveToLocal) where T : IEntity<T>

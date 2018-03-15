@@ -11,11 +11,12 @@
         [TestMethod]
         public async Task GetPagePictureUrl()
         {
+            Assert.Inconclusive();
             await Login();
             var pages = await FacebookService.Instance.RequestAsync<FacebookPage>(FacebookDataConfig.MyPages);
             var pageId = pages.First().Id;
-            var imageData = await FacebookService.Instance.GetPagePictureInfoAsync(pageId);
-            Assert.AreEqual("https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/14568257_1795295790740226_1853951626961530489_n.png?oh=61ce1acf6bdfd89bc35b49aef19d8d55&oe=59FC7FAF", imageData.Url);
+//            var imageData = await FacebookService.Instance.GetPagePictureInfoAsync(pageId);
+//            Assert.AreEqual("https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/14568257_1795295790740226_1853951626961530489_n.png?oh=61ce1acf6bdfd89bc35b49aef19d8d55&oe=59FC7FAF", imageData.Url);
         }
 
         [TestMethod]

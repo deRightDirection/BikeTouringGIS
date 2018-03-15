@@ -17,7 +17,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-
+using System.Linq;
 namespace BikeTouringGIS.ViewModels
 {
     public class BikeTouringGISViewModel : BikeTouringGISBaseViewModel
@@ -84,7 +84,11 @@ namespace BikeTouringGIS.ViewModels
 
         private void LayerRemoved(LayerRemovedMessage obj)
         {
-            _loadedFiles.Remove(obj.Layer.FileName);
+            var findItem = _loadedFiles.SingleOrDefault(x => x.ToLowerInvariant().Contains(obj.Layer.FileName.ToLowerInvariant()));
+            if (!string.IsNullOrEmpty(findItem))
+            {
+                _loadedFiles.Remove(findItem);
+            }
         }
 
         private void RemoveSplitRoute(BikeTouringGISLayer obj)

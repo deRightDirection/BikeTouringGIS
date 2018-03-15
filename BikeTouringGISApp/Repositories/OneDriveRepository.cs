@@ -11,12 +11,13 @@ using WinUX.CloudServices.OneDrive;
 
 namespace BikeTouringGISApp.Repositories
 {
+    [Obsolete("kijken hoe dit is opgelost in andere apps",true)]
     internal class OneDriveRepository : OneDriveService
     {
         private const string LOGBOOKSDIRECTORYNAME = "LogBooks";
         private const string LOGSDIRECTORYNAME = "Logs";
 
-        public OneDriveRepository() : base("theRightDirection/BikeTouringGIS", "00000000441DB51C", new string[] { "wl.signin", "wl.offline_access", "onedrive.readwrite" })
+        public OneDriveRepository() : base("00000000441DB51C", new string[] { "wl.signin", "wl.offline_access", "onedrive.readwrite" })
         {
         }
 
@@ -37,7 +38,7 @@ namespace BikeTouringGISApp.Repositories
             var isConnected = await ConnectToOneDrive();
             if (isConnected)
             {
-                await UpdateAsync($"{log.Identifier}.json", JsonConvert.SerializeObject(log), LOGSDIRECTORYNAME);
+//                await UpdateAsync($"{log.Identifier}.json", JsonConvert.SerializeObject(log), LOGSDIRECTORYNAME);
             }
         }
 
@@ -46,7 +47,8 @@ namespace BikeTouringGISApp.Repositories
             var isConnected = await ConnectToOneDrive();
             if (isConnected)
             {
-                await UpdateAsync($"{logBook.Identifier}.json", JsonConvert.SerializeObject(logBook), LOGBOOKSDIRECTORYNAME);
+                // TODO: fixen
+                //                await UpdateAsync($"{logBook.Identifier}.json", JsonConvert.SerializeObject(logBook), LOGBOOKSDIRECTORYNAME);
             }
         }
 
@@ -55,8 +57,9 @@ namespace BikeTouringGISApp.Repositories
             var result = await Connect();
             if (result.IsConnected)
             {
-                await CreateFolderAsync(LOGBOOKSDIRECTORYNAME);
-                await CreateFolderAsync(LOGSDIRECTORYNAME);
+                // TODO: fixen
+                //                await CreateFolderAsync(LOGBOOKSDIRECTORYNAME);
+                //                await CreateFolderAsync(LOGSDIRECTORYNAME);
             }
             return result.IsConnected;
         }
@@ -69,7 +72,9 @@ namespace BikeTouringGISApp.Repositories
                 var isConnected = await ConnectToOneDrive();
                 if (isConnected)
                 {
-                    var content = await GetAllItemsAsync(folderName);
+                    var content = new List<string>();
+                    // TODO: fixen
+//                    var content = await GetAllItemsAsync(folderName);
                     content.ForEach(item =>
                     {
                         var realObject = JsonConvert.DeserializeObject<T>(item);
