@@ -8,12 +8,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:BikeTouringGIS.ViewModels"
     d:DesignHeight="300"
+    Background="DarkGreen"
     d:DesignWidth="500"
     mc:Ignorable="d">
     <UserControl.DataContext>
         <vm:StatusBarViewModel />
     </UserControl.DataContext>
-    <Fluent:StatusBar HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+    <Fluent:StatusBar HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="DarkGreen">
         <Fluent:StatusBarItem
             Title="total length"
             Margin="5,0,5,0"

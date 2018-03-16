@@ -92,13 +92,14 @@
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MahApps.Metro.IconPacks.FontAwesome">
-      <HintPath>..\packages\MahApps.Metro.IconPacks.FontAwesome.1.9.1\lib\net46\MahApps.Metro.IconPacks.FontAwesome.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MahApps.Metro.IconPacks.FontAwesome, Version=2.1.0.15, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Program Files (x86)\NuGet\Config\packages\MahApps.Metro.IconPacks.FontAwesome.2.1.0\lib\net46\MahApps.Metro.IconPacks.FontAwesome.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro.IconPacks.Material">
-      <HintPath>..\packages\MahApps.Metro.IconPacks.Material.1.9.1\lib\net46\MahApps.Metro.IconPacks.Material.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MahApps.Metro.IconPacks.Material, Version=2.1.0.15, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Program Files (x86)\NuGet\Config\packages\MahApps.Metro.IconPacks.Material.2.1.0\lib\net46\MahApps.Metro.IconPacks.Material.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Modern, Version=2.1.0.15, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Program Files (x86)\NuGet\Config\packages\MahApps.Metro.IconPacks.Modern.2.1.0\lib\net46\MahApps.Metro.IconPacks.Modern.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>packages\Mono.Cecil.0.9.6.4\lib\net45\Mono.Cecil.dll</HintPath>
@@ -181,6 +182,8 @@
     </Compile>
     <Compile Include="Controls\PointsOfInterestLayer.cs" />
     <Compile Include="Converters\InverseBooleanConverter.cs" />
+    <Compile Include="Converters\LayerIsGpxTrackConverter.cs" />
+    <Compile Include="Converters\LayerIsGpxRouteOrTrackConverter.cs" />
     <Compile Include="Converters\LayerIsGpxRouteConverter.cs" />
     <Compile Include="Converters\LayerLoadedEventArgsToBikeTouringGISLayerConverter.cs" />
     <Compile Include="Converters\LayerTypeToValueConverter.cs" />

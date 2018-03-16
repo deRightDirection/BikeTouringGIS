@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace BikeTouringGIS.Converters
 {
-    public class LayerIsGpxRouteConverter : IValueConverter
+    public class LayerIsGpxTrackConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -19,13 +19,13 @@ namespace BikeTouringGIS.Converters
                 {
                     return false;
                 }
-                return layer.Type == LayerType.GPXRoute;
+                return layer.Type == LayerType.GPXTrack;
             }
-            if (layer == null)
+            if(layer == null)
             {
                 return Visibility.Collapsed;
             }
-            return layer.Type == LayerType.GPXRoute ? Visibility.Visible : Visibility.Collapsed;
+            return layer.Type == LayerType.GPXTrack ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

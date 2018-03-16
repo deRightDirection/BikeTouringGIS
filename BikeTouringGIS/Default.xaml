@@ -61,6 +61,7 @@
         <project:StatusBar
             Grid.Row="2"
             Grid.ColumnSpan="2"
+            Background="DarkGreen"
             Map="{Binding DataContext, ElementName=biketouringgismap}"
             SelectedRouteLength="{Binding SelectedLayer.TotalLength, ElementName=layerlist}"
             TotalLengthOfRoutes="{Binding TotalLengthOfRoutes, ElementName=biketouringgismap}"

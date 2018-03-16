@@ -18,6 +18,8 @@
         <converters:StringToIntConverter x:Key="stringToIntConverter" />
         <converters:NotNullAndPrefixConverter x:Key="notNullAndPrefixConverter" />
         <converters:SplitIsEnabledConverter x:Key="splitIsEnabledConverter" />
+        <converters:LayerIsGpxRouteConverter x:Key="layerIsRouteConverter"/>
+        <converters:LayerIsGpxTrackConverter x:Key="layerIsTrackConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -243,7 +245,7 @@
             </Fluent:RibbonTabItem>
             <Fluent:RibbonTabItem
                 Group="{Binding ElementName=layertab, Mode=OneWay}"
-                Header="General"
+                Header="Layer"
                 IsEnabled="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}"
                 IsSelected="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}"
                 Visibility="Visible">
@@ -324,7 +326,8 @@
             <Fluent:RibbonTabItem
                 Group="{Binding ElementName=layertab, Mode=OneWay}"
                 Header="Editing"
-                IsEnabled="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}">
+                Visibility="{Binding SelectedLayer, Converter={StaticResource layerIsRouteConverter}}"
+                IsEnabled="{Binding SelectedLayer, Converter={StaticResource layerIsRouteConverter}, ConverterParameter='boolean'}">
                 <Fluent:RibbonGroupBox Header="flipping">
                     <Fluent:Button
                         MinWidth="100"
@@ -347,7 +350,8 @@
                 MinWidth="150"
                 Group="{Binding ElementName=layertab, Mode=OneWay}"
                 Header="Splitting"
-                IsEnabled="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}">
+                Visibility="{Binding SelectedLayer, Converter={StaticResource layerIsRouteConverter}}"
+                IsEnabled="{Binding SelectedLayer, Converter={StaticResource layerIsRouteConverter}, ConverterParameter='boolean'}">
                 <Fluent:RibbonGroupBox>
                     <Fluent:Button
                         MinWidth="100"
@@ -439,6 +443,29 @@
                                 Height="32"
                                 Foreground="DarkGreen"
                                 Kind="ContentSave" />
+                        </Fluent:Button.LargeIcon>
+                    </Fluent:Button>
+                </Fluent:RibbonGroupBox>
+            </Fluent:RibbonTabItem>
+            <Fluent:RibbonTabItem
+                Group="{Binding ElementName=layertab, Mode=OneWay}"
+                Header="Timing"
+                Visibility="{Binding SelectedLayer, Converter={StaticResource layerIsTrackConverter}}"
+                IsEnabled="{Binding SelectedLayer, Converter={StaticResource layerIsTrackConverter}, ConverterParameter='boolean'}">
+                <Fluent:RibbonGroupBox Header="end time">
+                    <Fluent:Button
+                        MinWidth="100"
+                        Command="{Binding Base.ResetEndTimeCommand}"
+                        CommandParameter="{Binding DataContext.SelectedLayer}"
+                        Header="recalculate"
+                        IsEnabled="{Binding SelectedLayer, Converter={StaticResource notNullConverter}}"
+                        ToolTip="recalculate end time and time of points on the track">
+                        <Fluent:Button.LargeIcon>
+                            <iconPacks:PackIconModern
+                                Width="32"
+                                Height="32"
+                                Foreground="DarkGreen"
+                                Kind="TimerRewind" />
                         </Fluent:Button.LargeIcon>
                     </Fluent:Button>
                 </Fluent:RibbonGroupBox>

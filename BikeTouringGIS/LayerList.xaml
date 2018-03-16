@@ -18,6 +18,7 @@
     mc:Ignorable="d">
     <UserControl.Resources>
         <c:LayerIsGpxRouteConverter x:Key="layerIsRouteConverter" />
+        <c:LayerIsGpxRouteOrTrackConverter x:Key="layerIsRouteOrTrackConverter"/>
     </UserControl.Resources>
     <UserControl.DataContext>
         <vm:LayerListViewModel />
@@ -108,7 +109,7 @@
                             Text="{Binding TotalLength, StringFormat=({0} km)}"
                             Visibility="{Binding Converter={StaticResource layerIsRouteConverter}}" />
                     </StackPanel>
-                    <Grid Grid.Row="1" Visibility="{Binding Converter={StaticResource layerIsRouteConverter}}">
+                    <Grid Grid.Row="1" Visibility="{Binding Converter={StaticResource layerIsRouteOrTrackConverter}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="auto" />
