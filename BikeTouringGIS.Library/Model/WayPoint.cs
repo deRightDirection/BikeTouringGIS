@@ -8,7 +8,6 @@ namespace BikeTouringGISLibrary.Model
     {
         public decimal Lat { get; private set; }
         public decimal Lon { get; private set; }
-        public string Source { get; internal set; }
 
         public static implicit operator wptType(WayPoint waypoint)
         {

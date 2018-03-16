@@ -26,6 +26,8 @@ namespace BikeTouringGIS.Converters
                         return new SolidColorBrush(Colors.LimeGreen);
                     case LayerType.GPXTrack:
                         return new SolidColorBrush(Colors.Pink);
+                    case LayerType.PointsOfInterest:
+                        return new SolidColorBrush(Colors.White);
                     default:
                         return new SolidColorBrush(Colors.NavajoWhite);
                 }
@@ -38,6 +40,8 @@ namespace BikeTouringGIS.Converters
                         return "R";
                     case LayerType.GPXTrack:
                         return "T";
+                    case LayerType.PointsOfInterest:
+                        return "P";
                     default:
                         return "U";
                 }

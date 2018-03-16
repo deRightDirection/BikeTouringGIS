@@ -15,14 +15,14 @@ namespace BikeTouringGIS.Comparers
             {
                 var pX = x.Geometry as MapPoint;
                 var pY = y.Geometry as MapPoint;
-                return pX.X == pY.X && pX.Y == pY.Y && x.Attributes["source"].Equals(y.Attributes["source"]);
+                return pX.X == pY.X && pX.Y == pY.Y && x.Attributes["filename"].Equals(y.Attributes["filename"]);
             }
             return false;
         }
 
         public int GetHashCode(Graphic obj)
         {
-            int hCode = obj.Attributes["source"].GetHashCode() ^ obj.Geometry.GetHashCode();
+            int hCode = obj.Attributes["filename"].GetHashCode() ^ obj.Geometry.GetHashCode();
             return hCode.GetHashCode();
         }
     }

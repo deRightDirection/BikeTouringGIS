@@ -121,11 +121,11 @@ namespace BikeTouringGIS.ViewModels
 
         private void RemovePointsOfInterestOfRemovedLayer(BikeTouringGISLayer obj)
         {
-            var source = obj.FileName;
-            var layersWithSameSource = BikeTouringGISLayers.Any(x => x.FileName.Equals(source) && x.Type == LayerType.GPXRoute);
+            var fileName = obj.FileName;
+            var layersWithSameSource = BikeTouringGISLayers.Any(x => x.FileName.Equals(fileName));
             if (!layersWithSameSource)
             {
-                var wayPointsToRemove = _pointsOfInterestLayer.WayPoints.Where(x => x.Source.Equals(source)).ToList();
+                var wayPointsToRemove = _pointsOfInterestLayer.WayPoints.Where(x => x.FileName.Equals(fileName)).ToList();
                 _pointsOfInterestLayer.RemovePoIs(wayPointsToRemove);
             }
         }
@@ -135,6 +135,12 @@ namespace BikeTouringGIS.ViewModels
             if (layer != null)
             {
                 BikeTouringGISLayers = new ObservableCollection<BikeTouringGISLayer>(_map.GetBikeTouringGISLayers());
+                if (layer.Type != LayerType.PointsOfInterest)
+                {
+                    var poiLayer = BikeTouringGISLayers.FirstOrDefault(x => x.Type == LayerType.PointsOfInterest);
+                    _map.Layers.Remove(poiLayer);
+                    _map.Layers.Add(poiLayer);
+                }
             }
         }
 
@@ -266,8 +272,8 @@ namespace BikeTouringGIS.ViewModels
 
         private IEnumerable<wptType> GetWayPoints(BikeTouringGISLayer layer)
         {
-            var source = layer.FileName;
-            var selection = _pointsOfInterestLayer.WayPoints.Where(x => x.Source.Equals(source));
+            var fileName = layer.FileName;
+            var selection = _pointsOfInterestLayer.WayPoints.Where(x => x.FileName.Equals(fileName));
             var result = new List<wptType>();
             selection.ForEach(x => result.Add(x));
             return result;

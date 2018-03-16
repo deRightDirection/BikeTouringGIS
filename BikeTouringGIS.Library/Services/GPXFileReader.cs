@@ -63,7 +63,7 @@ namespace BikeTouringGISLibrary.Services
             {
                 var wPoint = new WayPoint();
                 wPoint.Name = waypoint.name;
-                wPoint.Source = _fileName;
+                wPoint.FileName = _fileName;
                 wPoint.Points = new List<wptType>() { waypoint };
                 _gpxData.WayPoints.Add(wPoint);
             }

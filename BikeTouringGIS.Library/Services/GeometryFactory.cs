@@ -57,7 +57,7 @@ namespace BikeTouringGISLibrary.Services
         private void CreateWayPointGeometry(WayPoint wayPoint)
         {
             var graphic = CreateBikeTouringGISPointGraphic(wayPoint.Points[0], wayPoint.Name, GraphicType.PointOfInterest);
-            graphic.Attributes["source"] = wayPoint.Source;
+            graphic.Attributes["filename"] = wayPoint.FileName;
             wayPoint.Geometry = graphic;
             wayPoint.FileName = _gpxInformation.FileName;
             wayPoint.Extent = graphic.Geometry.Extent;
