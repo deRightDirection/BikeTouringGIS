@@ -120,18 +120,6 @@
                             ToolTip="{Binding DisplayName}" />
                         <StackPanel Grid.Column="1" Orientation="Horizontal">
                             <Button
-                                Command="{Binding Menu.Base.CenterToLayerCommand, ElementName=layerlist}"
-                                CommandParameter="{Binding}"
-                                ToolTip="center map to layer">
-                                <Button.Content>
-                                    <iconPacks:PackIconMaterial
-                                        Width="16"
-                                        Height="16"
-                                        Foreground="DarkGreen"
-                                        Kind="FlashRedEye" />
-                                </Button.Content>
-                            </Button>
-                            <Button
                                 Command="{Binding Menu.Map.SaveLayerCommand, ElementName=layerlist}"
                                 CommandParameter="{Binding}"
                                 IsEnabled="{Binding IsInEditMode}"
@@ -142,6 +130,18 @@
                                         Height="16"
                                         Foreground="DarkGreen"
                                         Kind="FileSend" />
+                                </Button.Content>
+                            </Button>
+                            <Button
+                                Command="{Binding Menu.Base.CenterToLayerCommand, ElementName=layerlist}"
+                                CommandParameter="{Binding}"
+                                ToolTip="center map to layer">
+                                <Button.Content>
+                                    <iconPacks:PackIconMaterial
+                                        Width="16"
+                                        Height="16"
+                                        Foreground="DarkGreen"
+                                        Kind="FlashRedEye" />
                                 </Button.Content>
                             </Button>
                             <Button

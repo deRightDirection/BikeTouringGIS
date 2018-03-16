@@ -453,6 +453,11 @@
                 Visibility="{Binding SelectedLayer, Converter={StaticResource layerIsTrackConverter}}"
                 IsEnabled="{Binding SelectedLayer, Converter={StaticResource layerIsTrackConverter}, ConverterParameter='boolean'}">
                 <Fluent:RibbonGroupBox Header="end time">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding SelectedLayer.StartTime}"/>
+                            <TextBlock Text="{Binding SelectedLayer.EndTime}"/>
+                        </StackPanel>
                     <Fluent:Button
                         MinWidth="100"
                         Command="{Binding Base.ResetEndTimeCommand}"
@@ -467,7 +472,16 @@
                                 Foreground="DarkGreen"
                                 Kind="TimerRewind" />
                         </Fluent:Button.LargeIcon>
+                        <!--
+                        <Fluent:Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource lengthAndLayerConverter}">
+                                <Binding ElementName="menu" Path="DataContext.SelectedLayer" />
+                                <Binding ElementName="splitLengthSlider" Path="Value" />
+                            </MultiBinding>
+                        </Fluent:Button.CommandParameter>
+                        -->
                     </Fluent:Button>
+                    </StackPanel>
                 </Fluent:RibbonGroupBox>
             </Fluent:RibbonTabItem>
         </Fluent:Ribbon>

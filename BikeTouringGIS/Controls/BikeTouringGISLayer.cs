@@ -184,10 +184,23 @@ namespace BikeTouringGIS.Controls
         {
             var gpxFile = new GPXFile();
             var gpx = new gpxType();
-            var rte = new rteType();
-            rte.name = Title;
-            rte.rtept = ToRoute().Points.ToArray();
-            gpx.rte = new List<rteType>() { rte }.ToArray();
+            switch(Type)
+            {
+                case LayerType.GPXRoute:
+                    var rte = new rteType();
+                    rte.name = Title;
+                    rte.rtept = ToRoute().Points.ToArray();
+                    gpx.rte = new List<rteType>() { rte }.ToArray();
+                    break;
+                case LayerType.GPXTrack:
+                    var trk = new trkType();
+                    trk.name = Title;
+                    var seg = new trksegType();
+                    seg.trkpt = ToRoute().Points.ToArray();
+                    trk.trkseg = new trksegType[] { seg };
+                    gpx.trk = new List<trkType>() { trk}.ToArray();
+                    break;
+            }
             gpx.wpt = waypoints.ToArray();
             var fileNameToSave = string.IsNullOrEmpty(fileName) ? FileName : fileName;
             gpxFile.Save(fileNameToSave, gpx);
@@ -361,6 +374,9 @@ namespace BikeTouringGIS.Controls
                 return _wayPoints;
             }
         }
+
+        public object EndTime { get; internal set; }
+        public object StartTime { get; internal set; }
 
         public IPath ToRoute()
         {

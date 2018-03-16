@@ -30,6 +30,7 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand<SplitLayerProperties> ChangeSplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> FlipDirectionCommand { get; private set; }
         public RelayCommand<SplitLayerProperties> SplitRouteCommand { get; private set; }
+        public RelayCommand<BikeTouringGISLayer> ResetEndTimeCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> RemoveSplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> SaveSplitRouteCommand { get; private set; }
         public RelayCommand<BikeTouringGISLayer> CenterToLayerCommand { get; private set; }
@@ -49,7 +50,32 @@ namespace BikeTouringGIS.ViewModels
             CenterCommand = new RelayCommand(() => CenterMap(null));
             ZoomInCommand = new RelayCommand(() => ZoomInOrOutMap(ZoomOption.ZoomIn));
             ZoomOutCommand = new RelayCommand(() => ZoomInOrOutMap(ZoomOption.ZoomOut));
+            ResetEndTimeCommand = new RelayCommand<BikeTouringGISLayer>(ResetEndTime, CanResetEndTime);
             MessengerInstance.Register<LayerRemovedMessage>(this, LayerRemoved);
+        }
+
+        private bool CanResetEndTime(BikeTouringGISLayer arg)
+        {
+            if(arg == null) { return false; }
+            if(arg.StartTime == null) { return false; }
+            if (arg.EndTime == null) { return false; }
+
+
+
+            return true;
+        }
+
+        /// <summary>
+        /// reset de eindtijd van de track en herbereken de tijden voor de punten onderweg
+        /// </summary>
+        /// <param name="obj"></param>
+        private void ResetEndTime(BikeTouringGISLayer obj)
+        {
+
+
+
+
+            obj.IsInEditMode = true;
         }
 
         private void ZoomInOrOutMap(ZoomOption zoomOption)
