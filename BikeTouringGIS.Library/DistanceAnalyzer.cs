@@ -18,19 +18,5 @@ namespace BikeTouringGISLibrary
             var distances = dataAnalyzer.Distances;
             return ((int)distances.Sum() / 1000);
         }
-
-        public void DoSomethingWithTheTrack(Geometry trackGeometry)
-        {
-            if (trackGeometry == null || trackGeometry.GeometryType != GeometryType.Polyline)
-            {
-//                return 0;
-            }
-            var wayPoints = trackGeometry.GetWayPoints();
-            var dataAnalyzer = new DataAnalyzer(wayPoints);
-//            dataAnalyzer.
-            var distances = dataAnalyzer.Distances;
-//            return ((int)distances.Sum() / 1000);
-
-        }
     }
 }

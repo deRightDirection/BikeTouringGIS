@@ -88,18 +88,17 @@
       <HintPath>..\packages\Kent.Boogaart.HelperTrinity.1.5.2\lib\net45\Kent.Boogaart.HelperTrinity.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MahApps.Metro, Version=1.6.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.1\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro.IconPacks.FontAwesome, Version=2.1.0.15, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Program Files (x86)\NuGet\Config\packages\MahApps.Metro.IconPacks.FontAwesome.2.1.0\lib\net46\MahApps.Metro.IconPacks.FontAwesome.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.IconPacks.FontAwesome.2.1.0\lib\net46\MahApps.Metro.IconPacks.FontAwesome.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro.IconPacks.Material, Version=2.1.0.15, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Program Files (x86)\NuGet\Config\packages\MahApps.Metro.IconPacks.Material.2.1.0\lib\net46\MahApps.Metro.IconPacks.Material.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.IconPacks.Material.2.1.0\lib\net46\MahApps.Metro.IconPacks.Material.dll</HintPath>
     </Reference>
     <Reference Include="MahApps.Metro.IconPacks.Modern, Version=2.1.0.15, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Program Files (x86)\NuGet\Config\packages\MahApps.Metro.IconPacks.Modern.2.1.0\lib\net46\MahApps.Metro.IconPacks.Modern.dll</HintPath>
+      <HintPath>..\packages\MahApps.Metro.IconPacks.Modern.2.1.0\lib\net46\MahApps.Metro.IconPacks.Modern.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>packages\Mono.Cecil.0.9.6.4\lib\net45\Mono.Cecil.dll</HintPath>
@@ -117,38 +116,37 @@
       <HintPath>packages\Mono.Cecil.0.9.6.4\lib\net45\Mono.Cecil.Rocks.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MoreLinq">
-      <HintPath>..\packages\morelinq.2.8.0\lib\net40\MoreLinq.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="MoreLinq, Version=2.10.21623.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.2.10.0\lib\net40\MoreLinq.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NuGet.Squirrel">
-      <HintPath>..\packages\squirrel.windows.1.7.8\lib\Net45\NuGet.Squirrel.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="NuGet.Squirrel, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\squirrel.windows.1.7.9\lib\Net45\NuGet.Squirrel.dll</HintPath>
     </Reference>
-    <Reference Include="SharpCompress">
-      <HintPath>..\packages\SharpCompress.0.18.2\lib\net45\SharpCompress.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SharpCompress, Version=0.19.2.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.19.2\lib\net45\SharpCompress.dll</HintPath>
     </Reference>
-    <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Splat.2.0.0\lib\Net45\Splat.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Splat, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Splat.3.0.0\lib\net45\Splat.dll</HintPath>
     </Reference>
-    <Reference Include="Squirrel">
-      <HintPath>..\packages\squirrel.windows.1.7.8\lib\Net45\Squirrel.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Squirrel, Version=1.7.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\squirrel.windows.1.7.9\lib\Net45\Squirrel.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Primitives.4.3.0\lib\net45\System.Drawing.Primitives.dll</HintPath>
+    </Reference>
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net462\System.Windows.Interactivity.dll</HintPath>
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibraries\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
