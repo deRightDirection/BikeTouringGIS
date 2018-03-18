@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Fluent="urn:fluent-ribbon"
+    xmlns:MahAppsMetroControls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:System="clr-namespace:System;assembly=mscorlib"
     xmlns:converters="clr-namespace:BikeTouringGIS.Converters"
     xmlns:converters2="clr-namespace:Kent.Boogaart.Converters;assembly=Kent.Boogaart.Converters"
@@ -455,10 +456,17 @@
                 <Fluent:RibbonGroupBox Header="end time">
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding SelectedLayer.StartTime}"/>
-                            <TextBlock Text="{Binding SelectedLayer.EndTime}"/>
+                            <TextBlock Text="{Binding SelectedLayer.StartTime,ConverterCulture='nl-NL'}" Margin="5"/>
+                            <MahAppsMetroControls:TimePicker MahAppsMetroControls:TextBoxHelper.Watermark="select a duration"
+                                                         Culture="{Binding Base.CurrentCultue, Mode=OneTime}"
+                                                         PickerVisibility="All"
+                                                         HandVisibility="All"
+                                                     SelectedTime="{Binding DataContext.SelectedLayer.TrackDuration, ElementName=menu, Mode=TwoWay}"
+                                                     SelectedTimeFormat="Long">
+                            </MahAppsMetroControls:TimePicker>
+                            <TextBlock Text="{Binding SelectedLayer.EndTime,ConverterCulture='nl-NL'}" Margin="5"/>
                         </StackPanel>
-                    <Fluent:Button
+                        <Fluent:Button
                         MinWidth="100"
                         Command="{Binding Base.ResetEndTimeCommand}"
                         CommandParameter="{Binding DataContext.SelectedLayer}"

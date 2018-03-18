@@ -18,6 +18,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Linq;
+using System.Globalization;
+
 namespace BikeTouringGIS.ViewModels
 {
     public class BikeTouringGISViewModel : BikeTouringGISBaseViewModel
@@ -37,7 +39,6 @@ namespace BikeTouringGIS.ViewModels
         public RelayCommand CenterCommand { get; private set; }
         public RelayCommand ZoomInCommand { get; private set; }
         public RelayCommand ZoomOutCommand { get; private set; }
-
         public BikeTouringGISViewModel()
         {
             OpenGPXFileCommand = new RelayCommand<BikeTouringGISMapViewModel>(OpenGPXFile);
@@ -52,17 +53,21 @@ namespace BikeTouringGIS.ViewModels
             ZoomOutCommand = new RelayCommand(() => ZoomInOrOutMap(ZoomOption.ZoomOut));
             ResetEndTimeCommand = new RelayCommand<BikeTouringGISLayer>(ResetEndTime, CanResetEndTime);
             MessengerInstance.Register<LayerRemovedMessage>(this, LayerRemoved);
+            MessengerInstance.Register<TrackDurationChangedMessage>(this, TrackDurationChanged);
+        }
+
+        private void TrackDurationChanged(TrackDurationChangedMessage obj)
+        {
+            ResetEndTimeCommand.RaiseCanExecuteChanged();
         }
 
         private bool CanResetEndTime(BikeTouringGISLayer arg)
         {
-            if(arg == null) { return false; }
-            if(arg.StartTime == null) { return false; }
-            if (arg.EndTime == null) { return false; }
-
-
-
-            return true;
+            if(arg == null)
+            {
+                return false;
+            }
+            return arg.TrackDuration.Ticks > 0;
         }
 
         /// <summary>
@@ -71,11 +76,7 @@ namespace BikeTouringGIS.ViewModels
         /// <param name="obj"></param>
         private void ResetEndTime(BikeTouringGISLayer obj)
         {
-
-
-
-
-            obj.IsInEditMode = true;
+            obj.ResetTrackDuration();
         }
 
         private void ZoomInOrOutMap(ZoomOption zoomOption)
@@ -237,6 +238,14 @@ namespace BikeTouringGIS.ViewModels
             {
                 var versionApp = typeof(App).Assembly.GetName().Version;
                 return string.Format("version {0}.{1}.{2}", versionApp.Major, versionApp.Minor, versionApp.Build);
+            }
+        }
+
+        public CultureInfo CurrentCultue
+        {
+            get
+            {
+                return new CultureInfo("nl-NL");
             }
         }
     }

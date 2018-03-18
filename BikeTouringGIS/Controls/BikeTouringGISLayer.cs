@@ -1,11 +1,14 @@
-﻿using BikeTouringGIS.Services;
+﻿using BikeTouringGIS.Messenges;
+using BikeTouringGIS.Services;
 using BikeTouringGISLibrary;
 using BikeTouringGISLibrary.Enumerations;
 using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Symbology;
+using GalaSoft.MvvmLight.Messaging;
 using GPX;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -25,6 +28,7 @@ namespace BikeTouringGIS.Controls
         private RouteSplitter _routeSplitter;
         private int _totalLength, _splitDistance;
         private Envelope _extent;
+        private TimeSpan _trackDuration = new TimeSpan();
 
         private BikeTouringGISLayer()
         {
@@ -48,22 +52,24 @@ namespace BikeTouringGIS.Controls
             Title = string.IsNullOrEmpty(_routeOrTrack.Name) ? Path.GetFileNameWithoutExtension(fileName) : _routeOrTrack.Name;
             var subStringLength = Title.Length > 15 ? 15 : Title.Length;
             SplitPrefix = Title.Substring(0, subStringLength);
-            if(_routeOrTrack.StartLocation != null)
+            if (_routeOrTrack.StartLocation != null)
             {
                 Graphics.Add(_routeOrTrack.StartLocation);
             }
-            if(_routeOrTrack.EndLocation != null)
+            if (_routeOrTrack.EndLocation != null)
             {
                 Graphics.Add(_routeOrTrack.EndLocation);
             }
             Graphics.Add(_routeOrTrack.Geometry);
             SetLength();
-            switch(routeOrTrack.Type)
+            switch (routeOrTrack.Type)
             {
-                case PathType.Route: Type = LayerType.GPXRoute;
+                case PathType.Route:
+                    Type = LayerType.GPXRoute;
                     SelectionColor = Colors.LimeGreen;
                     break;
-                case PathType.Track: Type = LayerType.GPXTrack;
+                case PathType.Track:
+                    Type = LayerType.GPXTrack;
                     SelectionColor = Colors.LightGray;
                     break;
             }
@@ -184,7 +190,7 @@ namespace BikeTouringGIS.Controls
         {
             var gpxFile = new GPXFile();
             var gpx = new gpxType();
-            switch(Type)
+            switch (Type)
             {
                 case LayerType.GPXRoute:
                     var rte = new rteType();
@@ -198,7 +204,7 @@ namespace BikeTouringGIS.Controls
                     var seg = new trksegType();
                     seg.trkpt = ToRoute().Points.ToArray();
                     trk.trkseg = new trksegType[] { seg };
-                    gpx.trk = new List<trkType>() { trk}.ToArray();
+                    gpx.trk = new List<trkType>() { trk }.ToArray();
                     break;
             }
             gpx.wpt = waypoints.ToArray();
@@ -304,8 +310,8 @@ namespace BikeTouringGIS.Controls
                 {
                     foreach (var graphic in Graphics)
                     {
-                            var graphicExtent = graphic.Geometry.Extent;
-                            _extent = _extent == null ? graphicExtent : _extent.Union(graphicExtent);
+                        var graphicExtent = graphic.Geometry.Extent;
+                        _extent = _extent == null ? graphicExtent : _extent.Union(graphicExtent);
                     }
                 }
                 return _extent;
@@ -375,12 +381,59 @@ namespace BikeTouringGIS.Controls
             }
         }
 
-        public object EndTime { get; internal set; }
-        public object StartTime { get; internal set; }
+        public DateTime EndTime
+        {
+            get
+            {
+                if (_routeOrTrack.Type == PathType.Track)
+                {
+                    var track = _routeOrTrack as Track;
+                    return track.EndTime;
+                }
+                return DateTime.MinValue;
+            }
+        }
+
+        public DateTime StartTime
+        {
+            get
+            {
+                if (_routeOrTrack.Type == PathType.Track)
+                {
+                    var track = _routeOrTrack as Track;
+                    return track.StartTime;
+                }
+                return DateTime.MinValue;
+            }
+        }
 
         public IPath ToRoute()
         {
             return _routeOrTrack;
+        }
+
+        public TimeSpan TrackDuration
+        {
+            get { return _trackDuration; }
+            set
+            {
+                _trackDuration = value;
+                OnPropertyChanged("TrackDuration");
+                Messenger.Default.Send(new TrackDurationChangedMessage(value, this));
+            }
+        }
+
+        public void ResetTrackDuration()
+        {
+            // tussentijden veranderen
+            if (_routeOrTrack.Type == PathType.Track)
+            {
+                var track = _routeOrTrack as Track;
+                track.ResetDuration(TrackDuration);
+                TrackDuration = new TimeSpan();
+                IsInEditMode = true;
+                OnPropertyChanged("EndTime");
+            }
         }
     }
 }
