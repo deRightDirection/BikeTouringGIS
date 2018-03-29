@@ -163,6 +163,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WinUX.Common">
+      <HintPath>..\..\SharedLibraries\WinUX.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -298,10 +301,6 @@
     <ProjectReference Include="..\..\theRightDirection.Library.Logging\theRightDirection.Library.Logging\theRightDirection.Library.Logging.csproj">
       <Project>{302e3909-04af-4064-a533-6faa5e6593cf}</Project>
       <Name>theRightDirection.Library.Logging</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WinUX-UWP-Toolkit\WinUX\WinUX.Common\WinUX.Common.csproj">
-      <Project>{55c7fa03-c3b0-4aa0-be48-3fa435ee37c1}</Project>
-      <Name>WinUX.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\BikeTouringGIS.Library\BikeTouringGIS.Library.csproj">
       <Project>{bdc204a2-f656-43b9-9b4b-c6308bd81404}</Project>

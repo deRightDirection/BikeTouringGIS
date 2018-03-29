@@ -11,7 +11,7 @@
     <AssemblyName>BikeTouringGISApp.UnitTests</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -135,22 +135,24 @@
     <Folder Include="UWPCommunityToolkit\Services\Facebook\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\UWPCommunityToolkit\Microsoft.Toolkit.Services\Microsoft.Toolkit.Services.csproj">
-      <Project>{1c8a345b-fa57-4f22-b648-c703599f6f00}</Project>
-      <Name>Microsoft.Toolkit.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.Services\Microsoft.Toolkit.Uwp.Services.csproj">
-      <Project>{7189A42D-6F1A-4FA3-8E00-E2C14FDF167A}</Project>
-      <Name>Microsoft.Toolkit.Uwp.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp\Microsoft.Toolkit.Uwp.csproj">
-      <Project>{805f80df-75c6-4c2f-8fd9-b47f6d0df5a3}</Project>
-      <Name>Microsoft.Toolkit.Uwp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BikeTouringGISApp.Library\BikeTouringGISApp.Library.csproj">
       <Project>{01A37488-B1A9-40D0-BCD9-3A5ED692F127}</Project>
       <Name>BikeTouringGISApp.Library</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Toolkit">
+      <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Toolkit.Parsers">
+      <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.Parsers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Toolkit.Services">
+      <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Toolkit.Uwp.Services">
+      <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.Uwp.Services.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

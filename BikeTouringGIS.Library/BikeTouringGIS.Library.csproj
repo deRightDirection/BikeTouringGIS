@@ -47,6 +47,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WinUX.Common">
+      <HintPath>..\..\SharedLibraries\WinUX.Common.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BikeTouringGISGraphic.cs" />
@@ -74,10 +77,6 @@
     <ProjectReference Include="..\..\GPXDataAnalyzer\GPX\GPX.csproj">
       <Project>{159f1fc4-4759-4db0-8695-ffd423302db4}</Project>
       <Name>GPX</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WinUX-UWP-Toolkit\WinUX\WinUX.Common\WinUX.Common.csproj">
-      <Project>{55c7fa03-c3b0-4aa0-be48-3fa435ee37c1}</Project>
-      <Name>WinUX.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

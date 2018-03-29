@@ -11,13 +11,12 @@ using System.Threading.Tasks;
 using theRightDirection.Library.UnitTesting;
 using FluentAssertions;
 using Esri.ArcGISRuntime.Symbology;
-using WinUX;
 using BikeTouringGISLibrary.Model;
 using System.Collections.ObjectModel;
 using BikeTouringGIS.Extensions;
 using BikeTouringGISLibrary.Services;
 using BikeTouringGIS.Services;
-
+using WinUX;
 namespace BikeTouringGISLibrary.UnitTests.ViewModels
 {
     [TestClass]

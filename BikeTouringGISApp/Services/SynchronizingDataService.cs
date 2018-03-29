@@ -21,7 +21,7 @@ namespace BikeTouringGISApp.Services
 
         public SynchronizingDataService()
         {
-//            _oneDriveRepository = new OneDriveRepository();
+ //           _oneDriveRepository = new OneDriveRepository();
             _logBooksRepository = SimpleIoc.Default.GetInstance<IRepository<LogBook>>();
             _logsRepository = SimpleIoc.Default.GetInstance<IRepository<Log>>();
         }

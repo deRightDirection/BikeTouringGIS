@@ -12,7 +12,7 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <UapDefaultAssetScale>100</UapDefaultAssetScale>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.15063.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -231,6 +231,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="ColorCode.Core">
+      <Version>2.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Graph">
+      <Version>1.6.2</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>5.4.0</Version>
     </PackageReference>
@@ -243,6 +249,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>11.0.1</Version>
     </PackageReference>
+    <PackageReference Include="System.Net.Http">
+      <Version>4.3.3</Version>
+    </PackageReference>
     <PackageReference Include="Telerik.UI.for.UniversalWindowsPlatform">
       <Version>1.0.0.5</Version>
     </PackageReference>
@@ -251,42 +260,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\UWPCommunityToolkit\Microsoft.Toolkit.Services\Microsoft.Toolkit.Services.csproj">
-      <Project>{1c8a345b-fa57-4f22-b648-c703599f6f00}</Project>
-      <Name>Microsoft.Toolkit.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.Services\Microsoft.Toolkit.Uwp.Services.csproj">
-      <Project>{7189a42d-6f1a-4fa3-8e00-e2c14fdf167a}</Project>
-      <Name>Microsoft.Toolkit.Uwp.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.UI.Controls\Microsoft.Toolkit.Uwp.UI.Controls.csproj">
-      <Project>{e9faabfb-d726-42c1-83c1-cb46a29fea81}</Project>
-      <Name>Microsoft.Toolkit.Uwp.UI.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp.UI\Microsoft.Toolkit.Uwp.UI.csproj">
-      <Project>{3dd8aa7c-3569-4e51-992f-0c2257e8878e}</Project>
-      <Name>Microsoft.Toolkit.Uwp.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UWPCommunityToolkit\Microsoft.Toolkit.Uwp\Microsoft.Toolkit.Uwp.csproj">
-      <Project>{805f80df-75c6-4c2f-8fd9-b47f6d0df5a3}</Project>
-      <Name>Microsoft.Toolkit.Uwp</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\UWPCommunityToolkit\Microsoft.Toolkit\Microsoft.Toolkit.csproj">
-      <Project>{1c743253-00dd-406b-a0a9-7f956344838f}</Project>
-      <Name>Microsoft.Toolkit</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WinUX-UWP-Toolkit\WinUX\WinUX.Common\WinUX.Common.csproj">
-      <Project>{55c7fa03-c3b0-4aa0-be48-3fa435ee37c1}</Project>
-      <Name>WinUX.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WinUX-UWP-Toolkit\WinUX\WinUX.UWP.Xaml\WinUX.UWP.Xaml.csproj">
-      <Project>{0d958504-42c8-4b04-b9a7-2c6cb6e8009c}</Project>
-      <Name>WinUX.UWP.Xaml</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\WinUX-UWP-Toolkit\WinUX\WinUX.UWP\WinUX.UWP.csproj">
-      <Project>{B7D2BD46-3485-459D-AD88-ECABF497D508}</Project>
-      <Name>WinUX.UWP</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BikeTouringGISApp.Library\BikeTouringGISApp.Library.csproj">
       <Project>{01A37488-B1A9-40D0-BCD9-3A5ED692F127}</Project>
       <Name>BikeTouringGISApp.Library</Name>
@@ -294,6 +267,42 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Converters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Toolkit, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Toolkit.Parsers, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.Parsers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Toolkit.Services, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Toolkit.Uwp">
+      <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.Uwp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Toolkit.Uwp.Services, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.Uwp.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Toolkit.Uwp.UI">
+      <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.Uwp.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.Uwp.UI.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="WinUX.Common">
+      <HintPath>..\..\SharedLibraries\WinUX.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="WinUX.UWP">
+      <HintPath>..\..\SharedLibraries\WinUX.UWP.dll</HintPath>
+    </Reference>
+    <Reference Include="WinUX.UWP.Xaml">
+      <HintPath>..\..\SharedLibraries\WinUX.UWP.Xaml.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
