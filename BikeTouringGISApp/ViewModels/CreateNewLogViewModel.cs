@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Controls;
 using WinUX.Collections.ObjectModel;
 using BikeTouringGISApp.Library.Interfaces;
 using WinUX;
+using WinUX.Data;
 
 namespace BikeTouringGISApp.ViewModels
 {
@@ -114,7 +115,7 @@ namespace BikeTouringGISApp.ViewModels
 
         private async Task LoadLogBooks()
         {
-            await _logBookRepository.LoadData();
+            await _logBookRepository.GetEntities();
             var items = new List<LogBook>();
             LogBooks = new ObservableItemCollection<LogBook>(_logBookRepository.Entities);
         }

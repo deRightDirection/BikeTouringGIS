@@ -1,6 +1,5 @@
 ﻿using BikeTouringGISApp.Library.Interfaces;
 using BikeTouringGISApp.Library.Model;
-using BikeTouringGISApp.Repositories;
 using BikeTouringGISApp.Services;
 using BikeTouringGISApp.Views;
 using GalaSoft.MvvmLight.Command;
@@ -14,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WinUX;
 using WinUX.Collections.ObjectModel;
+using WinUX.Data;
 
 namespace BikeTouringGISApp.ViewModels
 {
@@ -71,7 +71,7 @@ namespace BikeTouringGISApp.ViewModels
 
         private async void LoadLogBooks()
         {
-            await _logBookRepository.LoadData();
+            await _logBookRepository.GetEntities();
             var items = new List<LogBookViewModel>();
             _logBookRepository.Entities.ForEach(x => items.Add(new LogBookViewModel() { LogBook = x }));
             LogBooks = new ObservableItemCollection<LogBookViewModel>(items);

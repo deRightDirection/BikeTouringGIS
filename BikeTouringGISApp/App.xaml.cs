@@ -12,7 +12,7 @@ using BikeTouringGISApp.Services;
 using WinUX.CloudServices.Facebook;
 using BikeTouringGISApp.Library.Interfaces;
 using BikeTouringGISApp.Library.Model;
-using BikeTouringGISApp.Repositories;
+using WinUX.Data;
 
 namespace BikeTouringGISApp
 {
@@ -48,17 +48,26 @@ namespace BikeTouringGISApp
         public override async Task OnStartAsync(StartKind startKind, IActivatedEventArgs args)
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-            SimpleIoc.Default.Register<IRepository<LogBook>>(() => new LogBookRepository());
-            SimpleIoc.Default.Register<IRepository<Log>>(() => new LogRepository());
+            await ConnectToOneDrive();
             await FileService.Instance.SetMainFolder();
-
             /*
-            SimpleIoc.Default.Register<ICloudService, OneDriveService>();
             var fbClient = new FacebookClient();
             await fbClient.LoginAsync("687964081409306");
             SimpleIoc.Default.Register<FacebookClient>(() => fbClient);
             */
             NavigationService.Navigate(typeof(Views.CreateNewLog));
+        }
+
+        private async Task ConnectToOneDrive()
+        {
+            var oneDrive = new OneDriveService("00000000441DB51C", new string[] { "wl.signin", "wl.offline_access", "onedrive.readwrite", "onedrive.appfolder" });
+            var result = await oneDrive.Connect();
+            if (result.IsConnected)
+            {
+                var folder = await oneDrive.GetAppRootFolder();
+                SimpleIoc.Default.Register<IRepository<LogBook>>(() => new OneDriveRepository<LogBook>("logbooks.json", folder));
+                SimpleIoc.Default.Register<IRepository<Log>>(() => new OneDriveRepository<Log>("logs.json", folder));
+            }
         }
     }
 }

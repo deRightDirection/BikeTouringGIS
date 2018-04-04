@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinUX.Data;
 
 namespace BikeTouringGISApp.Library.Interfaces
 {
-    public interface IEntity<T>
+    public interface IEntity<T> : IEntity
     {
-        Guid Identifier { get; set; }
         DateTime LastModificationDate { get; set; }
         RepositorySource Source { get; set; }
 

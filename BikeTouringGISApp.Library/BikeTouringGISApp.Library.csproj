@@ -110,7 +110,6 @@
     <Compile Include="Enumerations\LogStoryLanguage.cs" />
     <Compile Include="Enumerations\RepositorySource.cs" />
     <Compile Include="Interfaces\IEntity.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Model\Log.cs" />
     <Compile Include="Model\LogBook.cs" />
     <Compile Include="Model\LogStory.cs" />
