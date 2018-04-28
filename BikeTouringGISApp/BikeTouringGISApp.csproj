@@ -123,6 +123,9 @@
     <Compile Include="Views\LogBooks.xaml.cs">
       <DependentUpon>LogBooks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LogBooksTest.xaml.cs">
+      <DependentUpon>LogBooksTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Logs.xaml.cs">
       <DependentUpon>Logs.xaml</DependentUpon>
     </Compile>
@@ -202,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LogBooks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LogBooksTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -296,7 +303,8 @@
     <Reference Include="Microsoft.Toolkit.Uwp.UI">
       <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.Uwp.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+    <Reference Include="Microsoft.Toolkit.Uwp.UI.Controls, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SharedLibraries\Microsoft.Toolkit.Uwp.UI.Controls.dll</HintPath>
     </Reference>
     <Reference Include="WinUX.Common">

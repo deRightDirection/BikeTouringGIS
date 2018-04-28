@@ -39,8 +39,7 @@ namespace BikeTouringGISApp.ViewModels
 
         public CreateNewLogViewModel()
         {
-            _logBookRepository = SimpleIoc.Default.GetInstance<IRepository<LogBook>>();
-            LoadLogBooks();
+            _logBookRepository = SimpleIoc.Default.GetInstance<StorageFileRepository<LogBook>>();
             // PostToFacebookCommand = new RelayCommand(Post); SelectionChangedCommand = new RelayCommand<IList<object>>(SetSelectedPages);
             SaveTextCommand = new RelayCommand<ITextDocument>(SaveText);
             UpdateGPSCommand = new RelayCommand(UpdateGPS);
@@ -99,9 +98,9 @@ namespace BikeTouringGISApp.ViewModels
 
         public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
         {
+            await LoadLogBooks();
             if (parameter != null)
             {
-                await LoadLogBooks();
                 Log = (Log)parameter;
                 var story = Log.Stories.Where(x => x.Language == LogStoryLanguage.Dutch).FirstOrDefault();
                 if (story != null)

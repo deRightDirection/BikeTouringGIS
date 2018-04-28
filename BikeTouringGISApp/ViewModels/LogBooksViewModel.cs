@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Navigation;
 using WinUX;
 using WinUX.Collections.ObjectModel;
 using WinUX.Data;
@@ -30,8 +31,7 @@ namespace BikeTouringGISApp.ViewModels
             CancelLogBookCommand = new RelayCommand<LogBookViewModel>(CancelLogBook);
             DeleteLogBookCommand = new RelayCommand<LogBookViewModel>(DeleteLogBook);
             SaveLogBookCommand = new RelayCommand<LogBookViewModel>(SaveLogBook);
-            _logBookRepository = SimpleIoc.Default.GetInstance<IRepository<LogBook>>();
-            LoadLogBooks();
+            _logBookRepository = SimpleIoc.Default.GetInstance<StorageFileRepository<LogBook>>();
         }
 
         public RelayCommand<LogBookViewModel> CancelLogBookCommand { get; private set; }
@@ -55,7 +55,7 @@ namespace BikeTouringGISApp.ViewModels
         private void CancelLogBook(LogBookViewModel obj)
         {
             obj.DataFormIsInReadOnlyMode = true;
-            LoadLogBooks();
+            SetInitialData();
         }
 
         private async void DeleteLogBook(LogBookViewModel obj)
@@ -69,12 +69,30 @@ namespace BikeTouringGISApp.ViewModels
             obj.DataFormIsInReadOnlyMode = false;
         }
 
-        private async void LoadLogBooks()
+        private async Task SetInitialData()
         {
-            await _logBookRepository.GetEntities();
+            Busy.SetBusy(true, "Loading logbooks...");
+            var logBooks = new List<LogBook>();
+            logBooks.Add(new LogBook() { Description = "Test", Name = "Test"});
+//            logBooks = logBooks.OrderByDescending(x => x.EndDate);
             var items = new List<LogBookViewModel>();
-            _logBookRepository.Entities.ForEach(x => items.Add(new LogBookViewModel() { LogBook = x }));
+            logBooks.ForEach(x => items.Add(new LogBookViewModel() { LogBook = x }));
             LogBooks = new ObservableItemCollection<LogBookViewModel>(items);
+            Busy.SetBusy(false);
+            /*
+            var pages = await _facebook.GetPagesAsync();
+            FacebookPages = new ObservableCollection<FacebookPage>(pages);
+            var userPicture = await _facebook.FacebookService.GetUserPictureInfoAsync();
+            */
+        }
+
+        private async void SyncLogs()
+        {
+            Busy.SetBusy(true, "sync logs with OneDrive");
+            var syncService = new SynchronizingDataService();
+            await syncService.SynchronizeLogs();
+            SetInitialData();
+            Busy.SetBusy(false);
         }
 
         private void NewLogBook()
@@ -86,7 +104,7 @@ namespace BikeTouringGISApp.ViewModels
         private void SaveLogBook(LogBookViewModel obj)
         {
             obj.LogBook.LastModificationDate = DateTime.Now;
-            _logBookRepository.AddEntity(obj.LogBook);
+//            _logBookRepository.AddEntity(obj.LogBook);
         }
 
         private async void SyncLogBooks()
@@ -96,5 +114,11 @@ namespace BikeTouringGISApp.ViewModels
             await syncService.SynchronizeLogBooks();
             Busy.SetBusy(false);
         }
+
+        public override async Task OnNavigatedToAsync(object parameter, NavigationMode mode, IDictionary<string, object> state)
+        {
+            await SetInitialData();
+        }
+
     }
 }

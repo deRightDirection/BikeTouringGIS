@@ -11,20 +11,9 @@ namespace BikeTouringGISApp.Library.Model
 {
     public class LogStory
     {
-        private LogStoryLanguage _language = LogStoryLanguage.Dutch;
-        private string _storyText;
-
         [JsonConverter(typeof(StringEnumConverter))]
-        public LogStoryLanguage Language
-        {
-            get { return _language; }
-            set { _language = value; }
-        }
+        public LogStoryLanguage Language { get; set; } = LogStoryLanguage.Dutch;
 
-        public string Text
-        {
-            get { return _storyText; }
-            set { _storyText = value; }
-        }
+        public string Text { get; set; }
     }
 }

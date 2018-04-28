@@ -23,6 +23,7 @@ namespace BikeTouringGISApp.Services
 
         public static FileService Instance { get; } = new FileService();
         public string Path { get; private set; }
+        public StorageFolder ApplicationFolder { get; private set; }
 
         public async Task<IEnumerable<Log>> GetLogs()
         {
@@ -50,12 +51,12 @@ namespace BikeTouringGISApp.Services
         {
             var mainSystemPath = await GetMainSystemPath();
             MAINSYSTEMFOLDER = mainSystemPath;
+            ApplicationFolder = await MAINSYSTEMFOLDER.CreateFolderAsync(APPLICATIONFOLDERNAME, CreationCollisionOption.OpenIfExists);
         }
 
         private async Task<StorageFolder> CreateBaseFolder()
         {
-            var baseFolder = await MAINSYSTEMFOLDER.CreateFolderAsync(APPLICATIONFOLDERNAME, CreationCollisionOption.OpenIfExists);
-            var logsFolder = await baseFolder.CreateFolderAsync(LOGSFOLDERNAME, CreationCollisionOption.OpenIfExists);
+            var logsFolder = await ApplicationFolder.CreateFolderAsync(LOGSFOLDERNAME, CreationCollisionOption.OpenIfExists);
             Path = logsFolder.Path;
             return logsFolder;
         }

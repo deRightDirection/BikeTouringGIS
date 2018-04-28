@@ -50,6 +50,7 @@ namespace BikeTouringGISApp
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             await ConnectToOneDrive();
             await FileService.Instance.SetMainFolder();
+            SimpleIoc.Default.Register(() => new StorageFileRepository<LogBook>("logbooks.json", FileService.Instance.ApplicationFolder));
             /*
             var fbClient = new FacebookClient();
             await fbClient.LoginAsync("687964081409306");
@@ -65,8 +66,8 @@ namespace BikeTouringGISApp
             if (result.IsConnected)
             {
                 var folder = await oneDrive.GetAppRootFolder();
-                SimpleIoc.Default.Register<IRepository<LogBook>>(() => new OneDriveRepository<LogBook>("logbooks.json", folder));
-                SimpleIoc.Default.Register<IRepository<Log>>(() => new OneDriveRepository<Log>("logs.json", folder));
+                SimpleIoc.Default.Register(() => new OneDriveRepository<LogBook>("logbooks.json", folder));
+                SimpleIoc.Default.Register(() => new OneDriveFolderRepository<Log>(folder, "Logs"));
             }
         }
     }
