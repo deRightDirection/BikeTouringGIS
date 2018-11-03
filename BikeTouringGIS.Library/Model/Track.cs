@@ -45,7 +45,7 @@ namespace BikeTouringGISLibrary.Model
         public Route ConvertTrack()
         {
             var newRoute = new Route();
-            this.CopyProperties(newRoute, new string[] { "Segments"}, true);
+            this.CopyProperties(newRoute, true, new string[] { "Segments" });
             newRoute.Type = PathType.Route;
             return newRoute;
         }
@@ -54,7 +54,7 @@ namespace BikeTouringGISLibrary.Model
         {
             get
             {
-                if(Type == PathType.Track && _segments.Length == 1)
+                if (Type == PathType.Track && _segments.Length == 1)
                 {
                     return _segments[0].StartTime;
                 }
@@ -83,7 +83,7 @@ namespace BikeTouringGISLibrary.Model
             {
                 if (Type == PathType.Track && _segments.Length == 1)
                 {
-                    _segments[0].EndTime= value;
+                    _segments[0].EndTime = value;
                 }
             }
         }
