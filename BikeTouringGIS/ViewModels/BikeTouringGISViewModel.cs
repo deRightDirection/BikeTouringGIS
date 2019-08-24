@@ -11,6 +11,7 @@ using BikeTouringGISLibrary.Services;
 using GalaSoft.MvvmLight.Command;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Syroot.Windows.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -127,7 +128,7 @@ namespace BikeTouringGIS.ViewModels
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.Filter = "GPX files (*.gpx)|*.gpx";
             openFileDialog.Multiselect = true;
-            openFileDialog.InitialDirectory = DropBoxHelper.GetDropBoxFolder();
+            openFileDialog.InitialDirectory = KnownFolders.Downloads.Path;
             if (openFileDialog.ShowDialog() == true)
             {
                 foreach (var file in openFileDialog.FileNames)
@@ -177,9 +178,9 @@ namespace BikeTouringGIS.ViewModels
             var geometryFactory = new GeometryFactory(gpxFileInformation);
             geometryFactory.CreateGeometries();
             var layerFactory = new LayerFactory(gpxFileInformation.WayPointsExtent);
-            var routes = layerFactory.CreateRoutes(gpxFileInformation.Routes);
+            var routes = layerFactory.CreateRoutes(path, gpxFileInformation.Routes);
             mapViewModel.AddRoutes(routes);
-            var tracks = layerFactory.CreateTracks(gpxFileInformation.Tracks);
+            var tracks = layerFactory.CreateTracks(path, gpxFileInformation.Tracks);
             mapViewModel.AddTracks(tracks);
             mapViewModel.AddPoIs(gpxFileInformation.WayPoints);
         }

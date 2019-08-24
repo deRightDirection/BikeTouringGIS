@@ -6,6 +6,7 @@ using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Symbology;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
@@ -19,8 +20,8 @@ namespace BikeTouringGIS.Controls
         private IPath _routeOrTrack;
         private BikeTouringGISLayer _splitLayer;
         private Dictionary<GraphicType, object> _symbols;
-        private bool _isInEditMode, _isSplitted, _isSelected;
-        private string _splitPrefix, _title;
+        private bool _isInEditMode, _isSplitted, _isSelected, _isSplitPrefixStillEqualToOriginal;
+        private string _splitPrefix, _title, _originalTitle;
         private RouteSplitter _routeSplitter;
         private int _totalLength, _splitDistance;
         private Envelope _extent;
@@ -44,8 +45,9 @@ namespace BikeTouringGIS.Controls
         {
             _routeOrTrack = routeOrTrack;
             Title = string.IsNullOrEmpty(_routeOrTrack.Name) ? Path.GetFileNameWithoutExtension(fileName) : _routeOrTrack.Name;
-            var subStringLength = Title.Length > 15 ? 15 : Title.Length;
-            SplitPrefix = Title.Substring(0, subStringLength);
+            _originalTitle = Title;
+            _isSplitPrefixStillEqualToOriginal = true;
+            SetSplitPrefix();
             Graphics.Add(_routeOrTrack.StartLocation);
             Graphics.Add(_routeOrTrack.EndLocation);
             Graphics.Add(_routeOrTrack.Geometry);
@@ -61,6 +63,23 @@ namespace BikeTouringGIS.Controls
                     break;
             }
             IsInEditMode = false;
+        }
+
+        private void SetSplitPrefix()
+        {
+            if (_isSplitPrefixStillEqualToOriginal)
+            {
+                var subStringLength = Title.Length > 15 ? 15 : Title.Length;
+                var splitPrefix = Title.Substring(0, subStringLength);
+                if (SplitPrefix == null || SplitPrefix.Equals(_originalTitle) || splitPrefix.StartsWith(SplitPrefix))
+                {
+                    SplitPrefix = splitPrefix;
+                }
+                else
+                {
+                    _isSplitPrefixStillEqualToOriginal = false;
+                }
+            }
         }
 
         public bool IsSelected
@@ -178,7 +197,7 @@ namespace BikeTouringGIS.Controls
             var gpxFile = new GPXFile();
             var gpx = new gpxType();
             var rte = new rteType();
-            rte.name = Title;
+            rte.name = Title.Trim();
             rte.rtept = ToRoute().Points.ToArray();
             gpx.rte = new List<rteType>() { rte }.ToArray();
             gpx.wpt = waypoints.ToArray();
@@ -302,8 +321,9 @@ namespace BikeTouringGIS.Controls
             {
                 if (value != _title)
                 {
-                    _title = value.Trim();
+                    _title = value;
                     IsInEditMode = true;
+                    SetSplitPrefix();
                     OnPropertyChanged("Title");
                 }
             }

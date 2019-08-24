@@ -19,24 +19,24 @@ namespace BikeTouringGIS.Services
             _wayPointsExtent = wayPointsExtent;
         }
 
-        internal List<BikeTouringGISLayer> CreateRoutes(List<Route> routes)
+        internal List<BikeTouringGISLayer> CreateRoutes(string fileName, List<Route> routes)
         {
-            var result = new List<BikeTouringGISLayer>();   
+            var result = new List<BikeTouringGISLayer>();
             foreach (Route route in routes)
             {
-                var layer = new BikeTouringGISLayer(route.FileName, route);
+                var layer = new BikeTouringGISLayer(fileName, route);
                 layer.SetExtentToFitWithWaypoints(_wayPointsExtent);
                 result.Add(layer);
             }
             return result;
         }
 
-        internal List<BikeTouringGISLayer> CreateTracks(List<Track> tracks)
+        internal List<BikeTouringGISLayer> CreateTracks(string fileName, List<Track> tracks)
         {
             var result = new List<BikeTouringGISLayer>();
             foreach (Track track in tracks)
             {
-                var layer = new BikeTouringGISLayer(track.FileName, track);
+                var layer = new BikeTouringGISLayer(fileName, track);
                 layer.SetExtentToFitWithWaypoints(_wayPointsExtent);
                 result.Add(layer);
             }

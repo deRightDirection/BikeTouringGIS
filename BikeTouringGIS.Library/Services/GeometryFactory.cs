@@ -19,14 +19,20 @@ namespace BikeTouringGISLibrary.Services
         {
             _gpxInformation.WayPoints.ForEach(wp => CreateWayPointGeometry(wp));
             var tracksToConvert = _gpxInformation.Tracks.Where(t => t.IsConvertedToRoute);
-            var routes = new List<Route>();
+            var originalRoutes = _gpxInformation.Routes;
+            var newRoutes = new List<Route>();
             tracksToConvert.ForEach(t =>
             {
                 Route newRoute = t.ConvertTrack();
-                CreateRouteGeometry(newRoute);
-                routes.Add(newRoute);
+                originalRoutes.Add(newRoute);
             });
-            _gpxInformation.Routes = routes;
+            originalRoutes.ForEach(r =>
+            {
+                var newRoute = r;
+                CreateRouteGeometry(newRoute);
+                newRoutes.Add(newRoute);
+            });
+            _gpxInformation.Routes = newRoutes;
             var tracks = _gpxInformation.Tracks.Where(t => !t.IsConvertedToRoute);
             tracks.ForEach(t => CreateTrackGeometry(t));
             _gpxInformation.Tracks = tracks.ToList();

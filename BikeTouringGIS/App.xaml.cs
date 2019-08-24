@@ -69,8 +69,7 @@ namespace BicycleTripsPreparationApp
         {
 #if DEBUG
 #else
-            ILogger logger = Logger.GetLogger();
-            logger.LogException(exception);
+            _log.Error(exception);
             this.Shutdown();
 #endif
         }
