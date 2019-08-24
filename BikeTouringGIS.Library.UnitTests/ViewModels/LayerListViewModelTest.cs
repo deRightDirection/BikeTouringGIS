@@ -1,17 +1,12 @@
 ﻿using BikeTouringGIS.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using theRightDirection.Library.UnitTesting;
 using FluentAssertions;
 using BikeTouringGIS.Controls;
 using BikeTouringGISLibrary.Enumerations;
 using Moq;
 using BikeTouringGISLibrary.Model;
-using Ploeh.AutoFixture;
+using AutoFixture;
 namespace BikeTouringGISLibrary.UnitTests.ViewModels
 {
     [TestClass]
@@ -38,7 +33,7 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
         {
             var layer = new BikeTouringGISLayer("test", _route);
             _vm.SelectedLayer = layer.SplitLayer;
-            _vm.SelectedLayer.Type.ShouldBeEquivalentTo(LayerType.SplitRoutes);
+            _vm.SelectedLayer.Type.Should().Be(LayerType.SplitRoutes);
         }
 
         [TestMethod]
@@ -47,7 +42,7 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
             _route = _fixture.Build<Route>().OmitAutoProperties().Create();
             var layer = new BikeTouringGISLayer("test", _route);
             _vm.SelectedLayer = layer;
-            _vm.SelectedLayer.Type.ShouldBeEquivalentTo(LayerType.GPXRoute);
+            _vm.SelectedLayer.Type.Should().Be(LayerType.GPXRoute);
         }
 
         [TestMethod]

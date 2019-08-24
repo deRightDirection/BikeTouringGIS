@@ -1,8 +1,8 @@
 ﻿using BikeTouringGISLibrary.Enumerations;
-using Esri.ArcGISRuntime.Geometry;
-using GPX;
+using BikeTouringGISLibrary.GPX;
 using System.Collections.Generic;
-using WinUX;
+using theRightDirection.Library;
+
 namespace BikeTouringGISLibrary.Model
 {
     public class Track : GeometryData, IPath
@@ -42,7 +42,7 @@ namespace BikeTouringGISLibrary.Model
         public Route ConvertTrack()
         {
             var newRoute = new Route();
-            this.CopyProperties(newRoute, new string[] { "Segments"}, true);
+            this.CopyProperties(newRoute, true, new string[] { "Segments" });
             newRoute.Type = PathType.Route;
             return newRoute;
         }

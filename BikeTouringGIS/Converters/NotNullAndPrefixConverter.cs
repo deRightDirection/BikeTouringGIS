@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using WinUX;
+using theRightDirection.Library;
 
 namespace BikeTouringGIS.Converters
 {

@@ -1,11 +1,8 @@
 ﻿using BikeTouringGIS.Controls;
 using BikeTouringGISLibrary.Enumerations;
 using BikeTouringGISLibrary.Model;
-using GPX;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.AutoMoq;
 using System;
 using System.Collections.Generic;
 using System.Linq;

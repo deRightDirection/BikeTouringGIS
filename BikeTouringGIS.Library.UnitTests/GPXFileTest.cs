@@ -1,5 +1,4 @@
-﻿using GPX;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using theRightDirection.Library.UnitTesting;
 using FluentAssertions;
+using BikeTouringGISLibrary.GPX;
+
 namespace BikeTouringGISLibrary.UnitTests
 {
     [TestClass]
@@ -19,16 +20,17 @@ namespace BikeTouringGISLibrary.UnitTests
         {
             var path = Path.Combine(UnitTestDirectory, "70.gpx");
             var gpxFile = new GPXFile(path);
-            gpxFile.GetTracks().Count.ShouldBeEquivalentTo(0);
+            gpxFile.GetTracks().Count.Should().Be(0);
         }
 
         [TestMethod]
+        [DeploymentItem("70_2.gpx")]
         // bug #70 (foute versie, maar de gpxx extensions tag verwijderd voor de track)
         public void Load_Incorrect_GPX_but_manually_fixed_one_track()
         {
             var path = Path.Combine(UnitTestDirectory, "70_2.gpx");
             var gpxFile = new GPXFile(path);
-            gpxFile.GetTracks().Count.ShouldBeEquivalentTo(1);
+            gpxFile.GetTracks().Count.Should().Be(1);
         }
     }
-} 
+}

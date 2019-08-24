@@ -1,14 +1,16 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows;
-using theRightDirection.Library.Logging;
 
 namespace BikeTouringGIS
 {
     public static class DropBoxHelper
     {
+        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static string _folder;
 
         public static string GetDropBoxFolder()
@@ -36,8 +38,7 @@ namespace BikeTouringGIS
                 }
                 catch (Exception e)
                 {
-                    ILogger logger = Logger.GetLogger();
-                    logger.LogException(e);
+                    _log.Error(e);
                     return Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
                 }
             }

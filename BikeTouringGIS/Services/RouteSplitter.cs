@@ -1,8 +1,8 @@
 ﻿using BikeTouringGISLibrary;
 using BikeTouringGISLibrary.Enumerations;
+using BikeTouringGISLibrary.GPX;
 using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Geometry;
-using GPX;
 using System.Collections.Generic;
 using System.Linq;
 

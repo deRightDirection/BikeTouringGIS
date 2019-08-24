@@ -1,11 +1,11 @@
 ﻿using BikeTouringGIS.Services;
 using BikeTouringGISLibrary;
 using BikeTouringGISLibrary.Enumerations;
+using BikeTouringGISLibrary.GPX;
 using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using Esri.ArcGISRuntime.Symbology;
-using GPX;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
@@ -51,11 +51,13 @@ namespace BikeTouringGIS.Controls
             Graphics.Add(_routeOrTrack.Geometry);
             SetLength();
             SelectionColor = Colors.LimeGreen;
-            switch(routeOrTrack.Type)
+            switch (routeOrTrack.Type)
             {
-                case PathType.Route: Type = LayerType.GPXRoute;
+                case PathType.Route:
+                    Type = LayerType.GPXRoute;
                     break;
-                case PathType.Track: Type = LayerType.GPXTrack;
+                case PathType.Track:
+                    Type = LayerType.GPXTrack;
                     break;
             }
             IsInEditMode = false;

@@ -1,5 +1,5 @@
-﻿using Esri.ArcGISRuntime.Geometry;
-using GPX;
+﻿using BikeTouringGISLibrary.GPX;
+using Esri.ArcGISRuntime.Geometry;
 using System.Collections.Generic;
 
 namespace BikeTouringGISLibrary.Extensions

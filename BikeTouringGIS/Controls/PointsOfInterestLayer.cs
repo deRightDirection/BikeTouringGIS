@@ -2,7 +2,7 @@
 using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Layers;
 using System.Collections.Generic;
-using WinUX;
+using theRightDirection.Library;
 
 namespace BikeTouringGIS.Controls
 {

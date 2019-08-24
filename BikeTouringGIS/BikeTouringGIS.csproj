@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>BikeTouringGIS</RootNamespace>
     <AssemblyName>theRightDirection.BikeTouringGIS</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -89,6 +89,9 @@
       <HintPath>..\packages\Kent.Boogaart.HelperTrinity.1.5.2\lib\net45\Kent.Boogaart.HelperTrinity.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
@@ -157,6 +160,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="theRightDirection.Library">
+      <HintPath>..\..\SharedLibraries\theRightDirection.Library.dll</HintPath>
     </Reference>
     <Reference Include="VersionHelpers, Version=10.0.0.0, Culture=neutral, PublicKeyToken=fcd95136011e7371, processorArchitecture=MSIL">
       <HintPath>packages\VersionHelpers.10.0.0.0\lib\net45\VersionHelpers.dll</HintPath>
@@ -281,10 +287,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\GPXDataAnalyzer\GPX\GPX.csproj">
-      <Project>{159f1fc4-4759-4db0-8695-ffd423302db4}</Project>
-      <Name>GPX</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\theRightDirection.Library.Logging\theRightDirection.Library.Logging\theRightDirection.Library.Logging.csproj">
       <Project>{302e3909-04af-4064-a533-6faa5e6593cf}</Project>
       <Name>theRightDirection.Library.Logging</Name>

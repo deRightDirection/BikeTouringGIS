@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using theRightDirection.Library.UnitTesting;
 using FluentAssertions;
 using BikeTouringGISLibrary.Model;
-using GPX;
 using BikeTouringGISLibrary.Services;
+using BikeTouringGISLibrary.GPX;
 
 namespace BikeTouringGISLibrary.UnitTests
 {
@@ -18,29 +18,38 @@ namespace BikeTouringGISLibrary.UnitTests
     public class BikeTouringGISLayerTest : UnitTestingBase
     {
         [TestMethod]
+        [DeploymentItem("dwingeloo.gpx")]
         public void CreateLayer_Check_IsInEditMode_Is_False()
         {
             var layer = CreateLayer("dwingeloo.gpx");
-            layer.IsInEditMode.ShouldBeEquivalentTo(false);
+            layer.IsInEditMode.Should().Be(false);
         }
 
         [TestMethod]
+        [DeploymentItem("dwingeloo.gpx")]
         public void ChangeName_Check_IsInEditMode_Is_True()
         {
             var layer = CreateLayer("dwingeloo.gpx");
-            layer.IsInEditMode.ShouldBeEquivalentTo(false);
+            layer.IsInEditMode.Should().Be(false);
             layer.Title = "Mannus";
-            layer.IsInEditMode.ShouldBeEquivalentTo(true);
+            layer.IsInEditMode.Should().Be(true);
         }
 
         [TestMethod]
-        // bug #63
+        [DeploymentItem("dwingeloo.gpx")]
         public void Title_Is_Correct()
         {
             var layer = CreateLayer("dwingeloo.gpx");
-            layer.Title.ShouldBeEquivalentTo("MTB Dwingeloo");
-            layer = CreateLayer("63.gpx");
-            layer.Title.ShouldBeEquivalentTo("Holland Classic - 30 km");
+            layer.Title.Should().Be("MTB Dwingeloo");
+        }
+
+        [TestMethod]
+        [DeploymentItem("63.gpx")]
+        // bug #63
+        public void Title_Is_Correct2()
+        {
+            var layer = CreateLayer("63.gpx");
+            layer.Title.Should().Be("Holland Classic - 30 km");
         }
 
         [TestMethod]
@@ -53,20 +62,21 @@ namespace BikeTouringGISLibrary.UnitTests
 
         // bug #69
         [TestMethod]
+        [DeploymentItem("65.gpx")]
         public void Save_And_Check_For_POIs()
         {
             string fileName = "65.gpx";
             string outFileName = "69.gpx";
             var path = Path.Combine(UnitTestDirectory, fileName);
             var gpxInfo = new GpxFileReader().LoadFile(path);
-            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(4);
+            gpxInfo.WayPoints.Count.Should().Be(4);
             var wayPoints = new List<wptType>();
             gpxInfo.WayPoints.ForEach(x => wayPoints.Add(x));
             var layer = CreateLayer(fileName);
             layer.Save(wayPoints, Path.Combine(UnitTestDirectory, outFileName));
             path = Path.Combine(UnitTestDirectory, outFileName);
             gpxInfo = new GpxFileReader().LoadFile(path);
-            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(4);
+            gpxInfo.WayPoints.Count.Should().Be(4);
         }
         private BikeTouringGISLayer CreateLayer(string fileName)
         {

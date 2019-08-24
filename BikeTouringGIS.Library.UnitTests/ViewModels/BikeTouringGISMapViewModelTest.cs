@@ -2,21 +2,18 @@
 using BikeTouringGIS.ViewModels;
 using BikeTouringGISLibrary.Enumerations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using theRightDirection.Library.UnitTesting;
-using FluentAssertions;
 using Esri.ArcGISRuntime.Symbology;
-using WinUX;
 using BikeTouringGISLibrary.Model;
 using System.Collections.ObjectModel;
 using BikeTouringGIS.Extensions;
 using BikeTouringGISLibrary.Services;
 using BikeTouringGIS.Services;
+using FluentAssertions;
+using theRightDirection.Library;
 
 namespace BikeTouringGISLibrary.UnitTests.ViewModels
 {
@@ -42,6 +39,8 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
         }
 
         [TestMethod]
+        [DeploymentItem("dwingeloo.gpx")]
+        [DeploymentItem("88.gpx")]
         // bug #88
         public void RemoveLayer_Remove_Correct_PoIs()
         {
@@ -51,48 +50,51 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
             var path2 = Path.Combine(UnitTestDirectory, filename2);
             List<BikeTouringGISLayer> layers = GetLayers(path);
             layers = GetLayers(path2);
-            GetPOIsCount().ShouldBeEquivalentTo(165);
+            GetPOIsCount().Should().Be(165);
             _vm.RemoveLayerCommand.Execute(layers.Where(x => x.Type == LayerType.GPXRoute).First());
-            GetPOIsCount().ShouldBeEquivalentTo(162);
+            GetPOIsCount().Should().Be(162);
         }
 
         [TestMethod]
+        [DeploymentItem("dwingeloo.gpx")]
         public void RemoveLayer_Removed_All_Poi_As_Well()
         {
             var filename = "dwingeloo.gpx";
             var path = Path.Combine(UnitTestDirectory, filename);
             List<BikeTouringGISLayer> layers = GetLayers(path);
-            GetPOIsCount().ShouldBeEquivalentTo(3);
+            GetPOIsCount().Should().Be(3);
             _vm.RemoveLayerCommand.Execute(layers.Where(x => x.Type == LayerType.GPXRoute).First());
-            GetPOIsCount().ShouldBeEquivalentTo(0);
+            GetPOIsCount().Should().Be(0);
         }
 
         [TestMethod]
+        [DeploymentItem("Sample.gpx")]
         public void RemoveLayer_And_Remove_Pois_Only_After_All_Layers_From_Same_File_Are_Removed()
         {
             var file = "Sample.gpx";
             var path = Path.Combine(UnitTestDirectory, file);
             List<BikeTouringGISLayer> layers = GetLayers(path);
-            GetPOIsCount().ShouldBeEquivalentTo(49);
+            GetPOIsCount().Should().Be(49);
             layers.Where(x => x.Type == LayerType.GPXRoute).ForEach(x =>
             {
-                GetPOIsCount().ShouldBeEquivalentTo(49);
+                GetPOIsCount().Should().Be(49);
                 _vm.RemoveLayerCommand.Execute(x);
             });
-            GetPOIsCount().ShouldBeEquivalentTo(0);
+            GetPOIsCount().Should().Be(0);
         }
 
         // bug #69
         [TestMethod]
+        [DeploymentItem("65.gpx")]
         public void Save_And_Check_For_POIs()
         {
             string fileName = "65.gpx";
             var path = Path.Combine(UnitTestDirectory, fileName);
             var layers = GetLayers(path);
-            GetPOIsCount().ShouldBeEquivalentTo(4);
+            GetPOIsCount().Should().Be(4);
             _vm.SaveLayerCommand.Execute(layers.Where(x => x.Type == LayerType.GPXRoute).First());
             var gpxInfo = new GpxFileReader().LoadFile(path);
-            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(4);
+            gpxInfo.WayPoints.Count.Should().Be(4);
         }
 
 

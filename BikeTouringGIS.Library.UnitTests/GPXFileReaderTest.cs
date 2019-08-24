@@ -14,6 +14,7 @@ namespace BikeTouringGISLibrary.UnitTests
         private GeometryFactory _geometryFactory;
 
         [TestMethod]
+        [DeploymentItem("dwingeloo.gpx")]
         // bug #69
         public void LoadFile_All_WayPoints_Do_Have_Description()
         {
@@ -25,6 +26,7 @@ namespace BikeTouringGISLibrary.UnitTests
         }
 
         [TestMethod]
+        [DeploymentItem("Sample.gpx")]
         // bug #34
         public void LoadFile_Check_If_All_Have_Length()
         {
@@ -39,42 +41,47 @@ namespace BikeTouringGISLibrary.UnitTests
         }
 
         [TestMethod]
+        [DeploymentItem("Sample.gpx")]
         public void LoadFile_Counts_Tracks_Routes_Waypoints_Are_Correct()
         {
             var gpxInfo = LoadGPXData("Sample.gpx");
-            gpxInfo.Routes.Count.ShouldBeEquivalentTo(2);
-            gpxInfo.Tracks.Count.ShouldBeEquivalentTo(11);
-            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(49);
+            gpxInfo.Routes.Count.Should().Be(2);
+            gpxInfo.Tracks.Count.Should().Be(11);
+            gpxInfo.WayPoints.Count.Should().Be(49);
         }
 
         [TestMethod]
+        [DeploymentItem("BRM300BNK16 v2.gpx")]
         // bug #43
         public void LoadFile_Counts_Tracks_Routes_Waypoints_Are_Correct2()
         {
             var gpxInfo = LoadGPXData("BRM300BNK16 v2.gpx");
-            gpxInfo.Routes.Count.ShouldBeEquivalentTo(0);
-            gpxInfo.Tracks.Count.ShouldBeEquivalentTo(8);
-            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(5);
+            gpxInfo.Routes.Count.Should().Be(0);
+            gpxInfo.Tracks.Count.Should().Be(8);
+            gpxInfo.WayPoints.Count.Should().Be(5);
         }
 
         [TestMethod]
+        [DeploymentItem("pois.gpx")]
         // #100 file gecorrigeerd en geen fouten
         public void LoadFile_Counts_Waypoints_Are_Correct()
         {
             var gpxInfo = LoadGPXData("pois.gpx");
-            gpxInfo.Routes.Count.ShouldBeEquivalentTo(0);
-            gpxInfo.Tracks.Count.ShouldBeEquivalentTo(0);
-            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(157);
+            gpxInfo.Routes.Count.Should().Be(0);
+            gpxInfo.Routes.Count.Should().Be(0);
+            gpxInfo.Tracks.Count.Should().Be(0);
+            gpxInfo.WayPoints.Count.Should().Be(157);
         }
 
         [TestMethod]
         // #100
+        [DeploymentItem("pois2.gpx")]
         public void LoadFile_Counts_Waypoints_Are_Correct2()
         {
             var gpxInfo = LoadGPXData("pois2.gpx");
-            gpxInfo.Routes.Count.ShouldBeEquivalentTo(0);
-            gpxInfo.Tracks.Count.ShouldBeEquivalentTo(0);
-            gpxInfo.WayPoints.Count.ShouldBeEquivalentTo(157);
+            gpxInfo.Routes.Count.Should().Be(0);
+            gpxInfo.Tracks.Count.Should().Be(0);
+            gpxInfo.WayPoints.Count.Should().Be(157);
         }
 
         [TestInitialize]

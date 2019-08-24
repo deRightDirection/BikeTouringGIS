@@ -1,6 +1,6 @@
 ﻿using BikeTouringGISLibrary.Extensions;
+using BikeTouringGISLibrary.GPX;
 using Esri.ArcGISRuntime.Geometry;
-using GPX;
 using System.Linq;
 
 namespace BikeTouringGISLibrary

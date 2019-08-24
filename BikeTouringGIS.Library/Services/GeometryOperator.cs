@@ -1,9 +1,6 @@
-﻿using System;
+﻿using BikeTouringGISLibrary.GPX;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GPX;
 
 namespace BikeTouringGISLibrary.Services
 {

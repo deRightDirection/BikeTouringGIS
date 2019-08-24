@@ -1,6 +1,4 @@
-﻿using BikeTouringGISLibrary.Enumerations;
-using Esri.ArcGISRuntime.Geometry;
-using GPX;
+﻿using BikeTouringGISLibrary.GPX;
 
 namespace BikeTouringGISLibrary.Model
 {
@@ -12,10 +10,12 @@ namespace BikeTouringGISLibrary.Model
 
         public static implicit operator wptType(WayPoint waypoint)
         {
-            var wptType = new wptType();
-            wptType.name = waypoint.Name;
-            wptType.lon = waypoint.Lon;
-            wptType.lat = waypoint.Lat;
+            var wptType = new wptType
+            {
+                name = waypoint.Name,
+                lon = waypoint.Lon,
+                lat = waypoint.Lat
+            };
             return wptType;
         }
     }

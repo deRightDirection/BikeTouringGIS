@@ -2,12 +2,12 @@
 using BikeTouringGIS.Extensions;
 using BikeTouringGIS.Messenges;
 using BikeTouringGISLibrary.Enumerations;
+using BikeTouringGISLibrary.GPX;
 using BikeTouringGISLibrary.Model;
 using Esri.ArcGISRuntime.Controls;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Layers;
 using GalaSoft.MvvmLight.Command;
-using GPX;
 using MoreLinq;
 using System;
 using System.Collections.Generic;

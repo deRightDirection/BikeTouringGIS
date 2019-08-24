@@ -1,18 +1,21 @@
 ﻿using BikeTouringGIS.ViewModels;
 using Esri.ArcGISRuntime;
+using log4net;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Reflection;
 using System.Security;
 using System.Windows;
 using System.Windows.Media;
-using theRightDirection.Library.Logging;
 
 namespace BicycleTripsPreparationApp
 {
     public partial class App : Application
     {
+        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         protected override void OnExit(ExitEventArgs e)
         {
             try
@@ -57,11 +60,8 @@ namespace BicycleTripsPreparationApp
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "ArcGIS Runtime initialization failed.");
-                ILogger logger = Logger.GetLogger();
-                logger.LogException(ex);
-
-                // Exit application
-                this.Shutdown();
+                _log.Error(ex);
+                Shutdown();
             }
         }
 

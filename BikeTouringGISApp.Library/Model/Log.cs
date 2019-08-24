@@ -1,13 +1,4 @@
 ﻿using BikeTouringGISApp.Library.Interfaces;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Telerik.Data.Core;
-using WinUX;
 using BikeTouringGISApp.Library.Enumerations;
 
 namespace BikeTouringGISApp.Library.Model

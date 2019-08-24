@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BikeTouringGISLibrary</RootNamespace>
     <AssemblyName>BikeTouringGISLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -47,6 +47,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="theRightDirection.Library">
+      <HintPath>..\..\SharedLibraries\theRightDirection.Library.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BikeTouringGISGraphic.cs" />
@@ -58,6 +61,14 @@
     <Compile Include="Enumerations\PathType.cs" />
     <Compile Include="Enumerations\ZoomOption.cs" />
     <Compile Include="Extensions\GeometryExtension.cs" />
+    <Compile Include="GPX\DataAnalyzer.cs" />
+    <Compile Include="GPX\GPX.cs" />
+    <Compile Include="GPX\GPXClasses.cs" />
+    <Compile Include="GPX\GPXFile.cs" />
+    <Compile Include="GPX\GPXLoader.cs" />
+    <Compile Include="GPX\SegmentTimesRecalculator.cs" />
+    <Compile Include="GPX\TrkSegType.cs" />
+    <Compile Include="GPX\WptType.cs" />
     <Compile Include="Services\GeometryOperator.cs" />
     <Compile Include="Services\GPXFileReader.cs" />
     <Compile Include="GeometryData.cs" />
@@ -71,18 +82,18 @@
     <Compile Include="Services\GeometryFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\GPXDataAnalyzer\GPX\GPX.csproj">
-      <Project>{159f1fc4-4759-4db0-8695-ffd423302db4}</Project>
-      <Name>GPX</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\WinUX-UWP-Toolkit\WinUX\WinUX.Common\WinUX.Common.csproj">
       <Project>{55c7fa03-c3b0-4aa0-be48-3fa435ee37c1}</Project>
       <Name>WinUX.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="GPX\GPXSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

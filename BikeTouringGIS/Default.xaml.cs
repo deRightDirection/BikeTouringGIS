@@ -1,4 +1,5 @@
 ﻿using BikeTouringGIS.ViewModels;
+using log4net;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Newtonsoft.Json;
@@ -6,8 +7,8 @@ using Squirrel;
 using System;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Reflection;
 using System.Windows;
-using theRightDirection.Library.Logging;
 
 namespace BikeTouringGIS
 {
@@ -16,6 +17,8 @@ namespace BikeTouringGIS
     /// </summary>
     public partial class Default : MetroWindow
     {
+        private static readonly ILog _log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public Default()
         {
             InitializeComponent();
@@ -23,7 +26,6 @@ namespace BikeTouringGIS
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            ILogger logger = Logger.GetLogger();
             try
             {
                 using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
@@ -42,7 +44,7 @@ namespace BikeTouringGIS
             }
             catch (Exception ex)
             {
-                logger.LogException(ex);
+                _log.Error(ex);
             }
             var context = (BikeTouringGISViewModel)DataContext;
             try
@@ -69,7 +71,7 @@ namespace BikeTouringGIS
             catch (Exception ex)
             {
                 context.SplitLength = 100;
-                logger.LogException(ex);
+                _log.Error(ex);
             }
         }
     }

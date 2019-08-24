@@ -1,4 +1,4 @@
-﻿using GPX;
+﻿using BikeTouringGISLibrary.GPX;
 using System.Collections.Generic;
 
 namespace BikeTouringGIS

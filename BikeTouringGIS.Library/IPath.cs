@@ -1,5 +1,5 @@
 ﻿using BikeTouringGISLibrary.Enumerations;
-using GPX;
+using BikeTouringGISLibrary.GPX;
 using System.Collections.Generic;
 
 namespace BikeTouringGISLibrary
