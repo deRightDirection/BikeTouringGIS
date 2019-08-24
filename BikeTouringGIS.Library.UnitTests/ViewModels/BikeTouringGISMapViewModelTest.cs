@@ -103,7 +103,7 @@ namespace BikeTouringGISLibrary.UnitTests.ViewModels
             var gpxData = GetGPXData(path);
             _vm.AddPoIs(gpxData.WayPoints);
             var layerFactory = new LayerFactory(gpxData.WayPointsExtent);
-            _vm.AddRoutes(layerFactory.CreateRoutes(gpxData.Routes));
+            _vm.AddRoutes(layerFactory.CreateRoutes("unittest", gpxData.Routes));
             _vm.BikeTouringGISLayers = new ObservableCollection<BikeTouringGISLayer>(_vm.Map.GetBikeTouringGISLayers());
             return _vm.BikeTouringGISLayers.ToList();
         }
