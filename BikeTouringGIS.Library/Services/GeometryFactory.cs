@@ -15,6 +15,10 @@ namespace BikeTouringGISLibrary.Services
         {
             _gpxInformation = gpxData;
         }
+        public GeometryFactory()
+        {
+
+        }
         public void CreateGeometries()
         {
             _gpxInformation.WayPoints.ForEach(wp => CreateWayPointGeometry(wp));
@@ -42,7 +46,7 @@ namespace BikeTouringGISLibrary.Services
         {
             CreateGeometryAndExtentForTrackOrRoute(track, GraphicType.GPXTrack);
         }
-        private void CreateRouteGeometry(Route route)
+        public void CreateRouteGeometry(Route route)
         {
             CreateGeometryAndExtentForTrackOrRoute(route, GraphicType.GPXRoute);
             route.StartLocation = CreateBikeTouringGISPointGraphic(route.Points.First(), route.Name, GraphicType.GPXRouteStartLocation);

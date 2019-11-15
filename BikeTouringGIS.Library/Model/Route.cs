@@ -1,5 +1,7 @@
 ﻿using BikeTouringGISLibrary.Enumerations;
 using BikeTouringGISLibrary.Services;
+using Esri.ArcGISRuntime.Geometry;
+
 namespace BikeTouringGISLibrary.Model
 {
     public class Route : Track
@@ -11,7 +13,8 @@ namespace BikeTouringGISLibrary.Model
         public void Flip()
         {
             Points.Reverse();
-            Geometry = GeometryOperator.ReversePoints(Points);
+            var geometryFactory = new GeometryFactory();
+            geometryFactory.CreateRouteGeometry(this);
         }
     }
 }

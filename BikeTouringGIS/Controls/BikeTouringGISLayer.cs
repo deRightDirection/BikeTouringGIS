@@ -232,7 +232,6 @@ namespace BikeTouringGIS.Controls
                 Graphics.Clear();
                 var route = (Route)_routeOrTrack;
                 route.Flip();
-                // TODO nieuwe graphics maken
                 Graphics.Add(_routeOrTrack.StartLocation);
                 Graphics.Add(_routeOrTrack.EndLocation);
                 Graphics.Add(_routeOrTrack.Geometry);

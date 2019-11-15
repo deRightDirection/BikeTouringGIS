@@ -69,7 +69,6 @@
     <Compile Include="GPX\SegmentTimesRecalculator.cs" />
     <Compile Include="GPX\TrkSegType.cs" />
     <Compile Include="GPX\WptType.cs" />
-    <Compile Include="Services\GeometryOperator.cs" />
     <Compile Include="Services\GPXFileReader.cs" />
     <Compile Include="GeometryData.cs" />
     <Compile Include="IPath.cs" />
@@ -80,12 +79,6 @@
     <Compile Include="Model\WayPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\GeometryFactory.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\WinUX-UWP-Toolkit\WinUX\WinUX.Common\WinUX.Common.csproj">
-      <Project>{55c7fa03-c3b0-4aa0-be48-3fa435ee37c1}</Project>
-      <Name>WinUX.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="GPX\GPXSchema.xsd">
