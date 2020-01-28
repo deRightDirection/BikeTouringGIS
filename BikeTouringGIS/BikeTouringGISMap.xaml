@@ -101,7 +101,7 @@
                     <i:EventTrigger EventName="" />
                 </i:Interaction.Triggers>
                 <esri:OpenStreetMapLayer ID="opencyclemap" TemplateUri="http://{subDomain}.tile.opencyclemap.org/cycle/{level}/{col}/{row}.png" />
-                <esri:OpenStreetMapLayer ID="openstreetmap" />
+                <!--                <esri:OpenStreetMapLayer ID="openstreetmap"  TemplateUri="http://{subDomain}.tile.openstreetmap.org/{level}/{col}/{row}.png"/>-->
                 <esri:WmsLayer ID="fietsknooppunten" ServiceUri="https://geodata.nationaalgeoregister.nl/fietsknooppuntennetwerk/wms" />
             </esri:Map>
         </esri:MapView>
@@ -115,10 +115,11 @@
                              GroupName="basemap"
                              IsChecked="{Binding ShowOpenCycleMap,
                                                  Mode=TwoWay}" />
+                <!--
                 <RadioButton Content="OpenStreetMap"
                              GroupName="basemap"
                              IsChecked="{Binding ShowOpenStreetMap,
-                                                 Mode=TwoWay}" />
+                                                 Mode=TwoWay}" />-->
                 <CheckBox Content="Dutch Fietsknooppunten"
                           IsChecked="{Binding ShowKnooppunten,
                                               Mode=TwoWay}"

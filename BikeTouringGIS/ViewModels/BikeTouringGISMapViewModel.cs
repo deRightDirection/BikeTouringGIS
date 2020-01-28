@@ -158,8 +158,8 @@ namespace BikeTouringGIS.ViewModels
         {
             if (!_mapSetupIsDone)
             {
-                ShowOpenCycleMap = false;
-                ShowOpenStreetMap = true;
+                ShowOpenCycleMap = true;
+                ShowOpenStreetMap = false;
                 ShowKnooppunten = false;
                 _pointsOfInterestLayer = new PointsOfInterestLayer("Points of Interest");
                 _map.Layers.Add(_pointsOfInterestLayer);
