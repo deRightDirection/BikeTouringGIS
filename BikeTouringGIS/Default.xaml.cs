@@ -3,7 +3,6 @@ using log4net;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Newtonsoft.Json;
-using Squirrel;
 using System;
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -26,26 +25,6 @@ namespace BikeTouringGIS
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/MannusEtten/BikeTouringGIS"))
-                {
-                    var updateInfo = await mgr.CheckForUpdate();
-                    var currentVersion = updateInfo.CurrentlyInstalledVersion?.Version;
-                    var futureVersion = updateInfo.FutureReleaseEntry.Version;
-                    if (currentVersion != futureVersion)
-                    {
-                        var window = Application.Current.MainWindow as MetroWindow;
-                        var controller = await window.ShowProgressAsync("Please wait...", "Updating application");
-                        await mgr.UpdateApp();
-                        await controller.CloseAsync();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                _log.Error(ex);
-            }
             var context = (BikeTouringGISViewModel)DataContext;
             try
             {
